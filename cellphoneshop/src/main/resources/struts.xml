@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	
+	<package name="action" extends="struts-default" namespace="/">
+	
+		<result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>		
+		
+		<!-- <action name="home" class="homeAction">
+			<result name="success" type="tiles">home</result>
+		</action> -->
+		
+		<action name="login" method="login" class="accountAction">
+			<result name="success" type="redirectAction">home</result>
+			<result name="input" type="tiles">login</result>
+			<result name="error" type="tiles">login</result>
+		</action>
+		
+		<action name="register" method="register" class="accountAction">
+			<result name="success" type="redirectAction">home</result>
+			<result name="input" type="tiles">register</result>
+			<result name="error" type="tiles">register</result>
+		</action>
+		
+		<!-- <action name="logout" method="logout" class="accountAction">
+			<result name="success" type="redirectAction">login</result>
+		</action>
+ -->
+	</package>
+</struts>
