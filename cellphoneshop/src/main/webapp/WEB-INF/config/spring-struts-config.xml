@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-       					
+       			
+    <bean id="homeAction" class="cellphoneshop.controller.HomeController">
+	</bean>		
 		
 	<bean id="accountAction" class="cellphoneshop.controller.AccountController">
 	</bean>

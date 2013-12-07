@@ -14,9 +14,9 @@
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
         </result-types>		
 		
-		<!-- <action name="home" class="homeAction">
+		<action name="home" class="homeAction">
 			<result name="success" type="tiles">home</result>
-		</action> -->
+		</action>
 		
 		<action name="login" method="login" class="accountAction">
 			<result name="success" type="redirectAction">home</result>
