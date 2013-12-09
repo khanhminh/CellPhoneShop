@@ -1,8 +1,13 @@
 package cellphoneshop.controller;
 
 //import org.slf4j.Logger;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 
+
+
+import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -15,6 +20,13 @@ public class AccountController extends ActionSupport{
 		
 		logger.info("Vao login Controller AccountController");
 		return INPUT;
+	}
+	
+	public String loginFail(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("error", true);
+		
+		return ERROR;
 	}
 	
 	public String register(){

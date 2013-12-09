@@ -24,6 +24,10 @@
 			<result name="error" type="tiles">login</result>
 		</action>
 		
+		<action name="loginfail" method="loginFail" class="accountAction">
+			<result name="error" type="tiles">login</result>
+		</action>
+		
 		<action name="register" method="register" class="accountAction">
 			<result name="success" type="redirectAction">home</result>
 			<result name="input" type="tiles">register</result>
