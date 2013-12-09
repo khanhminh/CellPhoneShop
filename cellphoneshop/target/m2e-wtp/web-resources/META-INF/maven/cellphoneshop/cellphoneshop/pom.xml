@@ -113,6 +113,21 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
+
+		<!-- SLF4J API -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- LOG4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+
 		<!-- others -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
