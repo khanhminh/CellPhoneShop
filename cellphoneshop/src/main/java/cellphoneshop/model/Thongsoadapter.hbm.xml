@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 10, 2013 9:58:32 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Dec 10, 2013 11:05:38 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="cellphoneshop.model.Thongsoadapter" table="thongsoadapter" catalog="cellphoneshop">
         <id name="maThongSoAdapter" type="java.lang.Long">
             <column name="maThongSoAdapter" />
             <generator class="identity" />
         </id>
+        <many-to-one name="ctsanpham" class="cellphoneshop.model.Ctsanpham" fetch="select">
+            <column name="maCTSP" not-null="true" />
+        </many-to-one>
         <property name="inputAc" type="string">
             <column name="inputAC" length="28" />
         </property>
@@ -17,11 +20,5 @@
         <property name="kieuGiacCam" type="string">
             <column name="kieuGiacCam" length="30" />
         </property>
-        <set name="ctsanphams" table="ctsanpham" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="maThongSoAdapter" />
-            </key>
-            <one-to-many class="cellphoneshop.model.Ctsanpham" />
-        </set>
     </class>
 </hibernate-mapping>

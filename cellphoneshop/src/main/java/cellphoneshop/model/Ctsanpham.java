@@ -1,6 +1,6 @@
 package cellphoneshop.model;
 
-// Generated Dec 10, 2013 9:58:31 PM by Hibernate Tools 3.4.0.CR1
+// Generated Dec 10, 2013 11:05:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -12,19 +12,19 @@ import java.util.Set;
 public class Ctsanpham implements java.io.Serializable {
 
 	private Long maCtsp;
-	private Thongsotainghe thongsotainghe;
-	private Thongsodtdd thongsodtdd;
-	private Thongsothenho thongsothenho;
 	private Sanpham sanpham;
-	private Thongsopin thongsopin;
-	private Thongsosmartphone thongsosmartphone;
-	private Thongsoadapter thongsoadapter;
 	private Float trongLuong;
 	private Float chieuCao;
 	private Float chieuRong;
 	private Float doDay;
 	private Date ngaySx;
+	private Set thongsoadapters = new HashSet(0);
+	private Set thongsosmartphones = new HashSet(0);
 	private Set hinhanhsps = new HashSet(0);
+	private Set thongsotainghes = new HashSet(0);
+	private Set thongsopins = new HashSet(0);
+	private Set thongsodtdds = new HashSet(0);
+	private Set thongsothenhos = new HashSet(0);
 
 	public Ctsanpham() {
 	}
@@ -33,24 +33,23 @@ public class Ctsanpham implements java.io.Serializable {
 		this.sanpham = sanpham;
 	}
 
-	public Ctsanpham(Thongsotainghe thongsotainghe, Thongsodtdd thongsodtdd,
-			Thongsothenho thongsothenho, Sanpham sanpham,
-			Thongsopin thongsopin, Thongsosmartphone thongsosmartphone,
-			Thongsoadapter thongsoadapter, Float trongLuong, Float chieuCao,
-			Float chieuRong, Float doDay, Date ngaySx, Set hinhanhsps) {
-		this.thongsotainghe = thongsotainghe;
-		this.thongsodtdd = thongsodtdd;
-		this.thongsothenho = thongsothenho;
+	public Ctsanpham(Sanpham sanpham, Float trongLuong, Float chieuCao,
+			Float chieuRong, Float doDay, Date ngaySx, Set thongsoadapters,
+			Set thongsosmartphones, Set hinhanhsps, Set thongsotainghes,
+			Set thongsopins, Set thongsodtdds, Set thongsothenhos) {
 		this.sanpham = sanpham;
-		this.thongsopin = thongsopin;
-		this.thongsosmartphone = thongsosmartphone;
-		this.thongsoadapter = thongsoadapter;
 		this.trongLuong = trongLuong;
 		this.chieuCao = chieuCao;
 		this.chieuRong = chieuRong;
 		this.doDay = doDay;
 		this.ngaySx = ngaySx;
+		this.thongsoadapters = thongsoadapters;
+		this.thongsosmartphones = thongsosmartphones;
 		this.hinhanhsps = hinhanhsps;
+		this.thongsotainghes = thongsotainghes;
+		this.thongsopins = thongsopins;
+		this.thongsodtdds = thongsodtdds;
+		this.thongsothenhos = thongsothenhos;
 	}
 
 	public Long getMaCtsp() {
@@ -61,60 +60,12 @@ public class Ctsanpham implements java.io.Serializable {
 		this.maCtsp = maCtsp;
 	}
 
-	public Thongsotainghe getThongsotainghe() {
-		return this.thongsotainghe;
-	}
-
-	public void setThongsotainghe(Thongsotainghe thongsotainghe) {
-		this.thongsotainghe = thongsotainghe;
-	}
-
-	public Thongsodtdd getThongsodtdd() {
-		return this.thongsodtdd;
-	}
-
-	public void setThongsodtdd(Thongsodtdd thongsodtdd) {
-		this.thongsodtdd = thongsodtdd;
-	}
-
-	public Thongsothenho getThongsothenho() {
-		return this.thongsothenho;
-	}
-
-	public void setThongsothenho(Thongsothenho thongsothenho) {
-		this.thongsothenho = thongsothenho;
-	}
-
 	public Sanpham getSanpham() {
 		return this.sanpham;
 	}
 
 	public void setSanpham(Sanpham sanpham) {
 		this.sanpham = sanpham;
-	}
-
-	public Thongsopin getThongsopin() {
-		return this.thongsopin;
-	}
-
-	public void setThongsopin(Thongsopin thongsopin) {
-		this.thongsopin = thongsopin;
-	}
-
-	public Thongsosmartphone getThongsosmartphone() {
-		return this.thongsosmartphone;
-	}
-
-	public void setThongsosmartphone(Thongsosmartphone thongsosmartphone) {
-		this.thongsosmartphone = thongsosmartphone;
-	}
-
-	public Thongsoadapter getThongsoadapter() {
-		return this.thongsoadapter;
-	}
-
-	public void setThongsoadapter(Thongsoadapter thongsoadapter) {
-		this.thongsoadapter = thongsoadapter;
 	}
 
 	public Float getTrongLuong() {
@@ -157,12 +108,60 @@ public class Ctsanpham implements java.io.Serializable {
 		this.ngaySx = ngaySx;
 	}
 
+	public Set getThongsoadapters() {
+		return this.thongsoadapters;
+	}
+
+	public void setThongsoadapters(Set thongsoadapters) {
+		this.thongsoadapters = thongsoadapters;
+	}
+
+	public Set getThongsosmartphones() {
+		return this.thongsosmartphones;
+	}
+
+	public void setThongsosmartphones(Set thongsosmartphones) {
+		this.thongsosmartphones = thongsosmartphones;
+	}
+
 	public Set getHinhanhsps() {
 		return this.hinhanhsps;
 	}
 
 	public void setHinhanhsps(Set hinhanhsps) {
 		this.hinhanhsps = hinhanhsps;
+	}
+
+	public Set getThongsotainghes() {
+		return this.thongsotainghes;
+	}
+
+	public void setThongsotainghes(Set thongsotainghes) {
+		this.thongsotainghes = thongsotainghes;
+	}
+
+	public Set getThongsopins() {
+		return this.thongsopins;
+	}
+
+	public void setThongsopins(Set thongsopins) {
+		this.thongsopins = thongsopins;
+	}
+
+	public Set getThongsodtdds() {
+		return this.thongsodtdds;
+	}
+
+	public void setThongsodtdds(Set thongsodtdds) {
+		this.thongsodtdds = thongsodtdds;
+	}
+
+	public Set getThongsothenhos() {
+		return this.thongsothenhos;
+	}
+
+	public void setThongsothenhos(Set thongsothenhos) {
+		this.thongsothenhos = thongsothenhos;
 	}
 
 }

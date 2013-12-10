@@ -1,6 +1,6 @@
 package cellphoneshop.model;
 
-// Generated Dec 10, 2013 9:58:31 PM by Hibernate Tools 3.4.0.CR1
+// Generated Dec 10, 2013 11:05:38 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
