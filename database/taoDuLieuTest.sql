@@ -69,7 +69,7 @@ delimiter //
 create procedure taoDuLieuVaiTro()
 	begin
 		insert into VaiTro (tenVaiTro) values ('Admin');
-		insert into VaiTro (tenVaiTro) values (N'Người dùng');
+		insert into VaiTro (tenVaiTro) values (N'User');
 	end //
 delimiter ;
 call taoDuLieuVaiTro();
