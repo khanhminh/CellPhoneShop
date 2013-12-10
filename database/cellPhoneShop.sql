@@ -58,14 +58,6 @@ create table CTSanPham (
 	chieuRong float, # mm
 	doDay float, # mm
 	ngaySX date,
-	
-	# danh sach thuoc tinh
-	maThongSoDTDD bigint,
-	maThongSoSmartPhone bigint,
-	maThongSoTaiNghe bigint,
-	maThongSoPin bigint,
-	maThongSoAdapter bigint,
-	maThongSoTheNho bigint,
 
 	constraint fk_CTSanPham_SanPham foreign key (maSP) references SanPham(maSP)
 );
@@ -74,17 +66,18 @@ create table HinhAnhSP (
 	maHinhAnh bigint auto_increment primary key,
 	maCTSP bigint not null,
 	duongDan varchar(256) not null,
-	
+	STT smallint not null,
 	constraint fk_HinhAnhSP_CTSanPham foreign key (maCTSP) references CTSanPham(maCTSP)
 );
 
 create table LoaiBanPhim (
 	maLoaiBanPhim smallint auto_increment primary key,
-	tenLoaiBanPhim varchar(12)
+	tenLoaiBanPhim varchar(12) character set utf8
 );
 
 create table ThongSoDTDD (
 	maThongSoDTDD bigint auto_increment primary key,
+	maCTSP bigint not null,
 	
 	# Man hinh
 	loaiManhinh varchar(20) character set utf8,
@@ -135,6 +128,7 @@ create table ThongSoDTDD (
 	# Den pin
 	denPin varchar(30) character set utf8,
 	
+	constraint fk_ThongSoDTDD_CTSanPham foreign key (maCTSP) references CTSanPham(maCTSP),
 	constraint fk_ThongSoDTDD_LoaiBanPhim foreign key (maLoaiBanPhim) references LoaiBanPhim(maLoaiBanPhim)
 );
 
@@ -145,6 +139,7 @@ create table HeDieuHanh (
 
 create table ThongSoSmartPhone (
 	maThongSoSmartPhone bigint auto_increment primary key,
+	maCTSP bigint not null,
 	
 	# Man hinh
 	loaiManhinh varchar(20) character set utf8,
@@ -207,65 +202,58 @@ create table ThongSoSmartPhone (
 	denFlash varchar(30) character set utf8,
 	denPin varchar(30) character set utf8,
 	
-	
+	constraint fk_ThongSoSmartPhone_CTSanPham foreign key (maCTSP) references CTSanPham(maCTSP),
 	constraint fk_ThongSoSmartPhone_LoaiBanPhim foreign key (maLoaiBanPhim) references LoaiBanPhim(maLoaiBanPhim),
 	constraint fk_ThongSoSmartPhone_HeDieuHanh foreign key (maHDH) references HeDieuHanh(maHDH)
 );
 
 create table ThongSoTaiNghe (
 	maThongSoTaiNghe bigint auto_increment primary key,
+	maCTSP bigint not null,
 	
 	kichThuoc float, # speaker size: mm
 	congSuat float,  # power: mW
 	tanSo varchar(15) character set utf8, # frequency: Hz - KHz
 	doNhay smallint, # sesitivity: dB
-	troKhangDauVao smallint # Ohm impedance: Ohm
+	troKhangDauVao smallint, # Ohm impedance: Ohm
+	
+	constraint fk_ThongSoTaiNghe_CTSanPham foreign key (maCTSP) references CTSanPham(maCTSP)
 );
 
 create table ThongSoPin (
 	maThongSoPin bigint auto_increment primary key,
+	maCTSP bigint not null,
 	
 	dungLuongPin float, # mAh
 	dienAp float, # V
-	congNghe varchar(20) character set utf8 # NiCad, NiMH, Li-ion, Li-po
+	congNghe varchar(20) character set utf8, # NiCad, NiMH, Li-ion, Li-po
+	
+	constraint fk_ThongSoPin_CTSanPham foreign key (maCTSP) references CTSanPham(maCTSP)
 );
 
 create table ThongSoAdapter (
 	maThongSoAdapter bigint auto_increment primary key,
+	maCTSP bigint not null,
 	
 	inputAC varchar(28) character set utf8, # vd: 240 V ~ 50 - 60 Hz - 0.15 A
 	outputDC varchar(28) character set utf8, # vd: 5V = 1 A
-	kieuGiacCam varchar(30) character set utf8
+	kieuGiacCam varchar(30) character set utf8,
+	
+	constraint fk_ThongSoAdapter_CTSanPham foreign key (maCTSP) references CTSanPham(maCTSP)
 );
 
 create table ThongSoTheNho (
 	maThongSoTheNho bigint auto_increment primary key,
+	maCTSP bigint not null,
 	
 	dungLuong smallint, # GB
 	tocDoDoc float, # MB/s
 	tocDoGhi float, # MB/s
 	class smallint, # 1-6
-	serial varchar(12) # vd: 0x04ceb573
+	serial varchar(12), # vd: 0x04ceb573
+	
+	constraint fk_ThongSoTheNho_CTSanPham foreign key (maCTSP) references CTSanPham(maCTSP)
 );
-
-alter table CTSanPham
-add constraint fk_CTSanPham_ThongSoDTDD foreign key (maThongSoDTDD) references ThongSoDTDD(maThongSoDTDD);
-
-alter table CTSanPham
-add constraint fk_CTSanPham_ThongSoSmartPhone foreign key (maThongSoSmartPhone) references ThongSoSmartPhone(maThongSoSmartPhone);
-
-alter table CTSanPham
-add constraint fk_CTSanPham_ThongSoTaiNghe foreign key (maThongSoTaiNghe) references ThongSoTaiNghe(maThongSoTaiNghe);
-
-alter table CTSanPham
-add constraint fk_CTSanPham_ThongSoPin foreign key (maThongSoPin) references ThongSoPin(maThongSoPin);
-
-alter table CTSanPham
-add constraint fk_CTSanPham_ThongSoAdapter foreign key (maThongSoAdapter) references ThongSoAdapter(maThongSoAdapter);
-
-alter table CTSanPham
-add constraint fk_CTSanPham_ThongSoTheNho foreign key (maThongSoTheNho) references ThongSoTheNho(maThongSoTheNho);
-
 
 
 

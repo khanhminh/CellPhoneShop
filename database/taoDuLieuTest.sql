@@ -69,7 +69,7 @@ delimiter //
 create procedure taoDuLieuVaiTro()
 	begin
 		insert into VaiTro (tenVaiTro) values ('Admin');
-		insert into VaiTro (tenVaiTro) values (N'User');
+		insert into VaiTro (tenVaiTro) values (N'Người dùng');
 	end //
 delimiter ;
 call taoDuLieuVaiTro();
@@ -100,7 +100,7 @@ drop procedure if exists taoDuLieuPTGiaoHang;
 
 
 delimiter //
-create procedure TaoDuLieuDTDD()
+create procedure TaoDuLieuSmartPhone()
 	begin
 		declare SO_SAN_PHAM int;
 		declare idx int;
@@ -118,6 +118,9 @@ create procedure TaoDuLieuDTDD()
 		declare maLoaiSP smallint;
 		declare maNhaSX smallint;
 		
+		# Khai báo cho ThongSoDTDD
+		
+		
 		# Khai báo cho CTSanPham
 		declare maSP bigint;
 		declare trongLuong float;
@@ -125,8 +128,6 @@ create procedure TaoDuLieuDTDD()
 		declare chieuRong float;
 		declare doDay float;
 		declare ngaySX date;
-		
-		# Khai báo cho ThongSoDTDD
 
 
 
@@ -165,12 +166,13 @@ create procedure TaoDuLieuDTDD()
 		# Thêm dữ liệu vào CSDL
 		set idx = 0;
 		while (idx < SO_SAN_PHAM) do
+			# Chèn sản phẩm
 			set tenSPMoi = concat(tienToTen, idx);
 			
 			insert into SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
 			values (tenSPMoi, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX);
 			
-			
+			# Chèn chi tiết sản phẩm
 			select SP.maSP
 			into maSP
 			from SanPham as SP
@@ -179,13 +181,16 @@ create procedure TaoDuLieuDTDD()
 			insert into CTSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX)
 			values (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX);
 			
+			# Chèn thông số sản phẩm
+			
+			
 			set idx = idx + 1;
 		end while;
 		
 	end //
 delimiter ;
-call taoDuLieuDTDD();
-drop procedure if exists taoDuLieuDTDD;
+call taoDuLieuSmartPhone();
+drop procedure if exists taoDuLieuSmartPhone;
 
 
 delimiter //
