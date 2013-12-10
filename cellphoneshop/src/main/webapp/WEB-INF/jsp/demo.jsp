@@ -5,6 +5,6 @@
 
 <ul>
 	<c:forEach var="vt" items="${list}">
-		<li>${vt.tenVaiTro}</li>
+		<li>${vt.tenNhaSx}</li>
 	</c:forEach>
 </ul>

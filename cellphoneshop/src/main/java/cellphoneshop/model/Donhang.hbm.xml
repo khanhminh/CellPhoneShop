@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Dec 10, 2013 11:05:38 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="cellphoneshop.model.Donhang" table="donhang" catalog="cellphoneshop">
+    <class name="cellphoneshop.model.Donhang" table="DonHang" catalog="CellPhoneShop">
         <id name="maDonHang" type="java.lang.Long">
             <column name="maDonHang" />
             <generator class="identity" />
@@ -29,13 +29,13 @@
         <property name="diaChiGiaoHang" type="string">
             <column name="diaChiGiaoHang" length="100" />
         </property>
-        <set name="phieugiaohangs" table="phieugiaohang" inverse="true" lazy="true" fetch="select">
+        <set name="phieugiaohangs" table="PhieuGiaoHang" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maDonHang" not-null="true" />
             </key>
             <one-to-many class="cellphoneshop.model.Phieugiaohang" />
         </set>
-        <set name="ctdonhangs" table="ctdonhang" inverse="true" lazy="true" fetch="select">
+        <set name="ctdonhangs" table="CTDonHang" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maDonHang" not-null="true" />
             </key>

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Dec 10, 2013 11:05:38 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="cellphoneshop.model.Sanpham" table="sanpham" catalog="cellphoneshop">
+    <class name="cellphoneshop.model.Sanpham" table="SanPham" catalog="CellPhoneShop">
         <id name="maSp" type="java.lang.Long">
             <column name="maSP" />
             <generator class="identity" />
@@ -41,7 +41,7 @@
         <property name="diemDanhGiaTb" type="java.lang.Float">
             <column name="diemDanhGiaTB" precision="12" scale="0" />
         </property>
-        <set name="khuyenmais" table="quatang" inverse="true" lazy="true" fetch="select">
+        <set name="khuyenmais" table="QuaTang" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maSPTang" not-null="true" />
             </key>
@@ -49,7 +49,7 @@
                 <column name="maKM" not-null="true" />
             </many-to-many>
         </set>
-        <set name="danhsachmongmuons" table="ctdsmongmuon" inverse="true" lazy="true" fetch="select">
+        <set name="danhsachmongmuons" table="CTDSMongMuon" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maSP" not-null="true" />
             </key>
@@ -57,19 +57,19 @@
                 <column name="maDSMongMuon" not-null="true" />
             </many-to-many>
         </set>
-        <set name="ctdonhangs" table="ctdonhang" inverse="true" lazy="true" fetch="select">
+        <set name="ctdonhangs" table="CTDonHang" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maSP" not-null="true" />
             </key>
             <one-to-many class="cellphoneshop.model.Ctdonhang" />
         </set>
-        <set name="ctsanphams" table="ctsanpham" inverse="true" lazy="true" fetch="select">
+        <set name="ctsanphams" table="CTSanpham" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maSP" not-null="true" />
             </key>
             <one-to-many class="cellphoneshop.model.Ctsanpham" />
         </set>
-        <set name="khuyenmais_1" table="ctkhuyenmai" inverse="true" lazy="true" fetch="select">
+        <set name="khuyenmais_1" table="CTKhuyenMai" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maSP" not-null="true" />
             </key>
@@ -77,13 +77,13 @@
                 <column name="maKM" not-null="true" />
             </many-to-many>
         </set>
-        <set name="binhluans" table="binhluan" inverse="true" lazy="true" fetch="select">
+        <set name="binhluans" table="BinhLuan" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maSP" not-null="true" />
             </key>
             <one-to-many class="cellphoneshop.model.Binhluan" />
         </set>
-        <set name="danhgias" table="danhgia" inverse="true" lazy="true" fetch="select">
+        <set name="danhgias" table="DanhGia" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maSP" not-null="true" />
             </key>

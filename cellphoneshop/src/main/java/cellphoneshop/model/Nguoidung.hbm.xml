@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Dec 10, 2013 11:05:38 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="cellphoneshop.model.Nguoidung" table="nguoidung" catalog="cellphoneshop">
+    <class name="cellphoneshop.model.Nguoidung" table="NguoiDung" catalog="CellPhoneShop">
         <id name="maNd" type="java.lang.Integer">
             <column name="maND" />
             <generator class="identity" />
@@ -44,7 +44,7 @@
         <property name="nhanTinQuaEmail" type="java.lang.Boolean">
             <column name="nhanTinQuaEmail" />
         </property>
-        <set name="vaitros" table="phanquyen" inverse="false" lazy="true" fetch="select">
+        <set name="vaitros" table="PhanQuyen" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="maND" not-null="true" />
             </key>
@@ -52,25 +52,25 @@
                 <column name="maVaiTro" not-null="true" />
             </many-to-many>
         </set>
-        <set name="danhgias" table="danhgia" inverse="true" lazy="true" fetch="select">
+        <set name="danhgias" table="DanhGia" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maND" not-null="true" />
             </key>
             <one-to-many class="cellphoneshop.model.Danhgia" />
         </set>
-        <set name="danhsachmongmuons" table="danhsachmongmuon" inverse="true" lazy="true" fetch="select">
+        <set name="danhsachmongmuons" table="DanhSachMongMuon" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maND" not-null="true" />
             </key>
             <one-to-many class="cellphoneshop.model.Danhsachmongmuon" />
         </set>
-        <set name="binhluans" table="binhluan" inverse="true" lazy="true" fetch="select">
+        <set name="binhluans" table="BinhLuan" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maND" not-null="true" />
             </key>
             <one-to-many class="cellphoneshop.model.Binhluan" />
         </set>
-        <set name="donhangs" table="donhang" inverse="true" lazy="true" fetch="select">
+        <set name="donhangs" table="DonHang" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="maND" not-null="true" />
             </key>

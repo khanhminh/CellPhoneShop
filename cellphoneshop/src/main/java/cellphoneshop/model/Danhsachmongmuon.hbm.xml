@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Dec 10, 2013 11:05:38 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="cellphoneshop.model.Danhsachmongmuon" table="danhsachmongmuon" catalog="cellphoneshop">
+    <class name="cellphoneshop.model.Danhsachmongmuon" table="DanhSachMongMuon" catalog="CellPhoneShop">
         <id name="maDsmongMuon" type="java.lang.Integer">
             <column name="maDSMongMuon" />
             <generator class="identity" />
@@ -14,7 +14,7 @@
         <property name="ngayTao" type="date">
             <column name="ngayTao" length="10" />
         </property>
-        <set name="sanphams" table="ctdsmongmuon" inverse="false" lazy="true" fetch="select">
+        <set name="sanphams" table="CTDSMongMuon" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="maDSMongMuon" not-null="true" />
             </key>
