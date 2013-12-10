@@ -21,4 +21,9 @@
         <put-attribute name="title" value="Trang chủ" />
         <put-attribute name="content" value="/WEB-INF/jsp/home.jsp" />  
     </definition>
+    
+    <definition name="demo" extends="page">
+        <put-attribute name="title" value="Demo" />
+        <put-attribute name="content" value="/WEB-INF/jsp/demo.jsp" />  
+    </definition>
 </tiles-definitions>

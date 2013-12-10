@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 10, 2013 9:58:32 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.Nguoidung" table="nguoidung" catalog="cellphoneshop">
+        <id name="maNd" type="java.lang.Integer">
+            <column name="maND" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="loainguoidung" class="cellphoneshop.model.Loainguoidung" fetch="select">
+            <column name="maLoaiND" />
+        </many-to-one>
+        <property name="ho" type="string">
+            <column name="ho" length="30" not-null="true" />
+        </property>
+        <property name="ten" type="string">
+            <column name="ten" length="20" not-null="true" />
+        </property>
+        <property name="tenDangNhap" type="string">
+            <column name="tenDangNhap" length="35" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="256" not-null="true" />
+        </property>
+        <property name="matKhau" type="string">
+            <column name="matKhau" length="32" not-null="true" />
+        </property>
+        <property name="gioiTinh" type="java.lang.Short">
+            <column name="gioiTinh" />
+        </property>
+        <property name="ngaySinh" type="date">
+            <column name="ngaySinh" length="10" not-null="true" />
+        </property>
+        <property name="hinhDaiDien" type="string">
+            <column name="hinhDaiDien" length="256" />
+        </property>
+        <property name="soDienThoai" type="string">
+            <column name="soDienThoai" length="15" />
+        </property>
+        <property name="diaChi" type="string">
+            <column name="diaChi" length="100" />
+        </property>
+        <property name="nhanTinQuaEmail" type="java.lang.Boolean">
+            <column name="nhanTinQuaEmail" />
+        </property>
+        <set name="vaitros" table="phanquyen" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="maND" not-null="true" />
+            </key>
+            <many-to-many entity-name="cellphoneshop.model.Vaitro">
+                <column name="maVaiTro" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="danhgias" table="danhgia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maND" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.Danhgia" />
+        </set>
+        <set name="danhsachmongmuons" table="danhsachmongmuon" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maND" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.Danhsachmongmuon" />
+        </set>
+        <set name="binhluans" table="binhluan" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maND" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.Binhluan" />
+        </set>
+        <set name="donhangs" table="donhang" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maND" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.Donhang" />
+        </set>
+    </class>
+</hibernate-mapping>

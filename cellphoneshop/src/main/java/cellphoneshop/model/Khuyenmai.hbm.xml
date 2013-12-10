@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 10, 2013 9:58:32 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.Khuyenmai" table="khuyenmai" catalog="cellphoneshop">
+        <id name="maKm" type="java.lang.Integer">
+            <column name="maKM" />
+            <generator class="identity" />
+        </id>
+        <property name="tieuDe" type="string">
+            <column name="tieuDe" length="100" />
+        </property>
+        <property name="moTa" type="string">
+            <column name="moTa" length="400" />
+        </property>
+        <property name="phanTramGiamGia" type="java.lang.Float">
+            <column name="phanTramGiamGia" precision="12" scale="0" />
+        </property>
+        <property name="ngayBatDau" type="date">
+            <column name="ngayBatDau" length="10" />
+        </property>
+        <property name="ngayKetThuc" type="date">
+            <column name="ngayKetThuc" length="10" />
+        </property>
+        <set name="sanphams" table="quatang" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="maKM" not-null="true" />
+            </key>
+            <many-to-many entity-name="cellphoneshop.model.Sanpham">
+                <column name="maSPTang" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="sanphams_1" table="ctkhuyenmai" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="maKM" not-null="true" />
+            </key>
+            <many-to-many entity-name="cellphoneshop.model.Sanpham">
+                <column name="maSP" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

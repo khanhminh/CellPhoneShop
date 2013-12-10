@@ -34,9 +34,9 @@
 			<result name="error" type="tiles">register</result>
 		</action>
 		
-		<!-- <action name="logout" method="logout" class="accountAction">
-			<result name="success" type="redirectAction">login</result>
+		<action name="demo" method="demo" class="demoAction">
+			<result name="success" type="tiles">demo</result>
 		</action>
- -->
+		
 	</package>
 </struts>

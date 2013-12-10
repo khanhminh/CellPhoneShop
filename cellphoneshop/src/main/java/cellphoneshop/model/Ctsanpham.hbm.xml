@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 10, 2013 9:58:32 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.Ctsanpham" table="ctsanpham" catalog="cellphoneshop">
+        <id name="maCtsp" type="java.lang.Long">
+            <column name="maCTSP" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="thongsotainghe" class="cellphoneshop.model.Thongsotainghe" fetch="select">
+            <column name="maThongSoTaiNghe" />
+        </many-to-one>
+        <many-to-one name="thongsodtdd" class="cellphoneshop.model.Thongsodtdd" fetch="select">
+            <column name="maThongSoDTDD" />
+        </many-to-one>
+        <many-to-one name="thongsothenho" class="cellphoneshop.model.Thongsothenho" fetch="select">
+            <column name="maThongSoTheNho" />
+        </many-to-one>
+        <many-to-one name="sanpham" class="cellphoneshop.model.Sanpham" fetch="select">
+            <column name="maSP" not-null="true" />
+        </many-to-one>
+        <many-to-one name="thongsopin" class="cellphoneshop.model.Thongsopin" fetch="select">
+            <column name="maThongSoPin" />
+        </many-to-one>
+        <many-to-one name="thongsosmartphone" class="cellphoneshop.model.Thongsosmartphone" fetch="select">
+            <column name="maThongSoSmartPhone" />
+        </many-to-one>
+        <many-to-one name="thongsoadapter" class="cellphoneshop.model.Thongsoadapter" fetch="select">
+            <column name="maThongSoAdapter" />
+        </many-to-one>
+        <property name="trongLuong" type="java.lang.Float">
+            <column name="trongLuong" precision="12" scale="0" />
+        </property>
+        <property name="chieuCao" type="java.lang.Float">
+            <column name="chieuCao" precision="12" scale="0" />
+        </property>
+        <property name="chieuRong" type="java.lang.Float">
+            <column name="chieuRong" precision="12" scale="0" />
+        </property>
+        <property name="doDay" type="java.lang.Float">
+            <column name="doDay" precision="12" scale="0" />
+        </property>
+        <property name="ngaySx" type="date">
+            <column name="ngaySX" length="10" />
+        </property>
+        <set name="hinhanhsps" table="hinhanhsp" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maCTSP" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.Hinhanhsp" />
+        </set>
+    </class>
+</hibernate-mapping>

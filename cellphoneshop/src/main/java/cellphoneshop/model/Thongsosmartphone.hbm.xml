@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 10, 2013 9:58:32 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.Thongsosmartphone" table="thongsosmartphone" catalog="cellphoneshop">
+        <id name="maThongSoSmartPhone" type="java.lang.Long">
+            <column name="maThongSoSmartPhone" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="loaibanphim" class="cellphoneshop.model.Loaibanphim" fetch="select">
+            <column name="maLoaiBanPhim" />
+        </many-to-one>
+        <many-to-one name="hedieuhanh" class="cellphoneshop.model.Hedieuhanh" fetch="select">
+            <column name="maHDH" />
+        </many-to-one>
+        <property name="loaiManhinh" type="string">
+            <column name="loaiManhinh" length="20" />
+        </property>
+        <property name="soMauManHinh" type="string">
+            <column name="soMauManHinh" length="30" />
+        </property>
+        <property name="doPhanGiaiManHinh" type="string">
+            <column name="doPhanGiaiManHinh" length="20" />
+        </property>
+        <property name="chuanManHinh" type="string">
+            <column name="chuanManHinh" length="20" />
+        </property>
+        <property name="kichThuocManHinh" type="java.lang.Float">
+            <column name="kichThuocManHinh" precision="12" scale="0" />
+        </property>
+        <property name="camUng" type="string">
+            <column name="camUng" length="30" />
+        </property>
+        <property name="matDoDiemAnh" type="string">
+            <column name="matDoDiemAnh" length="30" />
+        </property>
+        <property name="cameraSau" type="string">
+            <column name="cameraSau" length="100" />
+        </property>
+        <property name="cameraTruoc" type="string">
+            <column name="cameraTruoc" length="100" />
+        </property>
+        <property name="tinhNangCamera" type="string">
+            <column name="tinhNangCamera" length="50" />
+        </property>
+        <property name="quayPhim" type="string">
+            <column name="quayPhim" length="100" />
+        </property>
+        <property name="videoCall" type="java.lang.Boolean">
+            <column name="videoCall" />
+        </property>
+        <property name="tocDoCpu" type="java.lang.Float">
+            <column name="tocDoCPU" precision="12" scale="0" />
+        </property>
+        <property name="soNhanCpu" type="java.lang.Short">
+            <column name="soNhanCPU" />
+        </property>
+        <property name="chipset" type="string">
+            <column name="chipset" length="30" />
+        </property>
+        <property name="ram" type="string">
+            <column name="RAM" length="30" />
+        </property>
+        <property name="gpu" type="string">
+            <column name="GPU" length="30" />
+        </property>
+        <property name="boNhoTrong" type="string">
+            <column name="boNhoTrong" length="30" />
+        </property>
+        <property name="theNhoNgoai" type="string">
+            <column name="theNhoNgoai" length="30" />
+        </property>
+        <property name="dungLuongTheToiDa" type="java.lang.Short">
+            <column name="dungLuongTheToiDa" />
+        </property>
+        <property name="dungLuongPin" type="java.lang.Float">
+            <column name="dungLuongPin" precision="12" scale="0" />
+        </property>
+        <property name="congNghePin" type="string">
+            <column name="congNghePin" length="20" />
+        </property>
+        <property name="pinCoTheThaoRoi" type="java.lang.Boolean">
+            <column name="pinCoTheThaoRoi" />
+        </property>
+        <property name="thoiGianChoToiDa" type="java.lang.Float">
+            <column name="thoiGianChoToiDa" precision="12" scale="0" />
+        </property>
+        <property name="thoiGianChoQuayPhim" type="java.lang.Float">
+            <column name="thoiGianChoQuayPhim" precision="12" scale="0" />
+        </property>
+        <property name="thoiGianChoGoiDien" type="java.lang.Float">
+            <column name="thoiGianChoGoiDien" precision="12" scale="0" />
+        </property>
+        <property name="mang2g" type="string">
+            <column name="mang2G" length="20" />
+        </property>
+        <property name="mang3g" type="string">
+            <column name="mang3G" length="20" />
+        </property>
+        <property name="mang4g" type="string">
+            <column name="mang4G" length="20" />
+        </property>
+        <property name="wifi" type="string">
+            <column name="wifi" length="30" />
+        </property>
+        <property name="bluetooth" type="string">
+            <column name="bluetooth" length="30" />
+        </property>
+        <property name="gprs" type="string">
+            <column name="GPRS" length="30" />
+        </property>
+        <property name="soLuongSim" type="java.lang.Short">
+            <column name="soLuongSim" />
+        </property>
+        <property name="gps" type="string">
+            <column name="GPS" length="30" />
+        </property>
+        <property name="boCamBien" type="string">
+            <column name="boCamBien" length="50" />
+        </property>
+        <property name="denFlash" type="string">
+            <column name="denFlash" length="30" />
+        </property>
+        <property name="denPin" type="string">
+            <column name="denPin" length="30" />
+        </property>
+        <set name="ctsanphams" table="ctsanpham" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="maThongSoSmartPhone" />
+            </key>
+            <one-to-many class="cellphoneshop.model.Ctsanpham" />
+        </set>
+    </class>
+</hibernate-mapping>
