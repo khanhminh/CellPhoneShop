@@ -33,7 +33,7 @@ public class LoaiBanPhimDAOImpl implements LoaiBanPhimDAO {
 	}
 
 	@Transactional(readOnly = true)
-	public Loaibanphim getLoaiBanPhimById(Short maLoaiBP) {
+	public Loaibanphim getLoaiBanPhimTheoId(Short maLoaiBP) {
 		Loaibanphim result = null;
 		Session session = sessionFactory.getCurrentSession();
 		

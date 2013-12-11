@@ -5,6 +5,6 @@ import cellphoneshop.model.Nhasanxuat;
 
 public interface NhaSanXuatDAO {
 	boolean insertNhaSanXuat(Nhasanxuat nhaSX);
-	Nhasanxuat getNhaSanXuatById(Short maNhaSX);
+	Nhasanxuat getNhaSanXuatTheoId(Short maNhaSX);
 	List<Nhasanxuat> getListNhaSanXuat();
 }

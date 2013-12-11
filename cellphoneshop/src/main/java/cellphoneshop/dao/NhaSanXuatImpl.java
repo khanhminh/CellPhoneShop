@@ -51,7 +51,7 @@ public class NhaSanXuatImpl implements NhaSanXuatDAO {
 	}
 
 	@Transactional(readOnly = true)
-	public Nhasanxuat getNhaSanXuatById(Short maNhaSX) {
+	public Nhasanxuat getNhaSanXuatTheoId(Short maNhaSX) {
 		Nhasanxuat result = null;
 		Session session = sessionFactory.getCurrentSession();
 		

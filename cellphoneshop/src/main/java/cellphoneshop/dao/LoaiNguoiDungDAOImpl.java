@@ -34,7 +34,7 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 	}
 
 	@Transactional(readOnly = true)
-	public Loainguoidung getLoaiNguoiDungById(Short maLoaiND) {
+	public Loainguoidung getLoaiNguoiDungTheoId(Short maLoaiND) {
 		Loainguoidung result = null;
 		Session session = sessionFactory.getCurrentSession();
 		

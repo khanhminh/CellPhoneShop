@@ -5,6 +5,6 @@ import cellphoneshop.model.Hedieuhanh;
 
 public interface HeDieuHanhDAO {
 	void insertHeDieuHanh(Hedieuhanh hdh);
-	Hedieuhanh getHeDieuHanhById(Short maHDH);
+	Hedieuhanh getHeDieuHanhTheoId(Short maHDH);
 	List<Hedieuhanh> getListHeDieuHanh();
 }

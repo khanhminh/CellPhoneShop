@@ -16,8 +16,8 @@ public class LoaiBanPhimServiceImpl implements LoaiBanPhimService {
 		loaiBPDAO.insertLoaiBanPhim(loaiBP);
 	}
 
-	public Loaibanphim getLoaiBanPhimById(Short maLoaiBP) {
-		return loaiBPDAO.getLoaiBanPhimById(maLoaiBP);
+	public Loaibanphim getLoaiBanPhimTheoId(Short maLoaiBP) {
+		return loaiBPDAO.getLoaiBanPhimTheoId(maLoaiBP);
 	}
 
 	public List<Loaibanphim> getListLoaiBanPhim() {

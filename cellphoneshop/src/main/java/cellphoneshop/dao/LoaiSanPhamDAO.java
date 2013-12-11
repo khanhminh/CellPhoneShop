@@ -5,6 +5,6 @@ import cellphoneshop.model.Loaisanpham;
 
 public interface LoaiSanPhamDAO {
 	void insertLoaiSP(Loaisanpham loaiSP);
-	Loaisanpham getLoaiSPById(Short maLoaiSP);
+	Loaisanpham getLoaiSPTheoId(Short maLoaiSP);
 	List<Loaisanpham> getListLoaiSP();
 }

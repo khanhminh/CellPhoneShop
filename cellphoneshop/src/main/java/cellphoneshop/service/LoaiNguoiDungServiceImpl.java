@@ -17,8 +17,8 @@ public class LoaiNguoiDungServiceImpl implements LoaiNguoiDungService {
 		loaiNDDAO.insertLoaiNguoiDung(loaiND);
 	}
 
-	public Loainguoidung getLoaiNguoiDungById(Short maLoaiND) {
-		return loaiNDDAO.getLoaiNguoiDungById(maLoaiND);
+	public Loainguoidung getLoaiNguoiDungTheoId(Short maLoaiND) {
+		return loaiNDDAO.getLoaiNguoiDungTheoId(maLoaiND);
 	}
 
 	public List<Loainguoidung> getListLoaiNguoiDung() {
