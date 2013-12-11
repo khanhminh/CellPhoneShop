@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <ul>
-	<c:forEach var="vt" items="${list}">
+	<%-- <c:forEach var="vt" items="${list}">
 		<li>${vt.tenNhaSx}</li>
-	</c:forEach>
+	</c:forEach> --%>
 </ul>

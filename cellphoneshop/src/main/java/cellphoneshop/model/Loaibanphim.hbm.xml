@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <property name="tenLoaiBanPhim" type="string">
-            <column name="tenLoaiBanPhim" length="12" />
+            <column name="tenLoaiBanPhim" length="20" not-null="true"/>
         </property>
         <set name="thongsodtdds" table="ThongSoDTDD" inverse="true" lazy="true" fetch="select">
             <key>

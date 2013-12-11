@@ -1,10 +1,8 @@
 package cellphoneshop.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cellphoneshop.dao.NhaSanXuatDAO;
 import cellphoneshop.model.Nhasanxuat;
 
@@ -12,10 +10,18 @@ import cellphoneshop.model.Nhasanxuat;
 public class NhaSanXuatServiceImpl implements NhaSanXuatService {
 
 	@Autowired
-	private NhaSanXuatDAO nhaSanXuatDAO;
+	private NhaSanXuatDAO nhaSXDAO;
 	
 	public List<Nhasanxuat> getListNhaSanXuat() {
-		return nhaSanXuatDAO.getListNhaSanXuat();
+		return nhaSXDAO.getListNhaSanXuat();
+	}
+
+	public boolean insertNhaSanXuat(Nhasanxuat nhaSX) {
+		return nhaSXDAO.insertNhaSanXuat(nhaSX);
+	}
+
+	public Nhasanxuat getNhaSanXuatById(Short maNhaSX) {
+		return nhaSXDAO.getNhaSanXuatById(maNhaSX);
 	}
 
 }

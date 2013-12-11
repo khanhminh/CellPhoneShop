@@ -1,5 +1,6 @@
 package cellphoneshop.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -7,25 +8,51 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import cellphoneshop.model.Nhasanxuat;
+import cellphoneshop.model.Loaisanpham;
 
 @Repository
-public class NhaSanXuatImpl implements NhaSanXuatDAO {
-	
+public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
+
 	@Autowired
 	private SessionFactory sessionFactory;
+	
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 	
-	@Transactional(readOnly = true)
-	public List<Nhasanxuat> getListNhaSanXuat() {
-		List<Nhasanxuat> result = null;
+	@Transactional
+	public void insertLoaiSP(Loaisanpham loaiSP) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
-			String hql = "from Nhasanxuat";
+			session.save(loaiSP);
+		} catch (Exception ex) {
+			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
+		}
+	}
+
+	@Transactional(readOnly = true)
+	public Loaisanpham getLoaiSPById(Short maLoaiSP) {
+		Loaisanpham result = null;
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			result = (Loaisanpham) session.get(Loaisanpham.class, maLoaiSP);
+		} catch (Exception ex) {
+			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
+		}
+		
+		return result;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Loaisanpham> getListLoaiSP() {
+		List<Loaisanpham> result = new ArrayList<Loaisanpham>();
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			String hql = "from Loaisanpham";
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
@@ -35,31 +62,4 @@ public class NhaSanXuatImpl implements NhaSanXuatDAO {
 		return result;
 	}
 
-	@Transactional
-	public boolean insertNhaSanXuat(Nhasanxuat nhaSX) {
-		boolean result = false;
-		Session session = sessionFactory.getCurrentSession();
-		
-		try {
-			session.save(nhaSX);
-			result = true;
-		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
-		}
-		
-		return result;
-	}
-
-	@Transactional(readOnly = true)
-	public Nhasanxuat getNhaSanXuatById(Short maNhaSX) {
-		Nhasanxuat result = null;
-		Session session = sessionFactory.getCurrentSession();
-		
-		try {
-			result = (Nhasanxuat) session.get(Nhasanxuat.class, maNhaSX);
-		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
-		}
-		return result;
-	}
 }
