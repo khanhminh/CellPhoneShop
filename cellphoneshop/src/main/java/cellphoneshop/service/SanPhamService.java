@@ -19,10 +19,10 @@ public interface SanPhamService {
 	/**
 	 * Lay danh sach san pham moi trong tuan co phan trang.
 	 */
-	public List<Sanpham> getListSanPhamMoiTrongTuan(int ketQuaDauTien, int soKetQuaToiDa);
+	List<Sanpham> getListSanPhamMoiTrongTuan(int ketQuaDauTien, int soKetQuaToiDa);
 	
 	/**
 	 * Dem so luong tat ca san pham moi them trong tuan.
 	 */
-	public int demSoSanPhamMoiTrongTuan();
+	int demSoSanPhamMoiTrongTuan();
 }
