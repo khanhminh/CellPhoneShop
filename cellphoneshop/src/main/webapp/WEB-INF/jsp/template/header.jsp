@@ -13,7 +13,7 @@
 				<security:authorize access="isAuthenticated()"> 
 					<c:url var="logoutUrl" value="/j_spring_security_logout" /> 
 					<ul class="list none">
-						<li>Chào, <a class="username" href="#"><security:authentication property="principal.username" /></a></li>
+						<li>Chào, <a class="username" href="#"><security:authentication property="principal.name" /></a></li>
 						<li>
 							<form action="${logoutUrl}" method="post" id="logoutForm">
 								<a

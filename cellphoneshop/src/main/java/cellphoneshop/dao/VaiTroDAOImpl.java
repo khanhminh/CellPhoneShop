@@ -38,4 +38,12 @@ public class VaiTroDAOImpl implements VaiTroDAO{
 		return list;
 	}
 
+	@Transactional
+	public Vaitro getVaitro(int maVaiTro) {
+		Session session = sessionFactory.getCurrentSession();
+		Vaitro vt = (Vaitro) session.get(Vaitro.class, maVaiTro);
+		
+		return vt;		
+	}
+
 }

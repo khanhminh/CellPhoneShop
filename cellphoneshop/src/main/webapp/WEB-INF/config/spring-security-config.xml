@@ -6,17 +6,18 @@
 	http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
 
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/home*" access="hasAnyRole('ROLE_USER,ROLE_ADMIN')"/>
+		<intercept-url pattern="/home*" access="hasAnyRole('User')"/>
 		<form-login login-page="/login" default-target-url="/home"
 			authentication-failure-url="/loginfail" />
+		<logout logout-success-url="/login"/>
 
 	</http>
+	
+	<beans:bean id="userDetailsService" class="cellphoneshop.security.UserDetailsServiceAdapter" />
 
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="khanh" password="123456" authorities="ROLE_USER" />
-			</user-service>
+		<authentication-provider user-service-ref="userDetailsService">
+			<password-encoder hash="plaintext" />
 		</authentication-provider>
 	</authentication-manager>
 
