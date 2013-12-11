@@ -1,6 +1,5 @@
 package cellphoneshop.controller;
 
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
@@ -26,14 +25,9 @@ public class DemoController extends ActionSupport{
 	
 	public String demo(){
 		HttpServletRequest request = ServletActionContext.getRequest();
-		
-		Date ngayBatDau = new Date();
-		ngayBatDau.setDate(10);
-		ngayBatDau.setMonth(12);
-		ngayBatDau.setYear(2013);
-		List<Sanpham> list = spService.getListSanPhamMoi(ngayBatDau, 0, 5);
+		List<Sanpham> list = spService.getListSanPhamMoiTrongTuan(0, 5);
 		request.setAttribute("list",list);
 		
-		return SUCCESS;		
+		return SUCCESS;
 	}
 }

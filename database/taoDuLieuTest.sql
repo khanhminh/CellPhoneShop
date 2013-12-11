@@ -140,7 +140,7 @@ create procedure TaoDuLieuSmartPhone()
 		set hinhDaiDien = 'resources/images/Smartphone/test/np1.png';         ### Dat duong dan hinh dai dien vao day
 		set soLuongHienCo = 100;
 		set tongSoLuong = 100;
-		set ngayNhap = '2013/12/10';
+		set ngayNhap = now();
 		
 		select LSP.maLoaiSP
 		into maLoaiSP
