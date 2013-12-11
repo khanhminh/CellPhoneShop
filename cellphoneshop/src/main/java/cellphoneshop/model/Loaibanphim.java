@@ -17,6 +17,10 @@ public class Loaibanphim implements java.io.Serializable {
 
 	public Loaibanphim() {
 	}
+	
+	public Loaibanphim(String tenLoaiBanPhim) {
+		this.tenLoaiBanPhim = tenLoaiBanPhim;
+	}
 
 	public Loaibanphim(String tenLoaiBanPhim, Set thongsodtdds,
 			Set thongsosmartphones) {

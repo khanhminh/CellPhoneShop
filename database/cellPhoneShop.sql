@@ -72,7 +72,7 @@ create table HinhAnhSP (
 
 create table LoaiBanPhim (
 	maLoaiBanPhim smallint auto_increment primary key,
-	tenLoaiBanPhim varchar(12) character set utf8
+	tenLoaiBanPhim varchar(20) character set utf8 not null
 );
 
 create table ThongSoDTDD (
