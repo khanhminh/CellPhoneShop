@@ -73,7 +73,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 	 * @return Danh sách sản phẩm
 	 */
 	@Transactional(readOnly = true)
-	public List<Sanpham> getListSanPhamMoi(Date ngayBatDau, int ketQuaDauTien, int soKetQuaToiDa) {
+	public List<Sanpham> getListSanPhamTheoNgayNhap(Date ngayBatDau, int ketQuaDauTien, int soKetQuaToiDa) {
 		List<Sanpham> result = new ArrayList<Sanpham>();
 		Session session = sessionFactory.getCurrentSession();
 		
@@ -94,13 +94,54 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 	}
 	
 	@Transactional(readOnly = true)
-	public long demSoSanPhamMoi(Date ngayBatDau) {
+	public long demSoSanPhamTheoNgayNhap(Date ngayBatDau) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			String hql = "select count(*) from Sanpham as SP where SP.ngayNhap <= :ngayBatDau";
 			Query query = session.createQuery(hql);
 			query.setDate("ngayBatDau", ngayBatDau);
+			
+			return ((Long)query.iterate().next()).longValue();
+		} catch (Exception ex) {
+			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return 0;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Sanpham> getListSanPhamTheoNgayNhap(Date ngay1, Date ngay2,
+			int kqDauTien, int soKqToiDa) {
+		List<Sanpham> result = new ArrayList<Sanpham>();
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			String hql = "select SP from Sanpham as SP where (:ngay1 <= SP.ngayNhap) and (SP.ngayNhap <= :ngay2)";
+			Query query = session.createQuery(hql);
+			query.setDate("ngay1", ngay1);
+			query.setDate("ngay2", ngay2);
+			
+			query.setFirstResult(kqDauTien);
+			query.setMaxResults(soKqToiDa);
+			
+			result = query.list();
+		} catch (Exception ex) {
+			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return result;
+	}
+
+	@Transactional(readOnly = true)
+	public long demSoSanPhamTheoNgayNhap(Date ngay1, Date ngay2) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			String hql = "select count(*) from Sanpham as SP where (:ngay1 <= SP.ngayNhap) and (SP.ngayNhap <= :ngay2)";
+			Query query = session.createQuery(hql);
+			query.setDate("ngay1", ngay1);
+			query.setDate("ngay2", ngay2);
 			
 			return ((Long)query.iterate().next()).longValue();
 		} catch (Exception ex) {

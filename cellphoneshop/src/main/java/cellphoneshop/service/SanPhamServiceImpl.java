@@ -1,9 +1,13 @@
 package cellphoneshop.service;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import cellphoneshop.dao.SanPhamDAO;
 import cellphoneshop.model.Sanpham;
 
@@ -24,13 +28,23 @@ public class SanPhamServiceImpl implements SanPhamService {
 	public void updateSanPham(Sanpham sp) {
 		spDAO.updateSanPham(sp);
 	}
-
-	public List<Sanpham> getListSanPhamMoi(Date ngayBatDau, int ketQuaDauTien,
-			int soKetQuaToiDa) {
-		return spDAO.getListSanPhamMoi(ngayBatDau, ketQuaDauTien, soKetQuaToiDa);
+	
+	public List<Sanpham> getListSanPhamMoiTrongTuan(int ketQuaDauTien, int soKetQuaToiDa) {
+		return spDAO.getListSanPhamTheoNgayNhap(layNgayDauTuan(), new Date(), ketQuaDauTien, soKetQuaToiDa);
+	}
+	
+	public int demSoSanPhamMoiTrongTuan() {
+		return (int)spDAO.demSoSanPhamTheoNgayNhap(layNgayDauTuan(), new Date());
 	}
 
-	public long demSoSanPhamMoi(Date ngayBatDau) {
-		return spDAO.demSoSanPhamMoi(ngayBatDau);
+	public static Date layNgayDauTuan() {
+		Date homNay = new Date();
+		Calendar c = Calendar.getInstance(Locale.getDefault());
+		
+		c.setTime(homNay);
+		c.add(Calendar.DAY_OF_MONTH, homNay.getDay() * -1);
+		
+		homNay = c.getTime();
+		return homNay;
 	}
 }

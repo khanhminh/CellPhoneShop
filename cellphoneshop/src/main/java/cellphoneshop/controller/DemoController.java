@@ -1,6 +1,5 @@
 package cellphoneshop.controller;
 
-import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
@@ -26,7 +25,6 @@ public class DemoController extends ActionSupport implements ServletRequestAware
 	
 	@Autowired
 	private SanPhamService spService;
-	
 	/*public String demo(){
 		//HttpServletRequest request = ServletActionContext.getRequest();
 		
@@ -50,6 +48,12 @@ public class DemoController extends ActionSupport implements ServletRequestAware
 
 	public void setServletRequest(HttpServletRequest arg0) {
 		this.request = arg0;		
+	public String demo(){
+		HttpServletRequest request = ServletActionContext.getRequest();
+		List<Sanpham> list = spService.getListSanPhamMoiTrongTuan(0, 5);
+		request.setAttribute("list",list);
+		
+		return SUCCESS;
 	}
 	
 	

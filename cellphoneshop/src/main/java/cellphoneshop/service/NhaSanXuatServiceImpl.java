@@ -23,5 +23,4 @@ public class NhaSanXuatServiceImpl implements NhaSanXuatService {
 	public Nhasanxuat getNhaSanXuatTheoId(Short maNhaSX) {
 		return nhaSXDAO.getNhaSanXuatTheoId(maNhaSX);
 	}
-
 }

@@ -9,18 +9,29 @@ public interface SanPhamDAO {
 	void updateSanPham(Sanpham sp);
 	
 	/**
-	 * Lấy danh sách sản phẩm có ngày nhập trước một ngày nào đó.
-	 * Xem thêm hàm đếm tất cả số kết quả có thể. {@link #demSoSanPhamMoi(Date)}
-	 * @param ngayBatDau Ngày bắt đầu tính.
-	 * @param ketQuaDauTien Số thứ tự sản phẩm đầu tiên tìm trong CSDL.
-	 * @param soKetQua Số kết quả tối đa mong muốn trả về.
-	 * @return Danh sách sản phẩm
+	 * Lay danh sach san pham co ngay nhap truoc mot ngay nao do co phan trang.
+	 * Xem them ham dem tat ca so san pham co the {@link #demSoSanPhamMoi(Date)}
+	 * @param ngayBatDau Ngày bat dau dem.
+	 * @param ketQuaDauTien So thu tu cua san pham dau tien trong CSDL.
+	 * @param soKetQua So ket qua toi da tra ve.
 	 */
-	List<Sanpham> getListSanPhamMoi(Date ngayBatDau, int ketQuaDauTien, int soKetQuaToiDa);
+	List<Sanpham> getListSanPhamTheoNgayNhap(Date ngayBatDau, int ketQuaDauTien, int soKetQuaToiDa);
 	
 	/**
 	 * Tính số sản phẩm nếu lấy tất cả sản phẩm có ngày nhập
 	 * trước một ngày nào đó.
 	 */
-	long demSoSanPhamMoi(Date ngayBatDau);
+	long demSoSanPhamTheoNgayNhap(Date ngayBatDau);
+	
+	
+	/**
+	 * Lay danh sach san pham co ngay nhap nam giua ngay1 va ngay2.
+	 */
+	List<Sanpham> getListSanPhamTheoNgayNhap(Date ngay1, Date ngay2,
+			int kqDauTien, int soKqToiDa);
+	
+	/**
+	 * Dem tat ca so san pham co ngay nhap nam giua ngay1 va ngay2. 
+	 */
+	long demSoSanPhamTheoNgayNhap(Date ngay1, Date ngay2);
 }
