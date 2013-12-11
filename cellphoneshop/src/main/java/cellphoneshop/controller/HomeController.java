@@ -2,11 +2,14 @@ package cellphoneshop.controller;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cellphoneshop.model.Sanpham;
 import cellphoneshop.service.SanPhamService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,23 +21,26 @@ public class HomeController extends ActionSupport implements ServletRequestAware
 	private SanPhamService sanPhamService;
 	private HttpServletRequest request;
 	
-	private int productPerPage;
+	private int productPerPage = 8;
 
 	@Override
 	public String execute() throws Exception {
 		int currentPage = getPage(request.getParameter("page"));
-		long totalNewProduct = sanPhamService.demSoSanPhamMoi(null);
+		long totalNewProduct = sanPhamService.demSoSanPhamMoiTrongTuan();
 		int totalPage = (int)totalNewProduct / productPerPage;
+		int start = (currentPage - 1) * productPerPage;
+		List<Sanpham> newProducts = 
+				sanPhamService.getListSanPhamMoiTrongTuan(start, productPerPage);
 		
-		request.setAttribute("newProducts", null);
+		request.setAttribute("newProducts", newProducts);
 		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("totalPage", null);
+		request.setAttribute("totalPage", totalPage);
 		
 		return SUCCESS;
 	}
 	
 	private int getPage(String strPage){
-		if (strPage.matches("\\d")){
+		if (strPage != null &&strPage.matches("\\d")){
 			return Integer.parseInt(strPage);
 		}
 		

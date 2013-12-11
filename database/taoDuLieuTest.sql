@@ -1,211 +1,211 @@
-use CellPhoneShop;
+USE CellPhoneShop;
 
 # Tạo một số dữ liệu trước
 
-delimiter //
-create procedure taoDuLieuNhaSanXuat()
-	begin
-		insert into NhaSanXuat (tenNhaSX) values ('Samsung');
-		insert into NhaSanXuat (tenNhaSX) values ('Nokia');
-		insert into NhaSanXuat (tenNhaSX) values ('HTC');
-		insert into NhaSanXuat (tenNhaSX) values ('Apple');
-	end //
-delimiter ;
-call taoDuLieuNhaSanXuat();
-drop procedure if exists taoDuLieuNhaSanXuat;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuNhaSanXuat()
+	BEGIN
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Samsung');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Nokia');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('HTC');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Apple');
+	END //
+DELIMITER ;
+CALL taoDuLieuNhaSanXuat();
+DROP PROCEDURE IF EXISTS taoDuLieuNhaSanXuat;
 
 
-delimiter //
-create procedure taoDuLieuLoaiSanPham()
-	begin
-		insert into LoaiSanPham (tenLoaiSP) values (N'Điện thoại di động');
-		insert into LoaiSanPham (tenLoaiSP) values (N'Điện thoại thông minh');
-		insert into LoaiSanPham (tenLoaiSP) values (N'Tai nghe');
-		insert into LoaiSanPham (tenLoaiSP) values (N'Pin');
-		insert into LoaiSanPham (tenLoaiSP) values (N'Thẻ nhớ');
-		insert into LoaiSanPham (tenLoaiSP) values (N'Sạc điện thoại');
-	end //
-delimiter ;
-call taoDuLieuLoaiSanPham();
-drop procedure if exists taoDuLieuLoaiSanPham;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuLoaiSanPham()
+	BEGIN
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Điện thoại di động');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Điện thoại thông minh');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Tai nghe');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Pin');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Thẻ nhớ');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Sạc điện thoại');
+	END //
+DELIMITER ;
+CALL taoDuLieuLoaiSanPham();
+DROP PROCEDURE IF EXISTS taoDuLieuLoaiSanPham;
 
 
-delimiter //
-create procedure taoDuLieuHeDieuHanh()
-	begin
-		insert into HeDieuHanh (tenHDH) values ('Android');
-		insert into HeDieuHanh (tenHDH) values ('iOS');
-		insert into HeDieuHanh (tenHDH) values ('Windows Phone');
-		insert into HeDieuHanh (tenHDH) values ('Tizen');
-		insert into HeDieuHanh (tenHDH) values ('Symbian');
-	end //
-delimiter ;
-call taoDuLieuHeDieuHanh();
-drop procedure if exists taoDuLieuHeDieuHanh;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuHeDieuHanh()
+	BEGIN
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Android');
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('iOS');
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Windows Phone');
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Tizen');
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Symbian');
+	END //
+DELIMITER ;
+CALL taoDuLieuHeDieuHanh();
+DROP PROCEDURE IF EXISTS taoDuLieuHeDieuHanh;
 
 
-delimiter //
-create procedure taoDuLieuLoaiBanPhim()
-	begin
-		insert into LoaiBanPhim (tenLoaiBanPhim) values (N'Thông thường');
-		insert into LoaiBanPhim (tenLoaiBanPhim) values ('Qwerty');
-		insert into LoaiBanPhim (tenLoaiBanPhim) values (N'Cảm ứng');
-	end //
-delimiter ;
-call taoDuLieuLoaiBanPhim();
-drop procedure if exists taoDuLieuLoaiBanPhim;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuLoaiBanPhim()
+	BEGIN
+		INSERT INTO LoaiBanPhim (tenLoaiBanPhim) VALUES (N'Thông thường');
+		INSERT INTO LoaiBanPhim (tenLoaiBanPhim) VALUES ('Qwerty');
+		INSERT INTO LoaiBanPhim (tenLoaiBanPhim) VALUES (N'Cảm ứng');
+	END //
+DELIMITER ;
+CALL taoDuLieuLoaiBanPhim();
+DROP PROCEDURE IF EXISTS taoDuLieuLoaiBanPhim;
 
 
-delimiter //
-create procedure taoDuLieuLoaiNguoiDung()
-	begin
-		insert into LoaiNguoiDung (tenLoaiND) values (N'Khách hàng phổ thông');
-	end //
-delimiter ;
-call taoDuLieuLoaiNguoiDung();
-drop procedure if exists taoDuLieuLoaiNguoiDung;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuLoaiNguoiDung()
+	BEGIN
+		INSERT INTO LoaiNguoiDung (tenLoaiND) VALUES (N'Khách hàng phổ thông');
+	END //
+DELIMITER ;
+CALL taoDuLieuLoaiNguoiDung();
+DROP PROCEDURE IF EXISTS taoDuLieuLoaiNguoiDung;
 
-delimiter //
-create procedure taoDuLieuVaiTro()
-	begin
-		insert into VaiTro (tenVaiTro) values ('Admin');
-		insert into VaiTro (tenVaiTro) values (N'Người dùng');
-	end //
-delimiter ;
-call taoDuLieuVaiTro();
-drop procedure if exists taoDuLieuVaiTro;
-
-
-delimiter //
-create procedure taoDuLieuTrangThaiDonHang()
-	begin
-		insert into TrangThaiDonHang (tenTrangThai) values('Chưa giao');
-		insert into TrangThaiDonHang (tenTrangThai) values('Đã giao');
-	end //
-delimiter ;
-call taoDuLieuTrangThaiDonHang();
-drop procedure if exists taoDuLieuTrangThaiDonHang;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuVaiTro()
+	BEGIN
+		INSERT INTO VaiTro (tenVaiTro) VALUES ('Admin');
+		INSERT INTO VaiTro (tenVaiTro) VALUES (N'User');
+	END //
+DELIMITER ;
+CALL taoDuLieuVaiTro();
+DROP PROCEDURE IF EXISTS taoDuLieuVaiTro;
 
 
-delimiter //
-create procedure taoDuLieuPTGiaoHang()
-	begin
-		insert into PTGiaoHang (tenPTGiaoHang) values (N'Chuyển đến tận nơi');
-		insert into PTGiaoHang (tenPTGiaoHang) values (N'Chuyển qua bưu điện');
-		insert into PTGiaoHang (tenPTGiaoHang) values (N'Khách hàng đến lấy sản phẩm');
-	end //
-delimiter ;
-call taoDuLieuPTGiaoHang();
-drop procedure if exists taoDuLieuPTGiaoHang;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuTrangThaiDonHang()
+	BEGIN
+		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Chưa giao');
+		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Đã giao');
+	END //
+DELIMITER ;
+CALL taoDuLieuTrangThaiDonHang();
+DROP PROCEDURE IF EXISTS taoDuLieuTrangThaiDonHang;
 
 
-delimiter //
-create procedure TaoDuLieuSmartPhone()
-	begin
-		declare SO_SAN_PHAM int;
-		declare idx int;
-		declare tienToTen varchar (50) character set utf8;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuPTGiaoHang()
+	BEGIN
+		INSERT INTO PTGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển đến tận nơi');
+		INSERT INTO PTGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển qua bưu điện');
+		INSERT INTO PTGiaoHang (tenPTGiaoHang) VALUES (N'Khách hàng đến lấy sản phẩm');
+	END //
+DELIMITER ;
+CALL taoDuLieuPTGiaoHang();
+DROP PROCEDURE IF EXISTS taoDuLieuPTGiaoHang;
+
+
+DELIMITER //
+CREATE PROCEDURE TaoDuLieuSmartPhone()
+	BEGIN
+		DECLARE SO_SAN_PHAM INT;
+		DECLARE idx INT;
+		DECLARE tienToTen VARCHAR (50) CHARACTER SET utf8;
 		
 		# Khai báo cho SanPham
-		declare tenSPMoi varchar(100) character set utf8;
-		declare gioiThieu varchar(800) character set utf8;
-		declare gia int;
-		declare soThangBaoHanh smallint;
-		declare hinhDaiDien varchar(256);
-		declare soLuongHienCo int;
-		declare tongSoLuong int;
-		declare ngayNhap date;
-		declare maLoaiSP smallint;
-		declare maNhaSX smallint;
+		DECLARE tenSPMoi VARCHAR(100) CHARACTER SET utf8;
+		DECLARE gioiThieu VARCHAR(800) CHARACTER SET utf8;
+		DECLARE gia INT;
+		DECLARE soThangBaoHanh SMALLINT;
+		DECLARE hinhDaiDien VARCHAR(256);
+		DECLARE soLuongHienCo INT;
+		DECLARE tongSoLuong INT;
+		DECLARE ngayNhap DATE;
+		DECLARE maLoaiSP SMALLINT;
+		DECLARE maNhaSX SMALLINT;
 		
 		# Khai báo cho ThongSoDTDD
 		
 		
 		# Khai báo cho CTSanPham
-		declare maSP bigint;
-		declare trongLuong float;
-		declare chieuCao float;
-		declare chieuRong float;
-		declare doDay float;
-		declare ngaySX date;
+		DECLARE maSP BIGINT;
+		DECLARE trongLuong FLOAT;
+		DECLARE chieuCao FLOAT;
+		DECLARE chieuRong FLOAT;
+		DECLARE doDay FLOAT;
+		DECLARE ngaySX DATE;
 
 
 
 		# Đặt dữ liệu cho SanPham
-		set SO_SAN_PHAM = 50;
-		set tienToTen = N'N Mobile v';
-		set gioiThieu = N'Điện thoại mới với nhiều tính năng hấp dẫn';
-		set gia = 2000000;
-		set soThangBaoHanh = 12;
-		set hinhDaiDien = 'resources/images/Smartphone/test/np1.png';         ### Dat duong dan hinh dai dien vao day
-		set soLuongHienCo = 100;
-		set tongSoLuong = 100;
-		set ngayNhap = now();
+		SET SO_SAN_PHAM = 50;
+		SET tienToTen = N'N Mobile v';
+		SET gioiThieu = N'Điện thoại mới với nhiều tính năng hấp dẫn';
+		SET gia = 2000000;
+		SET soThangBaoHanh = 12;
+		SET hinhDaiDien = 'resources/images/Smartphone/test/np1.png';         ### Dat duong dan hinh dai dien vao day
+		SET soLuongHienCo = 100;
+		SET tongSoLuong = 100;
+		SET ngayNhap = NOW();
 		
-		select LSP.maLoaiSP
-		into maLoaiSP
-		from LoaiSanPham as LSP
-		where LSP.tenLoaiSP like 'Điện thoại di động';
+		SELECT LSP.maLoaiSP
+		INTO maLoaiSP
+		FROM LoaiSanPham AS LSP
+		WHERE LSP.tenLoaiSP LIKE 'Điện thoại di động';
 
-		select NSX.maNhaSX
-		into maNhaSX
-		from NhaSanXuat as NSX
-		where NSX.tenNhaSX like 'Samsung';
+		SELECT NSX.maNhaSX
+		INTO maNhaSX
+		FROM NhaSanXuat AS NSX
+		WHERE NSX.tenNhaSX LIKE 'Samsung';
 		
 		
 		# Đặt dữ liệu cho CTSanPham
-		set trongLuong = 0.1;
-		set chieuCao = 120;
-		set chieuRong = 60;
-		set doDay = 20;
-		set ngaySX = '2013/12/9';
+		SET trongLuong = 0.1;
+		SET chieuCao = 120;
+		SET chieuRong = 60;
+		SET doDay = 20;
+		SET ngaySX = '2013/12/9';
 		
 		# Đặt dữ liệu cho ThongSoDTDD
 		
 		
 		# Thêm dữ liệu vào CSDL
-		set idx = 0;
-		while (idx < SO_SAN_PHAM) do
+		SET idx = 0;
+		WHILE (idx < SO_SAN_PHAM) DO
 			# Chèn sản phẩm
-			set tenSPMoi = concat(tienToTen, idx);
+			SET tenSPMoi = CONCAT(tienToTen, idx);
 			
-			insert into SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
-			values (tenSPMoi, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX);
+			INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+			VALUES (tenSPMoi, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX);
 			
 			# Chèn chi tiết sản phẩm
-			select SP.maSP
-			into maSP
-			from SanPham as SP
-			where SP.tenSP like tenSPMoi;
+			SELECT SP.maSP
+			INTO maSP
+			FROM SanPham AS SP
+			WHERE SP.tenSP LIKE tenSPMoi;
 			
-			insert into CTSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX)
-			values (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX);
+			INSERT INTO CTSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX)
+			VALUES (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX);
 			
 			# Chèn thông số sản phẩm
 			
 			
-			set idx = idx + 1;
-		end while;
+			SET idx = idx + 1;
+		END WHILE;
 		
-	end //
-delimiter ;
-call taoDuLieuSmartPhone();
-drop procedure if exists taoDuLieuSmartPhone;
+	END //
+DELIMITER ;
+CALL taoDuLieuSmartPhone();
+DROP PROCEDURE IF EXISTS taoDuLieuSmartPhone;
 
 
-delimiter //
-create procedure taoDuLieuNguoiDung()
-	begin
-		declare maLoaiND smallint;
+DELIMITER //
+CREATE PROCEDURE taoDuLieuNguoiDung()
+	BEGIN
+		DECLARE maLoaiND SMALLINT;
 		
-		select LND.maLoaiND
-		into maLoaiND
-		from LoaiNguoiDung as LND
-		where LND.tenLoaiND like N'Khách hàng phổ thông';
+		SELECT LND.maLoaiND
+		INTO maLoaiND
+		FROM LoaiNguoiDung AS LND
+		WHERE LND.tenLoaiND LIKE N'Khách hàng phổ thông';
 		
-		insert into NguoiDung(ho, ten, tenDangNhap, email, matKhau, maLoaiND, ngaySinh, hinhDaiDien, soDienThoai, diaChi, gioiTinh, nhanTinQuaEmail)
-		values (N'Nguyễn Văn', N'A', 'nva', 'nva@example.com', '12345', maLoaiND, '1990/10/10', null, '0909190234', 'Quận 5 TP HCM', 1, false);
-	end //
-delimiter ;
-call taoDuLieuNguoiDung();
-drop procedure if exists taoDuLieuNguoiDung;
+		INSERT INTO NguoiDung(ho, ten, tenDangNhap, email, matKhau, maLoaiND, ngaySinh, hinhDaiDien, soDienThoai, diaChi, gioiTinh, nhanTinQuaEmail)
+		VALUES (N'Nguyễn Văn', N'A', 'nva', 'nva@example.com', '12345', maLoaiND, '1990/10/10', NULL, '0909190234', 'Quận 5 TP HCM', 1, FALSE);
+	END //
+DELIMITER ;
+CALL taoDuLieuNguoiDung();
+DROP PROCEDURE IF EXISTS taoDuLieuNguoiDung;

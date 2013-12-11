@@ -27,7 +27,7 @@
 						<c:forEach var="sp" items="${newProducts}">
 							<li class="one_quarter"><a href="#">
 									<div class="product">
-										<img src="resources/${sp.hinhDaiDien}" />
+										<img src="${sp.hinhDaiDien}" />
 										<div class="info-product">
 											<p class="name-product">${sp.tenSp}</p>
 											<p class="cost">
@@ -45,11 +45,11 @@
 			<nav class="pagination">
 				<ul>
 					<c:forEach var="page" begin="1" end="${requestScope.totalPage}">
-						<li><a
-							href="home?page=${page}">${page}
-							<c:if test="${i == requestScope.currentPage}">
+						<li><a href="home?page=${page}"
+							<c:if test="${page == requestScope.currentPage}">
                                     class="active-page" href="#"
-                            </c:if></a></li>
+                            </c:if>>${page}
+						</a></li>
 					</c:forEach>
 				</ul>
 			</nav>
