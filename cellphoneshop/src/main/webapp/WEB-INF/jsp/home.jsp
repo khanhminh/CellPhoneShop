@@ -1,134 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="wrapper row3">
 	<div id="container">
-		<div style="background-color: red; height: 100px">
-			<div class="nav-page">
-				<span>San pham</span> >> <span>dien thoai di dong</span>
-				<h1>Dien thoai di dong</h1>
-			</div>
-		</div>
-	
 		<!-- sidebar left -->
 		<div id="sidebar_1" class="sidebar one_quarter first">
-			<jsp:include page="template/sidebar_right.jsp"></jsp:include>
+			<jsp:include page="template/sidebar.jsp"></jsp:include>
 		</div>
-	
-		<div id="gallery" class="three_quarter">
-			<nav class="pagination">
-				<ul>
-					<li><a class="ajax-link active-page" data-ajax="true"
-						data-ajax-method="GET" data-ajax-success="populateProducts"
-						href="/Home/GetNewProducts?page=1">1</a></li>
-					<li><a class="ajax-link" data-ajax="true"
-						data-ajax-method="GET" data-ajax-success="populateProducts"
-						href="/Home/GetNewProducts?page=2">2</a></li>
-					<li><a class="ajax-link" data-ajax="true"
-						data-ajax-method="GET" data-ajax-success="populateProducts"
-						href="/Home/GetNewProducts?page=3">3</a></li>
-					<li><a class="ajax-link" data-ajax="true"
-						data-ajax-method="GET" data-ajax-success="populateProducts"
-						href="/Home/GetNewProducts?page=4">4</a></li>
 
-				</ul>
-			</nav>
-		
+		<div id="gallery" class="three_quarter">
 			<section>
 				<figure>
 					<div class="title-content">
-						
+						<h2>Sản phẩm mới</h2>
 						<div class="sortby">
 							<lable>Sắp xếp theo: </lable>
 							<select>
-							 	<option>Giá tăng dần</option>
-							 	<option>Giá giảm dần</option>
+								<option>Giá tăng dần</option>
+								<option>Giá giảm dần</option>
 							</select>
 						</div>
 					</div>
-					<ul id="List" class="clear">
-						<li class="one_quarter"><a href="/Product/Details?id=58">
-								<div class="product">
-									<img
-										src="resources/images/Smartphone/BlackBerry/BLACKBERRY Z10/hinhdaidien.jpg" />
-									<div class="info-product">
-										<p class="name-product">BlackBerry Curve 9220</p>
-										<p class="cost">14,000,000 VNĐ</p>
+					<ul id="ListNewProducts" class="clear">
+						<c:forEach var="sp" items="${newProducts}">
+							<li class="one_quarter"><a href="#">
+									<div class="product">
+										<img src="resources/${sp.hinhDaiDien}" />
+										<div class="info-product">
+											<p class="name-product">${sp.tenSp}</p>
+											<p class="cost">
+												<fmt:formatNumber value="${sp.gia}" type="number" />
+												VNĐ
+											</p>
+										</div>
 									</div>
-								</div>
-						</a></li>
-						<li class="one_quarter"><a href="/Product/Details?id=57">
-								<div class="product">
-									<img
-										src="resources/images/Smartphone\Apple\iPhone 4S 16GB\hinhdaidien.jpg">
-									<div class="info-product">
-										<p class="name-product">iPhone 4S 16GB</p>
-										<p class="cost">14,490,000 VNĐ</p>
-									</div>
-								</div>
-						</a></li>
-						<li class="one_quarter"><a href="/Product/Details?id=56">
-								<div class="product">
-									<img
-										src="resources/images/Smartphone/SamSung/SAMSUNG GALAXY S4 I9500/hinhdaidien.jpg">
-									<div class="info-product">
-										<p class="name-product">SAMSUNG GALAXY S4 I9500</p>
-										<p class="cost">15,990,000 VNĐ</p>
-									</div>
-								</div>
-						</a></li>
-						<li class="one_quarter"><a href="/Product/Details?id=56">
-								<div class="product">
-									<img
-										src="resources/images/Smartphone/SamSung/SAMSUNG GALAXY S4 I9500/hinhdaidien.jpg">
-									<div class="info-product">
-										<p class="name-product">SAMSUNG GALAXY S4 I9500</p>
-										<p class="cost">15,990,000 VNĐ</p>
-									</div>
-								</div>
-						</a></li>
-						<li class="one_quarter"><a href="/Product/Details?id=58">
-								<div class="product">
-									<img
-										src="resources/images/Smartphone/BlackBerry/BLACKBERRY Z10/hinhdaidien.jpg" />
-									<div class="info-product">
-										<p class="name-product">BlackBerry Curve 9220</p>
-										<p class="cost">14,000,000 VNĐ</p>
-									</div>
-								</div>
-						</a></li>
-						<li class="one_quarter"><a href="/Product/Details?id=57">
-								<div class="product">
-									<img
-										src="resources/images/Smartphone\Apple\iPhone 4S 16GB\hinhdaidien.jpg">
-									<div class="info-product">
-										<p class="name-product">iPhone 4S 16GB</p>
-										<p class="cost">14,490,000 VNĐ</p>
-									</div>
-								</div>
-						</a></li>
-						<li class="one_quarter"><a href="/Product/Details?id=56">
-								<div class="product">
-									<img
-										src="resources/images/Smartphone/SamSung/SAMSUNG GALAXY S4 I9500/hinhdaidien.jpg">
-									<div class="info-product">
-										<p class="name-product">SAMSUNG GALAXY S4 I9500</p>
-										<p class="cost">15,990,000 VNĐ</p>
-									</div>
-								</div>
-						</a></li>
-						<li class="one_quarter"><a href="/Product/Details?id=56">
-								<div class="product">
-									<img
-										src="resources/images/Smartphone/SamSung/SAMSUNG GALAXY S4 I9500/hinhdaidien.jpg">
-									<div class="info-product">
-										<p class="name-product">SAMSUNG GALAXY S4 I9500</p>
-										<p class="cost">15,990,000 VNĐ</p>
-									</div>
-								</div>
-						</a></li>
+							</a></li>
+						</c:forEach>
 					</ul>
 				</figure>
 			</section>
+
+			<nav class="pagination">
+				<ul>
+					<li>
+						<a class="active-page" href="/Home/GetNewProducts?page=1">1</a>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="push30"></div>
+
 		</div>
 	</div>
+</div>
