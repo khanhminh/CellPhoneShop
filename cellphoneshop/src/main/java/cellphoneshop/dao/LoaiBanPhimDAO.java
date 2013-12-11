@@ -5,6 +5,6 @@ import cellphoneshop.model.Loaibanphim;
 
 public interface LoaiBanPhimDAO {
 	void insertLoaiBanPhim(Loaibanphim loaiBP);
-	Loaibanphim getLoaiBanPhimById(Short maLoaiBP);
+	Loaibanphim getLoaiBanPhimTheoId(Short maLoaiBP);
 	List<Loaibanphim> getListLoaiBanPhim();
 }

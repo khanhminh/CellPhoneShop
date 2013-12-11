@@ -17,8 +17,8 @@ public class LoaiSanPhamServiceImpl implements LoaiSanPhamService {
 		loaiSpDAO.insertLoaiSP(loaiSP);
 	}
 
-	public Loaisanpham getLoaiSPById(Short maLoaiSP) {
-		return loaiSpDAO.getLoaiSPById(maLoaiSP);
+	public Loaisanpham getLoaiSPTheoId(Short maLoaiSP) {
+		return loaiSpDAO.getLoaiSPTheoId(maLoaiSP);
 	}
 
 	public List<Loaisanpham> getListLoaiSP() {

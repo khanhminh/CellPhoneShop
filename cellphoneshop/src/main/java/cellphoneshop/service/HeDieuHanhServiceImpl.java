@@ -15,8 +15,8 @@ public class HeDieuHanhServiceImpl implements HeDieuHanhService {
 		hdhDAO.insertHeDieuHanh(hdh);
 	}
 
-	public Hedieuhanh getHeDieuHanhById(Short maHDH) {
-		return hdhDAO.getHeDieuHanhById(maHDH);
+	public Hedieuhanh getHeDieuHanhTheoId(Short maHDH) {
+		return hdhDAO.getHeDieuHanhTheoId(maHDH);
 	}
 
 	public List<Hedieuhanh> getListHeDieuHanh() {

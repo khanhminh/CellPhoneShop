@@ -44,9 +44,13 @@
 
 			<nav class="pagination">
 				<ul>
-					<li>
-						<a class="active-page" href="/Home/GetNewProducts?page=1">1</a>
-					</li>
+					<c:forEach var="page" begin="1" end="${requestScope.totalPage}">
+						<li><a
+							href="home?page=${page}">${page}
+							<c:if test="${i == requestScope.currentPage}">
+                                    class="active-page" href="#"
+                            </c:if></a></li>
+					</c:forEach>
 				</ul>
 			</nav>
 

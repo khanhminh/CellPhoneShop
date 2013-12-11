@@ -2,7 +2,6 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cellphoneshop.model.Hedieuhanh;
 
 @Repository
-public class HeDieuHangDAOImpl implements HeDieuHanhDAO {
+public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -34,7 +33,7 @@ public class HeDieuHangDAOImpl implements HeDieuHanhDAO {
 	}
 
 	@Transactional(readOnly = true)
-	public Hedieuhanh getHeDieuHanhById(Short maHDH) {
+	public Hedieuhanh getHeDieuHanhTheoId(Short maHDH) {
 		Hedieuhanh result = null;
 		Session session = sessionFactory.getCurrentSession();
 		

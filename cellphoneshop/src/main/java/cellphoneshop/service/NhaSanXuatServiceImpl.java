@@ -20,8 +20,8 @@ public class NhaSanXuatServiceImpl implements NhaSanXuatService {
 		return nhaSXDAO.insertNhaSanXuat(nhaSX);
 	}
 
-	public Nhasanxuat getNhaSanXuatById(Short maNhaSX) {
-		return nhaSXDAO.getNhaSanXuatById(maNhaSX);
+	public Nhasanxuat getNhaSanXuatTheoId(Short maNhaSX) {
+		return nhaSXDAO.getNhaSanXuatTheoId(maNhaSX);
 	}
 
 }

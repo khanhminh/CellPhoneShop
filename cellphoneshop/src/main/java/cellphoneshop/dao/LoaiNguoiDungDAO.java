@@ -5,6 +5,6 @@ import cellphoneshop.model.Loainguoidung;
 
 public interface LoaiNguoiDungDAO {
 	void insertLoaiNguoiDung(Loainguoidung loaiND);
-	Loainguoidung getLoaiNguoiDungById(Short maLoaiND);
+	Loainguoidung getLoaiNguoiDungTheoId(Short maLoaiND);
 	List<Loainguoidung> getListLoaiNguoiDung();
 }

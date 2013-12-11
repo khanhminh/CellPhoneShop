@@ -137,7 +137,7 @@ create procedure TaoDuLieuSmartPhone()
 		set gioiThieu = N'Điện thoại mới với nhiều tính năng hấp dẫn';
 		set gia = 2000000;
 		set soThangBaoHanh = 12;
-		set hinhDaiDien = null;         ### Dat duong dan hinh dai dien vao day
+		set hinhDaiDien = 'resources/images/Smartphone/test/np1.png';         ### Dat duong dan hinh dai dien vao day
 		set soLuongHienCo = 100;
 		set tongSoLuong = 100;
 		set ngayNhap = '2013/12/10';

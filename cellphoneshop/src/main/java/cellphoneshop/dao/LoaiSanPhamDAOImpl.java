@@ -33,7 +33,7 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 	}
 
 	@Transactional(readOnly = true)
-	public Loaisanpham getLoaiSPById(Short maLoaiSP) {
+	public Loaisanpham getLoaiSPTheoId(Short maLoaiSP) {
 		Loaisanpham result = null;
 		Session session = sessionFactory.getCurrentSession();
 		
