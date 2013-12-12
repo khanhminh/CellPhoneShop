@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +36,42 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 		} else {
 			return null;
 		}
+	}
+
+	@Transactional
+	public Boolean insertNguoidung(Nguoidung user) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		if(getNguoidung(user.getEmail()) != null){
+			return false;
+		}
+		
+		try {
+			session.save(user);
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			
+			return false;
+		}
+		
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public Boolean checkLogin(Nguoidung user) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session
+				.createQuery("from Nguoidung nd where nd.email = :email and nd.matKhau = :password");
+		query.setParameter("email", user.getEmail());
+		query.setParameter("password", user.getMatKhau());
+		
+		List<Nguoidung> list = query.list();
+		if (list == null || list.isEmpty()) {
+			return false;
+		}
+
+		return true;
+		
 	}
 }
