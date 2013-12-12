@@ -34,6 +34,11 @@
 			<result name="error" type="tiles">register</result>
 		</action>
 		
+		<action name="detail" method="detail" class="productAction">
+			<result name="success" type="tiles">detail</result>
+			<result name="error" type="tiles">register</result>
+		</action>
+		
 		<action name="demo" method="demo" class="demoAction">
 			<result name="success" type="tiles">demo</result>
 		</action>
