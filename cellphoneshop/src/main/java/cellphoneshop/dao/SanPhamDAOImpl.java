@@ -28,10 +28,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
-			if (getSanPhamTheoId(sp.getMaSp()) != null) {
-				throw new HibernateException("San pham da co trong CSDL"); //TODO: Tạo loại exception mới?
-			}
-			session.save(sp);
+			session.save(sp); //TODO: Neu san pham da co trong CSDL?
 		} catch (Exception ex) {
 			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -56,10 +53,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
-			if (getSanPhamTheoId(sp.getMaSp()) == null) {
-				throw new HibernateException("San pham chua co trong CSDL"); //TODO: Tạo loại exception mới?
-			}
-			session.update(sp);
+			session.update(sp); //TODO: Neu san pham chua co trong CSDL?
 		} catch (Exception ex) {
 			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -138,11 +132,52 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
-			String hql = "select count(*) from Sanpham as SP where (:ngay1 <= SP.ngayNhap) and (SP.ngayNhap <= :ngay2)";
+			String hql = "select count(*) from Sanpham as SP where (:ngay1 <= SP.ngayNhap) and (SP.ngayNhap <= :ngay2)"; //TODO Chi lay nhung truong nao can thiet
 			Query query = session.createQuery(hql);
 			query.setDate("ngay1", ngay1);
 			query.setDate("ngay2", ngay2);
 			
+			return ((Long)query.iterate().next()).longValue();
+		} catch (Exception ex) {
+			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return 0;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Sanpham> timKiemSanPhamTheoTen(String tuKhoa, int kqDauTien,
+			int soKqToiDa) {
+		if (tuKhoa == null) {
+			tuKhoa = "";
+		}
+		List<Sanpham> result = new ArrayList<Sanpham>();
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			String hql = "select SP from Sanpham as SP where SP.tenSp like '%" + tuKhoa + "%'";
+			Query query = session.createQuery(hql);
+			query.setFirstResult(kqDauTien);
+			query.setMaxResults(soKqToiDa);
+			result = query.list();
+		} catch (Exception ex) {
+			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		
+		return result;
+	}
+
+	@Transactional(readOnly = true)
+	public long demSoSanPhamKhiTimKiemTheoTen(String tuKhoa) {
+		if (tuKhoa == null) {
+			tuKhoa = "";
+		}
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "select count(*) from Sanpham as SP where SP.tenSp like '%" + tuKhoa + "%'";
+		
+		try {
+			Query query = session.createQuery(hql);
 			return ((Long)query.iterate().next()).longValue();
 		} catch (Exception ex) {
 			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
