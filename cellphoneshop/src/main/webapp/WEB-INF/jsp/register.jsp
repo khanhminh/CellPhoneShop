@@ -47,7 +47,7 @@
 				<tr>
 					<td class="lb-input"><label>Ngày sinh</label> (<span
 						class="mark">*</span>)</td>
-					<td><input type="text" name="dob" /></td>
+					<td><input type="text" name="birthday" /></td>
 				</tr>
 				<tr>
 					<td class="lb-input"><label>Giới tính</label> (<span
