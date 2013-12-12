@@ -10,7 +10,7 @@
 				CNTT Minh Khánh</p>
 		</div>
 
-		<form action="register.action" method="post" id="frm-register" >
+		<form action="register.action" method="post" id="frm-register">
 			<table>
 				<tr>
 					<th class="title-table" colspan="2">Thông tin tài khoản</th>
@@ -31,9 +31,14 @@
 					<td><input type="password" name="confirm" /></td>
 				</tr>
 				<tr>
-					<td class="lb-input"><label>Họ tên</label>) (<span
+					<td class="lb-input"><label>Họ</label>(<span
 						class="mark">*</span>)</td>
-					<td><input type="text" name="name" /></td>
+					<td><input type="text" name="ho" /></td>
+				</tr>
+				<tr>
+					<td class="lb-input"><label>Tên</label>(<span
+						class="mark">*</span>)</td>
+					<td><input type="text" name="ten" /></td>
 				</tr>
 				<tr>
 					<td class="lb-input"><label>Email</label> (<span class="mark">*</span>)</td>
