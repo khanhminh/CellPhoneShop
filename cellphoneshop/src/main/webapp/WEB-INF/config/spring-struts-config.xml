@@ -24,6 +24,9 @@
 	<bean id="shoppingCartAction" class="cellphoneshop.controller.ShoppingCartController">
 	</bean>
 	
+	<bean id="checkoutAction" class="cellphoneshop.controller.CheckoutController">
+	</bean>
+	
 	<bean id="demoAction" class="cellphoneshop.controller.DemoController">
 		
 	</bean>

@@ -5,7 +5,7 @@
 <div class="wrapper row1">
 	<header id="header" class="full_width clear">
 		<div id="logo" class="one_half">
-			<a href="#" title="Minh Khánh"><img
+			<a href="#" title="CellPhoneShop"><img
 				src="resources/images/logo.png" /></a>
 		</div>
 		<div id="header-contact" class="one_half">

@@ -49,8 +49,11 @@
 			<result name="error" type="tiles">errorcart</result>
 		</action>
 		
-		<action name="demo" method="demo" class="demoAction">
-			<result name="success" type="tiles">demo</result>
+		<action name="checkout" method="checkout" class="checkoutAction">
+			<result name="empty" type="redirectAction">cart</result>
+			<result name="input" type="tiles">checkout</result>
+			<result name="success" type="tiles">complete</result>
+			<result name="error" type="tiles">checkout</result>
 		</action>
 		
 	</package>
