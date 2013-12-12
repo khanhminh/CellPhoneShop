@@ -32,6 +32,11 @@ public class Nguoidung implements java.io.Serializable {
 
 	public Nguoidung() {
 	}
+	
+	public Nguoidung(String email, String matKhau) {
+		this.email = email;
+		this.matKhau = matKhau;
+	}
 
 	public Nguoidung(String ho, String ten, String email, String matKhau,
 			Date ngaySinh) {
