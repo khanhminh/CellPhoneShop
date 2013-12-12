@@ -1,5 +1,6 @@
 package cellphoneshop.dao;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,6 +39,8 @@ public class ThongSoSmartphoneDAOImpl implements ThongSoSmartphoneDAO {
 			String hql = "select TS from Thongsosmartphone as TS where TS.ctsanpham.maCtsp = " + maChiTietSp;
 			Query query = session.createQuery(hql);
 			result = (Thongsosmartphone) query.uniqueResult();
+			Hibernate.initialize(result.getHedieuhanh());
+			Hibernate.initialize(result.getLoaibanphim());
 		} catch (Exception ex) {
 			System.err.println(ex.getClass().getName() + " :" + ex.getMessage());
 		}

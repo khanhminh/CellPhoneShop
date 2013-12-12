@@ -57,6 +57,8 @@
 			</div>
 		</div>
 		<div class="clear"></div>
-		<div id="bottom-info"></div>
+		<div id="bottom-info">
+			<jsp:include page="smartphone_detail.jsp" />
+		</div>
 	</div>
 </div>

@@ -49,7 +49,7 @@
 <div class="wrapper row4">
   <div id="copyright" class="clear">
     <div id="info-copyright">
-       <p class="fl_left">Copyright &copy; 2013 Công ty TM-DV Minh Khánh</p>
+       <p class="fl_left">Copyright &copy; 2013 CellPhone Shop</p>
        <p class="fl_right">ĐT: 01285443591</p>
     </div>
   </div>
