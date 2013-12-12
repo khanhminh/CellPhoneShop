@@ -25,6 +25,18 @@
         <put-attribute name="title" value="Chi tiết sản phẩm" />
         <put-attribute name="content" value="/WEB-INF/jsp/detail.jsp" />  
     </definition>
+    <definition name="cart" extends="page">
+        <put-attribute name="title" value="Giỏ hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cart.jsp" />  
+    </definition>
+    <definition name="emptycart" extends="page">
+        <put-attribute name="title" value="Giỏ hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/emptycart.jsp" />  
+    </definition>
+    <definition name="errorcart" extends="page">
+        <put-attribute name="title" value="Giỏ hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/errorcart.jsp" />  
+    </definition>
     
     <definition name="demo" extends="page">
         <put-attribute name="title" value="Demo" />

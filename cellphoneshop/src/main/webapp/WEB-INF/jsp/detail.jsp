@@ -10,10 +10,14 @@
 		<div id="left-info" class="two_quarter">
 			<div id="amazingslider-2" style="margin: auto">
 				<ul class="amazingslider-slides" style="display: none;">
-					<li><img src="/@ha.DuongDan" class="img-details" /></li>
+					<c:forEach var="img" items="${images}">						
+						<li><img src="${img.duongDan}" class="img-details" /></li>
+					</c:forEach>
 				</ul>
 				<ul class="amazingslider-thumbnails" style="display: none;">
-					<li><img src="/@ha.DuongDan" /></li>
+					<c:forEach var="img" items="${images}">						
+						<li><img src="${img.duongDan}"/></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -47,7 +51,7 @@
 				</tr>
 			</table>
 			<div>
-				<a href="shoppingcart?product=${sp.maSp}"> <img
+				<a href="editcart?action=add&product=${sp.maSp}"> <img
 					src="resources/images/btn_addcart_vn.gif" />
 				</a>
 			</div>

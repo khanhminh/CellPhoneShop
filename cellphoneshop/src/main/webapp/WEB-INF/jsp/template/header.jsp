@@ -75,9 +75,19 @@
 					value="Tìm kiếm" class="one_ten" />
 			</form>
 		</div>
+		<c:if test="${sessionScope.cart != null}">
+			<c:forEach var="item" items="${sessionScope.cart}">
+				<c:set scope="page" var="count" value="${count + item.count}"/>
+			</c:forEach>
+		</c:if>
 		<div id="cart">
-			<img src="resources/images/cart.png" /> <a id="cart-status">Giỏ
-				hàng</a>
+			<img src="resources/images/cart.png" />
+			<a id="cart-status" href="cart.action">
+			Giỏ hàng
+			<c:if test="${count > 0}">
+				(<c:out value="${count}"></c:out>)
+			 </c:if>
+			</a>
 		</div>
 	</div>
 </div>

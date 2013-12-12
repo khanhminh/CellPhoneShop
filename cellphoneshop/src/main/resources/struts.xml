@@ -39,6 +39,16 @@
 			<result name="error" type="tiles">register</result>
 		</action>
 		
+		<action name="cart" method="cart" class="shoppingCartAction">
+			<result name="view" type="tiles">cart</result>
+			<result name="empty" type="tiles">emptycart</result>
+		</action>
+		
+		<action name="editcart" method="edit" class="shoppingCartAction">
+			<result name="success" type="redirectAction">cart</result>
+			<result name="error" type="tiles">errorcart</result>
+		</action>
+		
 		<action name="demo" method="demo" class="demoAction">
 			<result name="success" type="tiles">demo</result>
 		</action>
