@@ -23,6 +23,7 @@ public class HomeController extends ActionSupport implements ServletRequestAware
 	
 	private int productPerPage = 8;
 
+	
 	@Override
 	public String execute() throws Exception {
 		int currentPage = getPage(request.getParameter("page"));

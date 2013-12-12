@@ -34,4 +34,14 @@ public interface SanPhamDAO {
 	 * Dem tat ca so san pham co ngay nhap nam giua ngay1 va ngay2. 
 	 */
 	long demSoSanPhamTheoNgayNhap(Date ngay1, Date ngay2);
+	
+	/**
+	 * Tim kiem san pham theo ten. Xem them {@link #demSoSanPhamKhiTimKiemTheoTen(String)}
+	 */
+	List<Sanpham> timKiemSanPhamTheoTen(String tuKhoa, int kqDauTien, int soKqToiDa);
+	
+	/**
+	 * Dem tat ca ket qua tim kiem theo ten.
+	 */
+	long demSoSanPhamKhiTimKiemTheoTen(String tuKhoa);
 }
