@@ -47,4 +47,13 @@ public class SanPhamServiceImpl implements SanPhamService {
 		homNay = c.getTime();
 		return homNay;
 	}
+
+	public List<Sanpham> timKiemSanPhamTheoTen(String tuKhoa, int kqDauTien,
+			int soKqToiDa) {
+		return spDAO.timKiemSanPhamTheoTen(tuKhoa, kqDauTien, soKqToiDa);
+	}
+
+	public long demSoSanPhamKhiTimKiemTheoTen(String tuKhoa) {
+		return spDAO.demSoSanPhamKhiTimKiemTheoTen(tuKhoa);
+	}
 }

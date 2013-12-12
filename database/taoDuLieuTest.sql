@@ -5,6 +5,7 @@ USE CellPhoneShop;
 DELIMITER //
 CREATE PROCEDURE taoDuLieuNhaSanXuat()
 	BEGIN
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('JT');
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Samsung');
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Nokia');
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('HTC');
@@ -107,6 +108,7 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		DECLARE tienToTen VARCHAR (50) CHARACTER SET utf8;
 		
 		# Khai báo cho SanPham
+		DECLARE maSP BIGINT;
 		DECLARE tenSPMoi VARCHAR(100) CHARACTER SET utf8;
 		DECLARE gioiThieu VARCHAR(800) CHARACTER SET utf8;
 		DECLARE gia INT;
@@ -118,39 +120,45 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		DECLARE maLoaiSP SMALLINT;
 		DECLARE maNhaSX SMALLINT;
 		
-		# Khai báo cho ThongSoDTDD
-		
 		
 		# Khai báo cho CTSanPham
-		DECLARE maSP BIGINT;
+		DECLARE maCTSP BIGINT;
 		DECLARE trongLuong FLOAT;
 		DECLARE chieuCao FLOAT;
 		DECLARE chieuRong FLOAT;
 		DECLARE doDay FLOAT;
 		DECLARE ngaySX DATE;
-
+		
+		# Khai báo cho hình ảnh sản phẩm
+		DECLARE duongDan varchar(256);
+		DECLARE STT smallint;
+		
+		# Khai báo cho ThongSoSmartPhone
+		DECLARE maHDH smallint;
+		DECLARE maLoaiBanPhim smallint;
+		
 
 
 		# Đặt dữ liệu cho SanPham
 		SET SO_SAN_PHAM = 50;
-		SET tienToTen = N'N Mobile v';
+		SET tienToTen = N'JT Mobile v';
 		SET gioiThieu = N'Điện thoại mới với nhiều tính năng hấp dẫn';
 		SET gia = 2000000;
 		SET soThangBaoHanh = 12;
-		SET hinhDaiDien = 'resources/images/Smartphone/test/np1.png';         ### Dat duong dan hinh dai dien vao day
+		SET hinhDaiDien = 'resources/images/Smartphone/test/JTMobile/hinhDaiDien.png';
 		SET soLuongHienCo = 100;
 		SET tongSoLuong = 100;
 		SET ngayNhap = NOW();
 		
-		SELECT LSP.maLoaiSP
+		SELECT DISTINCT(LSP.maLoaiSP)
 		INTO maLoaiSP
 		FROM LoaiSanPham AS LSP
-		WHERE LSP.tenLoaiSP LIKE 'Điện thoại di động';
+		WHERE LSP.tenLoaiSP LIKE 'Điện thoại thông minh';
 
-		SELECT NSX.maNhaSX
+		SELECT DISTINCT(NSX.maNhaSX)
 		INTO maNhaSX
 		FROM NhaSanXuat AS NSX
-		WHERE NSX.tenNhaSX LIKE 'Samsung';
+		WHERE NSX.tenNhaSX LIKE 'JT';
 		
 		
 		# Đặt dữ liệu cho CTSanPham
@@ -158,9 +166,18 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		SET chieuCao = 120;
 		SET chieuRong = 60;
 		SET doDay = 20;
-		SET ngaySX = '2013/12/9';
+		SET ngaySX = NOW();
 		
-		# Đặt dữ liệu cho ThongSoDTDD
+		# Đặt dữ liệu cho ThongSoSmartPhone
+		SELECT DISTINCT(HDH.maHDH)
+		INTO maHDH
+		FROM HeDieuHanh AS HDH
+		WHERE HDH.tenHDH LIKE 'Android';
+		
+		SELECT DISTINCT(LBP.maLoaiBanPhim)
+		INTO maLoaiBanPhim
+		FROM LoaiBanPhim as LBP
+		WHERE LBP.tenLoaiBanPhim LIKE 'Cảm ứng';
 		
 		
 		# Thêm dữ liệu vào CSDL
@@ -168,6 +185,9 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		WHILE (idx < SO_SAN_PHAM) DO
 			# Chèn sản phẩm
 			SET tenSPMoi = CONCAT(tienToTen, idx);
+			SET gia = 2000000 + ((idx mod 5) * 100000);
+			SET soThangBaoHanh = soThangBaoHanh + idx;
+			SET soLuongHienCo = soLuongHienCo - idx;
 			
 			INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
 			VALUES (tenSPMoi, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX);
@@ -181,8 +201,22 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 			INSERT INTO CTSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX)
 			VALUES (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX);
 			
-			# Chèn thông số sản phẩm
+			# Chèn hình ảnh
+			SELECT CT.maCTSP
+			INTO maCTSP
+			FROM CTSanPham as CT
+			WHERE CT.maSP = maSP;
 			
+			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh1.png', 1);
+			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh2.png', 2);
+			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh3.png', 3);
+			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh4.png', 4);
+			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh5.png', 5);
+			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinhDaiDien.png', 6);
+			
+			# Chèn thông số sản phẩm
+			INSERT INTO ThongSoSmartPhone (maCTSP, maHDH, maLoaiBanPhim, doPhanGiaiManHinh,kichThuocManHinh, camUng, cameraTruoc, cameraSau, chipset, RAM, boNhoTrong, GPS)
+			VALUES (maCTSP, maHDH, maLoaiBanPhim, '1024 x 720', 4.5, 'Cảm ứng đa điểm', '2.0 MP', '8.0 MP', 'ARM', '1GB', '2GB', 'Có');
 			
 			SET idx = idx + 1;
 		END WHILE;

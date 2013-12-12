@@ -25,7 +25,7 @@
 					</div>
 					<ul id="ListNewProducts" class="clear">
 						<c:forEach var="sp" items="${newProducts}">
-							<li class="one_quarter"><a href="#">
+							<li class="one_quarter"><a href="detail?product=${sp.maSp}">
 									<div class="product">
 										<img src="${sp.hinhDaiDien}" />
 										<div class="info-product">

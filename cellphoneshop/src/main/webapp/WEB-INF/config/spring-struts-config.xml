@@ -17,10 +17,12 @@
 		
 	<bean id="accountAction" class="cellphoneshop.controller.AccountController">
 	</bean>
-
-<!-- 	<bean id="demoAction" class="cellphoneshop.controller.DemoController"> -->
-
-<!-- 	</bean> -->
+	<bean id="productAction" class="cellphoneshop.controller.ProductController">
+	</bean>
+	
+	<bean id="demoAction" class="cellphoneshop.controller.DemoController">
+		
+	</bean>
  	
 </beans>
        				

@@ -8,7 +8,7 @@
             <column name="maSP" />
             <generator class="identity" />
         </id>
-        <many-to-one name="nhasanxuat" class="cellphoneshop.model.Nhasanxuat" fetch="select">
+        <many-to-one name="nhasanxuat" class="cellphoneshop.model.Nhasanxuat" fetch="select" lazy="false">
             <column name="maNhaSX" />
         </many-to-one>
         <many-to-one name="loaisanpham" class="cellphoneshop.model.Loaisanpham" fetch="select">
