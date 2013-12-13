@@ -15,7 +15,7 @@ public class HomeController extends ActionSupport implements ServletRequestAware
 	private SanPhamService sanPhamService;
 	private HttpServletRequest request;
 	
-	private int productPerPage = 8;	
+	private int productPerPage = 8;
 	
 	@Override
 	public String execute() throws Exception {

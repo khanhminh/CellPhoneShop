@@ -8,11 +8,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cellphoneshop.model.Danhgia;
+import cellphoneshop.model.Sanpham;
 
 @Repository
 public class DanhGiaDAOImpl implements DanhGiaDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private SanPhamDAO sanPhamDAO;
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -24,6 +28,16 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 		
 		try {
 			session.save(danhGia);
+			
+			// cap nhap danh gia san pham
+			final String hql = "select avg(DG.diem) from Danhgia as DG where DG.sanpham.maSp = :maSanPham";
+			Query query = session.createQuery(hql);
+			query.setLong("maSanPham", danhGia.getSanpham().getMaSp());
+			final float diemTB = ((Double)query.list().iterator().next()).floatValue();
+			
+			Sanpham sanPham = sanPhamDAO.getSanPhamTheoId(danhGia.getSanpham().getMaSp());
+			sanPham.setDiemDanhGiaTb(diemTB);
+			sanPhamDAO.updateSanPham(sanPham); // TODO: Co cach lam nao khac tot hon la phai goi ham nay
 		} catch (Exception ex) {
 			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}

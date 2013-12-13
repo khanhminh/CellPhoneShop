@@ -80,7 +80,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 		try {
 			String hql = "select count(*) from Binhluan as BL where BL.sanpham.maSp = " + maSanPham;
 			Query query = session.createQuery(hql);
-			return ((Integer)query.iterate().next()).intValue();
+			return ((Long)query.iterate().next()).intValue();
 		} catch (Exception ex) {
 			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import cellphoneshop.dao.LoaiNguoiDungDAO;
 import cellphoneshop.model.Loainguoidung;
+import cellphoneshop.model.Nguoidung;
 
 @Service
 public class LoaiNguoiDungServiceImpl implements LoaiNguoiDungService {

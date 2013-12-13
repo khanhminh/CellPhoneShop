@@ -2,6 +2,7 @@ package cellphoneshop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import cellphoneshop.dao.NguoidungDAO;
 import cellphoneshop.model.Nguoidung;
 
@@ -12,6 +13,10 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 
 	public Nguoidung getNguoidung(String email) {
 		return nguoiDungDAO.getNguoidung(email);
+	}
+	
+	public Nguoidung getNguoiDung(Integer maNguoiDung) {
+		return nguoiDungDAO.getNguoiDung(maNguoiDung);
 	}
 
 	public Boolean insertNguoidung(Nguoidung user) {

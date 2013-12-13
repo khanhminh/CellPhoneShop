@@ -2,13 +2,11 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +34,23 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 		} else {
 			return null;
 		}
+	}
+	
+	@Transactional(readOnly = true)
+	public Nguoidung getNguoiDung(Integer maNguoiDung) {
+		Nguoidung result = null;
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			result = (Nguoidung) session.get(Nguoidung.class, maNguoiDung);
+			if (result != null) {
+				Hibernate.initialize(result.getVaitros());
+			}
+		} catch (Exception ex) {
+			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return result;
 	}
 
 	@Transactional
