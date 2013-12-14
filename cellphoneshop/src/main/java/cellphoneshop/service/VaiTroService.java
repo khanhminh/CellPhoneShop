@@ -6,5 +6,5 @@ import cellphoneshop.model.Vaitro;
 public interface VaiTroService {
 
 	List<Vaitro> getListVaiTro();
-	
+	Vaitro getVaiTro(String name);
 }

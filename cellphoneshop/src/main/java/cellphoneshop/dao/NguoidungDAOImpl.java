@@ -2,22 +2,30 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.dao.SaltSource;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cellphoneshop.model.Nguoidung;
+import cellphoneshop.security.UserDetailsAdapter;
 
 @Repository
 public class NguoidungDAOImpl implements NguoidungDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private SaltSource saltSource;
 
 	@Transactional
 	public Nguoidung getNguoidung(String email) {
@@ -63,13 +71,13 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 		
 		try {
 			session.save(user);
+			String pass = encodePassword(user);
+			user.setMatKhau(pass);
+			session.update(user);
 		} catch (HibernateException e) {
-			// TODO: handle exception
-			
 			return false;
 		}
 		
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -88,5 +96,12 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 
 		return true;
 		
+	}
+	
+	private String encodePassword(Nguoidung nguoidung){
+		Object salt = saltSource.getSalt(new UserDetailsAdapter(nguoidung));
+		String encPassword = passwordEncoder.encodePassword(nguoidung.getMatKhau(), salt);
+		
+		return encPassword;
 	}
 }

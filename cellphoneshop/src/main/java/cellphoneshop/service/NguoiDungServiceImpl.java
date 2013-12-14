@@ -1,7 +1,6 @@
 package cellphoneshop.service;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,12 +10,15 @@ import org.springframework.stereotype.Service;
 
 import cellphoneshop.dao.NguoidungDAO;
 import cellphoneshop.model.Nguoidung;
+import cellphoneshop.model.Vaitro;
 import cellphoneshop.viewmodel.RegisterUser;
 
 @Service
 public class NguoiDungServiceImpl implements NguoiDungService {
 	@Autowired
 	private NguoidungDAO nguoiDungDAO;
+	@Autowired
+	private VaiTroService vaiTroService;
 
 	public Nguoidung getNguoidung(String email) {
 		return nguoiDungDAO.getNguoidung(email);
@@ -42,8 +44,12 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 			DateFormat formater = new SimpleDateFormat("MM/dd/yyyy");
 			nd.setNgaySinh(formater.parse(user.getBirthday()));	
 			
-			/*Set<>
-			nd.setVaitros(new HashSet<E>());*/
+			Vaitro vt = vaiTroService.getVaiTro("User");
+			if (vt != null){
+				Set<Vaitro> vaitros = new HashSet<Vaitro>();
+				vaitros.add(vt);
+				nd.setVaitros(vaitros);
+			}
 			
 			result = nguoiDungDAO.insertNguoidung(nd);
 		} catch (Exception e) {

@@ -155,7 +155,7 @@
 
 <script>
 	$(function() {
-		$("#register_birthday").datepicker({
+		$("#frm-register_register_birthday").datepicker({
 			changeMonth : true,
 			changeYear : true,
 			yearRange : '1900:' + new Date().getFullYear

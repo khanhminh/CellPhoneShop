@@ -1,8 +1,10 @@
 package cellphoneshop.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import cellphoneshop.dao.VaiTroDAO;
 import cellphoneshop.model.Vaitro;
 
@@ -15,6 +17,11 @@ public class VaiTroServiceImpl implements VaiTroService {
 	public List<Vaitro> getListVaiTro() {
 		
 		return vaiTroDAO.getListVaiTro();
+	}
+
+	public Vaitro getVaiTro(String name) {
+		
+		return vaiTroDAO.getVaitro(name);
 	}
 
 }

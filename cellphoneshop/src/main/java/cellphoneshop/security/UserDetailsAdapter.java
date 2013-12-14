@@ -44,6 +44,10 @@ public class UserDetailsAdapter implements UserDetails {
 	public String getName() {
 		return nguoidung.getTen();
 	}
+	
+	public int getMaNd(){
+		return nguoidung.getMaNd();
+	}
 
 	public boolean isAccountNonExpired() {
 		return true;
