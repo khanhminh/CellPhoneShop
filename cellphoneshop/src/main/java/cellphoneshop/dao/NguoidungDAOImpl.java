@@ -27,6 +27,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 	@Autowired
 	private SaltSource saltSource;
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public Nguoidung getNguoidung(String email) {
 		List<Nguoidung> userList = new ArrayList<Nguoidung>();

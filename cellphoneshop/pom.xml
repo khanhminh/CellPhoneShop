@@ -38,6 +38,12 @@
 			<version>2.3.15.3</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-json-plugin</artifactId>
+			<version>2.3.1.2</version>
+		</dependency>
+
 		<!-- tiles -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>
@@ -175,6 +181,11 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
 		</dependency>
 
 	</dependencies>

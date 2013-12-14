@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import cellphoneshop.model.Nguoidung;
 import cellphoneshop.model.Vaitro;
 
+@SuppressWarnings("serial")
 public class UserDetailsAdapter implements UserDetails {
 
 
@@ -24,6 +25,7 @@ public class UserDetailsAdapter implements UserDetails {
 		return nguoidung;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Collection<GrantedAuthority> getAuthorities() {
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 		Set<Vaitro> dsVaitro = nguoidung.getVaitros();

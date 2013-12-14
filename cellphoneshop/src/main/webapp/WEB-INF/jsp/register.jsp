@@ -91,7 +91,10 @@
 					<td>
 						<s:textfield type="text" name="register.email" theme="simple"
 							data-val="true" data-val-email="Địa chỉ email không hợp lệ"
-							data-val-required="Vui lòng nhập địa chỉ Email" />
+							data-val-required="Vui lòng nhập địa chỉ Email"
+							data-val-remote="Email đã được sử dụng" 
+							data-val-remote-additionalfields="register.email" 
+							data-val-remote-url="checkemail.action" />
 						<span class="field-validation-valid" data-valmsg-for="register.email" data-valmsg-replace="true"></span>						
 					</td>
 				</tr>
@@ -145,7 +148,8 @@
 					<td></td>
 					<td class="inline-button">
 						<input type="submit" value="Đăng ký" />
-						<input type="reset" value="Hủy bỏ tất cả" />
+						<!-- <input type="reset" value="Hủy bỏ tất cả" /> -->
+						<s:reset value="Hủy bỏ tất cả" />
 					</td>
 				</tr>
 			</table>

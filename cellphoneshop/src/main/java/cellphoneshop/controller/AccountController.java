@@ -1,6 +1,8 @@
 package cellphoneshop.controller;
 
 //import org.slf4j.Logger;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
@@ -18,9 +21,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import cellphoneshop.model.Nguoidung;
 import cellphoneshop.service.NguoiDungService;
 import cellphoneshop.viewmodel.RegisterUser;
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -29,7 +34,7 @@ public class AccountController extends ActionSupport {
 	private Logger logger = Logger.getLogger(AccountController.class);
 
 	@Autowired
-	private NguoiDungService nguoiDungService;	
+	private NguoiDungService nguoiDungService;
 
 	@Autowired
 	@Qualifier("authenticationManager")
@@ -38,12 +43,12 @@ public class AccountController extends ActionSupport {
 	private RegisterUser user;
 	private List<String> errors;
 
-	public RegisterUser getRegister() {
-		return user;
-	}
-
 	public void setRegister(RegisterUser register) {
 		this.user = register;
+	}
+	
+	public RegisterUser getRegister() {
+		return this.user;
 	}
 
 	public String login() {
@@ -77,11 +82,21 @@ public class AccountController extends ActionSupport {
 			Authentication authResult = authMgr.authenticate(authRequest);
 			SecurityContextHolder.getContext().setAuthentication(authResult);
 
+			user = null;
 			return SUCCESS;
 		} else {
 			return INPUT;
 		}
 
+	}
+
+	public String checkEmail() throws IOException {
+		logger.info("vao checkmail: " + user.getEmail());
+		Nguoidung ng = nguoiDungService.getNguoidung(user.getEmail());
+		boolean result = ng != null ? false : true;
+		returnJsonData(result);
+
+		return "json";
 	}
 
 	private boolean validateRegister() {
@@ -152,5 +167,21 @@ public class AccountController extends ActionSupport {
 		}
 
 		return result;
+	}
+	
+	private void returnJsonData(Object obj){
+		Gson gson = new Gson();
+		String json = gson.toJson(obj);
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		PrintWriter writer;
+		try {
+			writer = response.getWriter();
+			writer.write(json);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			logger.error("Loi tra ve json");
+		}
 	}
 }

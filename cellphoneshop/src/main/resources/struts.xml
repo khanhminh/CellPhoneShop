@@ -34,6 +34,8 @@
 			<result name="error" type="tiles">register</result>
 		</action>
 		
+		
+		
 		<action name="detail" method="detail" class="productAction">
 			<result name="success" type="tiles">detail</result>
 			<result name="error" type="tiles">register</result>
@@ -56,5 +58,11 @@
 			<result name="error" type="tiles">checkout</result>
 		</action>
 		
+	</package>
+	
+	<package name="ajax" extends="json-default" namespace="/">
+		<action name="checkemail" method="checkEmail" class="accountAction">
+			<result name="json" type="json" />
+		</action>	
 	</package>
 </struts>
