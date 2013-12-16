@@ -5,9 +5,16 @@
 
 <div class="wrapper row3">
 	<div id="container">
+		<div class="title-content">
+			<!-- <h2>TRANG CHỦ</h2> -->
+		</div>
+		<div class="nav-page push10">
+			<span class="active-link"> <a>Trang chủ</a>
+			</span>
+		</div>
 		<!-- sidebar left -->
 		<div id="sidebar_1" class="sidebar one_quarter first">
-			<jsp:include page="template/sidebar.jsp"></jsp:include>
+			<jsp:include page="sidebar_home.jsp"></jsp:include>
 		</div>
 
 		<div id="gallery" class="three_quarter">
@@ -15,30 +22,10 @@
 				<figure>
 					<div class="title-content">
 						<h2>Sản phẩm mới</h2>
-						<div class="sortby">
-							<lable>Sắp xếp theo: </lable>
-							<select>
-								<option>Giá tăng dần</option>
-								<option>Giá giảm dần</option>
-							</select>
-						</div>
 					</div>
 					<ul id="ListNewProducts" class="clear">
-						<c:forEach var="sp" items="${newProducts}">
-							<li class="one_quarter"><a href="detail?product=${sp.maSp}">
-									<div class="product">
-										<img src="${sp.hinhDaiDien}" />
-										<div class="info-product">
-											<p class="name-product">${sp.tenSp}</p>
-											<p class="cost">
-												<fmt:formatNumber value="${sp.gia}" type="number" />
-												VNĐ
-											</p>
-										</div>
-									</div>
-							</a></li>
-						</c:forEach>
 					</ul>
+					<div id="temp-newproducts" style="height: 460px"></div>
 				</figure>
 			</section>
 
@@ -47,7 +34,10 @@
 					<c:forEach var="page" begin="1" end="${requestScope.totalPage}">
 						<li><a href="home?page=${page}"
 							<c:if test="${page == requestScope.currentPage}">
-                                    class="active-page" href="#"
+                                    class="active-page ajax-link" href="#"
+                            </c:if>
+							<c:if test="${page != requestScope.currentPage}">
+                                    class="ajax-link"
                             </c:if>>${page}
 						</a></li>
 					</c:forEach>
@@ -59,3 +49,42 @@
 		</div>
 	</div>
 </div>
+<script>
+	function addNewProduct(data) {
+		$('#ListNewProducts').html(data);
+		$("#temp-newproducts").remove();
+	}
+
+	function getNewProducts(page) {
+		$.ajax({
+			url : "new_products.action",
+			data : {
+				page : page
+			},
+			type : "GET",
+			success : addNewProduct,
+		});
+	}
+
+	function ajaxLinkClick(context) {
+		var page = $(context).text().trim();
+		getNewProducts(page);
+
+		var links = $(".pagination").find(".ajax-link");
+		if (links != null) {
+			for (var i = 0; i < links.length; i++) {
+				$(links[i]).removeClass("active-page");
+			}
+		}
+		$(context).addClass("active-page");
+	}
+
+	$(document).ready(function() {
+		getNewProducts(1);
+
+		$(".ajax-link").click(function(e) {
+			e.preventDefault();
+			ajaxLinkClick(this);
+		});
+	});
+</script>

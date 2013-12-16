@@ -1399,3 +1399,102 @@ input[type="checkbox"].input-validation-error {
     display: block;
     margin: auto;
 }
+
+/*///////////////////////////////////////*/
+
+.header-row {
+    width: 19.5%;
+    background-color: #e3f1f6;
+    font-weight: bold;
+    /*border-bottom: #ccc solid 1px;*/
+}
+
+.compare-products .header-row {
+    height: 302px;
+    background-color: #e3f1f6;
+    border-bottom: #ccc solid 1px;
+}
+
+.compare-product {
+    border-right: #ccc solid 1px;
+    padding-bottom: 20px;
+    border-bottom: #ccc solid 1px;
+}
+
+    .compare-product img {
+        height: 200px;
+        margin: auto;
+        display: block;
+    }
+
+    .compare-product a img {
+        height: auto;
+    }
+
+.compare-product-info {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.compare-product-info h2{
+    font-family: Arial;
+    color: blue;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.compare-product-info h3{
+    font-family: Arial;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    padding-bottom: 10px;
+}
+
+.compare-header {
+    background-color: #b2cdff;
+    height: 40px;    
+}
+
+    .compare-header span {
+        font-weight: bold;
+        color: #4a4f51;
+        font-size: 15px;
+        display: inline-block;
+        margin-left: 10px;
+        margin-top: 12px;
+    }
+
+.compare-table td {
+    border-right: #ccc solid 1px;
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+}
+
+.compare-table tr {
+    border-bottom: #ccc solid 1px;
+}
+
+.compare-table {
+    margin-bottom: 0;
+}
+
+.compare-star {
+    display: inline-block;
+}
+
+.compare-star img {
+    height: 20px;
+}
+
+.compare-score {
+    font-weight: bold;
+}
+
+.remove-compare {
+    float: right;
+}

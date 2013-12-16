@@ -54,6 +54,11 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 		return SUCCESS;
 	}
 	
+	public String compare(){
+		
+		return SUCCESS;
+	}
+	
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;		
 	}
