@@ -38,7 +38,9 @@
 	<nav id="topnav">
 		<ul class="clear">
 			<li><a href="home.action" class="active">Trang chủ</a></li>
-			<li><a href="home.action">Sản phẩm</a></li>
+			<li><a href="product.action">Sản phẩm</a></li>
+			<li><a href="contact.action">Liên hệ</a></li>
+			<li><a href="about.action">Giới thiệu</a></li>
 		</ul>
 	</nav>
 </div>

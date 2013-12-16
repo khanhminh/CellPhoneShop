@@ -18,6 +18,18 @@
 			<result name="success" type="tiles">home</result>
 		</action>
 		
+		<action name="about" method="about" class="homeAction">
+			<result name="success" type="tiles">about</result>
+		</action>
+		
+		<action name="contact" method="contact" class="homeAction">
+			<result name="success" type="tiles">contact</result>
+		</action>
+		
+		<action name="product" method="search" class="productAction">
+			<result name="success" type="tiles">product</result>
+		</action>
+		
 		<action name="login" method="login" class="accountAction">
 			<result name="success" type="redirectAction">home</result>
 			<result name="input" type="tiles">login</result>
@@ -33,8 +45,6 @@
 			<result name="input" type="tiles">register</result>
 			<result name="error" type="tiles">register</result>
 		</action>
-		
-		
 		
 		<action name="detail" method="detail" class="productAction">
 			<result name="success" type="tiles">detail</result>

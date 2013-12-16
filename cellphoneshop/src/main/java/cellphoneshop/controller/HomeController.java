@@ -33,6 +33,16 @@ public class HomeController extends ActionSupport implements ServletRequestAware
 		return SUCCESS;
 	}
 	
+	public String about(){
+		
+		return SUCCESS;
+	}
+	
+	public String contact(){
+		
+		return SUCCESS;
+	}
+	
 	private int getPage(String strPage){
 		if (strPage != null &&strPage.matches("\\d")){
 			return Integer.parseInt(strPage);

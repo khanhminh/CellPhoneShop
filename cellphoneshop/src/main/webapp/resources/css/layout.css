@@ -165,9 +165,9 @@ nav ul{margin:0; padding:0; list-style:none;}
 
 /* Pagination */
 
-.pagination{display:block; width:100%; text-align:center; clear:both; line-height:normal;}
-.pagination ul{margin:0; padding:0; list-style:none;}
-.pagination li{display:inline;}
+.pagination{display:block; width:100%; text-align:center; clear:both; line-height:normal; background-color: #edf3f4;}
+.pagination ul{margin:0; padding:0; list-style:none; display: inline-block;}
+.pagination li{display:inline; background-color: white;}
 .pagination strong{font-weight:normal;}
 .pagination .next{margin:0;}
 .pagination a, .pagination .current strong, .pagination .splitter strong{display:inline-block; padding:5px 10px; margin:1px 2px;}

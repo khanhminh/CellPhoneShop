@@ -27,6 +27,11 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 	
 	private HttpServletRequest request;
 	
+	public String search(){
+		
+		return SUCCESS;
+	}
+	
 	public String detail(){
 		String productId = request.getParameter("product");
 		if (productId == null || !productId.matches("\\d*")){
