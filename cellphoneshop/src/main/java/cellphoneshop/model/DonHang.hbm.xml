@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 10, 2010 7:19:01 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.DonHang" table="DonHang" catalog="CellPhoneShop">
+        <id name="maDonHang" type="java.lang.Integer">
+            <column name="maDonHang" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ptGiaoHang" class="cellphoneshop.model.PtGiaoHang" fetch="select">
+            <column name="maPtGiaoHang" not-null="true" />
+        </many-to-one>
+        <many-to-one name="nguoiDung" class="cellphoneshop.model.NguoiDung" fetch="select">
+            <column name="maND" not-null="true" />
+        </many-to-one>
+        <many-to-one name="nguoiNhan" class="cellphoneshop.model.NguoiNhan" fetch="select">
+            <column name="maNguoiNhan" not-null="true" />
+        </many-to-one>
+        <many-to-one name="trangThaiDonHang" class="cellphoneshop.model.TrangThaiDonHang" fetch="select">
+            <column name="maTrangThai" not-null="true" />
+        </many-to-one>
+        <property name="ngayDatHang" type="date">
+            <column name="ngayDatHang" length="10" not-null="true" />
+        </property>
+        <property name="tongGiaTri" type="int">
+            <column name="tongGiaTri" not-null="true" />
+        </property>
+        <property name="giamGia" type="java.lang.Integer">
+            <column name="giamGia" />
+        </property>
+        <set name="phieuGiaoHangs" inverse="true">
+            <key>
+                <column name="maDonHang" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.PhieuGiaoHang" />
+        </set>
+        <set name="ctDonHangs" inverse="true">
+            <key>
+                <column name="maDonHang" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.CtDonHang" />
+        </set>
+    </class>
+</hibernate-mapping>

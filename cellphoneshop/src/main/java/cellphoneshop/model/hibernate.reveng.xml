@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="CellPhoneShop"/>
+  <table-filter match-name="HinhAnhSP"/>
+  <table-filter match-name="CtDonHang"/>
+  <table-filter match-name="KhuyenMai"/>
+  <table-filter match-name="LienHe"/>
+  <table-filter match-name="SanPham"/>
+  <table-filter match-name="CtDSMongMuon"/>
+  <table-filter match-name="CtKhuyenMai"/>
+  <table-filter match-name="DonHang"/>
+  <table-filter match-name="VaiTro"/>
+  <table-filter match-name="NguoiDung"/>
+  <table-filter match-name="LoaiNguoiDung"/>
+  <table-filter match-name="DanhGia"/>
+  <table-filter match-name="BinhLuan"/>
+  <table-filter match-name="DanhSachMongMuon"/>
+  <table-filter match-name="NguoiNhan"/>
+  <table-filter match-name="LoaiSanPham"/>
+  <table-filter match-name="NhaSanXuat"/>
+  <table-filter match-name="PtGiaoHang"/>
+  <table-filter match-name="HeDieuHanh"/>
+  <table-filter match-name="CtSanPham"/>
+  <table-filter match-name="TrangThaiDonHang"/>
+  <table-filter match-name="PhieuGiaoHang"/>
+  <table-filter match-name="PhanQuyen"/>
+</hibernate-reverse-engineering>

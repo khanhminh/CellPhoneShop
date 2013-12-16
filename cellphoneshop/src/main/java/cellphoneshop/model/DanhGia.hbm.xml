@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 10, 2010 7:19:01 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.DanhGia" table="DanhGia" catalog="CellPhoneShop">
+        <composite-id name="id" class="cellphoneshop.model.DanhGiaId">
+            <key-property name="maSp" type="int">
+                <column name="maSP" />
+            </key-property>
+            <key-property name="maNd" type="int">
+                <column name="maND" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="sanPham" class="cellphoneshop.model.SanPham" update="false" insert="false" fetch="select">
+            <column name="maSP" not-null="true" />
+        </many-to-one>
+        <many-to-one name="nguoiDung" class="cellphoneshop.model.NguoiDung" update="false" insert="false" fetch="select">
+            <column name="maND" not-null="true" />
+        </many-to-one>
+        <property name="diem" type="float">
+            <column name="diem" precision="12" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

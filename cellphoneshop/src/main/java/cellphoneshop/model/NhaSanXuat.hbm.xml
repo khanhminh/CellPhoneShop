@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 10, 2010 7:19:01 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.NhaSanXuat" table="NhaSanXuat" catalog="CellPhoneShop">
+        <id name="maNhaSx" type="java.lang.Integer">
+            <column name="maNhaSX" />
+            <generator class="identity" />
+        </id>
+        <property name="tenNhaSx" type="string">
+            <column name="tenNhaSX" length="30" not-null="true" />
+        </property>
+        <property name="logo" type="string">
+            <column name="logo" length="256" />
+        </property>
+        <set name="sanPhams" inverse="true">
+            <key>
+                <column name="maNhaSX" />
+            </key>
+            <one-to-many class="cellphoneshop.model.SanPham" />
+        </set>
+    </class>
+</hibernate-mapping>
