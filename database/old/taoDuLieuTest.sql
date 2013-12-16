@@ -1,7 +1,3 @@
-#
-# Phien ban 0.2
-#
-
 USE CellPhoneShop;
 
 # Tạo một số dữ liệu trước
@@ -24,6 +20,11 @@ DELIMITER //
 CREATE PROCEDURE taoDuLieuLoaiSanPham()
 	BEGIN
 		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Điện thoại di động');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Điện thoại thông minh');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Tai nghe');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Pin');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Thẻ nhớ');
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Sạc điện thoại');
 	END //
 DELIMITER ;
 CALL taoDuLieuLoaiSanPham();
@@ -42,6 +43,18 @@ CREATE PROCEDURE taoDuLieuHeDieuHanh()
 DELIMITER ;
 CALL taoDuLieuHeDieuHanh();
 DROP PROCEDURE IF EXISTS taoDuLieuHeDieuHanh;
+
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuLoaiBanPhim()
+	BEGIN
+		INSERT INTO LoaiBanPhim (tenLoaiBanPhim) VALUES (N'Thông thường');
+		INSERT INTO LoaiBanPhim (tenLoaiBanPhim) VALUES ('Qwerty');
+		INSERT INTO LoaiBanPhim (tenLoaiBanPhim) VALUES (N'Cảm ứng');
+	END //
+DELIMITER ;
+CALL taoDuLieuLoaiBanPhim();
+DROP PROCEDURE IF EXISTS taoDuLieuLoaiBanPhim;
 
 
 DELIMITER //
@@ -78,9 +91,9 @@ DROP PROCEDURE IF EXISTS taoDuLieuTrangThaiDonHang;
 DELIMITER //
 CREATE PROCEDURE taoDuLieuPTGiaoHang()
 	BEGIN
-		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển đến tận nơi');
-		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển qua bưu điện');
-		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Khách hàng đến lấy sản phẩm');
+		INSERT INTO PTGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển đến tận nơi');
+		INSERT INTO PTGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển qua bưu điện');
+		INSERT INTO PTGiaoHang (tenPTGiaoHang) VALUES (N'Khách hàng đến lấy sản phẩm');
 	END //
 DELIMITER ;
 CALL taoDuLieuPTGiaoHang();
@@ -140,7 +153,7 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		SELECT DISTINCT(LSP.maLoaiSP)
 		INTO maLoaiSP
 		FROM LoaiSanPham AS LSP
-		WHERE LSP.tenLoaiSP LIKE 'Điện thoại di động';
+		WHERE LSP.tenLoaiSP LIKE 'Điện thoại thông minh';
 
 		SELECT DISTINCT(NSX.maNhaSX)
 		INTO maNhaSX
@@ -148,7 +161,7 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		WHERE NSX.tenNhaSX LIKE 'JT';
 		
 		
-		# Đặt dữ liệu cho CtSanPham
+		# Đặt dữ liệu cho CTSanPham
 		SET trongLuong = 0.1;
 		SET chieuCao = 120;
 		SET chieuRong = 60;
@@ -160,6 +173,11 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		INTO maHDH
 		FROM HeDieuHanh AS HDH
 		WHERE HDH.tenHDH LIKE 'Android';
+		
+		SELECT DISTINCT(LBP.maLoaiBanPhim)
+		INTO maLoaiBanPhim
+		FROM LoaiBanPhim as LBP
+		WHERE LBP.tenLoaiBanPhim LIKE 'Cảm ứng';
 		
 		
 		# Thêm dữ liệu vào CSDL
@@ -180,13 +198,13 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 			FROM SanPham AS SP
 			WHERE SP.tenSP LIKE tenSPMoi;
 			
-			INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, maHDH, doPhanGiaiManHinh,kichThuocManHinh, camUng, cameraTruoc, cameraSau, chipset, RAM, boNhoTrong, GPS)
-			VALUES (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, maHDH, '1024 x 720', 4.5, 'Cảm ứng đa điểm', '2.0 MP', '8.0 MP', 'ARM', '1GB', '2GB', 'Có');
+			INSERT INTO CTSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX)
+			VALUES (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX);
 			
 			# Chèn hình ảnh
 			SELECT CT.maCTSP
 			INTO maCTSP
-			FROM CtSanPham as CT
+			FROM CTSanPham as CT
 			WHERE CT.maSP = maSP;
 			
 			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh1.png', 1);
@@ -195,6 +213,10 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh4.png', 4);
 			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh5.png', 5);
 			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinhDaiDien.png', 6);
+			
+			# Chèn thông số sản phẩm
+			INSERT INTO ThongSoSmartPhone (maCTSP, maHDH, maLoaiBanPhim, doPhanGiaiManHinh,kichThuocManHinh, camUng, cameraTruoc, cameraSau, chipset, RAM, boNhoTrong, GPS)
+			VALUES (maCTSP, maHDH, maLoaiBanPhim, '1024 x 720', 4.5, 'Cảm ứng đa điểm', '2.0 MP', '8.0 MP', 'ARM', '1GB', '2GB', 'Có');
 			
 			SET idx = idx + 1;
 		END WHILE;
@@ -215,8 +237,8 @@ CREATE PROCEDURE taoDuLieuNguoiDung()
 		FROM LoaiNguoiDung AS LND
 		WHERE LND.tenLoaiND LIKE N'Khách hàng phổ thông';
 		
-		INSERT INTO NguoiDung(ho, ten, email, matKhau, maLoaiND, ngaySinh, hinhDaiDien, soDienThoai, diaChi, gioiTinh, nhanTinQuaEmail)
-		VALUES (N'Nguyễn Văn', N'A', 'nva@example.com', '12345', maLoaiND, '1990/10/10', NULL, '0909190234', 'Quận 5 TP HCM', 1, FALSE);
+		INSERT INTO NguoiDung(ho, ten, tenDangNhap, email, matKhau, maLoaiND, ngaySinh, hinhDaiDien, soDienThoai, diaChi, gioiTinh, nhanTinQuaEmail)
+		VALUES (N'Nguyễn Văn', N'A', 'nva', 'nva@example.com', '12345', maLoaiND, '1990/10/10', NULL, '0909190234', 'Quận 5 TP HCM', 1, FALSE);
 	END //
 DELIMITER ;
 CALL taoDuLieuNguoiDung();
