@@ -239,6 +239,10 @@ body {
     display: block;
 }
 
+#left-info div{
+	background-color: white;
+}
+
 #right-info {
     padding-top: 25px;
     margin-left: 30px;
@@ -811,8 +815,10 @@ input, textarea {
 
 .group-info {
     font-weight: bold;
-    color: black;
+    color: #4a4f51;
     border: none;
+    background-color: #b2cdff;
+    text-transform: uppercase;
 }
 
 .name-info {
@@ -820,7 +826,7 @@ input, textarea {
 }
 
 
-#bottom-info, #comments {
+#bottom-info, #comments, #user-rating {
     margin-top: 50px;
     padding-left: 40px;
     padding-right: 40px;
@@ -828,22 +834,27 @@ input, textarea {
 }
 
     #bottom-info table {
-        border: 1px solid black;
+        border: #ccc solid 1px;
         border-collapse: collapse;
     }
 
     #bottom-info td {
-        border-left: 1px solid black;
+    	height: 25px;
+        border-left: #ccc solid 1px;;
+        border-bottom: #ccc solid 1px;
     }
-
-
+    
+    #bottom-info .none-border{
+    	border-bottom: none;
+    }
 /*#bottom-info table, #bottom-info td, #bottom-info tr{
     border: 1px solid black;
     border-collapse: collapse;
 }*/
 
+
 .group {
-    border-top: 1px solid black;
+    border-top: #ccc solid 1px;
 }
 
 .item-info {
@@ -854,7 +865,9 @@ input, textarea {
 .title-info {
     margin-bottom: 10px;
     padding-bottom: 0px;
-    font: bold 20px Tahoma;
+    font: bold 20px Arial;
+	color: #4a4f51;
+	border-bottom: #ccc solid 2px;
 }
 
 #header-contact ul {
@@ -1497,4 +1510,57 @@ input[type="checkbox"].input-validation-error {
 
 .remove-compare {
     float: right;
+}
+
+#user-rating .rating{
+	border: none;	
+	margin-left: 20px;
+}
+
+#user-rating input[type="radio"]{
+	display: inline-block;	
+}
+
+.frm-rating img{
+	height: 20px;
+	padding-bottom: 7px;
+}
+
+.row-rating {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.frm-rating {
+	margin-left: 40px;
+}
+
+.rating-title, #user-rating button, #rating-notify, .comment-content{
+	margin-left: 20px;
+}
+
+#rating-notify{
+	display: block;
+}
+
+#user-rating button {
+	margin-top: 10px;
+}
+
+#frm-comment span{
+	display: block;
+}
+
+#frm-comment textarea{
+	margin-bottom: 5px;
+}
+
+#frm-comment button{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.comment{
+	border-bottom: #ccc solid 1px;
+	padding-bottom: 10px;
 }

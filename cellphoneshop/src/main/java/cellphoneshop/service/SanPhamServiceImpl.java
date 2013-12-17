@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import cellphoneshop.dao.SanPhamDAO;
 import cellphoneshop.model.CtSanPham;
 import cellphoneshop.model.HinhAnhSp;
-import cellphoneshop.model.ProductDetail;
+import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.model.SanPham;
 
 @Service

@@ -1,19 +1,23 @@
 package cellphoneshop.controller;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cellphoneshop.model.HinhAnhSp;
-import cellphoneshop.model.SanPham;
-
+import cellphoneshop.model.NguoiDung;
 import cellphoneshop.service.HinhAnhSPService;
 import cellphoneshop.service.SanPhamService;
 
 
+import cellphoneshop.viewmodel.ProductDetail;
+
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -33,23 +37,12 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 		}
 		
 		int id = Integer.parseInt(productId);
-		SanPham product = sanPhamService.getSanPhamTheoId(id);
-		List<HinhAnhSp> images = 
-				hinhAnhSpService.getListHinhAnhSPTheoMaCTSP(product.getMaSp());
-//		CtSanPham info = 
-//				thongSoSpService.getThongSoSmartphoneTheoMaCTSP(product.getMaSp());
-		
-//		if (product == null || images == null || info == null){
-//			return ERROR;
-//		}
-		
-		if (product == null || images == null){
+		ProductDetail detail = sanPhamService.getSanPhamCungChiTietTheoId(id);		
+		if (detail == null){
 			return ERROR;
 		}
 		
-		request.setAttribute("sp", product);	
-		request.setAttribute("images", images);	
-//		request.setAttribute("info",info);	
+		request.setAttribute("detail", detail);	
 		
 		return SUCCESS;
 	}
@@ -57,6 +50,30 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 	public String compare(){
 		
 		return SUCCESS;
+	}
+	
+	public String rating(){
+		
+		//boolean result = ng != null ? false : true;
+		//returnJsonData(result);
+
+		return "json";
+	}
+	
+	private void returnJsonData(Object obj){
+		Gson gson = new Gson();
+		String json = gson.toJson(obj);
+		
+		HttpServletResponse response = ServletActionContext.getResponse();
+		PrintWriter writer;
+		try {
+			writer = response.getWriter();
+			writer.write(json);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			
+		}
 	}
 	
 	public void setServletRequest(HttpServletRequest request) {
