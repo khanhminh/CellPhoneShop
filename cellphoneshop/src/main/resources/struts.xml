@@ -76,11 +76,22 @@
 		<action name="compare" method="compare" class="productAction">
 			<result name="success" type="tiles">compare</result>
 		</action>
+		
+		<action name="getComments" method="getComments" class="productAction">
+			<result name="success">WEB-INF/jsp/ajax-page/comments.jsp</result>
+		</action>
+		
 	</package>
 	
 	<package name="ajax" extends="json-default" namespace="/">
 		<action name="checkemail" method="checkEmail" class="accountAction">
 			<result name="json" type="json" />
 		</action>	
+		<action name="rating" method="rating" class="productAction">
+			<result name="json" type="json" />
+		</action>
+		<action name="sendComment" method="sendComment" class="productAction">
+			<result name="json" type="json" />
+		</action>
 	</package>
 </struts>

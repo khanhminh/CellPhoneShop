@@ -2,12 +2,15 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import cellphoneshop.model.BinhLuan;
 
 @Repository
@@ -61,7 +64,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
-			String hql = "select BL from BinhLuan as BL where BL.sanPham.maSp = " + maSanPham;
+			String hql = "select BL from BinhLuan as BL where BL.sanPham.maSp = " + maSanPham + " order by BL.ngayBinhLuan asc";
 			Query query = session.createQuery(hql);
 			query.setFirstResult(kqDauTien);
 			query.setMaxResults(soKqToiDa);

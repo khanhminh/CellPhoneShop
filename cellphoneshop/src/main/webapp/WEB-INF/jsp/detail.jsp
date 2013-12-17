@@ -150,19 +150,7 @@
 					<button id="btSend" type="submit" class="button small blue">Gửi</button>
 				</form>
 				<div id="list-comment">
-				<div class="comment">
-					<img class="avatar" src="resources/images/avatar.png"> <span
-						class="name">Khanh</span> <span class="time">17/12/2013
-						03:09</span>
-					<blockquote>san pham rat tot</blockquote>
 				</div>
-				<div class="comment">
-					<img class="avatar" src="resources/images/avatar.png"> <span
-						class="name">Khanh</span> <span class="time">17/12/2013
-						03:09</span>
-					<blockquote>san pham rat tot</blockquote>
-				</div>
-			</div>
 			</div>
 
 			
@@ -178,13 +166,20 @@
 	
 	function callbackRating(data){
 		var notify = $('#rating-notify');
-		if (data.success){
+		if (data == 1){
 			notify.text("Đánh giá của bạn đã được cập nhật");
 			notify.attr("style", "color:green;");
 		}
 		else {
-			notify.text(data.message);
+			var msg = "";
 			notify.attr("style", "color:red;");
+			if (data == 0){
+				msg = "Vui lòng đăng nhập!";
+			}
+			else {
+				msg = "Đã có lỗi xảy ra!";
+			}
+			notify.text(msg);
 		}
 		isWaitRating = false;
 	}
@@ -198,7 +193,6 @@
 			return;
 		}		
 		var id = $('#user-rating').attr('data-productId');
-		alert("danh gia: " + id + " " + number);
 		
 		$.ajax({
 			url : "rating.action",
@@ -240,14 +234,38 @@
 		return number;
 	}
 	
-	function callbackComment(data){
-		if (data){
-		}
+	function showComments(data) {
+		$('#list-comment').html(data);
+	}
+	
+	function loadComments() {
+		var id = $('#user-rating').attr('data-productId');
 		
+		$.ajax({
+			url : "getComments.action",
+			data : {
+				id : id,
+				page: 1
+			},
+			type : "GET",
+			success : showComments,
+		});
+	}
+	
+	function callbackComment(data){
+		if (data == 1){
+			loadComments();
+		}		
 		else {
-			$('#notify-comment').text('Đã có lỗi xảy ra!');
+			var msg = "";
+			if (data == 0){
+				msg = "Vui lòng đăng nhập!";
+			}
+			else {
+				msg = "Đã có lỗi xảy ra!";
+			}
+			$('#notify-comment').text(msg);
 		}
-		isWaitRating = false;
 	}
 	
 	function sendComment(){
@@ -258,10 +276,9 @@
 			return;
 		}
 		var id = $('#user-rating').attr('data-productId');
-		alert("send comment: " + id + " " + msg);
 		
 		$.ajax({
-			url : "comment.action",
+			url : "sendComment.action",
 			data : {
 				id : id,
 				msg: msg
@@ -271,7 +288,33 @@
 		});
 	}
 	
+	function showRating(){
+		var score = parseFloat($('#rating-score').attr('data-score'));
+		var arr = [0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+		var min = arr[0];
+		for (var i = 1; i < arr.length; i++){
+			if (Math.abs(arr[i] - score) < Math.abs(min - score)){
+				min = arr[i];
+			}
+		}
+		score = min;
+		
+		if (score == 0) return;
+		var list = $('#rating-score').children();
+		var index = 0;
+		for (; index < list.length && index < score - 1; index++){
+			var img = $(list[index]);
+			img.attr('src', "resources/images/star-on.png");
+		}
+		if (score - index > 0.1){
+			var img = $(list[index]);
+			img.attr('src', "resources/images/star-half.png");
+		}		
+	}
+	
 	$(document).ready(function(){
+		showRating();
+		loadComments();
 		$('.rbtRating').click(function(){
 			var number = $(this).attr("data-number");
 			$('#rating-notify').text("");

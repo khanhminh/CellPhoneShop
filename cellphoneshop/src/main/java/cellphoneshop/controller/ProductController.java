@@ -1,31 +1,43 @@
 package cellphoneshop.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.EOFException;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cellphoneshop.model.BinhLuan;
 import cellphoneshop.model.NguoiDung;
-import cellphoneshop.service.HinhAnhSPService;
+import cellphoneshop.model.SanPham;
+import cellphoneshop.security.SecurityHelper;
+import cellphoneshop.service.BinhLuanService;
+import cellphoneshop.service.DanhGiaService;
 import cellphoneshop.service.SanPhamService;
-
-
+import cellphoneshop.util.JsonHandler;
+import cellphoneshop.util.Util;
 import cellphoneshop.viewmodel.ProductDetail;
 
-import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class ProductController extends ActionSupport implements ServletRequestAware{
+	
+	private final int RATING_SUCCESS = 1;
+	private final int RATING_FAIL = -1;
+	private final int NO_LOGIN = 0;
+	
+	private static final String JSON = "json";
+	
 	@Autowired
 	private SanPhamService sanPhamService;
 	@Autowired
-	private HinhAnhSPService hinhAnhSpService;
+	private DanhGiaService danhGiaService;
+	@Autowired
+	private BinhLuanService binhLuanService;
+	
 
 	
 	private HttpServletRequest request;
@@ -52,28 +64,68 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 		return SUCCESS;
 	}
 	
-	public String rating(){
-		
-		//boolean result = ng != null ? false : true;
-		//returnJsonData(result);
+	public String rating(){		
+		Integer result = RATING_SUCCESS;
+		NguoiDung user = SecurityHelper.getUser();
+		if (user != null){
+			String strId = request.getParameter("id");		
+			String strNumber = request.getParameter("number");	
+			if (Util.tryParseInt(strId) &&
+					Util.tryParseInt(strNumber)){
+				int id = Integer.parseInt(strId);
+				int number = Integer.parseInt(strNumber);
+				
+				try {
+					danhGiaService.insertDanhGia(user, id, number);
+				} catch (Exception e) {
+					result = RATING_FAIL;
+				}
+			}
+		}
+		else {
+			result = NO_LOGIN;
+		}
+		JsonHandler.writeJson(result);		
 
-		return "json";
+		return JSON;
 	}
 	
-	private void returnJsonData(Object obj){
-		Gson gson = new Gson();
-		String json = gson.toJson(obj);
-		
-		HttpServletResponse response = ServletActionContext.getResponse();
-		PrintWriter writer;
-		try {
-			writer = response.getWriter();
-			writer.write(json);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			
+	public String sendComment(){
+		Integer result = RATING_SUCCESS;
+		NguoiDung user = SecurityHelper.getUser();
+		if (user != null){
+			String strId = request.getParameter("id");		
+			String msg = request.getParameter("msg");	
+			if (Util.tryParseInt(strId)){
+				int id = Integer.parseInt(strId);				
+				try {
+					SanPham sp = sanPhamService.getSanPhamTheoId(id);
+					BinhLuan bl = new BinhLuan(sp, user, msg, new Date());
+					binhLuanService.insertBinhLuan(bl);
+				} catch (Exception e) {
+					result = RATING_FAIL;
+				}
+			}
 		}
+		else {
+			result = NO_LOGIN;
+		}
+		JsonHandler.writeJson(result);		
+		
+		return JSON;
+	}
+	
+	public String getComments(){
+		String strId = request.getParameter("id");
+		if (Util.tryParseInt(strId)){
+			int id = Integer.parseInt(strId);				
+			List<BinhLuan> list = binhLuanService.getListBinhLuanTheoMaSP(id, 0, 10);
+			request.setAttribute("list", list);
+			
+			return SUCCESS;
+		}
+				
+		return ERROR;
 	}
 	
 	public void setServletRequest(HttpServletRequest request) {

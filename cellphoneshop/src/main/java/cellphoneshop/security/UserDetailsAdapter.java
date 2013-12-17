@@ -14,7 +14,6 @@ import cellphoneshop.model.VaiTro;
 @SuppressWarnings("serial")
 public class UserDetailsAdapter implements UserDetails {
 
-
 	private NguoiDung nguoidung;
 	
 	public UserDetailsAdapter(NguoiDung nguoidung){
