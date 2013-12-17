@@ -1,19 +1,12 @@
 package cellphoneshop.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import cellphoneshop.dao.SanPhamDAO;
-import cellphoneshop.model.CtSanPham;
-import cellphoneshop.model.ProductDetail;
 import cellphoneshop.model.SanPham;
 import cellphoneshop.service.SanPhamService;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
