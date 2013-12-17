@@ -1,5 +1,5 @@
 #
-# Phien ban 0.2
+# Phien ban 0.2.1
 #
 
 USE CellPhoneShop;
@@ -86,6 +86,16 @@ DELIMITER ;
 CALL taoDuLieuPTGiaoHang();
 DROP PROCEDURE IF EXISTS taoDuLieuPTGiaoHang;
 
+DELIMITER //
+CREATE PROCEDURE taoDuLieuPTThanhToan()
+	BEGIN
+		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Chuyển khoản ngân hàng');
+		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Trả tiển khi nhận hàng');
+		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Trả tiền tại siêu thị');
+	END //
+DELIMITER ;
+CALL taoDuLieuPTThanhToan();
+DROP PROCEDURE IF EXISTS taoDuLieuPTThanhToan;
 
 DELIMITER //
 CREATE PROCEDURE TaoDuLieuSmartPhone()
@@ -95,21 +105,21 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		DECLARE tienToTen VARCHAR (50) CHARACTER SET utf8;
 		
 		# Khai báo cho SanPham
-		DECLARE maSP BIGINT;
+		DECLARE maSP INT;
 		DECLARE tenSPMoi VARCHAR(100) CHARACTER SET utf8;
 		DECLARE gioiThieu VARCHAR(800) CHARACTER SET utf8;
 		DECLARE gia INT;
-		DECLARE soThangBaoHanh SMALLINT;
+		DECLARE soThangBaoHanh INT;
 		DECLARE hinhDaiDien VARCHAR(256);
 		DECLARE soLuongHienCo INT;
 		DECLARE tongSoLuong INT;
 		DECLARE ngayNhap DATE;
-		DECLARE maLoaiSP SMALLINT;
-		DECLARE maNhaSX SMALLINT;
+		DECLARE maLoaiSP INT;
+		DECLARE maNhaSX INT;
 		
 		
 		# Khai báo cho CTSanPham
-		DECLARE maCTSP BIGINT;
+		DECLARE maCTSP INT;
 		DECLARE trongLuong FLOAT;
 		DECLARE chieuCao FLOAT;
 		DECLARE chieuRong FLOAT;
@@ -117,12 +127,12 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 		DECLARE ngaySX DATE;
 		
 		# Khai báo cho hình ảnh sản phẩm
-		DECLARE duongDan varchar(256);
-		DECLARE STT smallint;
+		DECLARE duongDan VARCHAR(256);
+		DECLARE STT INT;
 		
 		# Khai báo cho ThongSoSmartPhone
-		DECLARE maHDH smallint;
-		DECLARE maLoaiBanPhim smallint;
+		DECLARE maHDH INT;
+		DECLARE maLoaiBanPhim INT;
 		
 
 
