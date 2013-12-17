@@ -1,5 +1,6 @@
 package cellphoneshop.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import cellphoneshop.dao.SanPhamDAO;
 import cellphoneshop.model.CtSanPham;
 import cellphoneshop.model.HinhAnhSp;
-import cellphoneshop.viewmodel.ProductDetail;
+import cellphoneshop.model.ProductDetail;
 import cellphoneshop.model.SanPham;
 
 @Service
@@ -104,5 +105,21 @@ public class SanPhamServiceImpl implements SanPhamService {
 		}
 		
 		return productDetail;
+	}
+
+	public List<ProductDetail> getCompareList(List<Integer> productIdList) {
+		List<ProductDetail> listProductDetails = new ArrayList<ProductDetail>();
+		
+		if(productIdList == null) {
+			return listProductDetails;
+		}
+		
+		for(Integer i : productIdList) {
+			ProductDetail productDetail = getSanPhamCungChiTietTheoId(i);
+			if(productDetail != null){
+				listProductDetails.add(productDetail);
+			}	
+		}
+		return listProductDetails;
 	}
 }

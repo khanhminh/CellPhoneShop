@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 10, 2010 7:19:01 AM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Jan 10, 2010 8:53:01 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="cellphoneshop.model.DonHang" table="DonHang" catalog="CellPhoneShop">
         <id name="maDonHang" type="java.lang.Integer">
             <column name="maDonHang" />
             <generator class="identity" />
         </id>
+        <many-to-one name="ptThanhToan" class="cellphoneshop.model.PtThanhToan" fetch="select">
+            <column name="maPtThanhToan" not-null="true" />
+        </many-to-one>
         <many-to-one name="ptGiaoHang" class="cellphoneshop.model.PtGiaoHang" fetch="select">
             <column name="maPtGiaoHang" not-null="true" />
         </many-to-one>

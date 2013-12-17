@@ -1,7 +1,5 @@
 package cellphoneshop.service;
 
-import java.text.ParseException;
-
 import cellphoneshop.model.NguoiDung;
 import cellphoneshop.viewmodel.RegisterUser;
 

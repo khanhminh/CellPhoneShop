@@ -1,5 +1,5 @@
 package cellphoneshop.model;
-// Generated Jan 10, 2010 7:19:00 AM by Hibernate Tools 3.2.1.GA
+// Generated Jan 10, 2010 8:13:28 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,6 +13,7 @@ public class NguoiNhan  implements java.io.Serializable {
 
      private int maNguoiNhan;
      private NguoiDung nguoiDung;
+     private String hoTen;
      private String soDienThoai;
      private String diaChi;
      private Set donHangs = new HashSet(0);
@@ -26,9 +27,10 @@ public class NguoiNhan  implements java.io.Serializable {
         this.nguoiDung = nguoiDung;
         this.diaChi = diaChi;
     }
-    public NguoiNhan(int maNguoiNhan, NguoiDung nguoiDung, String soDienThoai, String diaChi, Set donHangs) {
+    public NguoiNhan(int maNguoiNhan, NguoiDung nguoiDung, String hoTen, String soDienThoai, String diaChi, Set donHangs) {
        this.maNguoiNhan = maNguoiNhan;
        this.nguoiDung = nguoiDung;
+       this.hoTen = hoTen;
        this.soDienThoai = soDienThoai;
        this.diaChi = diaChi;
        this.donHangs = donHangs;
@@ -47,6 +49,13 @@ public class NguoiNhan  implements java.io.Serializable {
     
     public void setNguoiDung(NguoiDung nguoiDung) {
         this.nguoiDung = nguoiDung;
+    }
+    public String getHoTen() {
+        return this.hoTen;
+    }
+    
+    public void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
     }
     public String getSoDienThoai() {
         return this.soDienThoai;
