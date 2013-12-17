@@ -2,7 +2,7 @@ package cellphoneshop.service;
 
 import java.util.List;
 
-import cellphoneshop.model.ProductDetail;
+import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.model.SanPham;
 
 public interface SanPhamService {

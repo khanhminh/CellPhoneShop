@@ -17,15 +17,15 @@
 #	HDH - Hệ điều hành
 #
 
-create database CellPhoneShop;
-use CellPhoneShop;
+CREATE DATABASE CellPhoneShop;
+USE CellPhoneShop;
 
-grant all privileges on CellPhoneShop.* to 'admin'@'localhost' identified by '12345';
+GRANT ALL PRIVILEGES ON CellPhoneShop.* TO 'admin'@'localhost' IDENTIFIED BY '12345';
 
-create table NhaSanXuat (
-	maNhaSX int auto_increment primary key,
-	tenNhaSX varchar(30) character set utf8 not null,
-	logo varchar(256)
+CREATE TABLE NhaSanXuat (
+	maNhaSX INT AUTO_INCREMENT PRIMARY KEY,
+	tenNhaSX VARCHAR(30) CHARACTER SET utf8 NOT NULL,
+	logo VARCHAR(256)
 );
 
 create table LoaiSanPham (
