@@ -11,7 +11,6 @@ import java.util.Set;
  */
 public class CtSanPham  implements java.io.Serializable {
 
-
      private Integer maCtsp;
      private SanPham sanPham;
      private HeDieuHanh heDieuHanh;

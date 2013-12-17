@@ -7,10 +7,12 @@
        	<tr>
             <td colspan="3" class="titleinfo">Thông số kỹ thuật</td>
         </tr>
+        
+        <!-- chi tiet man hinh -->
         <tr class="group">
             <td class="group-info">Màn hình</td>
             <td class="name-info">Loại màn hình:</td>
-            <td>${info.loaiManhinh }</td>
+            <td>${info.loaiManhinh}&nbsp;${info.loaiManhinh.soMauManHinh}</td>
         </tr>
         <tr>
             <td></td>
@@ -27,15 +29,17 @@
             <td class="name-info">Cảm ứng:</td>
             <td>${info.camUng}</td>
         </tr>
+        
+        <!-- cau hinh chi tiet -->
         <tr class="group">
             <td class="group-info">Cấu hình chi tiết:</td>
             <td class="name-info">Hệ điều hành:</td>
-            <td>${info.hedieuhanh.tenHdh}</td>
+            <td>${info.heDieuHanh.tenHdh}</td>
         </tr>
         <tr>
             <td></td>
             <td class="name-info">CPU</td>
-            <td>${info.chipset} ${info.tocDoCpu}</td>
+            <td>${info.chipset}&nbsp;${info.soNhanCpu}&nbsp;${info.tocDoCpu}</td>
         </tr>
         <tr>
             <td></td>
@@ -44,33 +48,43 @@
         </tr>
         <tr>
             <td></td>
-            <td class="name-info">Bộ nhớ trong(ROM):</td>
-            <td>${info.boNhoTrong}</td>
-        </tr>
-        <tr>
-            <td></td>
             <td class="name-info">RAM:</td>
             <td>${info.ram}</td>
         </tr>
         <tr>
             <td></td>
-            <td class="name-info">Ngôn ngữ:</td>
-            <td>--</td>
+            <td class="name-info">Bộ nhớ trong(ROM):</td>
+            <td>${info.boNhoTrong}</td>
         </tr>
         <tr>
             <td></td>
-            <td class="name-info">Hỗ trợ thẻ nhớ:</td>
-            <td>${info.theNhoNgoai}</td>
+            <td class="name-info">Hỗ trợ thẻ nhớ ngoài:</td>
+            <td>${info.dungLuongTheToiDa} GB</td>
         </tr>
         <tr>
             <td></td>
-            <td class="name-info">Camera:</td>
+            <td class="name-info">Camera sau:</td>
             <td>${info.cameraSau}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="name-info">Camera trước:</td>
+            <td>${info.cameraTruoc}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="name-info">Quay phim:</td>
+            <td>${info.quayPhim}</td>
         </tr>
         <tr class="group">
             <td class="group-info">Chức năng khác:</td>
             <td class="name-info">Số SIM hỗ trợ:</td>
-            <td>1</td>
+            <td>${info.soLuongSim}</td>
+        </tr>        
+        <tr>
+            <td></td>
+            <td class="name-info">Ngôn ngữ:</td>
+            <td>--</td>
         </tr>
         <tr>
             <td></td>
@@ -115,7 +129,7 @@
         <tr>
             <td></td>
             <td class="name-info">GPS:</td>
-            <td>${info.gprs}</td>
+            <td>${info.gps}</td>
         </tr>
         <tr>
             <td></td>
@@ -135,17 +149,15 @@
         <tr>
             <td></td>
             <td class="name-info">Trọng lượng</td>
-            <td>300 g</td>
+            <td>${info.trongLuong} gam</td>
         </tr>
         <tr>
             <td></td>
             <td class="name-info">Kích thước</td>
-            <td>--</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td class="name-info">Bảo hành:</td>
-            <td>12 tháng</td>
+            <td>${info.chieuRong}&nbsp;x&nbsp;
+            	${info.chieuCao}&nbsp;x&nbsp;
+            	${info.doDay}
+            </td>
         </tr>
     </tbody>
 </table>

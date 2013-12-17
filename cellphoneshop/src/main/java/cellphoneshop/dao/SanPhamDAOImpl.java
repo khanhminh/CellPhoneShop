@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -42,6 +43,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 		try {
 			result = (SanPham) session.get(SanPham.class, maSp);
+			Hibernate.initialize(result.getNhaSanXuat());
 		} catch (Exception ex) {
 			System.err
 					.println(ex.getClass().getName() + ": " + ex.getMessage());

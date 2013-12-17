@@ -27,7 +27,10 @@ public class HomeController extends ActionSupport implements ServletRequestAware
 	@Override
 	public String execute() throws Exception {		
 		long totalNewProduct = sanPhamService.demSoSanPhamMoiTrongTuan();
-		int totalPage = (int)totalNewProduct / productPerPage;		
+		int totalPage = (int)totalNewProduct / productPerPage;	
+		if (totalPage * productPerPage < totalNewProduct){
+			totalPage++;
+		}
 		
 		request.setAttribute("currentPage", 1);
 		request.setAttribute("totalPage", totalPage);
