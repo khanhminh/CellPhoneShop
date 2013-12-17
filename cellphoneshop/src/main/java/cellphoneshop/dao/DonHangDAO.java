@@ -8,5 +8,6 @@ public interface DonHangDAO {
 	DonHang getDonHang(Integer maDonHang);
 	void updateDonHang(DonHang donHang);
 	List<DonHang> getListDonHangTheoNguoiDung(int maNguoiDung);
+	
 	// TODO: lam chuc nang xoa don hang
 }

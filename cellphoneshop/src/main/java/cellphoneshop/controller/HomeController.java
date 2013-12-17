@@ -8,6 +8,9 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cellphoneshop.dao.SanPhamDAO;
+import cellphoneshop.model.CtSanPham;
+import cellphoneshop.model.ProductDetail;
 import cellphoneshop.model.SanPham;
 import cellphoneshop.service.SanPhamService;
 
@@ -36,10 +39,14 @@ public class HomeController extends ActionSupport implements ServletRequestAware
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
 		
-		//logger.info("Size - newProducts: " + newProducts.size());
-		
-		//List<SanPham> result = sanPhamService.getListSanPhamTheoLoai((short)2, (long) 0, (long) 5, "price", 1);
-		//logger.info(result.size());
+		//test
+		ProductDetail pd = sanPhamService.getSanPhamCungChiTietTheoId(1);
+		System.out.println(pd.getProduct().getTenSp());
+		System.out.println(pd.getProduct().getNhaSanXuat().getTenNhaSx());
+		System.out.println(pd.getProduct().getLoaiSanPham().getTenLoaiSp());
+		System.out.println(pd.getImages().size());
+		System.out.println(pd.getDetail().getChieuCao());
+		System.out.println(pd.getDetail().getHeDieuHanh().getTenHdh());
 		
 		return SUCCESS;
 	}

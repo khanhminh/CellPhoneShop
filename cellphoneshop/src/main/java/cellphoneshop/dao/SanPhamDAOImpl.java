@@ -2,9 +2,17 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-import org.hibernate.HibernateException;
+
+
+
+
+
+
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import cellphoneshop.model.CtSanPham;
+import cellphoneshop.model.HinhAnhSp;
 import cellphoneshop.model.SanPham;
 
 @Repository
@@ -223,6 +233,39 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		}
 
 		// TODO Auto-generated method stub
+		return result;
+	}
+
+	@Transactional(readOnly = true)
+	public SanPham getSanPhamCungChiTietTheoId(Integer maSp) {
+		SanPham result = null;
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			result = (SanPham) session.get(SanPham.class, maSp);
+			
+			if (result != null) {
+				Iterator itrCtSP = result.getCtSanPhams().iterator();
+				if (itrCtSP.hasNext()) {
+					CtSanPham ctSP = (CtSanPham) itrCtSP.next();
+					Hibernate.initialize(ctSP);
+					Hibernate.initialize(ctSP.getHeDieuHanh());
+					
+					Iterator itrHinhAnhSp = ctSP.getHinhAnhSps().iterator();
+					while (itrHinhAnhSp.hasNext()) {
+						HinhAnhSp hinhAnh = (HinhAnhSp) itrHinhAnhSp.next();
+						Hibernate.initialize(hinhAnh);
+					}
+				}
+				
+				Hibernate.initialize(result.getNhaSanXuat());
+				Hibernate.initialize(result.getLoaiSanPham());
+			}
+		} catch (Exception ex) {
+			System.err
+					.println(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
 		return result;
 	}
 
