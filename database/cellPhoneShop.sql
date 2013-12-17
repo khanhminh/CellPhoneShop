@@ -1,5 +1,5 @@
 #
-# Phien ban 0.2
+# Phien ban 0.2.2
 # Sinh viên thực hiện:
 # 	. 1012190
 #	. 1012355
@@ -210,6 +210,12 @@ create table PtGiaoHang (
 	tenPTGiaoHang varchar(50) character set utf8 not null
 );
 
+create table PtThanhToan (
+	maPTThanhToan int auto_increment primary key,
+	tenPTThanhToan varchar(50) character set utf8 not null,
+	ghiChu varchar(800)
+);
+
 create table TrangThaiDonHang (
 	maTrangThai int auto_increment primary key,
 	tenTrangThai varchar(30) character set utf8 not null
@@ -218,6 +224,7 @@ create table TrangThaiDonHang (
 create table NguoiNhan (
 	maNguoiNhan int primary key,
 	maND int not null,
+	hoTen varchar(50) character set utf8,
 	soDienThoai varchar(15),
 	diaChi varchar(100) character set utf8 not null,
 	
@@ -233,10 +240,12 @@ create table DonHang (
 	giamGia int default 0,        #Giảm giá trên tổng giá trị của đơn hàng (vd: yêu cầu những đơn hàng trên x đồng được giảm 5%)
 	maPtGiaoHang int not null,
 	maTrangThai int not null,    # Trang thai don hang
+	maPtThanhToan int not null,
 	
 	constraint fk_DonHang_NguoiDung foreign key (maND) references NguoiDung(maND),
 	constraint fk_DonHang_NguoiNhan foreign key (maNguoiNhan) references NguoiNhan(maNguoiNhan),
 	constraint fk_DonHang_PTGiaoHang foreign key (maPtGiaoHang) references PtGiaoHang(maPtGiaoHang),
+	constraint fk_DonHang_PtThanhToan foreign key (maPtThanhToan) references PtThanhToan(maPtThanhToan),
 	constraint fk_DonHang_TrangThaiDonHang foreign key (maTrangThai) references TrangThaiDonHang(maTrangThai)
 );
 

@@ -1,5 +1,5 @@
 package cellphoneshop.model;
-// Generated Jan 10, 2010 7:19:00 AM by Hibernate Tools 3.2.1.GA
+// Generated Jan 10, 2010 8:52:59 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -13,6 +13,7 @@ public class DonHang  implements java.io.Serializable {
 
 
      private Integer maDonHang;
+     private PtThanhToan ptThanhToan;
      private PtGiaoHang ptGiaoHang;
      private NguoiDung nguoiDung;
      private NguoiNhan nguoiNhan;
@@ -27,7 +28,8 @@ public class DonHang  implements java.io.Serializable {
     }
 
 	
-    public DonHang(PtGiaoHang ptGiaoHang, NguoiDung nguoiDung, NguoiNhan nguoiNhan, TrangThaiDonHang trangThaiDonHang, Date ngayDatHang, int tongGiaTri) {
+    public DonHang(PtThanhToan ptThanhToan, PtGiaoHang ptGiaoHang, NguoiDung nguoiDung, NguoiNhan nguoiNhan, TrangThaiDonHang trangThaiDonHang, Date ngayDatHang, int tongGiaTri) {
+        this.ptThanhToan = ptThanhToan;
         this.ptGiaoHang = ptGiaoHang;
         this.nguoiDung = nguoiDung;
         this.nguoiNhan = nguoiNhan;
@@ -35,7 +37,8 @@ public class DonHang  implements java.io.Serializable {
         this.ngayDatHang = ngayDatHang;
         this.tongGiaTri = tongGiaTri;
     }
-    public DonHang(PtGiaoHang ptGiaoHang, NguoiDung nguoiDung, NguoiNhan nguoiNhan, TrangThaiDonHang trangThaiDonHang, Date ngayDatHang, int tongGiaTri, Integer giamGia, Set phieuGiaoHangs, Set ctDonHangs) {
+    public DonHang(PtThanhToan ptThanhToan, PtGiaoHang ptGiaoHang, NguoiDung nguoiDung, NguoiNhan nguoiNhan, TrangThaiDonHang trangThaiDonHang, Date ngayDatHang, int tongGiaTri, Integer giamGia, Set phieuGiaoHangs, Set ctDonHangs) {
+       this.ptThanhToan = ptThanhToan;
        this.ptGiaoHang = ptGiaoHang;
        this.nguoiDung = nguoiDung;
        this.nguoiNhan = nguoiNhan;
@@ -53,6 +56,13 @@ public class DonHang  implements java.io.Serializable {
     
     public void setMaDonHang(Integer maDonHang) {
         this.maDonHang = maDonHang;
+    }
+    public PtThanhToan getPtThanhToan() {
+        return this.ptThanhToan;
+    }
+    
+    public void setPtThanhToan(PtThanhToan ptThanhToan) {
+        this.ptThanhToan = ptThanhToan;
     }
     public PtGiaoHang getPtGiaoHang() {
         return this.ptGiaoHang;
