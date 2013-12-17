@@ -2,13 +2,21 @@ package cellphoneshop.service;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
+
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cellphoneshop.dao.SanPhamDAO;
+import cellphoneshop.model.CtSanPham;
+import cellphoneshop.model.HinhAnhSp;
+import cellphoneshop.model.ProductDetail;
 import cellphoneshop.model.SanPham;
 
 @Service
@@ -60,5 +68,47 @@ public class SanPhamServiceImpl implements SanPhamService {
 	public List<SanPham> getListSanPhamTheoLoai(Integer maloai, Integer positionStart,
 			Integer amount, String qualification, boolean isAsc) {
 		return spDAO.getListSanPhamTheoLoai(maloai, positionStart, amount, qualification, isAsc);
+	}
+
+	public List<SanPham> getListSanPhamMoiTrongThang(int ketQuaDauTien,
+			int soKetQuaToiDa) {
+		Date ngayDauThang = new Date();
+		ngayDauThang.setDate(1);
+		Date homNay = new Date();
+		
+		return spDAO.getListSanPhamTheoNgayNhap(ngayDauThang, homNay, ketQuaDauTien, soKetQuaToiDa);
+	}
+
+	public int demSoSanPhamMoiTrongThang() {
+		Date ngayDauThang = new Date();
+		ngayDauThang.setDate(1);
+		Date homNay = new Date();
+		
+		
+		return spDAO.demSoSanPhamTheoNgayNhap(ngayDauThang, homNay);
+	}
+
+	public ProductDetail getSanPhamCungChiTietTheoId(Integer maSp) {
+		SanPham sanPham = spDAO.getSanPhamCungChiTietTheoId(maSp);
+		
+		if (sanPham == null) {
+			return null;
+		}
+		
+		ProductDetail productDetail = new ProductDetail();
+		productDetail.setProduct(sanPham);
+		
+		Iterator itrCtSP  = sanPham.getCtSanPhams().iterator();
+		if (itrCtSP.hasNext()) {
+			CtSanPham ctSP = (CtSanPham) itrCtSP.next();
+			productDetail.setDetail(ctSP);
+			
+			Iterator itrHinhAnh = ctSP.getHinhAnhSps().iterator();
+			while (itrHinhAnh.hasNext()) {
+				productDetail.addImage((HinhAnhSp)itrHinhAnh.next());
+			}
+		}
+		
+		return productDetail;
 	}
 }

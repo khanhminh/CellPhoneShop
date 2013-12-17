@@ -2,6 +2,7 @@ package cellphoneshop.service;
 
 import java.util.List;
 
+import cellphoneshop.model.ProductDetail;
 import cellphoneshop.model.SanPham;
 
 public interface SanPhamService {
@@ -28,6 +29,19 @@ public interface SanPhamService {
 	int demSoSanPhamMoiTrongTuan();
 	
 	/**
+	 * Lay danh sach san pham moi trong thang co phan trang.
+	 */
+	List<SanPham> getListSanPhamMoiTrongThang(int ketQuaDauTien, int soKetQuaToiDa);
+	
+	
+	/**
+	 * Dem so luong tat ca san pham moi them trong thang.
+	 */
+	int demSoSanPhamMoiTrongThang();
+	
+	
+	
+	/**
 	 * Tim kiem san pham theo ten. Xem them {@link #demSoSanPhamKhiTimKiemTheoTen(String)}
 	 */
 	List<SanPham> timKiemSanPhamTheoTen(String tuKhoa, int kqDauTien, int soKqToiDa);
@@ -47,4 +61,7 @@ public interface SanPhamService {
 	 * @return
 	 */
 	List<SanPham> getListSanPhamTheoLoai(Integer maloai, Integer positionStart, Integer amount, String qualification, boolean isAsc);
+	
+	public ProductDetail getSanPhamCungChiTietTheoId(Integer maSp);
+	
 }

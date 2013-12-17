@@ -6,6 +6,7 @@ import cellphoneshop.model.SanPham;
 public interface SanPhamDAO {
 	void insertSanPham(SanPham sp);
 	SanPham getSanPhamTheoId(Integer maSp);
+	SanPham getSanPhamCungChiTietTheoId(Integer maSp);
 	void updateSanPham(SanPham sp);
 	
 	/**
@@ -28,10 +29,6 @@ public interface SanPhamDAO {
 	 * 
 	 */
 	List<SanPham> getListSanPhamTheoLoai(Integer maloai, Integer positionStart, Integer amount, String qualification, boolean isAsc);
-	/**
-	 * Tính số sản phẩm nếu lấy tất cả sản phẩm có ngày nhập
-	 * trước một ngày nào đó.
-	 */
 	int demSoSanPhamTheoNgayNhap(Date ngayBatDau);
 	
 	
