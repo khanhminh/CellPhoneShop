@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/main/java/cellphoneshop/controller/AccountController.java=UTF-8
 encoding//src/main/java/cellphoneshop/controller/ProductController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/ajax-page/new_products.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/product1.jsp=UTF-8

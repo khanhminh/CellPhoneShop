@@ -14,11 +14,12 @@ public class JsonHandler {
 		Gson gson = new Gson();
 		String json = gson.toJson(obj);		
 		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/json");
 		PrintWriter writer;
 		try {
 			writer = response.getWriter();
 			writer.write(json);
-			writer.flush();
+			//writer.flush();
 			writer.close();
 		} catch (IOException e) {
 			

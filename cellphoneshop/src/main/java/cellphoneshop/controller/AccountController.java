@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import cellphoneshop.model.NguoiDung;
 import cellphoneshop.service.NguoiDungService;
+import cellphoneshop.util.Message;
 import cellphoneshop.viewmodel.RegisterUser;
 
 import com.google.gson.Gson;
@@ -37,6 +39,8 @@ public class AccountController extends ActionSupport {
 	private NguoiDungService nguoiDungService;
 
 	@Autowired
+	private Message message;
+	
 	@Qualifier("authenticationManager")
 	private AuthenticationManager authMgr;
 
@@ -48,6 +52,7 @@ public class AccountController extends ActionSupport {
 	}
 	
 	public RegisterUser getRegister() {
+		
 		return this.user;
 	}
 
@@ -103,54 +108,51 @@ public class AccountController extends ActionSupport {
 		boolean result = true;
 		errors = new ArrayList<String>();
 
-		if (!user.getUsername().matches("^.{6,20}$")) {
-			errors.add("Tên đăng nhập không hợp lệ");
-			result = false;
-		} else {
-			// errors.add("");
-		}
+		try {
+			if (!user.getPassword().matches("^.{6,20}$")) {
+				errors.add(message.getMessageList().getProperty("errorPassword"));
+				result = false;
+			} else if (!user.getPassword().equals(user.getConfirm())) {
+				errors.add(message.getMessageList().getProperty("mismatch"));
+				result = false;
+			}
 
-		if (!user.getPassword().matches("^.{6,20}$")) {
-			errors.add("Mật khẩu không hợp lệ");
-			result = false;
-		} else if (!user.getPassword().equals(user.getConfirm())) {
-			errors.add("Mật khẩu không khớp");
-			result = false;
-		}
+			if (user.getFirstname().equals("")) {
+				errors.add(message.getMessageList().getProperty("unknowFirstName"));
+				result = false;
+			}
 
-		if (user.getFirstname().equals("")) {
-			errors.add("Vui lòng nhập họ");
-			result = false;
-		}
+			if (user.getName().equals("")) {
+				errors.add(message.getMessageList().getProperty("unknowName"));
+				result = false;
+			}
 
-		if (user.getName().equals("")) {
-			errors.add("Vui lòng nhập tên");
-			result = false;
-		}
+			if (!user
+					.getEmail()
+					.matches(
+							"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+				errors.add(message.getMessageList().getProperty("errorEmail"));
+				result = false;
+			} else if (nguoiDungService.getNguoidung(user.getEmail()) != null) {
+				errors.add(message.getMessageList().getProperty("duplicateEmail"));
+				result = false;
+			}
 
-		if (!user
-				.getEmail()
-				.matches(
-						"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-			errors.add("Địa chỉ email không hợp lệ");
-			result = false;
-		} else if (nguoiDungService.getNguoidung(user.getEmail()) != null) {
-			errors.add("Địa chỉ email đã được sử dụng");
-			result = false;
-		}
+			if (!tryParseDate(user.getBirthday())) {
+				errors.add(message.getMessageList().getProperty("errorBirthDate"));
+				result = false;
+			}
 
-		if (!tryParseDate(user.getBirthday())) {
-			errors.add("Ngày sinh không hợp lệ");
-			result = false;
-		}
+			if (!user.getPhone().matches("^\\d{6,11}$")) {
+				errors.add(message.getMessageList().getProperty("errorPhoneNumber"));
+				result = false;
+			}
 
-		if (!user.getPhone().matches("^\\d{6,11}$")) {
-			errors.add("Số điện thoại không hợp lệ");
-			result = false;
-		}
-
-		if (user.getAddress().equals("Vui lòng nhập địa chỉ")) {
-			errors.add("");
+			if (user.getAddress().equals("")) {
+				errors.add(message.getMessageList().getProperty("unknowAddress"));
+				result = false;
+			}
+		} catch (Exception e) {
 			result = false;
 		}
 

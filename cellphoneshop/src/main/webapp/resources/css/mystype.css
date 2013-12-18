@@ -1564,3 +1564,21 @@ input[type="checkbox"].input-validation-error {
 	border-bottom: #ccc solid 1px;
 	padding-bottom: 10px;
 }
+
+.score-rate {
+	color: red;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.count-rate {
+	color: blue;
+}
+
+.rating span{
+	vertical-align: middle;
+}
+
+#list-star{
+	display: inline-block;
+}

@@ -28,12 +28,15 @@
 		</div>
 		<div id="right-info" class="two_quarter">
 			<h2 id="name">${sp.tenSp}</h2>
-			<div class="rating" id="rating-score" data-score="${sp.diemDanhGiaTb}" >
-				<img src="resources/images/star-off.png" />
-				<img src="resources/images/star-off.png" />
-				<img src="resources/images/star-off.png" />
-				<img src="resources/images/star-off.png" />
-				<img src="resources/images/star-off.png" />
+			<div class="rating" id="rating-score"
+				data-score="${sp.diemDanhGiaTb}">
+				<img src="resources/images/star-off.png" /> <img
+					src="resources/images/star-off.png" /> <img
+					src="resources/images/star-off.png" /> <img
+					src="resources/images/star-off.png" /> <img
+					src="resources/images/star-off.png" />
+				
+				<span class="score-rate"></span>
 			</div>
 			<h3 id="status">
 				<c:choose>
@@ -70,22 +73,27 @@
 			</div>
 		</div>
 		<div class="clear"></div>
-				
-		
+
+
 		<div id="bottom-info">
 			<h3 class="title-info">CHI TIẾT SẢN PHẨM</h3>
 			<jsp:include page="smartphone_detail.jsp" />
 		</div>
 		<div class="clear push50"></div>
-		
+
 		<div id="user-rating" data-productId="${sp.maSp}">
 			<h3 class="title-info">ĐÁNH GIÁ</h3>
-			<div class="rating" id="list-star">
-				<img src="resources/images/star-off.png" /> <img
-					src="resources/images/star-off.png" /> <img
-					src="resources/images/star-off.png" /> <img
-					src="resources/images/star-off.png" /> <img
-					src="resources/images/star-off.png" />
+			<div class="rating">
+				<div id="list-star">
+					<img src="resources/images/star-off.png" /> <img
+						src="resources/images/star-off.png" /> <img
+						src="resources/images/star-off.png" /> <img
+						src="resources/images/star-off.png" /> <img
+						src="resources/images/star-off.png" />
+					<span class="score-rate"></span>
+				</div>
+				
+				<span class="count-rate">(<span id="count-rate">0</span> lượt đánh giá)</span>
 			</div>
 			<span class="rating-title">Đánh giá của bạn về sản
 				phẩm: </span>
@@ -150,25 +158,39 @@
 					<button id="btSend" type="submit" class="button small blue">Gửi</button>
 				</form>
 				<div id="list-comment">
+					
 				</div>
 			</div>
-
-			
-			<!-- <nav class="pagination">
-				<ul id="pages">
-				</ul>
-			</nav> -->
 		</div>
 	</div>
 </div>
 <script>
 	var isWaitRating = false;
 	
+	function loadRatingSuccess(data){
+		showRating(data.avgRating, data.numberUser);
+	}
+	
+	
+	function loadRating(){
+		var id = $('#user-rating').attr('data-productId');
+		$.ajax({
+			url : "getRating.action",
+			data : {
+				id : id,
+			},
+			type : "GET",
+			success : loadRatingSuccess,
+		});
+	}
+	
+	
 	function callbackRating(data){
 		var notify = $('#rating-notify');
 		if (data == 1){
 			notify.text("Đánh giá của bạn đã được cập nhật");
-			notify.attr("style", "color:green;");
+			notify.attr("style", "color:green;");		
+			loadRating();
 		}
 		else {
 			var msg = "";
@@ -205,7 +227,7 @@
 		});
 	}
 
-	function setStar(number){
+	/* function setStar(number){
 		var list = $("#list-star").children();
 		for (var i = 0; i < list.length; i++){
 			var img = $(list[i]);
@@ -218,7 +240,7 @@
 		}
 		
 		return false;
-	}
+	} */
 	
 	function checkSelect(){
 		var number = -1;
@@ -236,16 +258,21 @@
 	
 	function showComments(data) {
 		$('#list-comment').html(data);
+		
+		$(".ajax-link").click(function(e) {
+			e.preventDefault();
+			ajaxLinkClick(this);
+		});
 	}
 	
-	function loadComments() {
+	function loadComments(page) {
 		var id = $('#user-rating').attr('data-productId');
 		
 		$.ajax({
 			url : "getComments.action",
 			data : {
 				id : id,
-				page: 1
+				page: page
 			},
 			type : "GET",
 			success : showComments,
@@ -254,7 +281,7 @@
 	
 	function callbackComment(data){
 		if (data == 1){
-			loadComments();
+			loadComments(1);
 		}		
 		else {
 			var msg = "";
@@ -288,9 +315,12 @@
 		});
 	}
 	
-	function showRating(){
-		var score = parseFloat($('#rating-score').attr('data-score'));
-		var arr = [0, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+	function showRating(score, count){
+		$('.score-rate').text(score.toFixed(1));
+		$('#count-rate').text(count);
+		if (score == 0) return;
+		
+		var arr = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 		var min = arr[0];
 		for (var i = 1; i < arr.length; i++){
 			if (Math.abs(arr[i] - score) < Math.abs(min - score)){
@@ -298,27 +328,37 @@
 			}
 		}
 		score = min;
+		var limit = Math.round(score - 0.1);		
 		
-		if (score == 0) return;
 		var list = $('#rating-score').children();
 		var index = 0;
-		for (; index < list.length && index < score - 1; index++){
+		for (; index < list.length; index++){
 			var img = $(list[index]);
-			img.attr('src', "resources/images/star-on.png");
+			if (index < limit){
+				img.attr('src', "resources/images/star-on.png");
+			}
+			else {
+				img.attr('src', "resources/images/star-off.png");
+			}
 		}
-		if (score - index > 0.1){
+		if (score - limit > 0.1){
 			var img = $(list[index]);
 			img.attr('src', "resources/images/star-half.png");
-		}		
+		}
+		$('#list-star').html($('#rating-score').html());
+	}
+	
+	function ajaxLinkClick(context) {
+		var page = $(context).text().trim();
+		loadComments(page);
 	}
 	
 	$(document).ready(function(){
-		showRating();
-		loadComments();
+		loadRating();
 		$('.rbtRating').click(function(){
-			var number = $(this).attr("data-number");
+			//var number = $(this).attr("data-number");
 			$('#rating-notify').text("");
-			setStar(number);
+			//setStar(number);
 		});
 		
 		$('#btnRating').click(function(){
@@ -333,5 +373,6 @@
 			$('#notify-comment').text('');
 			sendComment();
 		});
+		loadComments(1);
 	});
 </script>

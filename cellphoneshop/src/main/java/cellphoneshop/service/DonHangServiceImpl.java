@@ -49,9 +49,6 @@ public class DonHangServiceImpl implements DonHangService {
 		donHangDAO.updateDonHang(donHang);
 	}
 
-	public List<DonHang> getListDonHangTheoNguoiDung(int maNguoiDung) {
-		return donHangDAO.getListDonHangTheoNguoiDung(maNguoiDung);
-	}
 
 	public Integer checkOut(Integer maND, List<CartItem> cartItemList,
 			NguoiNhan nguoiNhan, PtThanhToan ptThanhToan, PtGiaoHang ptGiaoHang) {
@@ -103,5 +100,10 @@ public class DonHangServiceImpl implements DonHangService {
 
 	public DonHang getDonHangCungChiTietTheoId(Integer maDonHang) {
 		return donHangDAO.getDonHangCungChiTietTheoId(maDonHang);
+	}
+
+	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung,
+			boolean isAsc, Integer maStatus, int kqDautien, int kqToiDa) {
+		return donHangDAO.getListDonHangTheoNguoiDung(maNguoiDung, isAsc, maStatus, kqDautien, kqToiDa);
 	}
 }

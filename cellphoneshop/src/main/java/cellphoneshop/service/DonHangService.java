@@ -13,7 +13,7 @@ public interface DonHangService {
 	DonHang getDonHang(Integer maDonHang);
 	DonHang getDonHangCungChiTietTheoId(Integer maDonHang);
 	void updateDonHang(DonHang donHang);
-	List<DonHang> getListDonHangTheoNguoiDung(int maNguoiDung);
+	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, boolean isAsc, Integer maStatus, int kqDautien, int kqToiDa);
 	Integer checkOut(Integer maND, List<CartItem> cartItemList, NguoiNhan nguoiNhan, PtThanhToan ptThanhToan, PtGiaoHang ptGiaoHang);
 	// TODO: lam chuc nang xoa don hang
 }

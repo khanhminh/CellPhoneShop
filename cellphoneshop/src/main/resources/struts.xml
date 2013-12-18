@@ -90,6 +90,9 @@
 		<action name="rating" method="rating" class="productAction">
 			<result name="json" type="json" />
 		</action>
+		<action name="getRating" method="getRating" class="productAction">
+			<result name="json" type="json" />
+		</action>
 		<action name="sendComment" method="sendComment" class="productAction">
 			<result name="json" type="json" />
 		</action>
