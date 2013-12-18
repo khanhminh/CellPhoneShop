@@ -18,7 +18,9 @@ import cellphoneshop.service.DanhGiaService;
 import cellphoneshop.service.SanPhamService;
 import cellphoneshop.util.JsonHandler;
 import cellphoneshop.util.Util;
+import cellphoneshop.viewmodel.MessageRating;
 import cellphoneshop.viewmodel.ProductDetail;
+import cellphoneshop.viewmodel.RatingInfor;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -30,6 +32,7 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 	private final int NO_LOGIN = 0;
 	
 	private static final String JSON = "json";
+	private static final int NUMBER_COMMENTS = 10;
 	
 	@Autowired
 	private SanPhamService sanPhamService;
@@ -62,6 +65,21 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 	public String compare(){
 		
 		return SUCCESS;
+	}
+	
+	public String getRating(){
+		String strId = request.getParameter("id");
+		if (Util.tryParseInt(strId)){
+			int id = Integer.parseInt(strId);	
+			RatingInfor data = danhGiaService.getThongTinDanhGiaSanPham(id);
+			
+			MessageRating msg = new MessageRating();
+			msg.setMessage("khanh");
+			msg.setSuccess(true);
+			JsonHandler.writeJson(msg);
+		}
+		
+		return JSON;
 	}
 	
 	public String rating(){		
@@ -117,10 +135,23 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 	
 	public String getComments(){
 		String strId = request.getParameter("id");
-		if (Util.tryParseInt(strId)){
+		String strPage = request.getParameter("page");
+		if (Util.tryParseInt(strId) && Util.tryParseInt(strPage)){
 			int id = Integer.parseInt(strId);				
-			List<BinhLuan> list = binhLuanService.getListBinhLuanTheoMaSP(id, 0, 10);
+			int page = Integer.parseInt(strPage);
+			page = page < 1 ? 1 : page; 
+			int start = NUMBER_COMMENTS * (page - 1);
+			
+			List<BinhLuan> list = binhLuanService.getListBinhLuanTheoMaSP(id, start, NUMBER_COMMENTS);
+			int cmmCount = binhLuanService.demSoBinhLuanCuaSanPham(id);
+			int totalPage = cmmCount / NUMBER_COMMENTS;
+			if (totalPage * NUMBER_COMMENTS < cmmCount){
+				totalPage++;
+			}
+			
 			request.setAttribute("list", list);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("currentPage", page);
 			
 			return SUCCESS;
 		}

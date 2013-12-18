@@ -64,7 +64,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
-			String hql = "select BL from BinhLuan as BL where BL.sanPham.maSp = " + maSanPham + " order by BL.ngayBinhLuan asc";
+			String hql = "select BL from BinhLuan as BL where BL.sanPham.maSp = " + maSanPham + " order by BL.maBinhLuan desc";
 			Query query = session.createQuery(hql);
 			query.setFirstResult(kqDauTien);
 			query.setMaxResults(soKqToiDa);

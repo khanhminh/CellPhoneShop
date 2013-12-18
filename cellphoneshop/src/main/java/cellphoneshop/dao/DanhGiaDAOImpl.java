@@ -1,5 +1,6 @@
 package cellphoneshop.dao;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,6 +18,8 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 	
 	@Autowired
 	private SanPhamDAO sanPhamDAO;
+	
+	Logger log = Logger.getLogger(DanhGiaDAOImpl.class);
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -70,5 +73,25 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 		} catch (Exception ex) {
 			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+	}
+
+	@Transactional(readOnly = true)
+	public int countDanhGia(Integer maSp) {
+		if(maSp == null){
+			return -1;
+		}
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			String hql = "select count(*) from DanhGia DG where DG.sanPham.maSp = :maSp";
+			Query query = session.createQuery(hql);
+			query.setInteger("maSp", maSp);
+			return ((Long)query.list().iterator().next()).intValue();
+			
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			// TODO: handle exception
+		}
+		
+		return -1;
 	}
 }

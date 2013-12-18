@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,6 +49,7 @@ public class AccountController extends ActionSupport {
 	}
 	
 	public RegisterUser getRegister() {
+		
 		return this.user;
 	}
 
@@ -104,27 +106,27 @@ public class AccountController extends ActionSupport {
 		errors = new ArrayList<String>();
 
 		if (!user.getUsername().matches("^.{6,20}$")) {
-			errors.add("Tên đăng nhập không hợp lệ");
+			errors.add("TÃªn Ä‘Äƒng nhÃ¢Ì£p khÃ´ng hÆ¡Ì£p lÃªÌ£");
 			result = false;
 		} else {
 			// errors.add("");
 		}
 
 		if (!user.getPassword().matches("^.{6,20}$")) {
-			errors.add("Mật khẩu không hợp lệ");
+			errors.add("MÃ¢Ì£t khÃ¢Ì‰u khÃ´ng hÆ¡Ì£p lÃªÌ£");
 			result = false;
 		} else if (!user.getPassword().equals(user.getConfirm())) {
-			errors.add("Mật khẩu không khớp");
+			errors.add("MÃ¢Ì£t khÃ¢Ì‰u khÃ´ng khÆ¡Ì�p");
 			result = false;
 		}
 
 		if (user.getFirstname().equals("")) {
-			errors.add("Vui lòng nhập họ");
+			errors.add("Vui loÌ€ng nhÃ¢Ì£p hoÌ£");
 			result = false;
 		}
 
 		if (user.getName().equals("")) {
-			errors.add("Vui lòng nhập tên");
+			errors.add("Vui loÌ€ng nhÃ¢Ì£p tÃªn");
 			result = false;
 		}
 
@@ -132,24 +134,24 @@ public class AccountController extends ActionSupport {
 				.getEmail()
 				.matches(
 						"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-			errors.add("Địa chỉ email không hợp lệ");
+			errors.add("Ä�iÌ£a chiÌ‰ email khÃ´ng hÆ¡Ì£p lÃªÌ£");
 			result = false;
 		} else if (nguoiDungService.getNguoidung(user.getEmail()) != null) {
-			errors.add("Địa chỉ email đã được sử dụng");
+			errors.add("Ä�iÌ£a chiÌ‰ email Ä‘aÌƒ Ä‘Æ°Æ¡Ì£c sÆ°Ì‰ duÌ£ng");
 			result = false;
 		}
 
 		if (!tryParseDate(user.getBirthday())) {
-			errors.add("Ngày sinh không hợp lệ");
+			errors.add("NgaÌ€y sinh khÃ´ng hÆ¡Ì£p lÃªÌ£");
 			result = false;
 		}
 
 		if (!user.getPhone().matches("^\\d{6,11}$")) {
-			errors.add("Số điện thoại không hợp lệ");
+			errors.add("SÃ´Ì� Ä‘iÃªÌ£n thoaÌ£i khÃ´ng hÆ¡Ì£p lÃªÌ£");
 			result = false;
 		}
 
-		if (user.getAddress().equals("Vui lòng nhập địa chỉ")) {
+		if (user.getAddress().equals("Vui loÌ€ng nhÃ¢Ì£p Ä‘iÌ£a chiÌ‰")) {
 			errors.add("");
 			result = false;
 		}
