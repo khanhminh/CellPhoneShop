@@ -4,15 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cellphoneshop.dao.DanhGiaDAO;
+import cellphoneshop.dao.DanhGiaDAOImpl;
+import cellphoneshop.dao.SanPhamDAO;
 import cellphoneshop.model.DanhGia;
 import cellphoneshop.model.DanhGiaId;
 import cellphoneshop.model.NguoiDung;
 import cellphoneshop.model.SanPham;
+import cellphoneshop.viewmodel.RatingInfor;
 
 @Service
 public class DanhGiaServiceImpl implements DanhGiaService {
 	@Autowired
 	private DanhGiaDAO danhGiaDAO;
+	@Autowired
+	private SanPhamDAO sanPhamDAO;
 
 	public void insertDanhGia(DanhGia danhGia) {
 		danhGiaDAO.insertDanhGia(danhGia);
@@ -39,5 +44,25 @@ public class DanhGiaServiceImpl implements DanhGiaService {
 			danhGia = new DanhGia(id, sanPham, nguoiDung, score);
 			danhGiaDAO.insertDanhGia(danhGia);			
 		}
+	}
+
+	public RatingInfor getThongTinDanhGiaSanPham(Integer maSanPham) {
+		// TODO Auto-generated method stub
+		RatingInfor ratingInfor = new RatingInfor();
+		SanPham sanPham = sanPhamDAO.getSanPhamTheoId(maSanPham);
+		if(sanPham == null){
+			return ratingInfor;
+		}
+		
+		int numberUser = danhGiaDAO.countDanhGia(maSanPham);
+		if(numberUser == -1){
+			return ratingInfor;
+		}
+		
+		ratingInfor.setNumberUser(numberUser);
+		ratingInfor.setAvgRating(sanPham.getDiemDanhGiaTb());
+		
+
+		return ratingInfor;
 	}
 }
