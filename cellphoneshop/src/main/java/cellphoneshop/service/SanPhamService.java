@@ -3,6 +3,7 @@ package cellphoneshop.service;
 import java.util.List;
 
 import cellphoneshop.viewmodel.ProductDetail;
+import cellphoneshop.model.ProductFilter;
 import cellphoneshop.model.SanPham;
 
 public interface SanPhamService {
@@ -65,4 +66,9 @@ public interface SanPhamService {
 	public ProductDetail getSanPhamCungChiTietTheoId(Integer maSp);
 	
 	public List<ProductDetail> getCompareList(List<Integer> productIdList);
+	
+	public ProductFilter layCacTieuChiLocDayDu();
+	
+	List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa);
+	int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter);
 }
