@@ -72,11 +72,7 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 		if (Util.tryParseInt(strId)){
 			int id = Integer.parseInt(strId);	
 			RatingInfor data = danhGiaService.getThongTinDanhGiaSanPham(id);
-			
-			MessageRating msg = new MessageRating();
-			msg.setMessage("khanh");
-			msg.setSuccess(true);
-			JsonHandler.writeJson(msg);
+			JsonHandler.writeJson(data);
 		}
 		
 		return JSON;

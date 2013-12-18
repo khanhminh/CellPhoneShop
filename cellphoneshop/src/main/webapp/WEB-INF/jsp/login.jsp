@@ -8,7 +8,7 @@
 		<div class="clear push20"></div>
 		<div>
 			<p id="intro">
-				Chào mừng bạn đến với website của công ty Minh Khánh. Nếu đây là lần
+				Chào mừng bạn đến với website CellPhone. Nếu đây là lần
 				đầu tiên tham gia, vui lòng <a href="register.action">Đăng ký</a>
 				trước khi đăng nhập.
 			</p>
@@ -19,7 +19,7 @@
 				<c:if test="${error != null}">
 					<div class="validation-summary-errors">
 						<ul>
-							<li>Tên đăng nhập hoặc mật khẩu không chính xác</li>
+							<li>Email hoặc mật khẩu không chính xác</li>
 						</ul>
 					</div>
 				</c:if>
@@ -28,7 +28,7 @@
 						<th class="title-table" colspan="3">Tài khoản</th>
 					</tr>
 					<tr>
-						<td class="td-bold"><label>Tên đăng nhập</label></td>
+						<td class="td-bold"><label>Email</label></td>
 						<td colspan="3"><input class="text-box single-line"
 							data-val="true" data-val-required="Vui lòng nhập tên đăng nhập"
 							id="j_username" name="j_username" type="text" value="" /> <span

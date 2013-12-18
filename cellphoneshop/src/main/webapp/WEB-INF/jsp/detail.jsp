@@ -168,9 +168,7 @@
 	var isWaitRating = false;
 	
 	function loadRatingSuccess(data){
-		var count = data.msg;
-		alert(count);
-		//showRating(data.avgRating, data.numberUser);
+		showRating(data.avgRating, data.numberUser);
 	}
 	
 	
@@ -334,9 +332,14 @@
 		
 		var list = $('#rating-score').children();
 		var index = 0;
-		for (; index < list.length && index < limit; index++){
+		for (; index < list.length; index++){
 			var img = $(list[index]);
-			img.attr('src', "resources/images/star-on.png");
+			if (index < limit){
+				img.attr('src', "resources/images/star-on.png");
+			}
+			else {
+				img.attr('src', "resources/images/star-off.png");
+			}
 		}
 		if (score - limit > 0.1){
 			var img = $(list[index]);
@@ -351,7 +354,6 @@
 	}
 	
 	$(document).ready(function(){
-		loadComments(1);
 		loadRating();
 		$('.rbtRating').click(function(){
 			//var number = $(this).attr("data-number");
@@ -371,5 +373,6 @@
 			$('#notify-comment').text('');
 			sendComment();
 		});
+		loadComments(1);
 	});
 </script>

@@ -18,7 +18,7 @@
 	<bean id="accountAction" class="cellphoneshop.controller.AccountController">
 	</bean>
 	
-	<bean id="productAction" class="cellphoneshop.controller.ProductController">
+	<bean id="productAction" class="cellphoneshop.controller.ProductController" scope="prototype">
 	</bean>
 	
 	<bean id="shoppingCartAction" class="cellphoneshop.controller.ShoppingCartController">

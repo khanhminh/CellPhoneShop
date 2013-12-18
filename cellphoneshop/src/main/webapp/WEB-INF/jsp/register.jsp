@@ -8,8 +8,7 @@
 		<h2 class="title-content push50">ĐĂNG KÝ</h2>
 		<div class="clear push20"></div>
 		<div>
-			<p id="intro">Đăng Ký Thành Viên Trang web Thương mại dịch vụ
-				CNTT Minh Khánh</p>
+			<p id="intro">Đăng Ký Thành Viên CellPhone</p>
 		</div>
 
 		<s:form action="register.action" method="post" id="frm-register" theme="simple">
@@ -26,15 +25,17 @@
 				</tr>
 				<tr>
 					<td class="lb-input">
-						<label>Tên đăng nhập</label>
+						<label>Email</label> 
 						(<span class="mark">*</span>)
 					</td>
 					<td>
-						<s:textfield type="text" name="register.username" theme="simple"
-							data-val="true" data-val-regex="Tên đăng nhập phải từ 6-20 kí tự" data-val-regex-pattern="^.{6,20}$"
-							data-val-required="Vui lòng nhập tên đăng nhập" >
-						</s:textfield>
-						<span class="field-validation-valid" data-valmsg-for="register.username" data-valmsg-replace="true"></span>
+						<s:textfield type="text" name="register.email" theme="simple"
+							data-val="true" data-val-email="Địa chỉ email không hợp lệ"
+							data-val-required="Vui lòng nhập địa chỉ Email"
+							data-val-remote="Email đã được sử dụng" 
+							data-val-remote-additionalfields="register.email" 
+							data-val-remote-url="checkemail.action" />
+						<span class="field-validation-valid" data-valmsg-for="register.email" data-valmsg-replace="true"></span>						
 					</td>
 				</tr>
 				<tr>
@@ -81,21 +82,6 @@
 						<s:textfield type="text" name="register.name" theme="simple"
 							data-val="true" data-val-required="Vui lòng nhập tên" />
 						<span class="field-validation-valid" data-valmsg-for="register.name" data-valmsg-replace="true"></span>
-					</td>
-				</tr>
-				<tr>
-					<td class="lb-input">
-						<label>Email</label> 
-						(<span class="mark">*</span>)
-					</td>
-					<td>
-						<s:textfield type="text" name="register.email" theme="simple"
-							data-val="true" data-val-email="Địa chỉ email không hợp lệ"
-							data-val-required="Vui lòng nhập địa chỉ Email"
-							data-val-remote="Email đã được sử dụng" 
-							data-val-remote-additionalfields="register.email" 
-							data-val-remote-url="checkemail.action" />
-						<span class="field-validation-valid" data-valmsg-for="register.email" data-valmsg-replace="true"></span>						
 					</td>
 				</tr>
 				<tr>

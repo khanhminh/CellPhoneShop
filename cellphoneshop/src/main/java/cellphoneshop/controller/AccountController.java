@@ -105,54 +105,51 @@ public class AccountController extends ActionSupport {
 		boolean result = true;
 		errors = new ArrayList<String>();
 
-		if (!user.getUsername().matches("^.{6,20}$")) {
-			errors.add("TÃªn Ä‘Äƒng nhÃ¢Ì£p khÃ´ng hÆ¡Ì£p lÃªÌ£");
-			result = false;
-		} else {
-			// errors.add("");
-		}
+		try {
+			if (!user.getPassword().matches("^.{6,20}$")) {
+				errors.add("MÃ¢Ì£t khÃ¢Ì‰u khÃ´ng hÆ¡Ì£p lÃªÌ£");
+				result = false;
+			} else if (!user.getPassword().equals(user.getConfirm())) {
+				errors.add("MÃ¢Ì£t khÃ¢Ì‰u khÃ´ng khÆ¡Ì�p");
+				result = false;
+			}
 
-		if (!user.getPassword().matches("^.{6,20}$")) {
-			errors.add("MÃ¢Ì£t khÃ¢Ì‰u khÃ´ng hÆ¡Ì£p lÃªÌ£");
-			result = false;
-		} else if (!user.getPassword().equals(user.getConfirm())) {
-			errors.add("MÃ¢Ì£t khÃ¢Ì‰u khÃ´ng khÆ¡Ì�p");
-			result = false;
-		}
+			if (user.getFirstname().equals("")) {
+				errors.add("Vui loÌ€ng nhÃ¢Ì£p hoÌ£");
+				result = false;
+			}
 
-		if (user.getFirstname().equals("")) {
-			errors.add("Vui loÌ€ng nhÃ¢Ì£p hoÌ£");
-			result = false;
-		}
+			if (user.getName().equals("")) {
+				errors.add("Vui loÌ€ng nhÃ¢Ì£p tÃªn");
+				result = false;
+			}
 
-		if (user.getName().equals("")) {
-			errors.add("Vui loÌ€ng nhÃ¢Ì£p tÃªn");
-			result = false;
-		}
+			if (!user
+					.getEmail()
+					.matches(
+							"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+				errors.add("Ä�iÌ£a chiÌ‰ email khÃ´ng hÆ¡Ì£p lÃªÌ£");
+				result = false;
+			} else if (nguoiDungService.getNguoidung(user.getEmail()) != null) {
+				errors.add("Ä�iÌ£a chiÌ‰ email Ä‘aÌƒ Ä‘Æ°Æ¡Ì£c sÆ°Ì‰ duÌ£ng");
+				result = false;
+			}
 
-		if (!user
-				.getEmail()
-				.matches(
-						"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-			errors.add("Ä�iÌ£a chiÌ‰ email khÃ´ng hÆ¡Ì£p lÃªÌ£");
-			result = false;
-		} else if (nguoiDungService.getNguoidung(user.getEmail()) != null) {
-			errors.add("Ä�iÌ£a chiÌ‰ email Ä‘aÌƒ Ä‘Æ°Æ¡Ì£c sÆ°Ì‰ duÌ£ng");
-			result = false;
-		}
+			if (!tryParseDate(user.getBirthday())) {
+				errors.add("NgaÌ€y sinh khÃ´ng hÆ¡Ì£p lÃªÌ£");
+				result = false;
+			}
 
-		if (!tryParseDate(user.getBirthday())) {
-			errors.add("NgaÌ€y sinh khÃ´ng hÆ¡Ì£p lÃªÌ£");
-			result = false;
-		}
+			if (!user.getPhone().matches("^\\d{6,11}$")) {
+				errors.add("SÃ´Ì� Ä‘iÃªÌ£n thoaÌ£i khÃ´ng hÆ¡Ì£p lÃªÌ£");
+				result = false;
+			}
 
-		if (!user.getPhone().matches("^\\d{6,11}$")) {
-			errors.add("SÃ´Ì� Ä‘iÃªÌ£n thoaÌ£i khÃ´ng hÆ¡Ì£p lÃªÌ£");
-			result = false;
-		}
-
-		if (user.getAddress().equals("Vui loÌ€ng nhÃ¢Ì£p Ä‘iÌ£a chiÌ‰")) {
-			errors.add("");
+			if (user.getAddress().equals("Vui loÌ€ng nhÃ¢Ì£p Ä‘iÌ£a chiÌ‰")) {
+				errors.add("");
+				result = false;
+			}
+		} catch (Exception e) {
 			result = false;
 		}
 
