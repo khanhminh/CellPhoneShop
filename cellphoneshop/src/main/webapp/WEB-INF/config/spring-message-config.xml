@@ -18,14 +18,13 @@
 	<bean id="message" class="cellphoneshop.util.Message">
 		<property name="messageList">
 		<props>
-			<prop key="duplicateUser">Tên đăng nhập muốn đăng ký tồn tại</prop>
-			<prop key="errorUser">Tên đăng nhập không hợp lệ</prop>
 			<prop key="errorPassword">Mật khẩu không hợp lệ</prop>
 			<prop key="mismatch">Mật khẩu không khớp</prop>
 			<prop key="unknowFirstName">Chưa nhập họ</prop>
 			<prop key="unknowName">Chưa nhập tên</prop>
 			<prop key="errorEmail">Địa chỉ Email không hợp lệ</prop>
-			<prop key="errorDate">Ngày sinh không hợp lệ</prop>
+			<prop key="duplicateEmail">Địa chỉ Email đã được sử dụng</prop>
+			<prop key="errorBirthDate">Ngày sinh không hợp lệ</prop>
 			<prop key="errorPhoneNumber">Số điện thoại không hợp lệ</prop>
 			<prop key="unknowAddress">Vui lòng nhập địa chỉ</prop>
 			
