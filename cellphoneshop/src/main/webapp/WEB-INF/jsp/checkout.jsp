@@ -62,9 +62,9 @@
 							</td>
 							<td>
 								<input class="text-box single-line" data-val="true"
-									data-val-required="Vui lòng nhập họ tên" id="receive.ten"
-									name="receive.ten" type="text" value="">
-								<span class="field-validation-valid" data-valmsg-for="receive.ten"
+									data-val-required="Vui lòng nhập họ tên"
+									name="donHang.nguoiNhan.hoTen" type="text" value="">
+								<span class="field-validation-valid" data-valmsg-for="donHang.nguoiNhan.hoTen"
 									data-valmsg-replace="true">
 								</span>
 							</td>
@@ -76,9 +76,9 @@
 							</td>
 							<td>
 								<input class="text-box single-line" data-val="true"
-									data-val-required="Vui lòng nhập địa chỉ" id="receive.diachi"
-									name="receive.diachi" type="text" value="">
-								<span class="field-validation-valid" data-valmsg-for="receive.diachi"
+									data-val-required="Vui lòng nhập địa chỉ"
+									name="donHang.nguoiNhan.diaChi" type="text" value="">
+								<span class="field-validation-valid" data-valmsg-for="donHang.nguoiNhan.diaChi"
 									data-valmsg-replace="true">
 								</span>
 							</td>
@@ -95,10 +95,10 @@
 									data-val-regex="Số điện thoại không hợp lệ"
 									data-val-regex-pattern="^\d{6,11}$"
 									data-val-required="Vui lòng nhập điện thoại liên lạc"
-									id="receiver.dienthoai" name="receiver.dienthoai" type="text"
+									name="donHang.nguoiNhan.soDienThoai" type="text"
 									value="">
 								<span class="field-validation-valid"
-									data-valmsg-for="receiver.dienthoai" data-valmsg-replace="true">
+									data-valmsg-for="donHang.nguoiNhan.soDienThoai" data-valmsg-replace="true">
 								</span>
 							</td>
 						</tr>
@@ -111,31 +111,25 @@
 						<tr>
 							<th class="title-table" colspan="2">Phương thức giao hàng</th>
 						</tr>
+						<c:forEach var="pt" items="${ptgh}">
+							<tr>
+								<td class="td-select">
+									<input data-val="true" data-val-required="Vui lòng chọn phương thức giao hàng"
+										name="donHang.ptGiaoHang.maPtgiaoHang"
+										type="radio" value="${pt.maPtgiaoHang}">
+								</td>
+								<td>
+									${pt.tenPtgiaoHang}
+								</td>
+							</tr>						
+						</c:forEach>
 						<tr>
-							<td>
-								<input data-val="true" id="MaPTGH"
-									name="MaPTGH" type="radio" value="1">
+							<td colspan="2">
+								<span class="field-validation-valid"
+									data-valmsg-for="donHang.ptGiaoHang.maPtgiaoHang" data-valmsg-replace="true">
+								</span>
 							</td>
-							<td>
-								Chính sách giao hàng của công ty. Cước phí vận chuyển sẽ
-								được thông báo trực tiếp đến khách hàng
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input id="MaPTGH" name="MaPTGH" type="radio" value="2">
-							</td>
-							<td>
-								Gửi bảo đảm qua bưu điện. Cước phí vận chuyển sẽ được
-								thông báo trực tiếp đến khách hàng
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<input id="MaPTGH" name="MaPTGH" type="radio" value="3">
-							</td>
-							<td>Các công ty giao nhận tư nhân trong và ngoài nước</td>
-						</tr>
+						</tr>						
 					</tbody>
 				</table>
 			</div>
@@ -145,18 +139,24 @@
 						<tr>
 							<th class="title-table" colspan="2">Phương thức thanh toán</th>
 						</tr>
+						<c:forEach var="ptt" items="${pttt}">
+							<tr>
+								<td class="td-select">
+									<input data-val="true" data-val-required="Vui lòng chọn phương thức thanh toán"
+										name="donHang.ptThanhToan.maPtthanhToan"
+										type="radio" value="${ptt.maPtthanhToan}">
+								</td>
+								<td>
+									${ptt.tenPtthanhToan}
+								</td>
+							</tr>						
+						</c:forEach>
 						<tr>
-							<td><input data-val="true" id="MaPTTT"
-								name="MaPTTT" type="radio" value="1">
+							<td colspan="2">
+								<span class="field-validation-valid"
+									data-valmsg-for="donHang.ptThanhToan.maPtthanhToan" data-valmsg-replace="true">
+								</span>
 							</td>
-							<td>Trả trực tiếp tại cửa hàng, văn phòng công ty</td>
-						</tr>
-						<tr>
-							<td>
-								<input id="MaPTTT" name="MaPTTT" type="radio" value="2">
-							</td>
-							<td>Thanh toán bằng chuyển khoản qua ngân hàng, thẻ ATM,
-								VISA, MASTER CARD</td>
 						</tr>
 					</tbody>
 				</table>

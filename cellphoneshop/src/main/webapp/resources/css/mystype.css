@@ -1582,3 +1582,16 @@ input[type="checkbox"].input-validation-error {
 #list-star{
 	display: inline-block;
 }
+
+.td-select{
+	width: 20px;
+}
+
+.ui-dialog-title{
+	font-family: Arial;
+}
+
+#dialog-name-product{
+	color: red;
+	font-weight: bold;
+}

@@ -18,10 +18,6 @@
 			<result name="success" type="tiles">home</result>
 		</action>
 		
-		<action name="new_products" method="newProducts" class="homeAction">
-			<result name="success">WEB-INF/jsp/ajax-page/new_products.jsp</result>
-		</action>
-		
 		<action name="about" method="about" class="homeAction">
 			<result name="success" type="tiles">about</result>
 		</action>
@@ -75,6 +71,11 @@
 		
 		<action name="compare" method="compare" class="productAction">
 			<result name="success" type="tiles">compare</result>
+		</action>
+		
+		
+		<action name="new_products" method="newProducts" class="homeAction">
+			<result name="success">WEB-INF/jsp/ajax-page/new_products.jsp</result>
 		</action>
 		
 		<action name="getComments" method="getComments" class="productAction">

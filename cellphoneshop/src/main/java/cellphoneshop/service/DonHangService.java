@@ -14,6 +14,6 @@ public interface DonHangService {
 	DonHang getDonHangCungChiTietTheoId(Integer maDonHang);
 	void updateDonHang(DonHang donHang);
 	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, boolean isAsc, Integer maStatus, int kqDautien, int kqToiDa);
-	Integer checkOut(Integer maND, List<CartItem> cartItemList, NguoiNhan nguoiNhan, PtThanhToan ptThanhToan, PtGiaoHang ptGiaoHang);
+	Integer checkOut(Integer maND, List<CartItem> cartItemList, DonHang donHang);
 	// TODO: lam chuc nang xoa don hang
 }

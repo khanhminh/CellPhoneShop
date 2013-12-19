@@ -34,18 +34,23 @@
 						<td class="name-product"><a href="detail?product=${p.maSp}">${p.tenSp}</a></td>
 						<td class="align-right"><fmt:formatNumber value="${p.gia}"
 								type="number" /> VNĐ</td>
-						<td class="align-center"><a
-							href="editcart?action=add&product=${p.maSp}"> <img id="icon-add"
-								src="resources/images/add.png">
-						</a> ${item.count} <a href="editcart?action=remove&product=${p.maSp}">
+						<td class="align-center">
+							<a href="editcart?action=add&product=${p.maSp}"> 
+								<img id="icon-add" src="resources/images/add.png">
+						    </a> ${item.count} 
+						    <a href="editcart?action=remove&product=${p.maSp}" 
+						    	class="remove-item" data-count="${item.count}" data-name="${p.tenSp}" data-id="${p.maSp}">
 								<img id="icon-remove" src="resources/images/remove.png">
-						</a></td>
+						   	</a>
+						</td>
 						<td class="align-right"><fmt:formatNumber
 								value="${item.count * p.gia}" type="number" /> VNĐ</td>
-						<td class="align-center"><a
-							href="editcart?action=delete&product=${p.maSp}"> <img
-								src="resources/images/remove.gif">
-						</a></td>
+						<td class="align-center">
+							<a href="editcart?action=delete&product=${p.maSp}" 
+								class="delete-item" data-name="${p.tenSp}" data-id="${p.maSp}"> 
+								<img src="resources/images/remove.gif">
+							</a>
+						</td>
 					</tr>
 				</c:forEach>
 
@@ -65,3 +70,45 @@
 	</div>
 	<div class="clear"></div>
 </div>
+<div id="dialog" title="Giỏ hàng">
+  <p>Bạn có muốn xóa <span id="dialog-name-product"></span>?</p>
+</div>
+<script>	
+	var name = "";
+	var id = "";
+	
+	$("#dialog").dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+            OK: function() { //ok
+                $(this).dialog( "close" );
+            	window.location.href = "editcart?action=delete&product=" + id;
+            },
+            Cancel: function() { //cancel
+                $(this).dialog( "close" );
+            }
+        }
+	});
+	function deleteItem(context){	
+		name = $(context).attr('data-name');
+		id = $(context).attr('data-id');
+		$("#dialog-name-product").text(name);
+		$("#dialog").dialog("open");
+	}
+
+	$(document).ready(function(){
+		$('.remove-item').click(function(e){
+			var count = parseInt($(this).attr('data-count'));
+			if (count == 1){
+				e.preventDefault();
+				deleteItem(this);
+			}
+		});
+		
+		$('.delete-item').click(function(e){
+			e.preventDefault();
+			deleteItem(this);
+		});
+	});
+</script>

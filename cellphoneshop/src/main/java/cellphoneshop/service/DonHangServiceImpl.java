@@ -37,7 +37,7 @@ public class DonHangServiceImpl implements DonHangService {
 	@Autowired
 	private CTDonHangDAO ctDonHangDAO;
 	
-	public void insertDonHang(DonHang donHangMoi) {
+	public void insertDonHang(DonHang donHangMoi) {		
 		donHangDAO.insertDonHang(donHangMoi);
 	}
 
@@ -50,28 +50,27 @@ public class DonHangServiceImpl implements DonHangService {
 	}
 
 
-	public Integer checkOut(Integer maND, List<CartItem> cartItemList,
-			NguoiNhan nguoiNhan, PtThanhToan ptThanhToan, PtGiaoHang ptGiaoHang) {
+	public Integer checkOut(Integer maND, List<CartItem> cartItemList, DonHang donHang) {
 		
 		NguoiDung nguoiDung = nguoidungDAO.getNguoiDung(maND);
 		if (nguoiDung == null) {
 			return -1;
 		}
 		
-		if(cartItemList == null || nguoiNhan == null || ptThanhToan == null || ptGiaoHang == null){
+		if(cartItemList == null || 
+				donHang.getNguoiNhan() == null || 
+				donHang.getPtThanhToan() == null || 
+				donHang.getPtGiaoHang() == null){
 			return -1;
 		}
 		
+		NguoiNhan nguoiNhan = donHang.getNguoiNhan();
 		if (nguoiNhanDAO.getNguoiNhan(maND, nguoiNhan.getHoTen()) == null) {
 			nguoiNhan.setNguoiDung(nguoiDung);
 			nguoiNhanDAO.themNguoiNhan(nguoiNhan);
 		}
 		
 		// Chen don hang
-		DonHang donHang = new DonHang();
-		donHang.setPtGiaoHang(ptGiaoHang);
-		donHang.setPtThanhToan(ptThanhToan);
-		donHang.setNguoiNhan(nguoiNhan);
 		donHang.setNguoiDung(nguoiDung);
 		Date ngayDatHang = new Date();
 		donHang.setNgayDatHang(ngayDatHang);

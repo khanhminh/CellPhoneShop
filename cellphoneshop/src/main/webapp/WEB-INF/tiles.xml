@@ -64,7 +64,7 @@
     
      <definition name="complete" extends="page">
         <put-attribute name="title" value="Hoàn tất" />
-        <put-attribute name="content" value="/WEB-INF/jsp/complete.jsp" />  
+        <put-attribute name="content" value="/WEB-INF/jsp/checkout_complete.jsp" />  
     </definition>
     
     <definition name="compare" extends="page">
