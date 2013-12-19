@@ -1,12 +1,17 @@
 package cellphoneshop.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import cellphoneshop.model.ProductFilter;
 import cellphoneshop.model.SanPham;
 import cellphoneshop.service.SanPhamService;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -16,8 +21,7 @@ public class HomeController extends ActionSupport implements ServletRequestAware
 	private SanPhamService sanPhamService;
 	private HttpServletRequest request;
 	
-	Logger logger = Logger.getLogger(HomeController.class);
-	
+	Logger logger = Logger.getLogger(HomeController.class);	
 	private int productPerPage = 8;
 	
 	@Override

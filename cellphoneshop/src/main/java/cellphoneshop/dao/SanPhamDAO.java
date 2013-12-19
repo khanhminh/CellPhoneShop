@@ -1,6 +1,8 @@
 package cellphoneshop.dao;
 import java.util.Date;
 import java.util.List;
+
+import cellphoneshop.model.ProductFilter;
 import cellphoneshop.model.SanPham;
 
 public interface SanPhamDAO {
@@ -52,4 +54,7 @@ public interface SanPhamDAO {
 	 * Dem tat ca ket qua tim kiem theo ten.
 	 */
 	int demSoSanPhamKhiTimKiemTheoTen(String tuKhoa);
+	
+	List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa);
+	int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter);
 }

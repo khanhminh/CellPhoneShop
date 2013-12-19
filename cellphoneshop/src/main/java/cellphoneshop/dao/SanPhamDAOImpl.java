@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,13 +15,18 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cellphoneshop.model.CtSanPham;
+import cellphoneshop.model.HeDieuHanh;
 import cellphoneshop.model.HinhAnhSp;
+import cellphoneshop.model.NhaSanXuat;
+import cellphoneshop.model.ProductFilter;
+import cellphoneshop.model.ProductFilter.PriceConstraint;
 import cellphoneshop.model.SanPham;
 
 @Repository
 public class SanPhamDAOImpl implements SanPhamDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
+	private Logger log = Logger.getLogger(SanPhamDAOImpl.class);
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -222,12 +227,10 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			query.setMaxResults((int) amount);
 			result = query.list();
 		} catch (Exception ex) {
-			// TODO: handle exception
 			System.err
 					.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
-		// TODO Auto-generated method stub
 		return result;
 	}
 
@@ -264,4 +267,131 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		return result;
 	}
 
+	@Transactional(readOnly = true)
+	public List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa) {
+		List<SanPham> result = new ArrayList<SanPham>();
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			String hql = taoTruyVanHQLDeLaySP(productFilter, false);
+			Query query = session.createQuery(hql);
+			
+			query.setFirstResult(kqDauTien);
+			query.setMaxResults(soKqToiDa);
+			
+			result = query.list();
+			
+			if (result != null) {
+				for (SanPham sanPham : result) {
+					Hibernate.initialize(sanPham.getNhaSanXuat());
+					Iterator itrCTSanPham = sanPham.getCtSanPhams().iterator();
+					if (itrCTSanPham.hasNext()) {
+						CtSanPham ctSanPham = (CtSanPham) itrCTSanPham.next();
+						Hibernate.initialize(ctSanPham);
+						Hibernate.initialize(ctSanPham.getHeDieuHanh());
+					}
+				}
+			}
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return result;
+	}
+	
+	
+	private String taoTruyVanHQLDeLaySP(ProductFilter productFilter, boolean isCountQuery) {
+		String selectFromClause;
+		
+		if (isCountQuery == false) {
+			selectFromClause = "select distinct sp from SanPham as sp, CtSanPham as ct ";
+		} else {
+			selectFromClause = "select count(*) from SanPham as sp inner join sp.ctSanPhams as ct ";
+		}
+		
+		// NhaSanXuat
+		String productCon = "";
+		for (int i = 0; i < productFilter.producerList.size(); i++) {
+			if (i > 0) {
+				productCon += " or ";
+			}
+			productCon += " (sp.nhaSanXuat.maNhaSx =  " + productFilter.producerList.get(i).getMaNhaSx() + ") ";
+		}
+		
+		// RatingList
+		String ratingCon = "";
+		for (int i = 0; i < productFilter.ratingList.size(); i++) {
+			if (i > 0) {
+				ratingCon += " or ";
+			}
+			ratingCon += " (sp.diemDanhGiaTb = " + productFilter.ratingList.get(i) + ") ";
+		}
+		
+		// HeDieuHanh
+		String osCon = "";
+		for (int i = 0; i < productFilter.osList.size(); i++) {
+			if (i > 0) {
+				osCon += " or ";
+			} else {
+				
+			}
+			//osCon += " (sp.maSp = ct.sanPham.maSp and ct.heDieuHanh.maHdh = " + productFilter.osList.get(i).getMaHdh() + ") ";
+			osCon += " (ct.heDieuHanh.maHdh = " + productFilter.osList.get(i).getMaHdh() + ") ";
+		}
+		
+		// Gia san pham
+		String priceCon = "";
+		for (int i = 0; i < productFilter.priceConstraintList.size(); i++) {
+			if (i > 0) {
+				priceCon += " or ";
+			}
+			priceCon += "(" + productFilter.priceConstraintList.get(i).minPrice + " < sp.gia and sp.gia < " + productFilter.priceConstraintList.get(i).maxPrice + ") ";
+		}
+		
+		
+		
+		String whereClause = " where "; // the length is 7
+		
+		if (!productCon.isEmpty()) {
+			whereClause += " (" + productCon + ") ";
+		}
+		
+		if (!ratingCon.isEmpty()) {
+			if (whereClause.length() > 7) {
+				whereClause += " and ";
+			}
+			whereClause += " (" + ratingCon + ") ";
+		}
+		
+		if (!osCon.isEmpty()) {
+			if (whereClause.length() > 7) {
+				whereClause += " and ";
+			}
+			whereClause += " (" + osCon + ") ";
+		}
+		
+		if (!priceCon.isEmpty()) {
+			if (whereClause.length() > 7) {
+				whereClause += " and ";
+			}
+			whereClause += " (" + priceCon + ") ";
+		}
+		
+		return selectFromClause + whereClause;
+	}
+
+	@Transactional(readOnly = true)
+	public int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			String hql = taoTruyVanHQLDeLaySP(productFilter, true);
+			Query query = session.createQuery(hql);
+			return ((Long) query.iterate().next()).intValue();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return 0;
+	}
 }

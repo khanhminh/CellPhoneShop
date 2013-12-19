@@ -6,11 +6,16 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import cellphoneshop.dao.HeDieuHanhDAO;
+import cellphoneshop.dao.NhaSanXuatDAO;
 import cellphoneshop.dao.SanPhamDAO;
 import cellphoneshop.model.CtSanPham;
 import cellphoneshop.model.HinhAnhSp;
+import cellphoneshop.model.ProductFilter;
 import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.model.SanPham;
 
@@ -19,6 +24,13 @@ public class SanPhamServiceImpl implements SanPhamService {
 
 	@Autowired
 	private SanPhamDAO spDAO;
+	
+	@Autowired
+	private HeDieuHanhDAO heDieuHanhDAO;
+	
+	@Autowired
+	private NhaSanXuatDAO nhaSXDAO;
+	
 	
 	public void insertSanPham(SanPham sp) {
 		spDAO.insertSanPham(sp);
@@ -118,8 +130,38 @@ public class SanPhamServiceImpl implements SanPhamService {
 			ProductDetail productDetail = getSanPhamCungChiTietTheoId(i);
 			if(productDetail != null){
 				listProductDetails.add(productDetail);
-			}	
+			}
 		}
 		return listProductDetails;
+	}
+	
+	public ProductFilter layCacTieuChiLocDayDu() {
+		ProductFilter productFilter = new ProductFilter();
+		
+		productFilter.osList = heDieuHanhDAO.getListHeDieuHanh();
+		productFilter.producerList = nhaSXDAO.getListNhaSanXuat();
+		
+		productFilter.addRating(1f);
+		productFilter.addRating(2f);
+		productFilter.addRating(3f);
+		productFilter.addRating(4f);
+		productFilter.addRating(5f);
+		
+		//TODO Cau hinh gia ben ngoai
+		productFilter.addPriceConstraint(0, 5000000);
+		productFilter.addPriceConstraint(5000000, 8000000);
+		productFilter.addPriceConstraint(8000000, 10000000);
+		productFilter.addPriceConstraint(10000000, 12000000);
+		productFilter.addPriceConstraint(12000000, 100000000);
+		
+		return productFilter;
+	}
+	
+	public List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa) {
+		return spDAO.getListSanPham(productFilter, kqDauTien, soKqToiDa);
+	}
+	
+	public int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter) {
+		return spDAO.demSoSanPhamKhiGetListSanPham(productFilter);
 	}
 }
