@@ -72,8 +72,13 @@
         <put-attribute name="content" value="/WEB-INF/jsp/compare.jsp" />  
     </definition>
     
-    <definition name="demo" extends="page">
-        <put-attribute name="title" value="Demo" />
-        <put-attribute name="content" value="/WEB-INF/jsp/demo.jsp" />  
+    <definition name="order" extends="page">
+        <put-attribute name="title" value="Quản lý đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/order.jsp" />  
+    </definition>
+    
+    <definition name="detail_order" extends="page">
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/detail_order.jsp" />  
     </definition>
 </tiles-definitions>

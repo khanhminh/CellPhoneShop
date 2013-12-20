@@ -1,6 +1,7 @@
 package cellphoneshop.dao;
 
 import java.util.List;
+
 import cellphoneshop.model.DonHang;
 
 public interface DonHangDAO {
@@ -9,6 +10,7 @@ public interface DonHangDAO {
 	DonHang getDonHangCungChiTietTheoId(Integer maDonHang);
 	void updateDonHang(DonHang donHang);
 	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, boolean isAsc, Integer maStatus, int kqDautien, int kqToiDa);
-	
+	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung);
+	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, Integer maStatus);
 	// TODO: lam chuc nang xoa don hang
 }

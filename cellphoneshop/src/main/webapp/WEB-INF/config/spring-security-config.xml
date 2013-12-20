@@ -7,6 +7,7 @@
 
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/checkout*" access="hasAnyRole('User')" />
+		<intercept-url pattern="/*order*" access="hasAnyRole('User')" />
 		<form-login login-page="/login" default-target-url="/home"
 			authentication-failure-url="/loginfail" />
 		<logout logout-success-url="/login" />

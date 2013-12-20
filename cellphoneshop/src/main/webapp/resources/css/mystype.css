@@ -1604,3 +1604,48 @@ input[type="checkbox"].input-validation-error {
 .group-narrow input[type='checkbox']{
 	vertical-align: middle;
 }
+
+#table-order{
+	text-align: center;
+}
+
+#table-order th{
+	background-color: #c7e9f0;
+	padding: 10px 5px 10px 5px;
+}
+
+#table-order tr{
+	border: #ccc solid 1px;
+}
+
+#title-order h3{
+	float: left;
+	margin-bottom: 10px;
+	padding-bottom: 0px;
+	font: bold 20px Arial;
+	color: #4a4f51;
+}
+
+#title-order{
+	border-bottom: #ccc solid 2px;
+}
+
+.filter-order{
+	float: right;
+}
+
+.filter-order label{
+	color: green;
+	font-weight: bold;
+}
+
+.filter-order select{
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.notify-order {
+	margin-top: 20px;
+	font: bold 15px Arial;
+	color: red;
+}
