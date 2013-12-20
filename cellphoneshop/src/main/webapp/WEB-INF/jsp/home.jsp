@@ -9,7 +9,7 @@
 			<!-- <h2>TRANG CHỦ</h2> -->
 		</div>
 		<div class="nav-page push10">
-			<span class="active-link"> <a>Trang chủ</a>
+			<a>Cellphone</a> » <span class="active-link"> <a>Trang chủ</a>
 			</span>
 		</div>
 		<!-- sidebar left -->

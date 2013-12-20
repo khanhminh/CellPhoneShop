@@ -31,7 +31,7 @@
 								<li data-empty="true" class="item-compare"></li>
 								<li data-empty="true" class="item-compare"></li>
 							</ul>
-							<a href="#" class="button small blue">So sánh</a>
+							<a href="#" id="btnCompare" class="button small blue">So sánh</a>
 						</div>
 
 						<div class="compare-sortby">
@@ -159,7 +159,20 @@
 		</div>
 	</div>
 </div>
+<div id="dialog" title="So sánh">
+  <p id="dialog-content"></p>
+</div>
 <script>
+	$("#dialog").dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+	        OK: function() { //ok
+	            $(this).dialog( "close" );
+	        }
+	    }
+	});
+	
 	function checkEmptyList() {
 		var list = $('#list-compare').children();
 		for (var i = 0; i < list.length; i++) {
@@ -171,8 +184,47 @@
 
 		return -1;
 	}
+	
+	function getNumberItemCompare(){
+		var list = $('#list-compare').children();
+		var count = 0;
+		for (var i = 0; i < list.length; i++) {
+			var li = $(list[i]);
+			if (li.attr('data-empty') == 'false') {
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
+	function compare(){
+		if (getNumberItemCompare() < 2){
+			$('#dialog-content').text("Để so sánh bạn phải chọn ít nhất 2 sản phẩm!");
+			$("#dialog").dialog("open");
+		}
+		else {
+			var list = $('#list-compare').children();
+			var url = "compare.action?";
+			var count = 0;
+			for (var i = 0; i < list.length; i++) {
+				var li = $(list[i]);
+				if (li.attr('data-empty') == 'false') {
+					var id = li.attr('data-ref');					
+					if (count > 0){
+						url += "&product=" + id;
+					}
+					else {
+						url += "product=" + id;
+					}
+					count++;
+				}
+			}
+			window.location.href = url;
+		}
+	}
 
-	function addListCompare(context) {
+	function addListCompare(context, e) {
 		var index = checkEmptyList();
 		if (index != -1) {
 			var src = $(context).attr('data-src');
@@ -189,7 +241,9 @@
 			li.attr('data-ref', id);
 			$(context).attr('data-index', index);
 		} else {
-			alert('full');
+			e.preventDefault();
+			$('#dialog-content').text("Chỉ so sánh tối đa 4 sản phẩm!");
+			$("#dialog").dialog("open");
 		}
 	}
 
@@ -245,9 +299,9 @@
 			$('#frm-filter').submit();
 		});
 
-		$(".chk-compare").click(function() {
+		$(".chk-compare").click(function(e) {
 			if ($(this).is(':checked')) {
-				addListCompare(this);
+				addListCompare(this, e);
 			} else {
 				var idx = $(this).attr('data-index');
 				removeCompare(idx);
@@ -261,6 +315,11 @@
 				var id = $(this).attr('data-ref');
 				$('#' + id).prop('checked', false);
 			}
+		});
+		
+		$('#btnCompare').click(function(e) {
+			e.preventDefault();
+			compare();
 		});
 
 		$('#view-page').change(function() {

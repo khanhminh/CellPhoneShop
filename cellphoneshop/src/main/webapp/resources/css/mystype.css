@@ -774,7 +774,6 @@ input, textarea {
     }
 
 .product img {
-    width: 150px;
     height: 140px;
 }
 
@@ -1423,18 +1422,20 @@ input[type="checkbox"].input-validation-error {
 }
 
 .compare-products .header-row {
-    height: 302px;
+    height: 312px;
     background-color: #e3f1f6;
     border-bottom: #ccc solid 1px;
 }
 
 .compare-product {
+	padding-top: 10px;
     border-right: #ccc solid 1px;
     padding-bottom: 20px;
     border-bottom: #ccc solid 1px;
 }
 
-    .compare-product img {
+    .compare-product a img {
+    	margin-top: 10px;
         height: 200px;
         margin: auto;
         display: block;

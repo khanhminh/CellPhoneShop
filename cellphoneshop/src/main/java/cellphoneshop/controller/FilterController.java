@@ -18,6 +18,7 @@ import cellphoneshop.service.HeDieuHanhService;
 import cellphoneshop.service.NhaSanXuatService;
 import cellphoneshop.service.SanPhamService;
 import cellphoneshop.util.Util;
+import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.viewmodel.SortBy;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -87,6 +88,22 @@ public class FilterController  extends ActionSupport implements ServletRequestAw
 		
 		return SUCCESS;
 	}	
+	
+	public String compare(){
+		String[] products = request.getParameterValues("product");
+		if (products != null){
+			List<Integer> listId = new ArrayList<Integer>();
+			for (String id : products){
+				if (Util.tryParseInt(id)){
+					listId.add(Integer.parseInt(id));
+				}
+			}
+			List<ProductDetail> listProduct = spService.getCompareList(listId);
+			request.setAttribute("listProduct", listProduct);
+		}
+		
+		return SUCCESS;
+	}
 	
 	private ProductFilter createProductFilter(){
 		ProductFilter filter = new ProductFilter();

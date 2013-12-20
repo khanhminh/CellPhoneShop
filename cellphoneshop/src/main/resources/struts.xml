@@ -83,7 +83,7 @@
 		</action>
 
 
-		<action name="compare" method="compare" class="productAction">
+		<action name="compare" method="compare" class="filterAction">
 			<result name="success" type="tiles">compare</result>
 		</action>
 
