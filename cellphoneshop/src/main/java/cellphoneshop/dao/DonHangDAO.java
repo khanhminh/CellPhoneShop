@@ -10,6 +10,5 @@ public interface DonHangDAO {
 	void updateDonHang(DonHang donHang);
 	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, boolean isAsc, Integer maStatus, int kqDautien, int kqToiDa);
 	
-	
 	// TODO: lam chuc nang xoa don hang
 }

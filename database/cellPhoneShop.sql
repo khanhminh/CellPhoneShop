@@ -270,6 +270,11 @@ create table PhieuGiaoHang (
 	constraint fk_PhieuGiaoHang_DonHang foreign key (maDonHang) references DonHang(maDonHang)
 );
 
+create table TrangThaiKhuyenMai (
+	maTrangThai int auto_increment primary key,
+	tenTrangThai varchar(30) character set utf8 not null
+);
+
 create table KhuyenMai (
 	maKM int auto_increment primary key,
 	tieuDe varchar(100) character set utf8,
@@ -277,7 +282,10 @@ create table KhuyenMai (
 	phanTramGiamGia float,
 	ngayBatDau date,
 	ngayKetThuc date,
-	quaTang varchar(200) character set utf8
+	quaTang varchar(200) character set utf8,
+	maTrangThaiKM int not null,
+	
+	constraint fk_KhuyenMai_TrangThaiKhuyenMai foreign key (maTrangThaiKM) references TrangThaiKhuyenMai(maTrangThai)
 );
 
 create table CtKhuyenMai (
@@ -402,3 +410,13 @@ CREATE PROCEDURE taoDuLieuPTThanhToan()
 DELIMITER ;
 CALL taoDuLieuPTThanhToan();
 DROP PROCEDURE IF EXISTS taoDuLieuPTThanhToan;
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuTrangThaiKhuyenMai()
+	BEGIN
+		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Đang mở');
+		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Đã đóng');
+	END //
+DELIMITER ;
+CALL taoDuLieuTrangThaiKhuyenMai();
+DROP PROCEDURE IF EXISTS taoDuLieuTrangThaiKhuyenMai;

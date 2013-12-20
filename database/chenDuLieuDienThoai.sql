@@ -351,7 +351,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
 		VALUES ('Nokia Lumia 820',
 				NULL,
-				2999000,
+				10999000,
 				24,
 				'resources/images/Smartphone/Nokia/Lumia820/Nokia-Lumia-820-front.png',
 				50,
@@ -435,7 +435,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
 		VALUES ('Nokia Lumia 920',
 				NULL,
-				2999000,
+				9999000,
 				24,
 				'resources/images/Smartphone/Nokia/Lumia920/Nokia-lumia-920-spec-front-png.png',
 				50,
@@ -519,7 +519,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
 		VALUES ('Nokia Lumia 800',
 				NULL,
-				2999000,
+				8999000,
 				24,
 				'resources/images/Smartphone/Nokia/Lumia800/Nokia-Lumia-800-white-front.png',
 				50,
@@ -600,7 +600,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
 		VALUES ('Nokia Lumia 900',
 				NULL,
-				2999000,
+				10999000,
 				24,
 				'resources/images/Smartphone/Nokia/Lumia900/Nokia-Lumia-900-cyan-front.png',
 				50,

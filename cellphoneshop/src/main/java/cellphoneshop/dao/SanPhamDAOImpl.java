@@ -6,14 +6,19 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import cellphoneshop.model.CtDonHang;
 import cellphoneshop.model.CtSanPham;
 import cellphoneshop.model.HeDieuHanh;
 import cellphoneshop.model.HinhAnhSp;
@@ -393,5 +398,29 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		}
 		
 		return 0;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<SanPham> getListSanPhamBanChayNhat(int soSanPham) {
+		List<SanPham> result = new ArrayList<SanPham>();
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			List<Integer> productIdList = session.createCriteria(CtDonHang.class)
+			.setProjection(Projections.projectionList().add(Projections.groupProperty("sanPham.maSp")))
+			.setFirstResult(0)
+			.setMaxResults(soSanPham)
+			.list();
+			
+			if (productIdList != null) {
+				for (Integer id : productIdList) {
+					result.add(getSanPhamTheoId(id));
+				}
+			}
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return result;
 	}
 }

@@ -13,16 +13,16 @@ public class BinhLuanServiceImpl implements BinhLuanService {
 	@Autowired
 	private BinhLuanDAO binhLuanDAO;
 
-	public void insertBinhLuan(BinhLuan binhLuanMoi) {
-		binhLuanDAO.insertBinhLuan(binhLuanMoi);
+	public boolean insertBinhLuan(BinhLuan binhLuanMoi) {
+		return binhLuanDAO.insertBinhLuan(binhLuanMoi);
 	}
 
 	public BinhLuan getBinhLuan(Integer maBinhLuan) {
 		return binhLuanDAO.getBinhLuan(maBinhLuan);
 	}
 
-	public void updateBinhLuan(BinhLuan binhLuan) {
-		binhLuanDAO.updateBinhLuan(binhLuan);
+	public boolean updateBinhLuan(BinhLuan binhLuan) {
+		return binhLuanDAO.updateBinhLuan(binhLuan);
 	}
 
 	public List<BinhLuan> getListBinhLuanTheoMaSP(Integer maSanPham,
@@ -33,6 +33,13 @@ public class BinhLuanServiceImpl implements BinhLuanService {
 	public int demSoBinhLuanCuaSanPham(Integer maSanPham) {
 		return binhLuanDAO.demSoBinhLuanCuaSanPham(maSanPham);
 	}
-	
-	
+
+	public boolean deleteBinhLuan(Integer maBinhLuan) {
+		BinhLuan binhLuan = binhLuanDAO.getBinhLuan(maBinhLuan);
+		return binhLuanDAO.deleteBinhLuan(binhLuan);
+	}
+
+	public boolean deleteBinhLuan(BinhLuan binhLuan) {
+		return binhLuanDAO.deleteBinhLuan(binhLuan);
+	}
 }

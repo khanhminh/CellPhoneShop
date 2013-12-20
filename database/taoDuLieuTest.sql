@@ -3,7 +3,6 @@
 
 USE CellPhoneShop;
 
-
 DELIMITER //
 CREATE PROCEDURE taoDuLieuNhaSanXuat()
 	BEGIN
@@ -123,6 +122,10 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh5.png', 5);
 			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinhDaiDien.png', 6);
 			
+
+			# Khuyến mãi
+			
+
 			SET idx = idx + 1;
 		END WHILE;
 		
@@ -148,3 +151,28 @@ CREATE PROCEDURE taoDuLieuNguoiDung()
 DELIMITER ;
 CALL taoDuLieuNguoiDung();
 DROP PROCEDURE IF EXISTS taoDuLieuNguoiDung;
+
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuCTKhuyenMai()
+	BEGIN
+		DECLARE maKM INT;
+		DECLARE i INT;
+
+		INSERT INTO KhuyenMai (tieuDe, moTa, phanTramGiamGia, ngayBatDau, ngayKetThuc, quaTang, maTrangThaiKM)
+		VALUES ('Khuyến mãi đầu năm', null, 5, '2013/20/12', '2014/10/5', null, 1);
+
+		SELECT K.maKM
+		INTO maKM
+		FROM KhuyenMai AS K
+		WHERE K.tieuDe LIKE 'Khuyến mãi đầu năm';
+
+		SET i = 1;
+		WHILE (i < 50) DO
+			INSERT INTO CtKhuyenMai (maKM, maSP) VALUES (maKM, i);
+			SET i = i + 2;
+		END WHILE;
+	END //
+DELIMITER ;
+CALL taoDuLieuCTKhuyenMai();
+DROP PROCEDURE IF EXISTS taoDuLieuCTKhuyenMai;

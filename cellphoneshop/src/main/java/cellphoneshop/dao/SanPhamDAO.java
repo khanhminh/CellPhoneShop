@@ -57,4 +57,6 @@ public interface SanPhamDAO {
 	
 	List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa);
 	int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter);
+	
+	List<SanPham> getListSanPhamBanChayNhat(int soSanPham);
 }

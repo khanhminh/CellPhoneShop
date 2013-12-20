@@ -6,10 +6,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cellphoneshop.dao.HeDieuHanhDAO;
 import cellphoneshop.dao.NhaSanXuatDAO;
 import cellphoneshop.dao.SanPhamDAO;
@@ -163,5 +161,9 @@ public class SanPhamServiceImpl implements SanPhamService {
 	
 	public int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter) {
 		return spDAO.demSoSanPhamKhiGetListSanPham(productFilter);
+	}
+	
+	public List<SanPham> getListSanPhamBanChayNhat(int soSanPham) {
+		return spDAO.getListSanPhamBanChayNhat(soSanPham);
 	}
 }
