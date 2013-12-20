@@ -11,7 +11,8 @@
 	<context:component-scan base-package="cellphoneshop" />
 
 
-	<bean id="homeAction" class="cellphoneshop.controller.HomeController">
+	<bean id="homeAction" class="cellphoneshop.controller.HomeController" scope="prototype">
+		<property name="productPerPage" value="8"/>
 	</bean>
 
 	<bean id="accountAction" class="cellphoneshop.controller.AccountController">
@@ -32,7 +33,7 @@
 	</bean>
 
 
-
+	<bean id="pageInterceptor" class="cellphoneshop.interceptor.PageInterceptor"/>
 
 	<bean id="searchInterceptor" class="cellphoneshop.interceptor.SearchInterceptor">
 		<property name="listPrice">

@@ -19,14 +19,22 @@
 			<interceptor name="searchInterceptor"
 				class="searchInterceptor">
 			</interceptor>
+			<interceptor name="pageInterceptor"
+				class="pageInterceptor">
+			</interceptor>
 
 			<interceptor-stack name="newStack">
 				<interceptor-ref name="searchInterceptor" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
-
+			<interceptor-stack name="pageStack">
+				<interceptor-ref name="pageInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
 		</interceptors>
-
+		
+		<default-interceptor-ref name="pageStack" />
+		
 		<action name="home" class="homeAction">
 			<result name="success" type="tiles">home</result>
 		</action>
@@ -41,6 +49,7 @@
 
 		<action name="product" method="filter" class="filterAction">
 			<interceptor-ref name="newStack"/>
+			<interceptor-ref name="pageStack"/>
 			<result name="success" type="tiles">product</result>
 		</action>
 
@@ -90,6 +99,10 @@
 
 		<action name="new_products" method="newProducts" class="homeAction">
 			<result name="success">WEB-INF/jsp/ajax-page/new_products.jsp</result>
+		</action>
+		
+		<action name="bestselling_products" method="bestSellingProducts" class="homeAction">
+			<result name="success">WEB-INF/jsp/ajax-page/best_selling_products.jsp</result>
 		</action>
 
 		<action name="getComments" method="getComments" class="productAction">

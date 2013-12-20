@@ -327,7 +327,7 @@ CREATE PROCEDURE taoDuLieuNhaSanXuat()
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('HTC');
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Nokia');
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Samsung');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Sony');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('LG');
 	END //
 DELIMITER ;
 CALL taoDuLieuNhaSanXuat();

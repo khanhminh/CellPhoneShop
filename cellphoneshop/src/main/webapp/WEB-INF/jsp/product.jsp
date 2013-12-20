@@ -80,8 +80,8 @@
 												</div>
 												<ul>
 													<li>CPU:
-														${info.chipset}&nbsp;${info.soNhanCpu}&nbsp;${info.tocDoCpu}</li>
-													<li>GPU: ${info.gpu}</li>
+														${info.chipset}&nbsp;${info.soNhanCpu}&nbsp;${info.tocDoCpu}
+													</li>
 													<li>Ram: ${info.ram}</li>
 													<li>Màn hình: ${info.kichThuocManHinh}
 														inch&nbsp;${info.doPhanGiaiManHinh}</li>

@@ -432,11 +432,13 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		return result;
 	}
 	
+	@Transactional
 	public List<SanPham> getListSanPhamBanChayNhat(int soSanPham) {
 		List<SanPham> result = new ArrayList<SanPham>();
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
+			@SuppressWarnings("unchecked")
 			List<Integer> productIdList = session.createCriteria(CtDonHang.class)
 			.setProjection(Projections.projectionList().add(Projections.groupProperty("sanPham.maSp")))
 			.setFirstResult(0)

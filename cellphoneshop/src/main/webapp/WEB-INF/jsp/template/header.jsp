@@ -38,7 +38,14 @@
 	<nav id="topnav">
 		<ul class="clear">
 			<li><a href="home.action" class="active">Trang chủ</a></li>
-			<li><a href="product.action">Sản phẩm</a></li>
+			<li class="drop">
+				<a href="product.action">Sản phẩm</a>
+				<ul>
+                  <c:forEach var="nsx" items="${requestScope.listNSX}">
+                  	<li><a href="product.action?brand=${nsx.maNhaSx}">${nsx.tenNhaSx}</a></li>
+                  </c:forEach>
+              	</ul>				
+			</li>
 			<li><a href="contact.action">Liên hệ</a></li>
 			<li><a href="about.action">Giới thiệu</a></li>
 		</ul>

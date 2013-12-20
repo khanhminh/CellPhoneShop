@@ -45,7 +45,16 @@
 			</nav>
 
 			<div class="push30"></div>
-
+			
+			<section>
+				<figure>
+					<div class="title-content">
+						<h2>Sản phẩm bán chạy</h2>
+					</div>
+					<ul id="ListBestSellingProducts" class="clear">
+					</ul>
+				</figure>
+			</section>
 		</div>
 	</div>
 </div>
@@ -53,6 +62,10 @@
 	function addNewProduct(data) {
 		$('#ListNewProducts').html(data);
 		$("#temp-newproducts").remove();
+	}
+	
+	function addBestSellingProduct(data) {
+		$('#ListBestSellingProducts').html(data);
 	}
 
 	function getNewProducts(page) {
@@ -63,6 +76,14 @@
 			},
 			type : "GET",
 			success : addNewProduct,
+		});
+	}
+	
+	function getBestSellingProducts(){
+		$.ajax({
+			url : "bestselling_products.action",
+			type : "GET",
+			success : addBestSellingProduct,
 		});
 	}
 
@@ -81,6 +102,7 @@
 
 	$(document).ready(function() {
 		getNewProducts(1);
+		getBestSellingProducts();
 
 		$(".ajax-link").click(function(e) {
 			e.preventDefault();
