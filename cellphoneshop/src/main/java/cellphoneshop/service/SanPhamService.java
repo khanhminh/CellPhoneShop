@@ -1,7 +1,6 @@
 package cellphoneshop.service;
 
 import java.util.List;
-
 import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.viewmodel.SortBy;
 import cellphoneshop.model.ProductFilter;
@@ -9,15 +8,18 @@ import cellphoneshop.model.SanPham;
 
 public interface SanPhamService {
 	/**
-	 * Them san pham moi
+	 * Them san pham moi.
 	 */
 	void insertSanPham(SanPham sp);
 	
 	/**
-	 * Lay thong tin san pham theo Id
+	 * Lay thong tin san pham theo Id.
 	 */
 	SanPham getSanPhamTheoId(Integer maSp);
 	
+	/**
+	 * Cap nhap thong tin cua san pham.
+	 */
 	void updateSanPham(SanPham sp);
 	
 	/**
@@ -41,8 +43,6 @@ public interface SanPhamService {
 	 */
 	int demSoSanPhamMoiTrongThang();
 	
-	
-	
 	/**
 	 * Tim kiem san pham theo ten. Xem them {@link #demSoSanPhamKhiTimKiemTheoTen(String)}
 	 */
@@ -64,15 +64,40 @@ public interface SanPhamService {
 	 */
 	List<SanPham> getListSanPhamTheoLoai(Integer maloai, Integer positionStart, Integer amount, String qualification, boolean isAsc);
 	
+	/**
+	 * Lay chi tiet day du cua mot san pham.
+	 */
 	public ProductDetail getSanPhamCungChiTietTheoId(Integer maSp);
 	
+	/**
+	 * Lay danh sach so sanh san pham.
+	 */
 	public List<ProductDetail> getCompareList(List<Integer> productIdList);
 	
+	/**
+	 * Lay cac tieu chi loc ma he thong de xuat cho nguoi dung.
+	 */
 	public ProductFilter layCacTieuChiLocDayDu();
 	
+
 	List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa, SortBy sortby);
 	int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter);
 	
 	public List<SanPham> getListSanPham(int kqDauTien, int soKqToiDa, SortBy sortby);	
 	public int demSoSanPham();
+
+	/**
+	 * Lay danh sach san pham khi loc theo tieu chi. Xem them {@link #demSoSanPhamKhiGetListSanPham(ProductFilter)}
+	 */
+	
+	
+	/**
+	 * Dem so san pham thoa tieu chi loc.
+	 */
+	
+	
+	/**
+	 * Lay danh sach san pham ban chay nhat.
+	 */
+	List<SanPham> getListSanPhamBanChayNhat(int soSanPham);
 }

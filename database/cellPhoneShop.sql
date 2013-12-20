@@ -1,5 +1,5 @@
 #
-# Phien ban 0.2.2
+# Phien ban 0.2.3
 # Sinh viên thực hiện:
 # 	. 1012190
 #	. 1012355
@@ -66,36 +66,36 @@ create table CtSanPham (
 	ngaySX date,
 	
 	# Man hinh
-	loaiManhinh varchar(20) character set utf8,
-	soMauManHinh varchar(30) character set utf8,
-	doPhanGiaiManHinh varchar(20) character set utf8, # 320x480 pixels
-	chuanManHinh varchar(20) character set utf8,
+	loaiManhinh varchar(200) character set utf8,
+	soMauManHinh varchar(200) character set utf8,
+	doPhanGiaiManHinh varchar(200) character set utf8, # 320x480 pixels
+	chuanManHinh varchar(200) character set utf8,
 	kichThuocManHinh float, # inch
-	camUng varchar(30) character set utf8,
-	matDoDiemAnh varchar(30) character set utf8,
+	camUng varchar(200) character set utf8,
+	matDoDiemAnh varchar(200) character set utf8,
 	
 	# Camera
-	cameraSau varchar(100) character set utf8,
-	cameraTruoc varchar(100) character set utf8,
-	tinhNangCamera varchar(50) character set utf8,
-	quayPhim varchar(100) character set utf8,
+	cameraSau varchar(200) character set utf8,
+	cameraTruoc varchar(200) character set utf8,
+	tinhNangCamera varchar(200) character set utf8,
+	quayPhim varchar(200) character set utf8,
 	videoCall bool,
 	
 	# Xu ly
 	tocDoCPU float,   # GHz
 	soNhanCPU int,
-	chipset varchar(30) character set utf8,
-	RAM varchar(30) character set utf8,
-	GPU varchar(30) character set utf8,
+	chipset varchar(200) character set utf8,
+	RAM varchar(200) character set utf8,
+	GPU varchar(200) character set utf8,
 	
 	# Bo nho
-	boNhoTrong varchar(30) character set utf8,
-	theNhoNgoai varchar(30) character set utf8,
+	boNhoTrong varchar(200) character set utf8,
+	theNhoNgoai varchar(200) character set utf8,
 	dungLuongTheToiDa int, # GB
 	
 	# Pin
 	dungLuongPin float, # mAh
-	congNghePin varchar(20) character set utf8,
+	congNghePin varchar(200) character set utf8,
 	pinCoTheThaoRoi bool,
 	thoiGianChoToiDa float, # Gio
 	thoiGianChoQuayPhim float, # Gio
@@ -105,27 +105,27 @@ create table CtSanPham (
 	maHDH int,
 
 	# Ban Phim
-	loaiBanPhim varchar(20) character set utf8,
+	loaiBanPhim varchar(200) character set utf8,
 	
 	
 	# SIM
 	soLuongSim int default 1,
 	
 	# CTKetNoi
-	mang2G varchar(20) character set utf8,
-	mang3G varchar(20) character set utf8,
-	mang4G varchar(20) character set utf8,
-	wifi varchar(30) character set utf8,
-	bluetooth varchar(30) character set utf8,
-	GPRS varchar(30) character set utf8,
+	mang2G varchar(200) character set utf8,
+	mang3G varchar(200) character set utf8,
+	mang4G varchar(200) character set utf8,
+	wifi varchar(200) character set utf8,
+	bluetooth varchar(200) character set utf8,
+	GPRS varchar(200) character set utf8,
 	
 	# Dinh vi
-	GPS varchar(30) character set utf8,
-	boCamBien varchar(50) character set utf8,
+	GPS varchar(200) character set utf8,
+	boCamBien varchar(200) character set utf8,
 	
 	# Den flash
-	denFlash varchar(30) character set utf8,
-	denPin varchar(30) character set utf8,
+	denFlash varchar(200) character set utf8,
+	denPin varchar(200) character set utf8,
 
 	constraint fk_CTSanPham_SanPham foreign key (maSP) references SanPham(maSP),
 	constraint fk_CTSanPham_HeDieuHanh foreign key (maHDH) references HeDieuHanh(maHDH)
@@ -270,6 +270,11 @@ create table PhieuGiaoHang (
 	constraint fk_PhieuGiaoHang_DonHang foreign key (maDonHang) references DonHang(maDonHang)
 );
 
+create table TrangThaiKhuyenMai (
+	maTrangThai int auto_increment primary key,
+	tenTrangThai varchar(30) character set utf8 not null
+);
+
 create table KhuyenMai (
 	maKM int auto_increment primary key,
 	tieuDe varchar(100) character set utf8,
@@ -277,7 +282,10 @@ create table KhuyenMai (
 	phanTramGiamGia float,
 	ngayBatDau date,
 	ngayKetThuc date,
-	quaTang varchar(200) character set utf8
+	quaTang varchar(200) character set utf8,
+	maTrangThaiKM int not null,
+	
+	constraint fk_KhuyenMai_TrangThaiKhuyenMai foreign key (maTrangThaiKM) references TrangThaiKhuyenMai(maTrangThai)
 );
 
 create table CtKhuyenMai (
@@ -305,3 +313,110 @@ create table CtDSMongMuon (
 	constraint fk_CTDSMongMuon_DSMonMuon foreign key (maDSMongMuon) references DanhSachMongMuon(maDSMongMuon),
 	constraint fk_CTDSMongMuon_SanPham foreign key (maSP) references SanPham(maSP)
 );
+
+
+
+
+#=======================================================================
+# Chen du lieu
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuNhaSanXuat()
+	BEGIN
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Apple');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('HTC');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Nokia');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Samsung');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Sony');
+	END //
+DELIMITER ;
+CALL taoDuLieuNhaSanXuat();
+DROP PROCEDURE IF EXISTS taoDuLieuNhaSanXuat;
+
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuLoaiSanPham()
+	BEGIN
+		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Điện thoại di động');
+	END //
+DELIMITER ;
+CALL taoDuLieuLoaiSanPham();
+DROP PROCEDURE IF EXISTS taoDuLieuLoaiSanPham;
+
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuHeDieuHanh()
+	BEGIN
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Android');
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('iOS');
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Windows Phone');
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Tizen');
+		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Symbian');
+	END //
+DELIMITER ;
+CALL taoDuLieuHeDieuHanh();
+DROP PROCEDURE IF EXISTS taoDuLieuHeDieuHanh;
+
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuLoaiNguoiDung()
+	BEGIN
+		INSERT INTO LoaiNguoiDung (tenLoaiND) VALUES (N'Khách hàng phổ thông');
+	END //
+DELIMITER ;
+CALL taoDuLieuLoaiNguoiDung();
+DROP PROCEDURE IF EXISTS taoDuLieuLoaiNguoiDung;
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuVaiTro()
+	BEGIN
+		INSERT INTO VaiTro (tenVaiTro) VALUES ('Admin');
+		INSERT INTO VaiTro (tenVaiTro) VALUES (N'User');
+	END //
+DELIMITER ;
+CALL taoDuLieuVaiTro();
+DROP PROCEDURE IF EXISTS taoDuLieuVaiTro;
+
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuTrangThaiDonHang()
+	BEGIN
+		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Chưa giao');
+		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Đã giao');
+	END //
+DELIMITER ;
+CALL taoDuLieuTrangThaiDonHang();
+DROP PROCEDURE IF EXISTS taoDuLieuTrangThaiDonHang;
+
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuPTGiaoHang()
+	BEGIN
+		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển đến tận nơi');
+		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển qua bưu điện');
+		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Khách hàng đến lấy sản phẩm');
+	END //
+DELIMITER ;
+CALL taoDuLieuPTGiaoHang();
+DROP PROCEDURE IF EXISTS taoDuLieuPTGiaoHang;
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuPTThanhToan()
+	BEGIN
+		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Chuyển khoản ngân hàng');
+		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Trả tiển khi nhận hàng');
+		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Trả tiền tại siêu thị');
+	END //
+DELIMITER ;
+CALL taoDuLieuPTThanhToan();
+DROP PROCEDURE IF EXISTS taoDuLieuPTThanhToan;
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuTrangThaiKhuyenMai()
+	BEGIN
+		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Đang mở');
+		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Đã đóng');
+	END //
+DELIMITER ;
+CALL taoDuLieuTrangThaiKhuyenMai();
+DROP PROCEDURE IF EXISTS taoDuLieuTrangThaiKhuyenMai;

@@ -1,101 +1,17 @@
-#
-# Phien ban 0.2.1
-#
+# Phien ban 0.1
+# Ngày: 19/12/2013
 
 USE CellPhoneShop;
-
-# Tạo một số dữ liệu trước
 
 DELIMITER //
 CREATE PROCEDURE taoDuLieuNhaSanXuat()
 	BEGIN
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('JT');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Samsung');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Nokia');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('HTC');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Apple');
 	END //
 DELIMITER ;
 CALL taoDuLieuNhaSanXuat();
 DROP PROCEDURE IF EXISTS taoDuLieuNhaSanXuat;
 
-
-DELIMITER //
-CREATE PROCEDURE taoDuLieuLoaiSanPham()
-	BEGIN
-		INSERT INTO LoaiSanPham (tenLoaiSP) VALUES (N'Điện thoại di động');
-	END //
-DELIMITER ;
-CALL taoDuLieuLoaiSanPham();
-DROP PROCEDURE IF EXISTS taoDuLieuLoaiSanPham;
-
-
-DELIMITER //
-CREATE PROCEDURE taoDuLieuHeDieuHanh()
-	BEGIN
-		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Android');
-		INSERT INTO HeDieuHanh (tenHDH) VALUES ('iOS');
-		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Windows Phone');
-		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Tizen');
-		INSERT INTO HeDieuHanh (tenHDH) VALUES ('Symbian');
-	END //
-DELIMITER ;
-CALL taoDuLieuHeDieuHanh();
-DROP PROCEDURE IF EXISTS taoDuLieuHeDieuHanh;
-
-
-DELIMITER //
-CREATE PROCEDURE taoDuLieuLoaiNguoiDung()
-	BEGIN
-		INSERT INTO LoaiNguoiDung (tenLoaiND) VALUES (N'Khách hàng phổ thông');
-	END //
-DELIMITER ;
-CALL taoDuLieuLoaiNguoiDung();
-DROP PROCEDURE IF EXISTS taoDuLieuLoaiNguoiDung;
-
-DELIMITER //
-CREATE PROCEDURE taoDuLieuVaiTro()
-	BEGIN
-		INSERT INTO VaiTro (tenVaiTro) VALUES ('Admin');
-		INSERT INTO VaiTro (tenVaiTro) VALUES (N'User');
-	END //
-DELIMITER ;
-CALL taoDuLieuVaiTro();
-DROP PROCEDURE IF EXISTS taoDuLieuVaiTro;
-
-
-DELIMITER //
-CREATE PROCEDURE taoDuLieuTrangThaiDonHang()
-	BEGIN
-		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Chưa giao');
-		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Đã giao');
-	END //
-DELIMITER ;
-CALL taoDuLieuTrangThaiDonHang();
-DROP PROCEDURE IF EXISTS taoDuLieuTrangThaiDonHang;
-
-
-DELIMITER //
-CREATE PROCEDURE taoDuLieuPTGiaoHang()
-	BEGIN
-		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển đến tận nơi');
-		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Chuyển qua bưu điện');
-		INSERT INTO PtGiaoHang (tenPTGiaoHang) VALUES (N'Khách hàng đến lấy sản phẩm');
-	END //
-DELIMITER ;
-CALL taoDuLieuPTGiaoHang();
-DROP PROCEDURE IF EXISTS taoDuLieuPTGiaoHang;
-
-DELIMITER //
-CREATE PROCEDURE taoDuLieuPTThanhToan()
-	BEGIN
-		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Chuyển khoản ngân hàng');
-		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Trả tiển khi nhận hàng');
-		INSERT INTO PtThanhToan (tenPTThanhToan) VALUES (N'Trả tiền tại siêu thị');
-	END //
-DELIMITER ;
-CALL taoDuLieuPTThanhToan();
-DROP PROCEDURE IF EXISTS taoDuLieuPTThanhToan;
 
 DELIMITER //
 CREATE PROCEDURE TaoDuLieuSmartPhone()
@@ -206,6 +122,10 @@ CREATE PROCEDURE TaoDuLieuSmartPhone()
 			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinh5.png', 5);
 			INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/test/JTMobile/hinhDaiDien.png', 6);
 			
+
+			# Khuyến mãi
+			
+
 			SET idx = idx + 1;
 		END WHILE;
 		
@@ -231,3 +151,28 @@ CREATE PROCEDURE taoDuLieuNguoiDung()
 DELIMITER ;
 CALL taoDuLieuNguoiDung();
 DROP PROCEDURE IF EXISTS taoDuLieuNguoiDung;
+
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuCTKhuyenMai()
+	BEGIN
+		DECLARE maKM INT;
+		DECLARE i INT;
+
+		INSERT INTO KhuyenMai (tieuDe, moTa, phanTramGiamGia, ngayBatDau, ngayKetThuc, quaTang, maTrangThaiKM)
+		VALUES ('Khuyến mãi đầu năm', null, 5, '2013/20/12', '2014/10/5', null, 1);
+
+		SELECT K.maKM
+		INTO maKM
+		FROM KhuyenMai AS K
+		WHERE K.tieuDe LIKE 'Khuyến mãi đầu năm';
+
+		SET i = 1;
+		WHILE (i < 50) DO
+			INSERT INTO CtKhuyenMai (maKM, maSP) VALUES (maKM, i);
+			SET i = i + 2;
+		END WHILE;
+	END //
+DELIMITER ;
+CALL taoDuLieuCTKhuyenMai();
+DROP PROCEDURE IF EXISTS taoDuLieuCTKhuyenMai;

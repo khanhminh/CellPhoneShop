@@ -3,6 +3,7 @@ package cellphoneshop.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -17,45 +18,51 @@ import cellphoneshop.model.BinhLuan;
 public class BinhLuanDAOImpl implements BinhLuanDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
+	private Logger log = Logger.getLogger(BinhLuanDAOImpl.class);
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	@Transactional
-	public void insertBinhLuan(BinhLuan binhLuanMoi) {
+	public boolean insertBinhLuan(BinhLuan binhLuanMoi) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(binhLuanMoi);
+			return true;
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return false;
 	}
 
 	@Transactional(readOnly = true)
 	public BinhLuan getBinhLuan(Integer maBinhLuan) {
-		BinhLuan result = null;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
-			result = (BinhLuan) session.get(BinhLuan.class, maBinhLuan);
+			return (BinhLuan) session.get(BinhLuan.class, maBinhLuan);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
-		return result;
+		return null;
 	}
 
 	@Transactional
-	public void updateBinhLuan(BinhLuan binhLuan) {
+	public boolean updateBinhLuan(BinhLuan binhLuan) {
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.update(binhLuan);
+			return true;
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return false;
 	}
 
 	@Transactional(readOnly = true)
@@ -70,7 +77,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 			query.setMaxResults(soKqToiDa);
 			result = query.list();
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -85,9 +92,23 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 			Query query = session.createQuery(hql);
 			return ((Long)query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return 0;
+	}
+
+	@Transactional
+	public boolean deleteBinhLuan(BinhLuan binhLuan) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			session.delete(binhLuan);
+			return true;
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return false;
 	}
 }

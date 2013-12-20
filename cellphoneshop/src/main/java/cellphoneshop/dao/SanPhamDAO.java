@@ -60,4 +60,6 @@ public interface SanPhamDAO {
 	
 	List<SanPham> getListSanPham(int kqDauTien, int soKqToiDa, String order, boolean isAsc);
 	int demSoSanPham();
+	
+	List<SanPham> getListSanPhamBanChayNhat(int soSanPham);
 }
