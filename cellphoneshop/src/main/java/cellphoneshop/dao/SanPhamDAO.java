@@ -55,6 +55,9 @@ public interface SanPhamDAO {
 	 */
 	int demSoSanPhamKhiTimKiemTheoTen(String tuKhoa);
 	
-	List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa);
+	List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa, String order, boolean isAsc);
 	int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter);
+	
+	List<SanPham> getListSanPham(int kqDauTien, int soKqToiDa, String order, boolean isAsc);
+	int demSoSanPham();
 }

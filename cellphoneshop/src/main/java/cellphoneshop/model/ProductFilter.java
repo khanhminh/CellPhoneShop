@@ -5,23 +5,11 @@ import java.util.List;
 
 
 public class ProductFilter {
-	public static class PriceConstraint {
-		public int minPrice;
-		public int maxPrice;
-		
-		public PriceConstraint() {
-		}
-		
-		public PriceConstraint(int min, int max) {
-			this.minPrice = min;
-			this.maxPrice = max;
-		}
-	}
 
 	public List<NhaSanXuat> producerList = new ArrayList<NhaSanXuat>();
 	public List<Float> ratingList = new ArrayList<Float>();
 	public List<HeDieuHanh> osList = new ArrayList<HeDieuHanh>();
-	public List<PriceConstraint> priceConstraintList = new ArrayList<ProductFilter.PriceConstraint>();
+	public List<PriceConstraint> priceConstraintList = new ArrayList<PriceConstraint>();
 	
 	public  ProductFilter() {
 	}
@@ -31,7 +19,7 @@ public class ProductFilter {
 	 */
 	public void addPriceConstraint(int minPrice, int maxPrice) {
 		for(PriceConstraint iPc : priceConstraintList){
-			if(iPc.minPrice == minPrice && iPc.maxPrice == maxPrice){
+			if(iPc.getMinPrice() == minPrice && iPc.getMaxPrice() == maxPrice){
 				return;
 			}
 		}
@@ -43,7 +31,7 @@ public class ProductFilter {
 	 */
 	public void removePriceContraint(int minPrice, int maxPrice){
 		for(PriceConstraint iPc : priceConstraintList){
-			if(iPc.minPrice == minPrice && iPc.maxPrice == maxPrice){
+			if(iPc.getMinPrice() == minPrice && iPc.getMaxPrice() == maxPrice){
 				priceConstraintList.remove(iPc);
 				break;
 			}

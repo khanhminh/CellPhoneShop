@@ -7,87 +7,101 @@
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="false" />
-	
+
 	<package name="action" extends="struts-default" namespace="/">
-	
+
 		<result-types>
-            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
-        </result-types>		
-		
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="searchInterceptor"
+				class="searchInterceptor">
+			</interceptor>
+
+			<interceptor-stack name="newStack">
+				<interceptor-ref name="searchInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+
+		</interceptors>
+
 		<action name="home" class="homeAction">
 			<result name="success" type="tiles">home</result>
 		</action>
-		
+
 		<action name="about" method="about" class="homeAction">
 			<result name="success" type="tiles">about</result>
 		</action>
-		
+
 		<action name="contact" method="contact" class="homeAction">
 			<result name="success" type="tiles">contact</result>
 		</action>
-		
-		<action name="product" method="search" class="productAction">
+
+		<action name="product" method="filter" class="filterAction">
+			<interceptor-ref name="newStack"/>
 			<result name="success" type="tiles">product</result>
 		</action>
-		
+
 		<action name="login" method="login" class="accountAction">
 			<result name="success" type="redirectAction">home</result>
 			<result name="input" type="tiles">login</result>
 			<result name="error" type="tiles">login</result>
 		</action>
-		
+
 		<action name="loginfail" method="loginFail" class="accountAction">
 			<result name="error" type="tiles">login</result>
 		</action>
-		
+
 		<action name="register" method="register" class="accountAction">
 			<result name="success" type="redirectAction">home</result>
 			<result name="input" type="tiles">register</result>
 			<result name="error" type="tiles">register</result>
 		</action>
-		
+
 		<action name="detail" method="detail" class="productAction">
 			<result name="success" type="tiles">detail</result>
 			<result name="error" type="tiles">register</result>
 		</action>
-		
+
 		<action name="cart" method="cart" class="shoppingCartAction">
 			<result name="view" type="tiles">cart</result>
 			<result name="empty" type="tiles">emptycart</result>
 		</action>
-		
+
 		<action name="editcart" method="edit" class="shoppingCartAction">
 			<result name="success" type="redirectAction">cart</result>
 			<result name="error" type="tiles">errorcart</result>
 		</action>
-		
+
 		<action name="checkout" method="checkout" class="checkoutAction">
 			<result name="empty" type="redirectAction">cart</result>
 			<result name="input" type="tiles">checkout</result>
 			<result name="success" type="tiles">complete</result>
 			<result name="error" type="tiles">checkout</result>
 		</action>
-		
-		
+
+
 		<action name="compare" method="compare" class="productAction">
 			<result name="success" type="tiles">compare</result>
 		</action>
-		
-		
+
+
 		<action name="new_products" method="newProducts" class="homeAction">
 			<result name="success">WEB-INF/jsp/ajax-page/new_products.jsp</result>
 		</action>
-		
+
 		<action name="getComments" method="getComments" class="productAction">
 			<result name="success">WEB-INF/jsp/ajax-page/comments.jsp</result>
 		</action>
-		
+
 	</package>
-	
+
 	<package name="ajax" extends="json-default" namespace="/">
 		<action name="checkemail" method="checkEmail" class="accountAction">
 			<result name="json" type="json" />
-		</action>	
+		</action>
 		<action name="rating" method="rating" class="productAction">
 			<result name="json" type="json" />
 		</action>

@@ -90,6 +90,7 @@
             }
         }
 	});
+	
 	function deleteItem(context){	
 		name = $(context).attr('data-name');
 		id = $(context).attr('data-id');

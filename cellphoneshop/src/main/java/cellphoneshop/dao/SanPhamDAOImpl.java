@@ -19,7 +19,6 @@ import cellphoneshop.model.HeDieuHanh;
 import cellphoneshop.model.HinhAnhSp;
 import cellphoneshop.model.NhaSanXuat;
 import cellphoneshop.model.ProductFilter;
-import cellphoneshop.model.ProductFilter.PriceConstraint;
 import cellphoneshop.model.SanPham;
 
 @Repository
@@ -268,12 +267,13 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 	}
 
 	@Transactional(readOnly = true)
-	public List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa) {
+	public List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa,
+			String order, boolean isAsc) {
 		List<SanPham> result = new ArrayList<SanPham>();
 		Session session = sessionFactory.getCurrentSession();
-		
+		String s = isAsc ? "asc" : "desc";
 		try {
-			String hql = taoTruyVanHQLDeLaySP(productFilter, false);
+			String hql = taoTruyVanHQLDeLaySP(productFilter, false) + " order by sp." + order + " " + s;
 			Query query = session.createQuery(hql);
 			
 			query.setFirstResult(kqDauTien);
@@ -345,7 +345,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			if (i > 0) {
 				priceCon += " or ";
 			}
-			priceCon += "(" + productFilter.priceConstraintList.get(i).minPrice + " < sp.gia and sp.gia < " + productFilter.priceConstraintList.get(i).maxPrice + ") ";
+			priceCon += "(" + productFilter.priceConstraintList.get(i).getMinPrice() + " < sp.gia and sp.gia < " + productFilter.priceConstraintList.get(i).getMaxPrice() + ") ";
 		}
 		
 		
@@ -386,6 +386,54 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		
 		try {
 			String hql = taoTruyVanHQLDeLaySP(productFilter, true);
+			Query query = session.createQuery(hql);
+			return ((Long) query.iterate().next()).intValue();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return 0;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<SanPham> getListSanPham(int kqDauTien, int soKqToiDa,
+			String order, boolean isAsc) {
+		List<SanPham> result = new ArrayList<SanPham>();
+		Session session = sessionFactory.getCurrentSession();
+		
+		String s = isAsc ? "asc" : "desc";
+		try {
+			String hql = "from SanPham sp order by sp." + order + " " + s;
+			Query query = session.createQuery(hql);			
+			query.setFirstResult(kqDauTien);
+			query.setMaxResults(soKqToiDa);
+			
+			result = query.list();
+			
+			if (result != null) {
+				for (SanPham sanPham : result) {
+					Hibernate.initialize(sanPham.getNhaSanXuat());
+					Iterator itrCTSanPham = sanPham.getCtSanPhams().iterator();
+					if (itrCTSanPham.hasNext()) {
+						CtSanPham ctSanPham = (CtSanPham) itrCTSanPham.next();
+						Hibernate.initialize(ctSanPham);
+						Hibernate.initialize(ctSanPham.getHeDieuHanh());
+					}
+				}
+			}
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+				
+		return result;
+	}
+
+	@Transactional(readOnly = true)
+	public int demSoSanPham() {
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			String hql = "select count(*) from SanPham";
 			Query query = session.createQuery(hql);
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {

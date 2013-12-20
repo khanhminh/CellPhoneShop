@@ -40,6 +40,7 @@ public class AccountController extends ActionSupport {
 	@Autowired
 	private Message message;
 	
+	@Autowired
 	@Qualifier("authenticationManager")
 	private AuthenticationManager authMgr;
 

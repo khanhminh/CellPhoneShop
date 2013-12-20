@@ -1595,3 +1595,11 @@ input[type="checkbox"].input-validation-error {
 	color: red;
 	font-weight: bold;
 }
+
+.group-narrow img{
+	height: 22px;
+}
+
+.group-narrow input[type='checkbox']{
+	vertical-align: middle;
+}

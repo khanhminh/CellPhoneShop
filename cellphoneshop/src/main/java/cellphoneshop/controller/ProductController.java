@@ -1,6 +1,5 @@
 package cellphoneshop.controller;
 
-import java.io.EOFException;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import cellphoneshop.service.DanhGiaService;
 import cellphoneshop.service.SanPhamService;
 import cellphoneshop.util.JsonHandler;
 import cellphoneshop.util.Util;
-import cellphoneshop.viewmodel.MessageRating;
 import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.viewmodel.RatingInfor;
 
@@ -40,8 +38,6 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 	private DanhGiaService danhGiaService;
 	@Autowired
 	private BinhLuanService binhLuanService;
-	
-
 	
 	private HttpServletRequest request;
 	

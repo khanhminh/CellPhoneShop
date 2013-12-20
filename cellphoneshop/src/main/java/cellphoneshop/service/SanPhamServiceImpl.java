@@ -17,6 +17,7 @@ import cellphoneshop.model.CtSanPham;
 import cellphoneshop.model.HinhAnhSp;
 import cellphoneshop.model.ProductFilter;
 import cellphoneshop.viewmodel.ProductDetail;
+import cellphoneshop.viewmodel.SortBy;
 import cellphoneshop.model.SanPham;
 
 @Service
@@ -138,7 +139,7 @@ public class SanPhamServiceImpl implements SanPhamService {
 	public ProductFilter layCacTieuChiLocDayDu() {
 		ProductFilter productFilter = new ProductFilter();
 		
-		productFilter.osList = heDieuHanhDAO.getListHeDieuHanh();
+		/*productFilter.osList = heDieuHanhDAO.getListHeDieuHanh();
 		productFilter.producerList = nhaSXDAO.getListNhaSanXuat();
 		
 		productFilter.addRating(1f);
@@ -152,16 +153,40 @@ public class SanPhamServiceImpl implements SanPhamService {
 		productFilter.addPriceConstraint(5000000, 8000000);
 		productFilter.addPriceConstraint(8000000, 10000000);
 		productFilter.addPriceConstraint(10000000, 12000000);
-		productFilter.addPriceConstraint(12000000, 100000000);
+		productFilter.addPriceConstraint(12000000, 100000000);*/
 		
 		return productFilter;
 	}
 	
-	public List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa) {
-		return spDAO.getListSanPham(productFilter, kqDauTien, soKqToiDa);
+	public List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa, SortBy sortby) {
+		String orderby = "gia";
+		if (sortby.getBy().equalsIgnoreCase("price")){
+			orderby = "gia";
+		}
+		else if (sortby.getBy().equalsIgnoreCase("name")){
+			orderby = "tenSp";
+		}
+		
+		return spDAO.getListSanPham(productFilter, kqDauTien, soKqToiDa, orderby, sortby.isAsc());
 	}
 	
 	public int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter) {
 		return spDAO.demSoSanPhamKhiGetListSanPham(productFilter);
+	}
+	
+	public List<SanPham> getListSanPham(int kqDauTien, int soKqToiDa, SortBy sortby) {
+		String orderby = "gia";
+		if (sortby.getBy().equalsIgnoreCase("price")){
+			orderby = "gia";
+		}
+		else if (sortby.getBy().equalsIgnoreCase("name")){
+			orderby = "tenSp";
+		}
+		
+		return spDAO.getListSanPham(kqDauTien, soKqToiDa, orderby, sortby.isAsc());
+	}
+	
+	public int demSoSanPham() {
+		return spDAO.demSoSanPham();
 	}
 }

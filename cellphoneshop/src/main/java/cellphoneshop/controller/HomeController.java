@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import cellphoneshop.model.ProductFilter;
 import cellphoneshop.model.SanPham;
 import cellphoneshop.service.SanPhamService;
 
@@ -50,6 +48,13 @@ public class HomeController extends ActionSupport implements ServletRequestAware
 		return SUCCESS;
 	}
 	
+	public String about(){
+		return SUCCESS;
+	}
+	
+	public String contact(){
+		return SUCCESS;
+	}
 	
 	private int getPage(String strPage){
 		if (strPage != null &&strPage.matches("\\d")){
