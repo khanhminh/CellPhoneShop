@@ -186,6 +186,7 @@ public class SanPhamServiceImpl implements SanPhamService {
 	
 	public int demSoSanPham() {
 		return spDAO.demSoSanPham();
+	}
 		
 	public List<SanPham> getListSanPhamBanChayNhat(int soSanPham) {
 		return spDAO.getListSanPhamBanChayNhat(soSanPham);
