@@ -33,14 +33,14 @@
 			<div class="icon-brand">
 				<a href="product?brand=1"> <img title="Apple"
 					src="resources/images/fb_apple.gif">
-				</a> <a href="product?brand=3"> <img title="Nokia"
+				</a> <a href="product?brand=4"> <img title="Nokia"
 					src="resources/images/fb_nokia.jpg">
 				</a>
 			</div>
 			<div class="icon-brand">
-				<a href="product?brand=5"> <img title=LG
+				<a href="product?brand=3"> <img title=LG
 					src="resources/images/fb_lg.gif">
-				</a> <a href="product?brand=4"> <img title="Samsung"
+				</a> <a href="product?brand=5"> <img title="Samsung"
 					src="resources/images/fb_samsung.gif">
 				</a>
 			</div>

@@ -107,6 +107,33 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 		
 		return "json";
 	}
+	
+	public String lockAccount(){
+		int result = 1;
+		try {
+			String action = request.getParameter("action");
+			String strId = request.getParameter("id");
+			int id = Integer.parseInt(strId);
+			if (id == SecurityHelper.getUser().getMaNd().intValue()){
+				result = 0;
+			}
+			else if (action.equals("lock")){
+				result = ndService.capNhatTrangThaiNguoiDung(id, true) ? 1 : -1;
+			}
+			else if (action.equals("unlock")){
+				result = ndService.capNhatTrangThaiNguoiDung(id, false) ? 1 : -1;
+			}
+			else {
+				result = -1;
+			}
+		} catch (Exception e) {
+			result = -1;
+			logger.error(e.getMessage());
+		}
+		JsonHandler.writeJson(result);
+		
+		return "json";
+	}
 
 	private int getPage(){
 		String strPage = request.getParameter("page");

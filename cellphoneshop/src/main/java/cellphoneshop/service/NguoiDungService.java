@@ -15,4 +15,5 @@ public interface NguoiDungService {
 	
 	Boolean phanQuyenNguoiDung(Integer maNguoiDung, Integer maVaiTro);
 	Boolean huyVaiTroNguoiDung(Integer maNguoiDung, Integer maVaiTro);
+	boolean capNhatTrangThaiNguoiDung(Integer maNguoiDung, boolean isLock);
 }

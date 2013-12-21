@@ -120,4 +120,14 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		// TODO Auto-generated method stub
 		return nguoiDungDAO.updateNguoidung(user);
 	}
+
+	public boolean capNhatTrangThaiNguoiDung(Integer maNguoiDung, boolean isLock) {
+		NguoiDung nguoidung = nguoiDungDAO.getNguoiDung(maNguoiDung);
+		if (nguoidung != null){
+			nguoidung.setEnable(!isLock);
+			return nguoiDungDAO.updateNguoidung(nguoidung);
+		}
+		
+		return false;
+	}
 }

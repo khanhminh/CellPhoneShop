@@ -157,5 +157,8 @@
 		<action name="processSetRole" method="processSetRole" class="accountManagerAction">
 			<result name="json" type="json" />
 		</action>
+		<action name="lock_account" method="lockAccount" class="accountManagerAction">
+			<result name="json" type="json" />
+		</action>
 	</package>
 </struts>

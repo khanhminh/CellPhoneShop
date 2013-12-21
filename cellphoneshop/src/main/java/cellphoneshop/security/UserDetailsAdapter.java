@@ -63,7 +63,7 @@ public class UserDetailsAdapter implements UserDetails {
 	}
 
 	public boolean isEnabled() {
-		return true;
+		return nguoidung.getEnable();
 	}
 
 }
