@@ -133,4 +133,15 @@
 			<result name="json" type="json" />
 		</action>
 	</package>
+	
+	<package name="admin" extends="struts-default" namespace="/admin">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		
+		<action name="list_account" method="listAccount" class="accountManagerAction">
+			<result name="success" type="tiles">list_account</result>
+		</action>
+	</package>
 </struts>

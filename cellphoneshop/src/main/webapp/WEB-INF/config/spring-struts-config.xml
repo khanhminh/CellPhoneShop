@@ -99,5 +99,9 @@
 		</property>
 	</bean>
 
+
+	<!-- Admin -->
+	<bean id="accountManagerAction" class="cellphoneshop.controller.AccountManagerController" />
+
 </beans>
        				

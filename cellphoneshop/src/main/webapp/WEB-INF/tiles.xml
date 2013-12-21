@@ -81,4 +81,20 @@
         <put-attribute name="title" value="Chi tiết đơn hàng" />
         <put-attribute name="content" value="/WEB-INF/jsp/detail_order.jsp" />  
     </definition>
+    
+    <!-- Amdin Pages -->
+    
+    <definition name="admin" template="/WEB-INF/jsp/admin/template/template.jsp">
+        <put-attribute name="title" value="Amin" />
+        <put-attribute name="head" value="/WEB-INF/jsp/admin/template/head.jsp" />   
+         <put-attribute name="sidebar" value="/WEB-INF/jsp/admin/template/sidebar.jsp" /> 
+        <put-attribute name="header" value="/WEB-INF/jsp/admin/template/header.jsp" />  
+        <put-attribute name="footer" value="/WEB-INF/jsp/admin/template/footer.jsp" />  
+    </definition>
+    
+    <definition name="list_account" extends="admin">
+        <put-attribute name="title" value="Danh sách tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/list_account.jsp" />  
+    </definition>
+    
 </tiles-definitions>
