@@ -38,7 +38,7 @@
 			<div class="top-nav nav-collapse">
 				<ul class="nav">
 					<li>
-						<a href="home.action">Trang chủ</a>
+						<a href="/cellphoneshop/home.action">Trang chủ</a>
 					</li>
 					<li>
 						<form class="navbar-search pull-left">
