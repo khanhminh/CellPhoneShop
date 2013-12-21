@@ -84,6 +84,14 @@
 					<img src="resources/images/km/km1.png"> 
 					<a>CTKM Laptop SONY tặng sổ tay cao cấp</a>
 				</div>
+				<div class="promotion">
+					<img src="resources/images/km/km2.png"> 
+					<a>CTKM Laptop SONY tặng sổ tay cao cấp</a>
+				</div>
+				<div class="promotion">
+					<img src="resources/images/km/km3.png"> 
+					<a>CTKM Laptop SONY tặng sổ tay cao cấp</a>
+				</div>
 			</div>
 		</div>
 	</div>
