@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
  
 <!DOCTYPE struts PUBLIC
-"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
-"http://struts.apache.org/dtds/struts-2.0.dtd">
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="false" />
 
-	<package name="action" extends="struts-default" namespace="/">
-
+	<package name="action" extends="struts-default" namespace="/">		
+		
 		<result-types>
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
-		</result-types>
+		</result-types>		
+		
 
 		<interceptors>
 			<interceptor name="searchInterceptor"
@@ -147,6 +148,19 @@
 		
 		<action name="list_account" method="listAccount" class="accountManagerAction">
 			<result name="success" type="tiles">list_account</result>
+		</action>
+		
+		<action name="set_role" method="setRole" class="accountManagerAction">
+			<result name="success" type="tiles">set_role</result>
+		</action>
+		<action name="account_detail" method="detailAccount" class="accountManagerAction">
+			<result name="success" type="tiles">detail_account</result>
+		</action>
+	</package>
+	
+	<package name="ajax_admin" extends="json-default" namespace="/admin">
+		<action name="processSetRole" method="processSetRole" class="accountManagerAction">
+			<result name="json" type="json" />
 		</action>
 	</package>
 </struts>

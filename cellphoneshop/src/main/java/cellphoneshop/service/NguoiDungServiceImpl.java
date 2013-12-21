@@ -80,11 +80,7 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 			return false;
 		}
 		
-		Iterator iterator = nguoiDung.getVaiTros().iterator();
-		/*VaiTro vt = (VaiTro) iterator.next();
-		vt.setMaVaiTro(maVaiTro);
-		vt.setTenVaiTro(vaiTro.getTenVaiTro());*/
-		
+		Iterator iterator = nguoiDung.getVaiTros().iterator();		
 		while (iterator.hasNext()) {
 			VaiTro vt = (VaiTro) iterator.next();
 			if (vt.getMaVaiTro().intValue() == maVaiTro.intValue()) {
@@ -95,6 +91,29 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		nguoiDung.getVaiTros().add(vaiTro);
 		
 		return nguoiDungDAO.updateNguoidung(nguoiDung);		
+	}
+	
+	public Boolean huyVaiTroNguoiDung(Integer maNguoiDung, Integer maVaiTro) {
+		if(maNguoiDung == null || maVaiTro == null){
+			return false;
+		}
+		VaiTro vaiTro = vaiTroService.getVaiTro(maVaiTro);
+		NguoiDung nguoiDung = nguoiDungDAO.getNguoiDung(maNguoiDung);
+		
+		if(vaiTro == null || nguoiDung == null){
+			return false;
+		}
+		
+		Iterator iterator = nguoiDung.getVaiTros().iterator();		
+		while (iterator.hasNext()) {
+			VaiTro vt = (VaiTro) iterator.next();
+			if (vt.getMaVaiTro().intValue() == maVaiTro.intValue()) {
+				nguoiDung.getVaiTros().remove(vt);
+				return nguoiDungDAO.updateNguoidung(nguoiDung);	
+			}
+		}
+		
+		return true;
 	}
 
 	public Boolean updateNguoidung(NguoiDung user) {

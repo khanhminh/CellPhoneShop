@@ -51,6 +51,9 @@
 			<security:authorize access="isAuthenticated()"> 
 				<li><a href="list_order.action">Quản lý đơn hàng</a></li>
 			</security:authorize>
+			<security:authorize access="hasAnyRole('Admin')"> 
+				<li><a href="/cellphoneshop/admin/list_account.action">Admin</a></li>
+			</security:authorize>
 		</ul>
 	</nav>
 </div>
@@ -81,9 +84,9 @@
 <div class="wrapper row3">
 	<div id="search">
 		<div class="one_half">
-			<form action="search" method="get">
-				<input type="text" class="one_half" /> <input type="submit"
-					value="Tìm kiếm" class="one_ten" />
+			<form action="product.action" method="get">
+				<input type="text" name="query" class="one_half" id="text-search-product"/> 
+				<input type="submit" value="Tìm kiếm" class="one_ten" id="btnSearch"/>
 			</form>
 		</div>
 		<c:if test="${sessionScope.cart != null}">
@@ -102,3 +105,13 @@
 		</div>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		$('#btnSearch').click(function(e){
+			var text = $('#text-search-product').val().trim();
+			if (text == ""){
+				e.preventDefault();
+			}
+		});
+	});
+</script>

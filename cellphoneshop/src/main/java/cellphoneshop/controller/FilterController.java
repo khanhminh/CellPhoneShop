@@ -57,22 +57,28 @@ public class FilterController  extends ActionSupport implements ServletRequestAw
 
 		SortBy sort = getSortBy();
 		List<SanPham> list = new ArrayList<SanPham>();
-		ProductFilter filter = createProductFilter();
 		int totalPage = 0;
-		if (filter != null){
-			list = spService.getListSanPham(filter, (page - 1) * productPerPage, productPerPage, sort);
-			int count = spService.demSoSanPhamKhiGetListSanPham(filter);
-			totalPage = count / productPerPage;
-			if (totalPage * productPerPage < count){
-				totalPage++;
-			}
+		String query = request.getParameter("query");
+		if (query != null && !query.equals("")){
+			list = spService.timKiemSanPhamTheoTen(query, 0, productPerPage);
 		}
 		else {
-			list = spService.getListSanPham((page - 1) * productPerPage, productPerPage, sort);
-			int count = spService.demSoSanPham();
-			totalPage = count / productPerPage;
-			if (totalPage * productPerPage < count){
-				totalPage++;
+			ProductFilter filter = createProductFilter();			
+			if (filter != null){
+				list = spService.getListSanPham(filter, (page - 1) * productPerPage, productPerPage, sort);
+				int count = spService.demSoSanPhamKhiGetListSanPham(filter);
+				totalPage = count / productPerPage;
+				if (totalPage * productPerPage < count){
+					totalPage++;
+				}
+			}
+			else {
+				list = spService.getListSanPham((page - 1) * productPerPage, productPerPage, sort);
+				int count = spService.demSoSanPham();
+				totalPage = count / productPerPage;
+				if (totalPage * productPerPage < count){
+					totalPage++;
+				}
 			}
 		}
 

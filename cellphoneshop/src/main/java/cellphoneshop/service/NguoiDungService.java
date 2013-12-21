@@ -14,4 +14,5 @@ public interface NguoiDungService {
 	Boolean updateNguoidung(NguoiDung user);
 	
 	Boolean phanQuyenNguoiDung(Integer maNguoiDung, Integer maVaiTro);
+	Boolean huyVaiTroNguoiDung(Integer maNguoiDung, Integer maVaiTro);
 }

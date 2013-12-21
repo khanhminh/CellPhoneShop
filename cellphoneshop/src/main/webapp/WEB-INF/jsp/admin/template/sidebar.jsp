@@ -4,11 +4,9 @@
 	<div class="well nav-collapse sidebar-nav">
 		<ul class="nav nav-tabs nav-stacked main-menu">
 			<li class="nav-header hidden-tablet">Quản lý tài khoản</li>
-			<li><a class="ajax-link" href="/Admin/ListAccounts"><i
+			<li><a class="ajax-link" href="list_account.action"><i
 					class="icon-align-justify"></i><span class="hidden-tablet">Danh
 						sách tài khoản</span></a></li>
-			<li><a class="ajax-link" href="/Admin/ManageRoles"><i
-					class="icon-calendar"></i><span class="hidden-tablet">Roles</span></a></li>
 		</ul>
 	</div>
 </div>
