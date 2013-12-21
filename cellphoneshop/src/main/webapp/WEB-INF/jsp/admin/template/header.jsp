@@ -18,17 +18,16 @@
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 					<i class="icon-user"></i>
 					<span class="hidden-phone">
-						<%-- <security:authentication property="principal.name"/> --%>
-						Khanh
+						<security:authentication property="principal.name"/>
 					</span>
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
 					<li class="divider"></li>
 					<li>
+						<c:url var="logoutUrl" value="/j_spring_security_logout" /> 
 						<form action="${logoutUrl}" method="post" id="logoutForm">
-								<a
-									href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
+								<a href="javascript:document.getElementById('logoutForm').submit()">Thoát</a>
 						</form>
 					</li>
 				</ul>

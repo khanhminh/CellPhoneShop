@@ -73,8 +73,7 @@
 			</div>
 			<!--/span-->
 		</div>
-		<script>
-		
+		<script>		
 			function callback(data){
 				if (data){
 					$('#msg').text("Cập nhật thành công");
@@ -96,6 +95,9 @@
 						var chkb = $(list[i]);
 						if (chkb.attr('checked') == 'checked'){
 							url += "&role=" + chkb.val().trim();
+						}
+						else {
+							url += "&unrole=" + chkb.val().trim();
 						}
 					}
 					

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cellphoneshop.model.NguoiDung;
 import cellphoneshop.model.VaiTro;
+import cellphoneshop.security.SecurityHelper;
 import cellphoneshop.service.NguoiDungService;
 import cellphoneshop.service.VaiTroService;
 import cellphoneshop.util.JsonHandler;
@@ -52,19 +53,51 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 		return SUCCESS;
 	}
 	
+	public String detailAccount(){
+		String strId = request.getParameter("id");
+		if (Util.tryParseInt(strId)){
+			int id = Integer.parseInt(strId);
+			NguoiDung account = ndService.getNguoiDung(id);
+			if (account != null){				
+				request.setAttribute("account", account);
+			}
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String processSetRole(){
 		boolean result = true;
 		try {
 			String strId = request.getParameter("id");
 			String[] roles = request.getParameterValues("role");
+			String[] unroles = request.getParameterValues("unrole");
 			int id = Integer.parseInt(strId);
-			for (String role : roles){
-				int r = Integer.parseInt(role);
-				if (!ndService.phanQuyenNguoiDung(id, r)){
-					result = false;
-					break;
-				}
+			NguoiDung admin = SecurityHelper.getUser();
+			if (admin.getMaNd() == id) {
+				// khong the phan quyen tu phan quyen
+				result = false;
 			}
+			else {
+				if (roles != null){
+					for (String role : roles){
+						int r = Integer.parseInt(role);
+						if (!ndService.phanQuyenNguoiDung(id, r)){
+							result = false;
+							break;
+						}
+					}
+				}
+				if (unroles != null){
+					for (String role : unroles){
+						int r = Integer.parseInt(role);
+						if (!ndService.huyVaiTroNguoiDung(id, r)){
+							result = false;
+							break;
+						}
+					}
+				}
+			}			
 			
 		} catch (Exception e) {
 			logger.error(e.getMessage());

@@ -102,4 +102,9 @@
         <put-attribute name="content" value="/WEB-INF/jsp/admin/set_role.jsp" />  
     </definition>
     
+    <definition name="detail_account" extends="admin">
+        <put-attribute name="title" value="Chi tiết tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/detail_account.jsp" />  
+    </definition>
+    
 </tiles-definitions>

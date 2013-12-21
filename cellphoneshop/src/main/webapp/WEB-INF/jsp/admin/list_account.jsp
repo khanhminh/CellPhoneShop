@@ -40,7 +40,7 @@
                             <td>${acc.email}</td>
                             <td class="center">
                             	<c:forEach var="role" items="${acc.vaiTros}" varStatus="status">
-                            		<span><b>${role.tenVaiTro}</b>, </span>
+                            		<span><b>${role.tenVaiTro}</b>&nbsp;</span>
                             	</c:forEach>
                             </td>
                             <td>

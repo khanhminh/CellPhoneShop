@@ -62,6 +62,7 @@ public class VaiTroDAOImpl implements VaiTroDAO{
 		}
 	}
 
+	@Transactional
 	public VaiTro getVaiTro(Integer maVaiTro) {
 		List<VaiTro> list;
 		Session session = sessionFactory.getCurrentSession();
