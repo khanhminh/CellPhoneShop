@@ -97,4 +97,9 @@
         <put-attribute name="content" value="/WEB-INF/jsp/admin/list_account.jsp" />  
     </definition>
     
+    <definition name="set_role" extends="admin">
+        <put-attribute name="title" value="Phân quyền" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/set_role.jsp" />  
+    </definition>
+    
 </tiles-definitions>

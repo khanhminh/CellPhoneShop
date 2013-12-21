@@ -29,6 +29,7 @@
 						<th>ID</th>
 						<th>Email</th>
 						<th>Vai trò</th>
+						<th style="font-family: Arial;">Trạng thái</th>
 						<th>Chức năng</th>
 					</tr>
 				</thead>
@@ -38,11 +39,19 @@
                             <td class="center">${acc.maNd}</td>
                             <td>${acc.email}</td>
                             <td class="center">
-                            	<c:forEach var="role" items="acc.vaiTros" varStatus="status">
-                            		<c:choose>
-                            			<span><b>${role.tenVaiTro}</b>, </span>
-                            		</c:choose>
+                            	<c:forEach var="role" items="${acc.vaiTros}" varStatus="status">
+                            		<span><b>${role.tenVaiTro}</b>, </span>
                             	</c:forEach>
+                            </td>
+                            <td>
+                            	<c:choose>
+                            		<c:when test="${acc.enable}">
+                            			<span class="label label-success">Active</span>
+                            		</c:when>
+                            		<c:otherwise>
+                            			<span class="label label-important">Lock</span>
+                            		</c:otherwise>
+                            	</c:choose>
                             </td>
                             <td class="center">
                                 <a class="btn btn-success" href="account_detail?id=${acc.maNd}">
@@ -53,10 +62,18 @@
                                     <i class="icon-edit icon-white"></i>
                                     Phân quyền                                           
 									</a>
-                                <a class="btn btn-danger" href="#">
-                                    <i class="icon-trash icon-white"></i>
-                                    Delete
-								</a>
+								<c:choose>
+									<c:when test="${acc.enable}">
+										<a class="btn btn-danger" href="#"> 
+											<i class="icon-lock icon-white"></i>Lock
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a class="btn btn-success" href="#"> 
+											<i class="icon-lock icon-white"></i>UnLock
+										</a>
+									</c:otherwise>
+								</c:choose>
                             </td>
                         </tr>  
 					</c:forEach>

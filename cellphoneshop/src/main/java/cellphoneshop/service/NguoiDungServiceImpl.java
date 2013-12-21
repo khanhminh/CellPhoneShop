@@ -80,10 +80,11 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 			return false;
 		}
 		
-		Iterator iterator = nguoiDung.getVaiTros().iterator();
-		VaiTro vt = (VaiTro) iterator.next();
-		vt.setMaVaiTro(maVaiTro);
-		vt.setTenVaiTro(vaiTro.getTenVaiTro());
+		Set<VaiTro> lisVt = nguoiDung.getVaiTros();
+		if (lisVt.contains(vaiTro)){
+			return true;
+		}
+		lisVt.add(vaiTro);
 		
 		
 		return nguoiDungDAO.updateNguoidung(nguoiDung);		
