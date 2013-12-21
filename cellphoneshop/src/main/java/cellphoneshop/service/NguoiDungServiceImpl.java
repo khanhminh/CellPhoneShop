@@ -65,8 +65,8 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		return checkLogin(user);
 	}
 
-	public List<NguoiDung> getListNguoiDung() {
-		return nguoiDungDAO.getListNguoiDung();
+	public List<NguoiDung> getListNguoiDung(int ketquadautien, int soluong) {
+		return nguoiDungDAO.getListNguoiDung(ketquadautien, soluong);
 	}
 
 	public Boolean phanQuyenNguoiDung(Integer maNguoiDung, Integer maVaiTro) {

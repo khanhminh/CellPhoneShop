@@ -112,10 +112,12 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 	}
 
 	@Transactional(readOnly = true)
-	public List<NguoiDung> getListNguoiDung() {
+	public List<NguoiDung> getListNguoiDung(int ketquadautien, int soluong) {
 		List<NguoiDung> userList = new ArrayList<NguoiDung>();
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("from NguoiDung nd");
+		query.setFirstResult(ketquadautien);
+		query.setMaxResults(soluong);
 		userList = query.list();
 
 		for (NguoiDung user : userList) {
