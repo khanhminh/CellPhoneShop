@@ -61,17 +61,16 @@
 		<div class="boxholder">
 			<div id="amazingslider-1">
 				<ul class="amazingslider-slides" style="display: none;">
-					<li><img src="resources/images/1.jpg" alt="1" /></li>
-					<li><img src="resources/images/2.jpg" alt="2" /></li>
-					<li><img src="resources/images/3.jpg" alt="3" /></li>
-					<li><img src="resources/images/4.jpg" alt="4" /></li>
+					<li><img src="resources/images/slider/1.png" alt="1" /></li>
+					<li><img src="resources/images/slider/2.png" alt="2" /></li>
+					<li><img src="resources/images/slider/3.png" alt="3" /></li>
 				</ul>
-				<ul class="amazingslider-thumbnails" style="display: none;">
+				<!-- <ul class="amazingslider-thumbnails" style="display: none;">
 					<li><img src="resources/images/thumbnails/1.jpg" /></li>
 					<li><img src="resources/images/thumbnails/2.jpg" /></li>
 					<li><img src="resources/images/thumbnails/3.jpg" /></li>
 					<li><img src="resources/images/thumbnails/4.jpg" /></li>
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 	</div>

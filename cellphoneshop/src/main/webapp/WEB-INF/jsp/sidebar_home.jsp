@@ -81,28 +81,8 @@
 		<div class="sidebox-body">
 			<div id="list-promotion">
 				<div class="promotion">
-					<img src="resources/images/km1.jpg"> <a>CTKM Laptop SONY
-						tặng sổ tay cao cấp</a>
-				</div>
-				<div class="promotion">
-					<img src="resources/images/km2.jpg"> <a>Mua Máy Nhận Quà
-						Niềm Vui Lan Tỏa</a>
-				</div>
-				<div class="promotion">
-					<img src="resources/images/km3.jpg"> <a>Khuyến mãi đặc
-						biệt cùng Cooler Master</a>
-				</div>
-				<div class="promotion">
-					<img src="resources/images/km4.jpg"> <a>Giỗ Tổ Hùng Vương
-						mua sắm nhận tài trợ mua hàng</a>
-				</div>
-				<div class="promotion">
-					<img src="resources/images/km5.jpg"> <a>Đổi điểm tích lũy
-						Nhận PMH đến 350.000đ</a>
-				</div>
-				<div class="promotion">
-					<img src="resources/images/km6.jpg"> <a>Tri Ân Sinh Nhật
-						Khách Hàng Tháng 4</a>
+					<img src="resources/images/km/km1.png"> 
+					<a>CTKM Laptop SONY tặng sổ tay cao cấp</a>
 				</div>
 			</div>
 		</div>
