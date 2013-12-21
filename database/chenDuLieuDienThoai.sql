@@ -1,7 +1,462 @@
-# Phien ban 0.3
-# Ngày: 19/12/2013
+# Phien ban 0.4
+# Ngày: 21/12/2013
 
 use CellPhoneShop;
+
+# Thông tin và hình ảnh lấy từ trang thegioididong.com
+
+DELIMITER //
+CREATE PROCEDURE chenDuLieuDienThoaiSony()
+	BEGIN
+		DECLARE maSP INT;
+		DECLARE maNhaSX INT;
+		DECLARE maLoaiSP INT;
+		DECLARE maHDH INT;
+		DECLARE ngayNhap DATE;
+		
+		DECLARE maCTSP INT;
+		
+		SELECT DISTINCT(LSP.maLoaiSP)
+		INTO maLoaiSP
+		FROM LoaiSanPham AS LSP
+		WHERE LSP.tenLoaiSP LIKE 'Điện thoại di động';
+		
+		SELECT DISTINCT(NSX.maNhaSX)
+		INTO maNhaSX
+		FROM NhaSanXuat AS NSX
+		WHERE NSX.tenNhaSX LIKE 'Sony';
+		
+		SELECT DISTINCT(HDH.maHDH)
+		INTO maHDH
+		FROM HeDieuHanh AS HDH
+		WHERE HDH.tenHDH LIKE 'Android';
+		
+		SET ngayNhap = NOW();
+		
+		#===================================================================================================
+		#==== Sony Xperia Z Ultra  =============================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('Sony Xperia Z Ultra',
+				NULL,
+				13990000,
+				24,
+				'resources/images/Smartphone/Sony/XperiaZUltra/sony-xperia-z-ultra-300-nowatermark-120x120.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'Sony Xperia Z Ultra';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			212, 			# trongLuong
+			179.4,			# chieuCao
+			92.2, 			# chieuRong
+			6.5,			# doDay
+			NULL,				# ngaySX date
+			NULL,				# loaiManHinh
+			'16 triệu màu',				# soMauManHinh
+			'1080 x 1920 pixels',					# doPhanGiaiManHinh
+			'Full HD',				# chuanManHinh
+			6.4,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'8.0 MP',					# cameraSau
+			'2.0 MP',				# cameraTruoc
+			'Tự động lấy nét, chạm lấy nét. Nhận diện khuôn mặt, nụ cười.',	    # tinhNangCamera
+			'Quay phim FullHD 1080p@30fps',					# quayPhim
+			true,				# videoCall boolean
+			2.2,				# tocDoCPU float
+			4,				    # soNhanCPU int
+			'Qualcomm MSM8974',				# chipset
+			'2 GB',				# RAM
+			'Adreno 330',				# GPU
+			'16 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			64,				    # dungLuongTheToiDa int
+			3050,				# dungLuongPin float
+			NULL,				# congNghePin
+			FALSE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			NULL,				# loaiBanPhim
+			NULL,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 42 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Có',				# mang4G
+			'Wi-Fi 802.11 a/b/g/n, DLNA, Wi-Fi Direct, dual-band, Wi-Fi hotspot',		# wifi
+			'V4.0 with A2DP',				# bluetooth
+			NULL,				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Không',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Sony/XperiaZUltra/sony-xperia-z-ultra-300-nowatermark-300x300.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Sony/XperiaZUltra/Sony-Xperia-Z-Ultra-1-2.jpg.png', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Sony/XperiaZUltra/sony-xperia-z-ultra-2.jpg', 3);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Sony/XperiaZUltra/sony-xperia-z-ultra-3.jpg', 4);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Sony/XperiaZUltra/sony-xperia-z-ultra-4.jpg', 5);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Sony/XperiaZUltra/sony-xperia-z-ultra_clip_image002.jpg.png', 6);
+	END //
+DELIMITER ;
+CALL chenDuLieuDienThoaiSony();
+DROP PROCEDURE IF EXISTS chenDuLieuDienThoaiSony;
+	
+DELIMITER //
+CREATE PROCEDURE chenDuLieuDienThoaiSamsung()
+	BEGIN
+		DECLARE maSP INT;
+		DECLARE maNhaSX INT;
+		DECLARE maLoaiSP INT;
+		DECLARE maHDH INT;
+		DECLARE ngayNhap DATE;
+		
+		DECLARE maCTSP INT;
+		
+		SELECT DISTINCT(LSP.maLoaiSP)
+		INTO maLoaiSP
+		FROM LoaiSanPham AS LSP
+		WHERE LSP.tenLoaiSP LIKE 'Điện thoại di động';
+		
+		SELECT DISTINCT(NSX.maNhaSX)
+		INTO maNhaSX
+		FROM NhaSanXuat AS NSX
+		WHERE NSX.tenNhaSX LIKE 'Samsung';
+		
+		SELECT DISTINCT(HDH.maHDH)
+		INTO maHDH
+		FROM HeDieuHanh AS HDH
+		WHERE HDH.tenHDH LIKE 'Android';
+		
+		SET ngayNhap = NOW();
+		
+		#===================================================================================================
+		#==== Samsung Galaxy Note 3 N9000 ==================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('Samsung Galaxy Note 3 N9000',
+				NULL,
+				16990000,
+				24,
+				'resources/images/Smartphone/SamSung/GalaxyNote3/galaxy-note-3-300-nowatermark-120x120.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'Samsung Galaxy Note 3 N9000';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			168, 			# trongLuong
+			151.2,			# chieuCao
+			79.2, 			# chieuRong
+			8.3,			# doDay
+			NULL,				# ngaySX date
+			NULL,				# loaiManHinh
+			' 16 triệu màu',				# soMauManHinh
+			'1080 x 1920 pixels',					# doPhanGiaiManHinh
+			'Full HD',				# chuanManHinh
+			5.7,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'13 MP',					# cameraSau
+			'2.0 MP',				# cameraTruoc
+			'Tự động lấy nét, chạm lấy nét. Nhận diện khuôn mặt, nụ cười',	    # tinhNangCamera
+			'Quay phim FullHD 1080p@60fps',					# quayPhim
+			true,				# videoCall boolean
+			1.2,				# tocDoCPU float
+			8,				    # soNhanCPU int
+			'Exynos 5420',				# chipset
+			'3 GB',				# RAM
+			'Adreno 330',				# GPU
+			'32 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			64,				    # dungLuongTheToiDa int
+			3200,				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			TRUE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			NULL,				# loaiBanPhim
+			1,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 42 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Không',				# mang4G
+			'Wi-Fi 802.11 a/b/g/n/ac, dual-band, DLNA, Wi-Fi Direct, Wi-Fi hotspot',		# wifi
+			'Có, V4.0 với A2DP, EDR',				# bluetooth
+			'Có',				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyNote3/Ne--Easy-Clip-galaxy-note-3.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyNote3/camera-galaxy-note-3.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyNote3/s-new-note-galaxy-note-3.jpg', 3);
+		
+		
+		
+		#===================================================================================================
+		#==== Samsung Galaxy Trend Plus ==================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('Samsung Galaxy Trend Plus',
+				NULL,
+				3990000,
+				24,
+				'resources/images/Smartphone/SamSung/GalaxyTrendPlus/samsung-galaxy-trend-plus-s7580-300-nowatermark-120x120.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'Samsung Galaxy Trend Plus';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			118, 			# trongLuong
+			121.5,			# chieuCao
+			63.1, 			# chieuRong
+			10.57,			# doDay
+			NULL,				# ngaySX date
+			NULL,				# loaiManHinh
+			' 16 triệu màu',				# soMauManHinh
+			'480 x 800 pixels',					# doPhanGiaiManHinh
+			'WVGA',				# chuanManHinh
+			4.0,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'5.0 MP',					# cameraSau
+			'VGA (0.3 Mpx)',				# cameraTruoc
+			'Tự động lấy nét',	    # tinhNangCamera
+			'Quay phim HD 720p@30fps',					# quayPhim
+			true,				# videoCall boolean
+			1.2,				# tocDoCPU float
+			2,				    # soNhanCPU int
+			'Broadcom BCM21664',				# chipset
+			'768 MB',				# RAM
+			'Adreno 200',				# GPU
+			'4 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			32,				    # dungLuongTheToiDa int
+			1500,				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			TRUE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			NULL,				# loaiBanPhim
+			1,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Không',				# mang4G
+			'Wi-Fi 802.11 b/g/n, Wi-Fi Direct, DLNA, Wi-Fi hotspot',		# wifi
+			'Có, V3.0 với A2DP',				# bluetooth
+			'Có',				# GPRS
+			'A-GPS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyTrendPlus/Samsung-Galaxy-Trend-Plus-5.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyTrendPlus/Samsung-Galaxy-Trend-Plus-14.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyTrendPlus/Samsung-Galaxy-Trend-Plus-S7580-Trang-9.jpg', 3);
+		
+		
+		#===================================================================================================
+		#==== Samsung Galaxy Grand 2 ==================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('Samsung Galaxy Grand 2',
+				NULL,
+				84990000,
+				24,
+				'resources/images/Smartphone/SamSung/GalaxyGrand2/samsung-galaxy-grand-2-g7102-300-nowatermark-120x120.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'Samsung Galaxy Grand 2';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			163, 			# trongLuong
+			146.8,			# chieuCao
+			75.3, 			# chieuRong
+			8.9,			# doDay
+			NULL,				# ngaySX date
+			NULL,				# loaiManHinh
+			' 16 triệu màu',				# soMauManHinh
+			'720x1280 pixels',					# doPhanGiaiManHinh
+			'HD',				# chuanManHinh
+			5.25,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'8.0 MP',					# cameraSau
+			'1.9 MP',				# cameraTruoc
+			'Tự động lấy nét, chạm lấy nét. Nhận diện khuôn mặt, nụ cườiChống rung',	    # tinhNangCamera
+			'Quay phim FullHD 1080p@30fps',					# quayPhim
+			true,				# videoCall boolean
+			1.2,				# tocDoCPU float
+			4,				    # soNhanCPU int
+			'Qualcomm',				# chipset
+			'1.5 GB',				# RAM
+			'Adreno 330',				# GPU
+			'8 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			64,				    # dungLuongTheToiDa int
+			2600,				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			TRUE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			NULL,				# loaiBanPhim
+			2,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Không',				# mang4G
+			'Wi-Fi 802.11 a/b/g/n, dual-band, DLNA, Wi-Fi hotspot',		# wifi
+			'V4.0 với A2DP, EDR',				# bluetooth
+			'Có',				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyGrand2/ban-hang-galaxy-grand-355x220-2.jpg', 1);
+		
+		
+		#===================================================================================================
+		#==== Samsung Galaxy S4 i9500 ==================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('Samsung Galaxy S4 i9500',
+				NULL,
+				13990000,
+				24,
+				'resources/images/Smartphone/SamSung/GalaxyS4/Samsung-Galaxy-S4-I9500-m.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'Samsung Galaxy S4 i9500';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			235, 			# trongLuong
+			136.6,			# chieuCao
+			69.8, 			# chieuRong
+			7.9,			# doDay
+			NULL,				# ngaySX date
+			NULL,				# loaiManHinh
+			' 16 triệu màu',				# soMauManHinh
+			'1080 x 1920 pixels',					# doPhanGiaiManHinh
+			'Full HD',				# chuanManHinh
+			5.0,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'13.0 MP',					# cameraSau
+			'2.1 MP',				# cameraTruoc
+			'Chạm lấy nét. Nhận diện khuôn mặt, nụ cười. Chống rung',	    # tinhNangCamera
+			'Quay phim FullHD 1080p@30fps',					# quayPhim
+			true,				# videoCall boolean
+			1.2,				# tocDoCPU float
+			8,				    # soNhanCPU int
+			'Exynos 5410',				# chipset
+			'2 GB',				# RAM
+			'PowerVR SGX544MP3',				# GPU
+			'16 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			64,				    # dungLuongTheToiDa int
+			2600,				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			TRUE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			NULL,				# loaiBanPhim
+			2,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 42 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Có',				# mang4G
+			'Wi-Fi 802.11 a/b/g/n, DLNA, Wi-Fi Direct, dual-band, Wi-Fi hotspot',		# wifi
+			'V4.0 với A2DP, EDR',				# bluetooth
+			'Có',				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyS4/SmartScreen-galaxy-S4.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/SamSung/GalaxyS4/camera-galaxy-s4.jpg', 2);
+	END //
+DELIMITER ;
+CALL chenDuLieuDienThoaiSamsung();
+DROP PROCEDURE IF EXISTS chenDuLieuDienThoaiSamsung;
 
 
 # Thông tin lấy từ nguồn: www.nokia.com
@@ -676,4 +1131,116 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 DELIMITER ;
 CALL chenDuLieuDienThoaiNokia();
 DROP PROCEDURE IF EXISTS chenDuLieuDienThoaiNokia;
- 
+
+
+DELIMITER //
+CREATE PROCEDURE chenDuLieuDienThoaiLG()
+	BEGIN
+		DECLARE maSP INT;
+		DECLARE maNhaSX INT;
+		DECLARE maLoaiSP INT;
+		DECLARE maHDH INT;
+		DECLARE ngayNhap DATE;
+		
+		DECLARE maCTSP INT;
+		
+		SELECT DISTINCT(LSP.maLoaiSP)
+		INTO maLoaiSP
+		FROM LoaiSanPham AS LSP
+		WHERE LSP.tenLoaiSP LIKE 'Điện thoại di động';
+		
+		SELECT DISTINCT(NSX.maNhaSX)
+		INTO maNhaSX
+		FROM NhaSanXuat AS NSX
+		WHERE NSX.tenNhaSX LIKE 'LG';
+		
+		SELECT DISTINCT(HDH.maHDH)
+		INTO maHDH
+		FROM HeDieuHanh AS HDH
+		WHERE HDH.tenHDH LIKE 'Android';
+		
+		SET ngayNhap = NOW();
+		
+		#===================================================================================================
+		#==== LG Optimus L9 =============================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('LG Optimus L9',
+				NULL,
+				6050000,
+				24,
+				'resources/images/Smartphone/LG/OptimusL9/LG-Optimus-L9-P760-m.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'LG Optimus L9';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			125, 			# trongLuong
+			131.9,			# chieuCao
+			62.8, 			# chieuRong
+			8.8,			# doDay
+			NULL,				# ngaySX date
+			NULL,				# loaiManHinh
+			' 16 triệu màu',				# soMauManHinh
+			'540 x 960 pixels',					# doPhanGiaiManHinh
+			'qHD',				# chuanManHinh
+			4.7,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'8.0 MP',					# cameraSau
+			'VGA (0.3 Mpx)',				# cameraTruoc
+			'Tự động lấy nét.',	    # tinhNangCamera
+			'Quay phim FullHD 1080p@30fps',					# quayPhim
+			false,				# videoCall boolean
+			1,				# tocDoCPU float
+			2,				    # soNhanCPU int
+			'TI OMAP 4430',				# chipset
+			'1 GB',				# RAM
+			'PowerVR SGX540',				# GPU
+			'4 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			32,				    # dungLuongTheToiDa int
+			'Pin chuẩn Li-Ion',				# dungLuongPin float
+			NULL,				# congNghePin
+			TRUE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			NULL,				# loaiBanPhim
+			NULL,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Không',				# mang4G
+			'Wi-Fi 802.11 b/g/n, Wi-Fi Direct, DLNA, Wi-Fi hotspot',		# wifi
+			'V2.1 với A2DP',				# bluetooth
+			'Class 12 (4+1/3+2/2+3/1+4 slots), 32 - 48 kbps',				# GPRS
+			'A-GPS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/LG-Optimus-L9-P760-l.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/dien-thoai-di-dong-lg-optimus-l9-2.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/dien-thoai-di-dong-lg-optimus-l9-3.jpg', 3);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/dien-thoai-di-dong-lg-optimus-l9-4.jpg', 4);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/dien-thoai-di-dong-lg-optimus-l9-5.jpg', 5);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/dien-thoai-di-dong-lg-optimus-l9-6.jpg', 6);
+	END //
+DELIMITER ;
+CALL chenDuLieuDienThoaiLG();
+DROP PROCEDURE IF EXISTS chenDuLieuDienThoaiLG;

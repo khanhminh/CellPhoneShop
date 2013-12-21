@@ -1,5 +1,5 @@
 package cellphoneshop.model;
-// Generated Jan 10, 2010 7:19:00 AM by Hibernate Tools 3.2.1.GA
+// Generated Dec 21, 2013 12:56:07 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -24,6 +24,7 @@ public class NguoiDung  implements java.io.Serializable {
      private String soDienThoai;
      private String diaChi;
      private Boolean nhanTinQuaEmail;
+     private Boolean enable;
      private Set vaiTros = new HashSet(0);
      private Set danhGias = new HashSet(0);
      private Set danhSachMongMuons = new HashSet(0);
@@ -42,7 +43,7 @@ public class NguoiDung  implements java.io.Serializable {
         this.matKhau = matKhau;
         this.ngaySinh = ngaySinh;
     }
-    public NguoiDung(LoaiNguoiDung loaiNguoiDung, String ho, String ten, String email, String matKhau, Integer gioiTinh, Date ngaySinh, String hinhDaiDien, String soDienThoai, String diaChi, Boolean nhanTinQuaEmail, Set vaiTros, Set danhGias, Set danhSachMongMuons, Set binhLuans, Set donHangs, Set nguoiNhans) {
+    public NguoiDung(LoaiNguoiDung loaiNguoiDung, String ho, String ten, String email, String matKhau, Integer gioiTinh, Date ngaySinh, String hinhDaiDien, String soDienThoai, String diaChi, Boolean nhanTinQuaEmail, Boolean enable, Set vaiTros, Set danhGias, Set danhSachMongMuons, Set binhLuans, Set donHangs, Set nguoiNhans) {
        this.loaiNguoiDung = loaiNguoiDung;
        this.ho = ho;
        this.ten = ten;
@@ -54,6 +55,7 @@ public class NguoiDung  implements java.io.Serializable {
        this.soDienThoai = soDienThoai;
        this.diaChi = diaChi;
        this.nhanTinQuaEmail = nhanTinQuaEmail;
+       this.enable = enable;
        this.vaiTros = vaiTros;
        this.danhGias = danhGias;
        this.danhSachMongMuons = danhSachMongMuons;
@@ -145,6 +147,13 @@ public class NguoiDung  implements java.io.Serializable {
     
     public void setNhanTinQuaEmail(Boolean nhanTinQuaEmail) {
         this.nhanTinQuaEmail = nhanTinQuaEmail;
+    }
+    public Boolean getEnable() {
+        return this.enable;
+    }
+    
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
     public Set getVaiTros() {
         return this.vaiTros;

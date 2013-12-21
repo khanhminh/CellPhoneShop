@@ -162,6 +162,7 @@ create table NguoiDung (
 	soDienThoai varchar(15),
 	diaChi varchar(100) character set utf8,
 	nhanTinQuaEmail bool default false,
+	enable boolean default true,
 	
 	constraint fk_NguoiDung_LoaiNguoiDung foreign key (maLoaiND) references LoaiNguoiDung(maLoaiND)
 );
@@ -325,9 +326,10 @@ CREATE PROCEDURE taoDuLieuNhaSanXuat()
 	BEGIN
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Apple');
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('HTC');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('LG');
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Nokia');
 		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Samsung');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('LG');
+		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Sony');
 	END //
 DELIMITER ;
 CALL taoDuLieuNhaSanXuat();
