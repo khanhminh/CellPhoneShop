@@ -24,10 +24,10 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 	private final int RecordPerPage = 10;
 	
 	public String listAccount(){
-		
-		//List<NguoiDung> listAccount = null;//
 		int page = getPage();
-		
+		int start = (page -1) * RecordPerPage;
+		List<NguoiDung> listAccount = ndService.getListNguoiDung(start, RecordPerPage);
+		request.setAttribute("listAccount", listAccount);
 		
 		return SUCCESS;
 	}

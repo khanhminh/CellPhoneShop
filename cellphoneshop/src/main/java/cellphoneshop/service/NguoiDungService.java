@@ -7,7 +7,7 @@ import cellphoneshop.viewmodel.RegisterUser;
 
 public interface NguoiDungService {
 	NguoiDung getNguoidung(String email);
-	List<NguoiDung> getListNguoiDung();
+	List<NguoiDung> getListNguoiDung(int ketquadautien, int soluong);
 	NguoiDung getNguoiDung(Integer maNguoiDung);
 	Boolean insertNguoidung(RegisterUser user);
 	Boolean checkLogin(NguoiDung user);

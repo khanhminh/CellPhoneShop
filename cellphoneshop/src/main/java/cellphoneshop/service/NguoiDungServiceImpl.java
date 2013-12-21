@@ -34,7 +34,6 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		boolean result = true;
 		try {
 			NguoiDung nd = new NguoiDung();
-		//	nd.setTenDangNhap(user.getUsername());
 			nd.setMatKhau(user.getPassword());
 			nd.setEmail(user.getEmail());
 			nd.setHo(user.getFirstname());
@@ -43,6 +42,7 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 			nd.setDiaChi(user.getAddress());
 			Integer sex = (Integer) (user.getSex().equalsIgnoreCase("Nam") ? 1 : 0);
 			nd.setGioiTinh(sex);
+			nd.setEnable(true);
 			DateFormat formater = new SimpleDateFormat("MM/dd/yyyy");
 			nd.setNgaySinh(formater.parse(user.getBirthday()));	
 			
@@ -65,8 +65,8 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		return checkLogin(user);
 	}
 
-	public List<NguoiDung> getListNguoiDung() {
-		return nguoiDungDAO.getListNguoiDung();
+	public List<NguoiDung> getListNguoiDung(int ketquadautien, int soluong) {
+		return nguoiDungDAO.getListNguoiDung(ketquadautien, soluong);
 	}
 
 	public Boolean phanQuyenNguoiDung(Integer maNguoiDung, Integer maVaiTro) {
