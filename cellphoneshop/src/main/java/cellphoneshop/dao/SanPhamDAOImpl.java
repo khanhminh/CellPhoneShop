@@ -175,6 +175,19 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			query.setFirstResult(kqDauTien);
 			query.setMaxResults(soKqToiDa);
 			result = query.list();
+			
+			if (result != null) { 					//TODO trung ma nguon voi ham lay san pham khi loc
+				for (SanPham sanPham : result) {
+					Hibernate.initialize(sanPham.getNhaSanXuat());
+					Hibernate.initialize(sanPham.getLoaiSanPham());
+					Iterator itrCTSanPham = sanPham.getCtSanPhams().iterator();
+					if (itrCTSanPham.hasNext()) {
+						CtSanPham ctSanPham = (CtSanPham) itrCTSanPham.next();
+						Hibernate.initialize(ctSanPham);
+						Hibernate.initialize(ctSanPham.getHeDieuHanh());
+					}
+				}
+			}
 		} catch (Exception ex) {
 			System.err
 					.println(ex.getClass().getName() + ": " + ex.getMessage());
@@ -289,6 +302,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			if (result != null) {
 				for (SanPham sanPham : result) {
 					Hibernate.initialize(sanPham.getNhaSanXuat());
+					Hibernate.initialize(sanPham.getLoaiSanPham());
 					Iterator itrCTSanPham = sanPham.getCtSanPhams().iterator();
 					if (itrCTSanPham.hasNext()) {
 						CtSanPham ctSanPham = (CtSanPham) itrCTSanPham.next();
@@ -309,7 +323,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		String selectFromClause;
 		
 		if (isCountQuery == false) {
-			selectFromClause = "select distinct sp from SanPham as sp, CtSanPham as ct ";
+			selectFromClause = "select distinct sp from SanPham as sp inner join sp.ctSanPhams as ct ";
 		} else {
 			selectFromClause = "select count(*) from SanPham as sp inner join sp.ctSanPhams as ct ";
 		}
@@ -325,11 +339,16 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		
 		// RatingList
 		String ratingCon = "";
-		for (int i = 0; i < productFilter.ratingList.size(); i++) {
-			if (i > 0) {
-				ratingCon += " or ";
+		if (productFilter.ratingList.isEmpty() == false) {
+			float minRating = 10;
+			for (int i = 0; i < productFilter.ratingList.size(); i++) {
+				float iRating = productFilter.ratingList.get(i);
+				if (iRating < minRating) {
+					minRating = iRating; 
+				}
 			}
-			ratingCon += " (sp.diemDanhGiaTb = " + productFilter.ratingList.get(i) + ") ";
+			
+			ratingCon = "(sp.diemDanhGiaTb >= " + minRating + ")";
 		}
 		
 		// HeDieuHanh
