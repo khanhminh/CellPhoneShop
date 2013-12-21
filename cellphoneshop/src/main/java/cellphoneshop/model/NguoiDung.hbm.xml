@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 10, 2010 7:19:01 AM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated Dec 21, 2013 12:56:08 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="cellphoneshop.model.NguoiDung" table="NguoiDung" catalog="CellPhoneShop">
         <id name="maNd" type="java.lang.Integer">
@@ -40,6 +40,9 @@
         </property>
         <property name="nhanTinQuaEmail" type="java.lang.Boolean">
             <column name="nhanTinQuaEmail" />
+        </property>
+        <property name="enable" type="java.lang.Boolean">
+            <column name="enable" />
         </property>
         <set name="vaiTros" inverse="false" table="PhanQuyen">
             <key>
