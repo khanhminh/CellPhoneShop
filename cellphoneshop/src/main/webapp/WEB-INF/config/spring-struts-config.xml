@@ -102,6 +102,6 @@
 
 	<!-- Admin -->
 	<bean id="accountManagerAction" class="cellphoneshop.controller.AccountManagerController" />
-
+	<bean id="testInsertProductAction" class="cellphoneshop.controller.TestProductManagerController"/> <!-- for test only -->
 </beans>
        				

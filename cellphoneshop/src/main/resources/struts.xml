@@ -117,6 +117,11 @@
 			<result name="success">WEB-INF/jsp/ajax-page/comments.jsp</result>
 		</action>
 
+		<!-- test insert product -->
+		<action name="insert_product" method="insertProduct" class="testInsertProductAction">
+			<result name="success" type="tiles">test_insert_product</result>
+			<result name="input" type="tiles">test_insert_product</result>
+		</action>
 	</package>
 
 	<package name="ajax" extends="json-default" namespace="/">

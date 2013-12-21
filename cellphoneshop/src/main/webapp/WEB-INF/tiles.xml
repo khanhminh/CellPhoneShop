@@ -97,4 +97,9 @@
         <put-attribute name="content" value="/WEB-INF/jsp/admin/list_account.jsp" />  
     </definition>
     
+    <definition name="test_insert_product" extends="page">
+    	<put-attribute name="title" value="Thêm sản phẩm mới"/>
+    	<put-attribute name="content" value="/WEB-INF/jsp/admin/test_insert_product.jsp"/>
+    </definition>
+    
 </tiles-definitions>
