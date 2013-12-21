@@ -1,12 +1,16 @@
 package cellphoneshop.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import cellphoneshop.model.SanPham;
 import cellphoneshop.service.SanPhamService;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -19,7 +23,7 @@ public class HomeController extends ActionSupport implements
 
 	Logger logger = Logger.getLogger(HomeController.class);
 	private int productPerPage;
-
+	
 	@Override
 	public String execute() throws Exception {
 		long totalNewProduct = sanPhamService.demSoSanPhamMoiTrongTuan();

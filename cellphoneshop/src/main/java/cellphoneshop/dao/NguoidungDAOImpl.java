@@ -131,7 +131,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 
 	@Transactional
 	public Boolean updateNguoidung(NguoiDung user) {
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		if(user == null){
 			return false;
 		}
@@ -142,12 +142,14 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 
 		try {
 			session.update(user);
-			
+			session.flush();
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			log.info("Error Update: " + e.getMessage());
 			return false;
+		} finally {
+			session.close();
 		}
 	}
 }

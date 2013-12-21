@@ -81,10 +81,18 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		}
 		
 		Iterator iterator = nguoiDung.getVaiTros().iterator();
-		VaiTro vt = (VaiTro) iterator.next();
+		/*VaiTro vt = (VaiTro) iterator.next();
 		vt.setMaVaiTro(maVaiTro);
-		vt.setTenVaiTro(vaiTro.getTenVaiTro());
+		vt.setTenVaiTro(vaiTro.getTenVaiTro());*/
 		
+		while (iterator.hasNext()) {
+			VaiTro vt = (VaiTro) iterator.next();
+			if (vt.getMaVaiTro().intValue() == maVaiTro.intValue()) {
+				return true;  // nguoi dung da co vai tro nay roi.
+			}
+		}
+		
+		nguoiDung.getVaiTros().add(vaiTro);
 		
 		return nguoiDungDAO.updateNguoidung(nguoiDung);		
 	}
