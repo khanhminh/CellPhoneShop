@@ -24,4 +24,9 @@ public class VaiTroServiceImpl implements VaiTroService {
 		return vaiTroDAO.getVaitro(name);
 	}
 
+	public VaiTro getVaiTro(Integer maVaiTro) {
+		
+		return vaiTroDAO.getVaiTro(maVaiTro);
+	}
+
 }

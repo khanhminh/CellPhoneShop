@@ -3,6 +3,8 @@ package cellphoneshop.service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +63,34 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 
 	public Boolean checkLogin(NguoiDung user) {
 		return checkLogin(user);
+	}
+
+	public List<NguoiDung> getListNguoiDung() {
+		return nguoiDungDAO.getListNguoiDung();
+	}
+
+	public Boolean phanQuyenNguoiDung(Integer maNguoiDung, Integer maVaiTro) {
+		if(maNguoiDung == null || maVaiTro == null){
+			return false;
+		}
+		VaiTro vaiTro = vaiTroService.getVaiTro(maVaiTro);
+		NguoiDung nguoiDung = nguoiDungDAO.getNguoiDung(maNguoiDung);
+		
+		if(vaiTro == null || nguoiDung == null){
+			return false;
+		}
+		
+		Iterator iterator = nguoiDung.getVaiTros().iterator();
+		VaiTro vt = (VaiTro) iterator.next();
+		vt.setMaVaiTro(maVaiTro);
+		vt.setTenVaiTro(vaiTro.getTenVaiTro());
+		
+		
+		return nguoiDungDAO.updateNguoidung(nguoiDung);		
+	}
+
+	public Boolean updateNguoidung(NguoiDung user) {
+		// TODO Auto-generated method stub
+		return nguoiDungDAO.updateNguoidung(user);
 	}
 }
