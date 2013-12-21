@@ -100,7 +100,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				Hibernate.initialize(result.getTrangThaiDonHang());
 
 				Iterator itrCTDonHang = result.getCtDonHangs().iterator();
-				if (itrCTDonHang.hasNext()) {
+				while (itrCTDonHang.hasNext()) {
 					CtDonHang ctDonHang = (CtDonHang) itrCTDonHang.next();
 					Hibernate.initialize(ctDonHang);
 					Hibernate.initialize(ctDonHang.getSanPham());
@@ -137,6 +137,56 @@ public class DonHangDAOImpl implements DonHangDAO {
 			query.setFirstResult(kqDautien);
 			query.setMaxResults(kqToiDa);
 			result = query.list();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, Integer maStatus) {
+		List<DonHang> result = new ArrayList<DonHang>();
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			String hql = "select DH from DonHang as DH where DH.nguoiDung.maNd = :maNguoiDung "
+					+ "and DH.trangThaiDonHang.maTrangThai = :maStatus";
+
+			Query query = session.createQuery(hql);
+			query.setInteger("maStatus", maStatus);
+			query.setInteger("maNguoiDung", maNguoiDung);
+			result = query.list();
+			if (result != null){
+				for (DonHang dh : result){
+					Hibernate.initialize(dh.getTrangThaiDonHang());
+				}
+			}
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung) {
+		List<DonHang> result = new ArrayList<DonHang>();
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			String hql = "select DH from DonHang as DH where DH.nguoiDung.maNd = :maNguoiDung";
+
+			Query query = session.createQuery(hql);
+			query.setInteger("maNguoiDung", maNguoiDung);
+			result = query.list();
+			if (result != null){
+				for (DonHang dh : result){
+					Hibernate.initialize(dh.getTrangThaiDonHang());
+				}
+			}
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}

@@ -29,10 +29,10 @@
 	<bean id="shoppingCartAction" class="cellphoneshop.controller.ShoppingCartController">
 	</bean>
 
-	<bean id="checkoutAction" class="cellphoneshop.controller.CheckoutController">
-	</bean>
+	<bean id="checkoutAction" class="cellphoneshop.controller.CheckoutController" />
 
-
+	<bean id="orderManagerAction" class="cellphoneshop.controller.OrderManagerController" />
+	
 	<bean id="pageInterceptor" class="cellphoneshop.interceptor.PageInterceptor"/>
 
 	<bean id="searchInterceptor" class="cellphoneshop.interceptor.SearchInterceptor">
@@ -98,6 +98,10 @@
 			</list>
 		</property>
 	</bean>
+
+
+	<!-- Admin -->
+	<bean id="accountManagerAction" class="cellphoneshop.controller.AccountManagerController" />
 
 </beans>
        				

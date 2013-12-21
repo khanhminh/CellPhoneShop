@@ -105,4 +105,12 @@ public class DonHangServiceImpl implements DonHangService {
 			boolean isAsc, Integer maStatus, int kqDautien, int kqToiDa) {
 		return donHangDAO.getListDonHangTheoNguoiDung(maNguoiDung, isAsc, maStatus, kqDautien, kqToiDa);
 	}
+
+	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung) {
+		return donHangDAO.getListDonHangTheoNguoiDung(maNguoiDung);
+	}
+	
+	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, Integer maStatus){
+		return donHangDAO.getListDonHangTheoNguoiDung(maNguoiDung, maStatus);
+	}
 }

@@ -48,6 +48,9 @@
 			</li>
 			<li><a href="contact.action">Liên hệ</a></li>
 			<li><a href="about.action">Giới thiệu</a></li>
+			<security:authorize access="isAuthenticated()"> 
+				<li><a href="list_order.action">Quản lý đơn hàng</a></li>
+			</security:authorize>
 		</ul>
 	</nav>
 </div>

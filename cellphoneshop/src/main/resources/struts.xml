@@ -95,6 +95,14 @@
 		<action name="compare" method="compare" class="filterAction">
 			<result name="success" type="tiles">compare</result>
 		</action>
+		
+		<action name="list_order" method="listOrder" class="orderManagerAction">
+			<result name="success" type="tiles">order</result>
+		</action>
+		
+		<action name="order_detail" method="detail" class="orderManagerAction">
+			<result name="success" type="tiles">detail_order</result>
+		</action>
 
 
 		<action name="new_products" method="newProducts" class="homeAction">
@@ -123,6 +131,17 @@
 		</action>
 		<action name="sendComment" method="sendComment" class="productAction">
 			<result name="json" type="json" />
+		</action>
+	</package>
+	
+	<package name="admin" extends="struts-default" namespace="/admin">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		
+		<action name="list_account" method="listAccount" class="accountManagerAction">
+			<result name="success" type="tiles">list_account</result>
 		</action>
 	</package>
 </struts>
