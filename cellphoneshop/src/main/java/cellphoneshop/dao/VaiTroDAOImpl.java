@@ -62,4 +62,19 @@ public class VaiTroDAOImpl implements VaiTroDAO{
 		}
 	}
 
+	public VaiTro getVaiTro(Integer maVaiTro) {
+		List<VaiTro> list;
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "from VaiTro vt where vt.maVaiTro=:maVaiTro";
+		Query query = session.createQuery(hql);
+		query.setInteger("maVaiTro", maVaiTro);
+		list = query.list();
+		if (list.size() > 0){
+			return list.get(0);
+		}
+		else {
+			return null;
+		}
+	}
+
 }

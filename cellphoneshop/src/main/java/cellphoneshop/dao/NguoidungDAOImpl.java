@@ -3,6 +3,7 @@ package cellphoneshop.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -26,6 +27,8 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private SaltSource saltSource;
+	
+	Logger log = Logger.getLogger(NguoidungDAOImpl.class);
 
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -44,32 +47,33 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 			return null;
 		}
 	}
-	
+
 	@Transactional(readOnly = true)
 	public NguoiDung getNguoiDung(Integer maNguoiDung) {
 		NguoiDung result = null;
 		Session session = sessionFactory.getCurrentSession();
-		
+
 		try {
 			result = (NguoiDung) session.get(NguoiDung.class, maNguoiDung);
 			if (result != null) {
 				Hibernate.initialize(result.getVaiTros());
 			}
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			System.err
+					.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}
-		
+
 		return result;
 	}
 
 	@Transactional
 	public Boolean insertNguoidung(NguoiDung user) {
-		
+
 		Session session = sessionFactory.getCurrentSession();
-		if(getNguoidung(user.getEmail()) != null){
+		if (getNguoidung(user.getEmail()) != null) {
 			return false;
 		}
-		
+
 		try {
 			session.save(user);
 			String pass = encodePassword(user);
@@ -78,7 +82,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 		} catch (HibernateException e) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -89,20 +93,61 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 				.createQuery("from NguoiDung nd where nd.email = :email and nd.matKhau = :password");
 		query.setParameter("email", user.getEmail());
 		query.setParameter("password", user.getMatKhau());
-		
+
 		List<NguoiDung> list = query.list();
 		if (list == null || list.isEmpty()) {
 			return false;
 		}
 
 		return true;
-		
+
 	}
-	
-	private String encodePassword(NguoiDung nguoidung){
+
+	private String encodePassword(NguoiDung nguoidung) {
 		Object salt = saltSource.getSalt(new UserDetailsAdapter(nguoidung));
-		String encPassword = passwordEncoder.encodePassword(nguoidung.getMatKhau(), salt);
-		
+		String encPassword = passwordEncoder.encodePassword(
+				nguoidung.getMatKhau(), salt);
+
 		return encPassword;
+	}
+
+	@Transactional(readOnly = true)
+	public List<NguoiDung> getListNguoiDung() {
+		List<NguoiDung> userList = new ArrayList<NguoiDung>();
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from NguoiDung nd");
+		userList = query.list();
+
+		for (NguoiDung user : userList) {
+			Hibernate.initialize(user.getVaiTros());
+		}
+
+		if (userList == null || userList.isEmpty()) {
+			return null;
+		}
+
+		return userList;
+	}
+
+	@Transactional
+	public Boolean updateNguoidung(NguoiDung user) {
+		Session session = sessionFactory.getCurrentSession();
+		if(user == null){
+			return false;
+		}
+		
+		if(this.getNguoiDung(user.getMaNd()) == null){
+			return false;
+		}
+
+		try {
+			session.update(user);
+			
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info("Error Update: " + e.getMessage());
+			return false;
+		}
 	}
 }

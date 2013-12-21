@@ -7,4 +7,5 @@ public interface VaiTroService {
 
 	List<VaiTro> getListVaiTro();
 	VaiTro getVaiTro(String name);
+	VaiTro getVaiTro(Integer maVaiTro);
 }
