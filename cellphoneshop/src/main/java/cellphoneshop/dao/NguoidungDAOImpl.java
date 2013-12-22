@@ -27,7 +27,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private SaltSource saltSource;
-	
+
 	Logger log = Logger.getLogger(NguoidungDAOImpl.class);
 
 	@SuppressWarnings("unchecked")
@@ -59,8 +59,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 				Hibernate.initialize(result.getVaiTros());
 			}
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -134,11 +133,11 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 	@Transactional
 	public Boolean updateNguoidung(NguoiDung user) {
 		Session session = sessionFactory.openSession();
-		if(user == null){
+		if (user == null) {
 			return false;
 		}
-		
-		if(this.getNguoiDung(user.getMaNd()) == null){
+
+		if (this.getNguoiDung(user.getMaNd()) == null) {
 			return false;
 		}
 
@@ -148,7 +147,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
-			log.info("Error Update: " + e.getMessage());
+			log.error("Error Update: " + e.getMessage());
 			return false;
 		} finally {
 			session.close();

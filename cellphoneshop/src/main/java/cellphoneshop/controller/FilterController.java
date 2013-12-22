@@ -36,7 +36,7 @@ public class FilterController  extends ActionSupport implements ServletRequestAw
 	
 	private static final int DEFAULT_NUMBER_PRODUCT = 10;
 	
-	private Logger logger = Logger.getLogger(FilterController.class);
+	private Logger log = Logger.getLogger(FilterController.class);
 	
 	private String[] os;
 	private String[] brand;
@@ -85,7 +85,7 @@ public class FilterController  extends ActionSupport implements ServletRequestAw
 		request.setAttribute("listProduct", list);
 		request.setAttribute("totalPage", totalPage);
 		
-		logger.info(sort.getBy() + "_" + sort.isAsc());
+		log.info(sort.getBy() + "_" + sort.isAsc());
 		
 		price = null;
 		brand = null;

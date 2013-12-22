@@ -3,6 +3,7 @@ package cellphoneshop.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import cellphoneshop.model.TrangThaiDonHang;
 public class TrangThaiDonHangDAOImpl implements TrangThaiDonHangDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
+	private Logger log = Logger.getLogger(TrangThaiDonHangDAOImpl.class);
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -27,7 +29,7 @@ public class TrangThaiDonHangDAOImpl implements TrangThaiDonHangDAO {
 		try {
 			session.save(ttDonHang);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -39,7 +41,7 @@ public class TrangThaiDonHangDAOImpl implements TrangThaiDonHangDAO {
 		try {
 			result = (TrangThaiDonHang) session.get(TrangThaiDonHang.class, maTrangThai);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -53,7 +55,7 @@ public class TrangThaiDonHangDAOImpl implements TrangThaiDonHangDAO {
 		try {
 			result = session.createQuery("from TrangThaiDonHang").list();
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

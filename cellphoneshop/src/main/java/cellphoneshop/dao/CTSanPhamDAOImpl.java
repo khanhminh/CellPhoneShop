@@ -1,11 +1,13 @@
 package cellphoneshop.dao;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import cellphoneshop.model.CtSanPham;
 
 @Repository
@@ -13,6 +15,8 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+		
+	private Logger log = Logger.getLogger(CTSanPhamDAOImpl.class);
 	
 	public void sessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -25,7 +29,7 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 		try {
 			session.save(ctSanPham);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -37,7 +41,7 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 		try {
 			result = (CtSanPham) session.get(CtSanPham.class, maCtSP);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -53,7 +57,7 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 			Query query = session.createQuery(hql);
 			result = (CtSanPham) query.uniqueResult();
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -65,7 +69,7 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 		try {
 			session.update(ctSanPham);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 }

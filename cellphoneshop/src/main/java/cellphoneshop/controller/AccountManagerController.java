@@ -27,7 +27,7 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 	private VaiTroService vtService;
 	private HttpServletRequest request;
 	private final int RecordPerPage = 10;
-	private Logger logger = Logger.getLogger(AccountManagerController.class);
+	private Logger log = Logger.getLogger(AccountManagerController.class);
 	
 	public String listAccount(){
 		int page = getPage();
@@ -100,7 +100,7 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			}			
 			
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 			result = false;
 		}
 		JsonHandler.writeJson(new Boolean(result));
@@ -128,7 +128,7 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			}
 		} catch (Exception e) {
 			result = -1;
-			logger.error(e.getMessage());
+			log.error(e.getMessage());
 		}
 		JsonHandler.writeJson(result);
 		

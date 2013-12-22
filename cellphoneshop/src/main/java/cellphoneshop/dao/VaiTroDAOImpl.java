@@ -3,6 +3,7 @@ package cellphoneshop.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,6 +20,8 @@ public class VaiTroDAOImpl implements VaiTroDAO{
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	private Logger log = Logger.getLogger(VaiTroDAOImpl.class);
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -32,7 +35,7 @@ public class VaiTroDAOImpl implements VaiTroDAO{
 			Query query = session.createQuery(hql);
 			list = query.list();
 		} catch (HibernateException ex) {
-			System.err.println(ex.getMessage());
+			log.error(ex.getMessage());
 		}
 		
 		return list;

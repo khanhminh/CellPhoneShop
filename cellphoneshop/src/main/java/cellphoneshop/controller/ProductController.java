@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,6 +32,8 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 	
 	private static final String JSON = "json";
 	private static final int NUMBER_COMMENTS = 10;
+	
+	private Logger log = Logger.getLogger(ProductController.class);
 	
 	@Autowired
 	private SanPhamService sanPhamService;

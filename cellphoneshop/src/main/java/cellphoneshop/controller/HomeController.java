@@ -21,7 +21,7 @@ public class HomeController extends ActionSupport implements
 	private SanPhamService sanPhamService;
 	private HttpServletRequest request;
 
-	Logger logger = Logger.getLogger(HomeController.class);
+	Logger log = Logger.getLogger(HomeController.class);
 	private int productPerPage;
 	
 	@Override

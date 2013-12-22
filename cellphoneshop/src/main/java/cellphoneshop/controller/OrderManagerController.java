@@ -28,6 +28,8 @@ public class OrderManagerController extends ActionSupport implements
 	@Autowired
 	private TrangThaiDonHangService ttdhService;
 	
+	private Logger log = Logger.getLogger(OrderManagerController.class);
+	
 	public String listOrder(){
 		NguoiDung user = SecurityHelper.getUser();
 		int id = getStatus();

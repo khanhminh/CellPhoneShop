@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +22,8 @@ public class ShoppingCartController extends ActionSupport implements ServletRequ
 	@Autowired
 	private SanPhamService sanPhamService;
 	private HttpServletRequest request;
+	
+	private Logger log = Logger.getLogger(ShoppingCartController.class);
 	
 	public String cart(){
 		HttpSession session = request.getSession();
