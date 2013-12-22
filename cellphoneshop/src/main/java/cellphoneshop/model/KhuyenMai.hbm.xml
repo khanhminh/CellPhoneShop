@@ -29,6 +29,9 @@
         <property name="quaTang" type="string">
             <column name="quaTang" length="200" />
         </property>
+        <property name="hinhAnh" type="string">
+            <column name="hinhAnh" length="256" />
+        </property>
         <set name="sanPhams" inverse="false" table="CtKhuyenMai">
             <key>
                 <column name="maKM" not-null="true" />

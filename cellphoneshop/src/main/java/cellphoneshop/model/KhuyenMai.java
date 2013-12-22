@@ -18,6 +18,7 @@ public class KhuyenMai  implements java.io.Serializable {
      private Date ngayBatDau;
      private Date ngayKetThuc;
      private String quaTang;
+     private String hinhAnh;
      private Set sanPhams = new HashSet(0);
 
     public KhuyenMai() {
@@ -101,6 +102,15 @@ public class KhuyenMai  implements java.io.Serializable {
     public void setSanPhams(Set sanPhams) {
         this.sanPhams = sanPhams;
     }
+
+	public String getHinhAnh() {
+		return hinhAnh;
+	}
+	
+	public void setHinhAnh(String hinhAnh) {
+		this.hinhAnh = hinhAnh;
+	}
+    
 }
 
 

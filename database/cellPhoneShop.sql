@@ -28,291 +28,292 @@ CREATE TABLE NhaSanXuat (
 	logo VARCHAR(256)
 );
 
-create table LoaiSanPham (
-	maLoaiSP int auto_increment primary key,
-	tenLoaiSP varchar(30) character set utf8 not null
+CREATE TABLE LoaiSanPham (
+	maLoaiSP INT AUTO_INCREMENT PRIMARY KEY,
+	tenLoaiSP VARCHAR(30) CHARACTER SET utf8 NOT NULL
 );
 
-create table SanPham (
-	maSP int auto_increment primary key,
-	tenSP varchar(100) character set utf8 not null,
-	gioiThieu varchar(800) character set utf8,
-	gia int default 0,
-	soThangBaoHanh int, # don vi: thang
-	hinhDaiDien varchar(256),
-	soLuongHienCo int default 0,
-	tongSoLuong int default 0,
-	ngayNhap date,
-	maLoaiSP int not null,
-	maNhaSX int,
-	diemDanhGiaTB float default 0,
+CREATE TABLE SanPham (
+	maSP INT AUTO_INCREMENT PRIMARY KEY,
+	tenSP VARCHAR(100) CHARACTER SET utf8 NOT NULL,
+	gioiThieu VARCHAR(800) CHARACTER SET utf8,
+	gia INT DEFAULT 0,
+	soThangBaoHanh INT, # don vi: thang
+	hinhDaiDien VARCHAR(256),
+	soLuongHienCo INT DEFAULT 0,
+	tongSoLuong INT DEFAULT 0,
+	ngayNhap DATE,
+	maLoaiSP INT NOT NULL,
+	maNhaSX INT,
+	diemDanhGiaTB FLOAT DEFAULT 0,
 	
-	constraint fk_SanPham_NhaSanXuat foreign key (maNhaSX) references NhaSanXuat(maNhaSX),
-	constraint fk_SanPham_LoaiSanPham foreign key (maLoaiSP) references LoaiSanPham(maLoaiSP)
+	CONSTRAINT fk_SanPham_NhaSanXuat FOREIGN KEY (maNhaSX) REFERENCES NhaSanXuat(maNhaSX),
+	CONSTRAINT fk_SanPham_LoaiSanPham FOREIGN KEY (maLoaiSP) REFERENCES LoaiSanPham(maLoaiSP)
 );
 
-create table HeDieuHanh (
-	maHDH int auto_increment primary key,
-	tenHDH varchar(30) character set utf8 not null
+CREATE TABLE HeDieuHanh (
+	maHDH INT AUTO_INCREMENT PRIMARY KEY,
+	tenHDH VARCHAR(30) CHARACTER SET utf8 NOT NULL
 );
 
-create table CtSanPham (
-	maCTSP int auto_increment primary key,
-	maSP int not null,
-	trongLuong float,
-	chieuCao float, # mm
-	chieuRong float, # mm
-	doDay float, # mm
-	ngaySX date,
+CREATE TABLE CtSanPham (
+	maCTSP INT AUTO_INCREMENT PRIMARY KEY,
+	maSP INT NOT NULL,
+	trongLuong FLOAT,
+	chieuCao FLOAT, # mm
+	chieuRong FLOAT, # mm
+	doDay FLOAT, # mm
+	ngaySX DATE,
 	
 	# Man hinh
-	loaiManhinh varchar(200) character set utf8,
-	soMauManHinh varchar(200) character set utf8,
-	doPhanGiaiManHinh varchar(200) character set utf8, # 320x480 pixels
-	chuanManHinh varchar(200) character set utf8,
-	kichThuocManHinh float, # inch
-	camUng varchar(200) character set utf8,
-	matDoDiemAnh varchar(200) character set utf8,
+	loaiManhinh VARCHAR(200) CHARACTER SET utf8,
+	soMauManHinh VARCHAR(200) CHARACTER SET utf8,
+	doPhanGiaiManHinh VARCHAR(200) CHARACTER SET utf8, # 320x480 pixels
+	chuanManHinh VARCHAR(200) CHARACTER SET utf8,
+	kichThuocManHinh FLOAT, # inch
+	camUng VARCHAR(200) CHARACTER SET utf8,
+	matDoDiemAnh VARCHAR(200) CHARACTER SET utf8,
 	
 	# Camera
-	cameraSau varchar(200) character set utf8,
-	cameraTruoc varchar(200) character set utf8,
-	tinhNangCamera varchar(200) character set utf8,
-	quayPhim varchar(200) character set utf8,
-	videoCall bool,
+	cameraSau VARCHAR(200) CHARACTER SET utf8,
+	cameraTruoc VARCHAR(200) CHARACTER SET utf8,
+	tinhNangCamera VARCHAR(200) CHARACTER SET utf8,
+	quayPhim VARCHAR(200) CHARACTER SET utf8,
+	videoCall BOOL,
 	
 	# Xu ly
-	tocDoCPU float,   # GHz
-	soNhanCPU int,
-	chipset varchar(200) character set utf8,
-	RAM varchar(200) character set utf8,
-	GPU varchar(200) character set utf8,
+	tocDoCPU FLOAT,   # GHz
+	soNhanCPU INT,
+	chipset VARCHAR(200) CHARACTER SET utf8,
+	RAM VARCHAR(200) CHARACTER SET utf8,
+	GPU VARCHAR(200) CHARACTER SET utf8,
 	
 	# Bo nho
-	boNhoTrong varchar(200) character set utf8,
-	theNhoNgoai varchar(200) character set utf8,
-	dungLuongTheToiDa int, # GB
+	boNhoTrong VARCHAR(200) CHARACTER SET utf8,
+	theNhoNgoai VARCHAR(200) CHARACTER SET utf8,
+	dungLuongTheToiDa INT, # GB
 	
 	# Pin
-	dungLuongPin float, # mAh
-	congNghePin varchar(200) character set utf8,
-	pinCoTheThaoRoi bool,
-	thoiGianChoToiDa float, # Gio
-	thoiGianChoQuayPhim float, # Gio
-	thoiGianChoGoiDien float,
+	dungLuongPin FLOAT, # mAh
+	congNghePin VARCHAR(200) CHARACTER SET utf8,
+	pinCoTheThaoRoi BOOL,
+	thoiGianChoToiDa FLOAT, # Gio
+	thoiGianChoQuayPhim FLOAT, # Gio
+	thoiGianChoGoiDien FLOAT,
 	
 	# HDH
-	maHDH int,
+	maHDH INT,
 
 	# Ban Phim
-	loaiBanPhim varchar(200) character set utf8,
+	loaiBanPhim VARCHAR(200) CHARACTER SET utf8,
 	
 	
 	# SIM
-	soLuongSim int default 1,
+	soLuongSim INT DEFAULT 1,
 	
 	# CTKetNoi
-	mang2G varchar(200) character set utf8,
-	mang3G varchar(200) character set utf8,
-	mang4G varchar(200) character set utf8,
-	wifi varchar(200) character set utf8,
-	bluetooth varchar(200) character set utf8,
-	GPRS varchar(200) character set utf8,
+	mang2G VARCHAR(200) CHARACTER SET utf8,
+	mang3G VARCHAR(200) CHARACTER SET utf8,
+	mang4G VARCHAR(200) CHARACTER SET utf8,
+	wifi VARCHAR(200) CHARACTER SET utf8,
+	bluetooth VARCHAR(200) CHARACTER SET utf8,
+	GPRS VARCHAR(200) CHARACTER SET utf8,
 	
 	# Dinh vi
-	GPS varchar(200) character set utf8,
-	boCamBien varchar(200) character set utf8,
+	GPS VARCHAR(200) CHARACTER SET utf8,
+	boCamBien VARCHAR(200) CHARACTER SET utf8,
 	
 	# Den flash
-	denFlash varchar(200) character set utf8,
-	denPin varchar(200) character set utf8,
+	denFlash VARCHAR(200) CHARACTER SET utf8,
+	denPin VARCHAR(200) CHARACTER SET utf8,
 
-	constraint fk_CTSanPham_SanPham foreign key (maSP) references SanPham(maSP),
-	constraint fk_CTSanPham_HeDieuHanh foreign key (maHDH) references HeDieuHanh(maHDH)
+	CONSTRAINT fk_CTSanPham_SanPham FOREIGN KEY (maSP) REFERENCES SanPham(maSP),
+	CONSTRAINT fk_CTSanPham_HeDieuHanh FOREIGN KEY (maHDH) REFERENCES HeDieuHanh(maHDH)
 );
 
-create table HinhAnhSP (
-	maHinhAnh int auto_increment primary key,
-	maCTSP int not null,
-	duongDan varchar(256) not null,
-	STT int not null,
-	constraint fk_HinhAnhSP_CTSanPham foreign key (maCTSP) references CtSanPham(maCTSP)
+CREATE TABLE HinhAnhSP (
+	maHinhAnh INT AUTO_INCREMENT PRIMARY KEY,
+	maCTSP INT NOT NULL,
+	duongDan VARCHAR(256) NOT NULL,
+	STT INT NOT NULL,
+	CONSTRAINT fk_HinhAnhSP_CTSanPham FOREIGN KEY (maCTSP) REFERENCES CtSanPham(maCTSP)
 );
 
-create table LoaiNguoiDung (
-	maLoaiND int auto_increment primary key,
-	tenLoaiND varchar(30) character set utf8 not null
+CREATE TABLE LoaiNguoiDung (
+	maLoaiND INT AUTO_INCREMENT PRIMARY KEY,
+	tenLoaiND VARCHAR(30) CHARACTER SET utf8 NOT NULL
 );
 
-create table VaiTro (
-	maVaiTro int auto_increment primary key,
-	tenVaiTro varchar(30) character set utf8 not null
+CREATE TABLE VaiTro (
+	maVaiTro INT AUTO_INCREMENT PRIMARY KEY,
+	tenVaiTro VARCHAR(30) CHARACTER SET utf8 NOT NULL
 );
 
-create table NguoiDung (
-	maND int auto_increment primary key,
-	ho varchar(30) character set utf8 not null,
-	ten varchar(20) character set utf8 not null,
-	email varchar(256) character set utf8 not null,
-	matKhau varchar(32) character set utf8 not null,
-	maLoaiND int,
-	gioiTinh int, # 1 la nam
-	ngaySinh date not null,
-	hinhDaiDien varchar(256),
-	soDienThoai varchar(15),
-	diaChi varchar(100) character set utf8,
-	nhanTinQuaEmail bool default false,
-	enable boolean default true,
+CREATE TABLE NguoiDung (
+	maND INT AUTO_INCREMENT PRIMARY KEY,
+	ho VARCHAR(30) CHARACTER SET utf8 NOT NULL,
+	ten VARCHAR(20) CHARACTER SET utf8 NOT NULL,
+	email VARCHAR(256) CHARACTER SET utf8 NOT NULL,
+	matKhau VARCHAR(32) CHARACTER SET utf8 NOT NULL,
+	maLoaiND INT,
+	gioiTinh INT, # 1 la nam
+	ngaySinh DATE NOT NULL,
+	hinhDaiDien VARCHAR(256),
+	soDienThoai VARCHAR(15),
+	diaChi VARCHAR(100) CHARACTER SET utf8,
+	nhanTinQuaEmail BOOL DEFAULT FALSE,
+	ENABLE BOOLEAN DEFAULT TRUE,
 	
-	constraint fk_NguoiDung_LoaiNguoiDung foreign key (maLoaiND) references LoaiNguoiDung(maLoaiND)
+	CONSTRAINT fk_NguoiDung_LoaiNguoiDung FOREIGN KEY (maLoaiND) REFERENCES LoaiNguoiDung(maLoaiND)
 );
 
-create table LienHe (
-	maLienHe int primary key,
-	email varchar(256) character set utf8 not null,
-	hoTen varchar(50) character set utf8 not null,
-	noiDung varchar (800) character set utf8 not null
+CREATE TABLE LienHe (
+	maLienHe INT PRIMARY KEY,
+	email VARCHAR(256) CHARACTER SET utf8 NOT NULL,
+	hoTen VARCHAR(50) CHARACTER SET utf8 NOT NULL,
+	noiDung VARCHAR (800) CHARACTER SET utf8 NOT NULL
 );
 
 
-create table PhanQuyen (
-	maND int not null,
-	maVaiTro int not null,
+CREATE TABLE PhanQuyen (
+	maND INT NOT NULL,
+	maVaiTro INT NOT NULL,
 	
-	primary key (maND, maVaiTro),
-	constraint fk_PhanQuyen_NguoiDung foreign key (maND) references NguoiDung(maND),
-	constraint fk_PhanQuyen_VaiTro foreign key (maVaiTro) references VaiTro(maVaiTro)
+	PRIMARY KEY (maND, maVaiTro),
+	CONSTRAINT fk_PhanQuyen_NguoiDung FOREIGN KEY (maND) REFERENCES NguoiDung(maND),
+	CONSTRAINT fk_PhanQuyen_VaiTro FOREIGN KEY (maVaiTro) REFERENCES VaiTro(maVaiTro)
 );
 
 
-create table DanhGia (
-	maSP int not null,
-	maND int not null,
-	diem float not null,
+CREATE TABLE DanhGia (
+	maSP INT NOT NULL,
+	maND INT NOT NULL,
+	diem FLOAT NOT NULL,
 	
-	primary key (maSP, maND),
-	constraint fk_DanhGia_SanPham foreign key (maSP) references SanPham(maSP),
-	constraint fk_DanhGia_NguoiDung foreign key (maND) references NguoiDung(maND)
+	PRIMARY KEY (maSP, maND),
+	CONSTRAINT fk_DanhGia_SanPham FOREIGN KEY (maSP) REFERENCES SanPham(maSP),
+	CONSTRAINT fk_DanhGia_NguoiDung FOREIGN KEY (maND) REFERENCES NguoiDung(maND)
 );
 
-create table BinhLuan (
-	maBinhLuan int auto_increment primary key,
-	maSP int not null,
-	maND int not null,
-	loiBinh varchar (800) character set utf8 not null,
-	ngayBinhLuan date not null,
+CREATE TABLE BinhLuan (
+	maBinhLuan INT AUTO_INCREMENT PRIMARY KEY,
+	maSP INT NOT NULL,
+	maND INT NOT NULL,
+	loiBinh VARCHAR (800) CHARACTER SET utf8 NOT NULL,
+	ngayBinhLuan DATE NOT NULL,
 	
-	constraint fk_BinhLuan_SanPham foreign key (maSP) references SanPham(maSP),
-	constraint fk_BinhLuan_NguoiDung foreign key (maND) references NguoiDung(maND)
+	CONSTRAINT fk_BinhLuan_SanPham FOREIGN KEY (maSP) REFERENCES SanPham(maSP),
+	CONSTRAINT fk_BinhLuan_NguoiDung FOREIGN KEY (maND) REFERENCES NguoiDung(maND)
 );
 
-create table PtGiaoHang (
-	maPTGiaoHang int auto_increment primary key,
-	tenPTGiaoHang varchar(50) character set utf8 not null
+CREATE TABLE PtGiaoHang (
+	maPTGiaoHang INT AUTO_INCREMENT PRIMARY KEY,
+	tenPTGiaoHang VARCHAR(50) CHARACTER SET utf8 NOT NULL
 );
 
-create table PtThanhToan (
-	maPTThanhToan int auto_increment primary key,
-	tenPTThanhToan varchar(50) character set utf8 not null,
-	ghiChu varchar(800)
+CREATE TABLE PtThanhToan (
+	maPTThanhToan INT AUTO_INCREMENT PRIMARY KEY,
+	tenPTThanhToan VARCHAR(50) CHARACTER SET utf8 NOT NULL,
+	ghiChu VARCHAR(800)
 );
 
-create table TrangThaiDonHang (
-	maTrangThai int auto_increment primary key,
-	tenTrangThai varchar(30) character set utf8 not null
+CREATE TABLE TrangThaiDonHang (
+	maTrangThai INT AUTO_INCREMENT PRIMARY KEY,
+	tenTrangThai VARCHAR(30) CHARACTER SET utf8 NOT NULL
 );
 
-create table NguoiNhan (
-	maNguoiNhan int primary key,
-	maND int not null,
-	hoTen varchar(50) character set utf8,
-	soDienThoai varchar(15),
-	diaChi varchar(100) character set utf8 not null,
+CREATE TABLE NguoiNhan (
+	maNguoiNhan INT PRIMARY KEY,
+	maND INT NOT NULL,
+	hoTen VARCHAR(50) CHARACTER SET utf8,
+	soDienThoai VARCHAR(15),
+	diaChi VARCHAR(100) CHARACTER SET utf8 NOT NULL,
 	
-	constraint fk_NguoiNhan_NguoiDung foreign key (maND) references NguoiDung(maND)
+	CONSTRAINT fk_NguoiNhan_NguoiDung FOREIGN KEY (maND) REFERENCES NguoiDung(maND)
 );
 
-create table DonHang (
-	maDonHang int auto_increment primary key,
-	maND int not null,
-	maNguoiNhan int not null,
-	ngayDatHang date not null,
-	tongGiaTri int not null,
-	giamGia int default 0,        #Giảm giá trên tổng giá trị của đơn hàng (vd: yêu cầu những đơn hàng trên x đồng được giảm 5%)
-	maPtGiaoHang int not null,
-	maTrangThai int not null,    # Trang thai don hang
-	maPtThanhToan int not null,
+CREATE TABLE DonHang (
+	maDonHang INT AUTO_INCREMENT PRIMARY KEY,
+	maND INT NOT NULL,
+	maNguoiNhan INT NOT NULL,
+	ngayDatHang DATE NOT NULL,
+	tongGiaTri INT NOT NULL,
+	giamGia INT DEFAULT 0,        #Giảm giá trên tổng giá trị của đơn hàng (vd: yêu cầu những đơn hàng trên x đồng được giảm 5%)
+	maPtGiaoHang INT NOT NULL,
+	maTrangThai INT NOT NULL,    # Trang thai don hang
+	maPtThanhToan INT NOT NULL,
 	
-	constraint fk_DonHang_NguoiDung foreign key (maND) references NguoiDung(maND),
-	constraint fk_DonHang_NguoiNhan foreign key (maNguoiNhan) references NguoiNhan(maNguoiNhan),
-	constraint fk_DonHang_PTGiaoHang foreign key (maPtGiaoHang) references PtGiaoHang(maPtGiaoHang),
-	constraint fk_DonHang_PtThanhToan foreign key (maPtThanhToan) references PtThanhToan(maPtThanhToan),
-	constraint fk_DonHang_TrangThaiDonHang foreign key (maTrangThai) references TrangThaiDonHang(maTrangThai)
+	CONSTRAINT fk_DonHang_NguoiDung FOREIGN KEY (maND) REFERENCES NguoiDung(maND),
+	CONSTRAINT fk_DonHang_NguoiNhan FOREIGN KEY (maNguoiNhan) REFERENCES NguoiNhan(maNguoiNhan),
+	CONSTRAINT fk_DonHang_PTGiaoHang FOREIGN KEY (maPtGiaoHang) REFERENCES PtGiaoHang(maPtGiaoHang),
+	CONSTRAINT fk_DonHang_PtThanhToan FOREIGN KEY (maPtThanhToan) REFERENCES PtThanhToan(maPtThanhToan),
+	CONSTRAINT fk_DonHang_TrangThaiDonHang FOREIGN KEY (maTrangThai) REFERENCES TrangThaiDonHang(maTrangThai)
 );
 
-create table CtDonHang (
-	maCTDonHang int auto_increment primary key,
-	maDonHang int not null,
-	maSP int not null,
-	giaTungSP int not null,
-	giamGiaTungSP int not null default 0,       # Giảm giá trên từng sản phẩm (ví dụ: giảm giá khi khuyến mãi).
-	soLuong int not null default 1,
-	tongGiaTri int not null,
+CREATE TABLE CtDonHang (
+	maCTDonHang INT AUTO_INCREMENT PRIMARY KEY,
+	maDonHang INT NOT NULL,
+	maSP INT NOT NULL,
+	giaTungSP INT NOT NULL,
+	giamGiaTungSP INT NOT NULL DEFAULT 0,       # Giảm giá trên từng sản phẩm (ví dụ: giảm giá khi khuyến mãi).
+	soLuong INT NOT NULL DEFAULT 1,
+	tongGiaTri INT NOT NULL,
 	
-	constraint fk_CtDonHang_DonHang foreign key (maDonHang) references DonHang(maDonHang),
-	constraint fk_CtDonHang_SanPham foreign key (maSP) references SanPham(maSP)
+	CONSTRAINT fk_CtDonHang_DonHang FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang),
+	CONSTRAINT fk_CtDonHang_SanPham FOREIGN KEY (maSP) REFERENCES SanPham(maSP)
 );
 
-create table PhieuGiaoHang (
-	maPhieuGiaoHang int auto_increment primary key,
-	maDonHang int not null,
-	ngayGiao date not null,
+CREATE TABLE PhieuGiaoHang (
+	maPhieuGiaoHang INT AUTO_INCREMENT PRIMARY KEY,
+	maDonHang INT NOT NULL,
+	ngayGiao DATE NOT NULL,
 	
-	constraint fk_PhieuGiaoHang_DonHang foreign key (maDonHang) references DonHang(maDonHang)
+	CONSTRAINT fk_PhieuGiaoHang_DonHang FOREIGN KEY (maDonHang) REFERENCES DonHang(maDonHang)
 );
 
-create table TrangThaiKhuyenMai (
-	maTrangThai int auto_increment primary key,
-	tenTrangThai varchar(30) character set utf8 not null
+CREATE TABLE TrangThaiKhuyenMai (
+	maTrangThai INT AUTO_INCREMENT PRIMARY KEY,
+	tenTrangThai VARCHAR(30) CHARACTER SET utf8 NOT NULL
 );
 
-create table KhuyenMai (
-	maKM int auto_increment primary key,
-	tieuDe varchar(100) character set utf8,
-	moTa varchar(400) character set utf8,
-	phanTramGiamGia float,
-	ngayBatDau date,
-	ngayKetThuc date,
-	quaTang varchar(200) character set utf8,
-	maTrangThaiKM int not null,
+CREATE TABLE KhuyenMai (
+	maKM INT AUTO_INCREMENT PRIMARY KEY,
+	tieuDe VARCHAR(100) CHARACTER SET utf8,
+	moTa VARCHAR(400) CHARACTER SET utf8,
+	phanTramGiamGia FLOAT,
+	ngayBatDau DATE,
+	ngayKetThuc DATE,
+	quaTang VARCHAR(200) CHARACTER SET utf8,
+	maTrangThaiKM INT NOT NULL,
+	hinhAnh VARCHAR(256),
 	
-	constraint fk_KhuyenMai_TrangThaiKhuyenMai foreign key (maTrangThaiKM) references TrangThaiKhuyenMai(maTrangThai)
+	CONSTRAINT fk_KhuyenMai_TrangThaiKhuyenMai FOREIGN KEY (maTrangThaiKM) REFERENCES TrangThaiKhuyenMai(maTrangThai)
 );
 
-create table CtKhuyenMai (
-	maKM int not null,
-	maSP int not null,
+CREATE TABLE CtKhuyenMai (
+	maKM INT NOT NULL,
+	maSP INT NOT NULL,
 	
-	primary key (maSP, maKM),
-	constraint fk_CTKhuyenMai_KhuyenMai foreign key (maKM) references KhuyenMai(maKM),
-	constraint fk_CTKhuyenMai_SanPham foreign key (maSP) references SanPham(maSP)
+	PRIMARY KEY (maSP, maKM),
+	CONSTRAINT fk_CTKhuyenMai_KhuyenMai FOREIGN KEY (maKM) REFERENCES KhuyenMai(maKM),
+	CONSTRAINT fk_CTKhuyenMai_SanPham FOREIGN KEY (maSP) REFERENCES SanPham(maSP)
 );
 
-create table DanhSachMongMuon (
-	maDSMongMuon int auto_increment primary key,
-	maND int not null,
-	ngayTao date,
+CREATE TABLE DanhSachMongMuon (
+	maDSMongMuon INT AUTO_INCREMENT PRIMARY KEY,
+	maND INT NOT NULL,
+	ngayTao DATE,
 
-	constraint fk_DanhSachMongMuon_NguoiDung foreign key (maND) references NguoiDung(maND)
+	CONSTRAINT fk_DanhSachMongMuon_NguoiDung FOREIGN KEY (maND) REFERENCES NguoiDung(maND)
 );
 
-create table CtDSMongMuon (
-	maDSMongMuon int not null,
-	maSP int not null,
+CREATE TABLE CtDSMongMuon (
+	maDSMongMuon INT NOT NULL,
+	maSP INT NOT NULL,
 	
-	primary key (maDSMongMuon, maSP),
-	constraint fk_CTDSMongMuon_DSMonMuon foreign key (maDSMongMuon) references DanhSachMongMuon(maDSMongMuon),
-	constraint fk_CTDSMongMuon_SanPham foreign key (maSP) references SanPham(maSP)
+	PRIMARY KEY (maDSMongMuon, maSP),
+	CONSTRAINT fk_CTDSMongMuon_DSMonMuon FOREIGN KEY (maDSMongMuon) REFERENCES DanhSachMongMuon(maDSMongMuon),
+	CONSTRAINT fk_CTDSMongMuon_SanPham FOREIGN KEY (maSP) REFERENCES SanPham(maSP)
 );
 
 
@@ -324,12 +325,12 @@ create table CtDSMongMuon (
 DELIMITER //
 CREATE PROCEDURE taoDuLieuNhaSanXuat()
 	BEGIN
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Apple');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('HTC');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('LG');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Nokia');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Samsung');
-		INSERT INTO NhaSanXuat (tenNhaSX) VALUES ('Sony');
+		INSERT INTO NhaSanXuat (tenNhaSX,logo) VALUES ('Apple','resources/images/logo/fb_apple.gif');
+		INSERT INTO NhaSanXuat (tenNhaSX,logo) VALUES ('HTC','resources/images/logo/fb_htc.gif');
+		INSERT INTO NhaSanXuat (tenNhaSX,logo) VALUES ('LG','resources/images/logo/fb_lg.gif');
+		INSERT INTO NhaSanXuat (tenNhaSX,logo) VALUES ('Nokia','resources/images/logo/fb_nokia.jpg');
+		INSERT INTO NhaSanXuat (tenNhaSX,logo) VALUES ('Samsung','resources/images/logo/fb_samsung.gif');
+		INSERT INTO NhaSanXuat (tenNhaSX,logo) VALUES ('Sony','resources/images/logo/fb_sony.gif');
 	END //
 DELIMITER ;
 CALL taoDuLieuNhaSanXuat();
@@ -385,6 +386,7 @@ CREATE PROCEDURE taoDuLieuTrangThaiDonHang()
 	BEGIN
 		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Chưa giao');
 		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Đã giao');
+		INSERT INTO TrangThaiDonHang (tenTrangThai) VALUES('Đang giao');
 	END //
 DELIMITER ;
 CALL taoDuLieuTrangThaiDonHang();
@@ -422,3 +424,14 @@ CREATE PROCEDURE taoDuLieuTrangThaiKhuyenMai()
 DELIMITER ;
 CALL taoDuLieuTrangThaiKhuyenMai();
 DROP PROCEDURE IF EXISTS taoDuLieuTrangThaiKhuyenMai;
+
+DELIMITER //
+CREATE PROCEDURE taoDuLieuKhuyenMai()
+	BEGIN
+		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Năm mới giảm giá smartphone', 'resources/images/km/km1.png', 1);
+		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Khuyến mãi cuối năm cho IPhone', 'resources/images/km/km2.png', 1);
+		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Mua sắm cuối tuần nhận khuyến mãi khủng', 'resources/images/km/km3.png', 2);
+	END //
+DELIMITER ;
+CALL taoDuLieuKhuyenMai();
+DROP PROCEDURE IF EXISTS taoDuLieuKhuyenMai;
