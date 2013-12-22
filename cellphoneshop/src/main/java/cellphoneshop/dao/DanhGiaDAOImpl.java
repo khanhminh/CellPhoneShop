@@ -47,8 +47,7 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 			sanPhamDAO.updateSanPham(sanPham); // TODO: Co cach lam nao khac tot
 												// hon la phai goi ham nay
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -64,8 +63,7 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 			query.setInteger("maNguoiDung", maNguoiDung);
 			result = (DanhGia) query.uniqueResult();
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -90,8 +88,7 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 			sanPhamDAO.updateSanPham(sanPham); // TODO: Co cach lam nao khac tot
 												// hon la phai goi ham nay
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 

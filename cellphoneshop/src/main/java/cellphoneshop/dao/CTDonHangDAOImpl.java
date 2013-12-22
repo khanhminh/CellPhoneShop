@@ -2,19 +2,22 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import cellphoneshop.model.CtDonHang;
 
 @Repository
 public class CTDonHangDAOImpl implements CTDonHangDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+	private Logger log = Logger.getLogger(CTDonHangDAOImpl.class);	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -26,7 +29,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 		try {
 			session.save(ctDonHang);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -38,7 +41,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 		try {
 			result = (CtDonHang) session.get(CtDonHang.class, maCTDonHang);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -51,7 +54,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 		try {
 			session.update(ctDonHang);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -65,7 +68,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

@@ -1,6 +1,6 @@
 package cellphoneshop.controller;
 
-//import org.slf4j.Logger;
+//import org.slf4j.log;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -32,7 +32,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class AccountController extends ActionSupport {
 
-	private Logger logger = Logger.getLogger(AccountController.class);
+	private Logger log = Logger.getLogger((AccountController.class));
 
 	@Autowired
 	private NguoiDungService nguoiDungService;
@@ -58,7 +58,7 @@ public class AccountController extends ActionSupport {
 
 	public String login() {
 
-		logger.info("Vao login Controller AccountController");
+		log.info("Vao login Controller AccountController");
 		return INPUT;
 	}
 
@@ -70,7 +70,7 @@ public class AccountController extends ActionSupport {
 	}
 
 	public String register() throws UnsupportedEncodingException {
-		logger.info("Vao register Controller AccountController");
+		log.info("Vao register Controller AccountController");
 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setCharacterEncoding("UTF-8");
@@ -96,7 +96,7 @@ public class AccountController extends ActionSupport {
 	}
 
 	public String checkEmail() throws IOException {
-		logger.info("vao checkmail: " + user.getEmail());
+		log.info("vao checkmail: " + user.getEmail());
 		NguoiDung ng = nguoiDungService.getNguoidung(user.getEmail());
 		boolean result = ng != null ? false : true;
 		returnJsonData(result);
@@ -183,7 +183,7 @@ public class AccountController extends ActionSupport {
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
-			logger.error("Loi tra ve json");
+			log.error("Loi tra ve json");
 		}
 	}
 }

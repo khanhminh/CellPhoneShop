@@ -2,9 +2,13 @@ package cellphoneshop.controller;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import cellphoneshop.model.LoaiSanPham;
 import cellphoneshop.model.NhaSanXuat;
 import cellphoneshop.model.SanPham;
@@ -23,6 +27,8 @@ public class TestProductManagerController extends ActionSupport
 	@Autowired
 	private SanPhamService sanPhamService;
 	private SanPham sanPham;
+	
+	Logger log = Logger.getLogger(TestProductManagerController.class);
 	
 	@Autowired
 	private NhaSanXuatService nhaSanXuatService;

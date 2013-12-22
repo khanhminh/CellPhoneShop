@@ -3,6 +3,7 @@ package cellphoneshop.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,6 +18,7 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	private Logger log = Logger.getLogger(LoaiNguoiDungDAOImpl.class);
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -29,7 +31,7 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 		try {
 			session.save(loaiND);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -41,7 +43,7 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 		try {
 			result = (LoaiNguoiDung) session.get(LoaiNguoiDung.class, maLoaiND);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -57,7 +59,7 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

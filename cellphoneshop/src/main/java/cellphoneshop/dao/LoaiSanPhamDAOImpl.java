@@ -2,12 +2,15 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import cellphoneshop.model.LoaiSanPham;
 
 @Repository
@@ -15,6 +18,8 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	private Logger log = Logger.getLogger(LoaiSanPhamDAOImpl.class);
 	
 	
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -28,7 +33,7 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 		try {
 			session.save(loaiSP);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
+			log.error(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 	}
 
@@ -40,7 +45,7 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 		try {
 			result = (LoaiSanPham) session.get(LoaiSanPham.class, maLoaiSP);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
+			log.error(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
@@ -56,7 +61,7 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
+			log.error(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;

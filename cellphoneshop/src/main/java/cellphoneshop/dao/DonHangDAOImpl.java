@@ -107,8 +107,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				}
 			}
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -143,10 +142,11 @@ public class DonHangDAOImpl implements DonHangDAO {
 
 		return result;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
-	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, Integer maStatus) {
+	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung,
+			Integer maStatus) {
 		List<DonHang> result = new ArrayList<DonHang>();
 		Session session = sessionFactory.getCurrentSession();
 
@@ -158,8 +158,8 @@ public class DonHangDAOImpl implements DonHangDAO {
 			query.setInteger("maStatus", maStatus);
 			query.setInteger("maNguoiDung", maNguoiDung);
 			result = query.list();
-			if (result != null){
-				for (DonHang dh : result){
+			if (result != null) {
+				for (DonHang dh : result) {
 					Hibernate.initialize(dh.getTrangThaiDonHang());
 				}
 			}
@@ -169,7 +169,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 
 		return result;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung) {
@@ -182,8 +182,8 @@ public class DonHangDAOImpl implements DonHangDAO {
 			Query query = session.createQuery(hql);
 			query.setInteger("maNguoiDung", maNguoiDung);
 			result = query.list();
-			if (result != null){
-				for (DonHang dh : result){
+			if (result != null) {
+				for (DonHang dh : result) {
 					Hibernate.initialize(dh.getTrangThaiDonHang());
 				}
 			}

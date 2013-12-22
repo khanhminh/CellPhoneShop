@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,6 +30,8 @@ public class CheckoutController extends ActionSupport implements ServletRequestA
 	private PTThanhToanService ptttService;
 	@Autowired
 	private DonHangService donHangService;
+	
+	private Logger log = Logger.getLogger(CheckoutController.class);
 	
 	private static final String EMPTY = "empty";
 	

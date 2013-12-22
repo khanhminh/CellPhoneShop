@@ -43,8 +43,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		try {
 			session.save(sp); // TODO: Neu san pham da co trong CSDL?
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -57,8 +56,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			result = (SanPham) session.get(SanPham.class, maSp);
 			Hibernate.initialize(result.getNhaSanXuat());
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -71,8 +69,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		try {
 			session.update(sp); // TODO: Neu san pham chua co trong CSDL?
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -92,8 +89,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 			result = query.list();
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -110,8 +106,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
@@ -134,8 +129,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 			result = query.list();
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -153,8 +147,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
@@ -170,13 +163,15 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
-			String hql = "select SP from SanPham as SP where SP.tenSp like '%" + tuKhoa + "%'";
+			String hql = "select SP from SanPham as SP where SP.tenSp like '%"
+					+ tuKhoa + "%'";
 			Query query = session.createQuery(hql);
 			query.setFirstResult(kqDauTien);
 			query.setMaxResults(soKqToiDa);
 			result = query.list();
-			
-			if (result != null) { 					//TODO trung ma nguon voi ham lay san pham khi loc
+
+			if (result != null) { // TODO trung ma nguon voi ham lay san pham
+									// khi loc
 				for (SanPham sanPham : result) {
 					Hibernate.initialize(sanPham.getNhaSanXuat());
 					Hibernate.initialize(sanPham.getLoaiSanPham());
@@ -189,8 +184,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 				}
 			}
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -209,8 +203,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			Query query = session.createQuery(hql);
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
@@ -218,7 +211,8 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 	@Transactional(readOnly = true)
 	public List<SanPham> getListSanPhamTheoLoai(Integer maloai,
-			Integer positionStart, Integer amount, String qualification, boolean isAsc) {
+			Integer positionStart, Integer amount, String qualification,
+			boolean isAsc) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "select SP from SanPham as SP where SP.loaiSanPham.maLoaiSp=:maloai";
 		if (qualification != null) {
@@ -244,8 +238,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			query.setMaxResults((int) amount);
 			result = query.list();
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -258,47 +251,46 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 		try {
 			result = (SanPham) session.get(SanPham.class, maSp);
-			
+
 			if (result != null) {
 				Iterator itrCtSP = result.getCtSanPhams().iterator();
 				if (itrCtSP.hasNext()) {
 					CtSanPham ctSP = (CtSanPham) itrCtSP.next();
 					Hibernate.initialize(ctSP);
 					Hibernate.initialize(ctSP.getHeDieuHanh());
-					
+
 					Iterator itrHinhAnhSp = ctSP.getHinhAnhSps().iterator();
 					while (itrHinhAnhSp.hasNext()) {
 						HinhAnhSp hinhAnh = (HinhAnhSp) itrHinhAnhSp.next();
 						Hibernate.initialize(hinhAnh);
 					}
 				}
-				
+
 				Hibernate.initialize(result.getNhaSanXuat());
 				Hibernate.initialize(result.getLoaiSanPham());
 			}
 		} catch (Exception ex) {
-			System.err
-					.println(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
 	}
 
 	@Transactional(readOnly = true)
-	public List<SanPham> getListSanPham(ProductFilter productFilter, int kqDauTien, int soKqToiDa,
-			String order, boolean isAsc) {
+	public List<SanPham> getListSanPham(ProductFilter productFilter,
+			int kqDauTien, int soKqToiDa, String order, boolean isAsc) {
 		List<SanPham> result = new ArrayList<SanPham>();
 		Session session = sessionFactory.getCurrentSession();
 		String s = isAsc ? "asc" : "desc";
 		try {
-			String hql = taoTruyVanHQLDeLaySP(productFilter, false) + " order by sp." + order + " " + s;
+			String hql = taoTruyVanHQLDeLaySP(productFilter, false)
+					+ " order by sp." + order + " " + s;
 			Query query = session.createQuery(hql);
-			
+
 			query.setFirstResult(kqDauTien);
 			query.setMaxResults(soKqToiDa);
-			
+
 			result = query.list();
-			
+
 			if (result != null) {
 				for (SanPham sanPham : result) {
 					Hibernate.initialize(sanPham.getNhaSanXuat());
@@ -314,29 +306,30 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
-		
+
 		return result;
 	}
-	
-	
-	private String taoTruyVanHQLDeLaySP(ProductFilter productFilter, boolean isCountQuery) {
+
+	private String taoTruyVanHQLDeLaySP(ProductFilter productFilter,
+			boolean isCountQuery) {
 		String selectFromClause;
-		
+
 		if (isCountQuery == false) {
 			selectFromClause = "select distinct sp from SanPham as sp inner join sp.ctSanPhams as ct ";
 		} else {
 			selectFromClause = "select count(*) from SanPham as sp inner join sp.ctSanPhams as ct ";
 		}
-		
+
 		// NhaSanXuat
 		String productCon = "";
 		for (int i = 0; i < productFilter.producerList.size(); i++) {
 			if (i > 0) {
 				productCon += " or ";
 			}
-			productCon += " (sp.nhaSanXuat.maNhaSx =  " + productFilter.producerList.get(i).getMaNhaSx() + ") ";
+			productCon += " (sp.nhaSanXuat.maNhaSx =  "
+					+ productFilter.producerList.get(i).getMaNhaSx() + ") ";
 		}
-		
+
 		// RatingList
 		String ratingCon = "";
 		if (productFilter.ratingList.isEmpty() == false) {
@@ -344,70 +337,74 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			for (int i = 0; i < productFilter.ratingList.size(); i++) {
 				float iRating = productFilter.ratingList.get(i);
 				if (iRating < minRating) {
-					minRating = iRating; 
+					minRating = iRating;
 				}
 			}
-			
+
 			ratingCon = "(sp.diemDanhGiaTb >= " + minRating + ")";
 		}
-		
+
 		// HeDieuHanh
 		String osCon = "";
 		for (int i = 0; i < productFilter.osList.size(); i++) {
 			if (i > 0) {
 				osCon += " or ";
 			} else {
-				
+
 			}
-			//osCon += " (sp.maSp = ct.sanPham.maSp and ct.heDieuHanh.maHdh = " + productFilter.osList.get(i).getMaHdh() + ") ";
-			osCon += " (ct.heDieuHanh.maHdh = " + productFilter.osList.get(i).getMaHdh() + ") ";
+			// osCon += " (sp.maSp = ct.sanPham.maSp and ct.heDieuHanh.maHdh = "
+			// + productFilter.osList.get(i).getMaHdh() + ") ";
+			osCon += " (ct.heDieuHanh.maHdh = "
+					+ productFilter.osList.get(i).getMaHdh() + ") ";
 		}
-		
+
 		// Gia san pham
 		String priceCon = "";
 		for (int i = 0; i < productFilter.priceConstraintList.size(); i++) {
 			if (i > 0) {
 				priceCon += " or ";
 			}
-			priceCon += "(" + productFilter.priceConstraintList.get(i).getMinPrice() + " < sp.gia and sp.gia < " + productFilter.priceConstraintList.get(i).getMaxPrice() + ") ";
+			priceCon += "("
+					+ productFilter.priceConstraintList.get(i).getMinPrice()
+					+ " < sp.gia and sp.gia < "
+					+ productFilter.priceConstraintList.get(i).getMaxPrice()
+					+ ") ";
 		}
-		
-		
-		
+
 		String whereClause = " where "; // the length is 7
-		
+
 		if (!productCon.isEmpty()) {
 			whereClause += " (" + productCon + ") ";
 		}
-		
+
 		if (!ratingCon.isEmpty()) {
 			if (whereClause.length() > 7) {
 				whereClause += " and ";
 			}
 			whereClause += " (" + ratingCon + ") ";
 		}
-		
+
 		if (!osCon.isEmpty()) {
 			if (whereClause.length() > 7) {
 				whereClause += " and ";
 			}
 			whereClause += " (" + osCon + ") ";
 		}
-		
+
 		if (!priceCon.isEmpty()) {
 			if (whereClause.length() > 7) {
 				whereClause += " and ";
 			}
 			whereClause += " (" + priceCon + ") ";
 		}
-		
+
 		return selectFromClause + whereClause;
 	}
 
 	@Transactional(readOnly = true)
 	public int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter) {
 		Session session = sessionFactory.getCurrentSession();
-		
+
 		try {
 			String hql = taoTruyVanHQLDeLaySP(productFilter, true);
 			Query query = session.createQuery(hql);
@@ -415,25 +412,25 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
-		
+
 		return 0;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<SanPham> getListSanPham(int kqDauTien, int soKqToiDa,
 			String order, boolean isAsc) {
 		List<SanPham> result = new ArrayList<SanPham>();
 		Session session = sessionFactory.getCurrentSession();
-		
+
 		String s = isAsc ? "asc" : "desc";
 		try {
 			String hql = "from SanPham sp order by sp." + order + " " + s;
-			Query query = session.createQuery(hql);			
+			Query query = session.createQuery(hql);
 			query.setFirstResult(kqDauTien);
 			query.setMaxResults(soKqToiDa);
-			
+
 			result = query.list();
-			
+
 			if (result != null) {
 				for (SanPham sanPham : result) {
 					Hibernate.initialize(sanPham.getNhaSanXuat());
@@ -447,23 +444,24 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			}
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
-		}			
+		}
 		return result;
 	}
-	
+
 	@Transactional
 	public List<SanPham> getListSanPhamBanChayNhat(int soSanPham) {
 		List<SanPham> result = new ArrayList<SanPham>();
 		Session session = sessionFactory.getCurrentSession();
-		
+
 		try {
 			@SuppressWarnings("unchecked")
-			List<Integer> productIdList = session.createCriteria(CtDonHang.class)
-			.setProjection(Projections.projectionList().add(Projections.groupProperty("sanPham.maSp")))
-			.setFirstResult(0)
-			.setMaxResults(soSanPham)
-			.list();
-			
+			List<Integer> productIdList = session
+					.createCriteria(CtDonHang.class)
+					.setProjection(
+							Projections.projectionList().add(
+									Projections.groupProperty("sanPham.maSp")))
+					.setFirstResult(0).setMaxResults(soSanPham).list();
+
 			if (productIdList != null) {
 				for (Integer id : productIdList) {
 					result.add(getSanPhamTheoId(id));
@@ -472,14 +470,14 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
-		
+
 		return result;
 	}
 
 	@Transactional(readOnly = true)
 	public int demSoSanPham() {
 		Session session = sessionFactory.getCurrentSession();
-		
+
 		try {
 			String hql = "select count(*) from SanPham";
 			Query query = session.createQuery(hql);
@@ -487,7 +485,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
-		
+
 		return 0;
 	}
 }

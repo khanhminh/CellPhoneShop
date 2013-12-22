@@ -28,7 +28,7 @@ public class PTGiaoHangDAOImpl implements PTGiaoHangDAO {
 		try {
 			session.save(ptGiaoHang);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 
@@ -40,7 +40,7 @@ public class PTGiaoHangDAOImpl implements PTGiaoHangDAO {
 		try {
 			result = (PtGiaoHang) session.get(PtGiaoHang.class, maPtGiaoHang);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

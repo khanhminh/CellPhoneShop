@@ -2,6 +2,8 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,6 +19,8 @@ public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	private Logger log = Logger.getLogger(HeDieuHanhDAOImpl.class);
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -28,7 +32,7 @@ public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 		try {
 			session.save(hdh);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
+			log.error(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 	}
 
@@ -40,7 +44,7 @@ public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 		try {
 			result = (HeDieuHanh) session.get(HeDieuHanh.class, maHDH);
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
+			log.error(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
@@ -56,7 +60,7 @@ public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			System.err.println(ex.getClass().getName() + " : " + ex.getMessage());
+			log.error(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
