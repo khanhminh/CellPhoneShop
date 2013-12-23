@@ -12,7 +12,7 @@
 				class="icon-bar"></span> <span class="icon-bar"></span> <span
 				class="icon-bar"></span>
 			</a> <a class="brand" href="index.html"> <img alt="Charisma Logo"
-				src="/cellphoneshop/resources/images/logo20.png" /> <span>Admin</span></a>
+				src="<s:url value='resources/images/logo20.png'/>" /> <span>Admin</span></a>
 
 			<!-- user dropdown starts -->
 			<div class="btn-group pull-right">

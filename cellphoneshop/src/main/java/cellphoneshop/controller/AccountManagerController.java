@@ -21,6 +21,10 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class AccountManagerController extends ActionSupport implements ServletRequestAware{
 	
+	private static final int Success = 1;
+	private static final int Error = -1;
+	private static final int NoAccess = 0;
+	
 	@Autowired
 	private NguoiDungService ndService;
 	@Autowired
@@ -67,7 +71,7 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 	}
 	
 	public String processSetRole(){
-		boolean result = true;
+		int result = Success;
 		try {
 			String strId = request.getParameter("id");
 			String[] roles = request.getParameterValues("role");
@@ -76,14 +80,14 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			NguoiDung admin = SecurityHelper.getUser();
 			if (admin.getMaNd() == id) {
 				// khong the phan quyen tu phan quyen
-				result = false;
+				result = NoAccess;
 			}
 			else {
 				if (roles != null){
 					for (String role : roles){
 						int r = Integer.parseInt(role);
 						if (!ndService.phanQuyenNguoiDung(id, r)){
-							result = false;
+							result = Error;
 							break;
 						}
 					}
@@ -92,7 +96,7 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 					for (String role : unroles){
 						int r = Integer.parseInt(role);
 						if (!ndService.huyVaiTroNguoiDung(id, r)){
-							result = false;
+							result = Error;
 							break;
 						}
 					}
@@ -101,33 +105,33 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			result = false;
+			result = Error;
 		}
-		JsonHandler.writeJson(new Boolean(result));
+		JsonHandler.writeJson(result);
 		
 		return "json";
 	}
 	
 	public String lockAccount(){
-		int result = 1;
+		int result = Success;
 		try {
 			String action = request.getParameter("action");
 			String strId = request.getParameter("id");
 			int id = Integer.parseInt(strId);
 			if (id == SecurityHelper.getUser().getMaNd().intValue()){
-				result = 0;
+				result = NoAccess;
 			}
 			else if (action.equals("lock")){
-				result = ndService.capNhatTrangThaiNguoiDung(id, true) ? 1 : -1;
+				result = ndService.capNhatTrangThaiNguoiDung(id, true) ? Success : Error;
 			}
 			else if (action.equals("unlock")){
-				result = ndService.capNhatTrangThaiNguoiDung(id, false) ? 1 : -1;
+				result = ndService.capNhatTrangThaiNguoiDung(id, false) ? Success : Error;
 			}
 			else {
-				result = -1;
+				result = Error;
 			}
 		} catch (Exception e) {
-			result = -1;
+			result = Error;
 			log.error(e.getMessage());
 		}
 		JsonHandler.writeJson(result);

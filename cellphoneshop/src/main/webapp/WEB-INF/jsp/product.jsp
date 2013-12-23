@@ -296,6 +296,7 @@
 	$(document).ready(function() {
 		setRating();
 		$(".chk-select").click(function() {
+			$('#page-frm-filter').attr('value', 1);
 			$('#frm-filter').submit();
 		});
 
