@@ -130,4 +130,13 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		
 		return false;
 	}
+
+	/**
+	 * @param tieuchi - gia tri cua tieu chi
+	 * @param loaitieuchi - name, vaitro, email, id(truyen chinh xac 4 gia tri nay)
+	 */
+	public List<NguoiDung> getListNguoiDung(String tieuchi, String loaiTieuChi,
+			int ketquadautien, int soluong) {
+		return nguoiDungDAO.getListNguoiDung(tieuchi, loaiTieuChi, ketquadautien, soluong);
+	}
 }

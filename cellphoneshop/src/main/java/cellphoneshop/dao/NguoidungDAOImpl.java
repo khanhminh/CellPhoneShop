@@ -78,8 +78,8 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 			String pass = encodePassword(user);
 			user.setMatKhau(pass);
 			session.update(user);
-		} catch (HibernateException e) {
-			return false;
+		} catch (HibernateException ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return true;
@@ -152,5 +152,51 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Transactional(readOnly = true)
+	public List<NguoiDung> getListNguoiDung(String tieuchi, String loaiTieuChi,
+			int ketquadautien, int soluong) {
+		
+
+		Session session = sessionFactory.getCurrentSession();
+		List<NguoiDung> result = new ArrayList<NguoiDung>();
+		
+		if(tieuchi == null || loaiTieuChi == null || ketquadautien < 0 || soluong <= 0){
+			return result;
+		}
+		
+		Query query = null;
+		String hql = "";
+		if (loaiTieuChi.equals("email")) {
+			hql += "from NguoiDung nd where nd.email =:tieuchi";
+		} else {
+			if (loaiTieuChi.equals("id")) {
+				hql += "from NguoiDung nd where nd.maNd =:tieuchi";
+			} else {
+				if (loaiTieuChi.equals("name")) {
+					hql += "from NguoiDung nd where nd.ten like :tieuchi";
+				} else {
+					if (loaiTieuChi.equals("vaitro")) {
+						hql += "select distinct n from NguoiDung as n inner join n.vaiTros as v where v.maVaiTro = :tieuchi";	
+					}
+				}
+			}
+		}
+		try {
+			query = session.createQuery(hql);
+			if (loaiTieuChi.equals("name")) {
+				query.setString("tieuchi", "%" + tieuchi + "%");
+			} else {
+				query.setString("tieuchi", tieuchi);
+			}
+			result = query.list();
+			
+			return result;
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return result;
 	}
 }

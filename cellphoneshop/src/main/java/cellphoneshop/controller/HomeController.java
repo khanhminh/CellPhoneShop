@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cellphoneshop.model.SanPham;
+import cellphoneshop.service.NguoiDungService;
 import cellphoneshop.service.SanPhamService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -24,6 +25,7 @@ public class HomeController extends ActionSupport implements
 	Logger log = Logger.getLogger(HomeController.class);
 	private int productPerPage;
 	
+	
 	@Override
 	public String execute() throws Exception {
 		long totalNewProduct = sanPhamService.demSoSanPhamMoiTrongTuan();
@@ -34,6 +36,7 @@ public class HomeController extends ActionSupport implements
 
 		request.setAttribute("currentPage", 1);
 		request.setAttribute("totalPage", totalPage);
+		
 		return SUCCESS;
 	}
 
