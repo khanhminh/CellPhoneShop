@@ -158,8 +158,8 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 	public String getRelativeProduct(){
 		String strId = request.getParameter("id");
 		if (Util.tryParseInt(strId)){
-			//int id = Integer.parseInt(strId);
-			List<SanPham> listProduct = sanPhamService.getListSanPham(0, 15, new SortBy("name", true));
+			int id = Integer.parseInt(strId);
+			List<SanPham> listProduct = sanPhamService.getListSanPhamLienQuan(id);
 			request.setAttribute("listProduct", listProduct);
 		}
 		
