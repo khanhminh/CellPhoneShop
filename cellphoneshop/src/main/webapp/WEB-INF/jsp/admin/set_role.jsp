@@ -80,7 +80,7 @@
 					$('#msg').attr('style', "color:green;font-family: Arial;");
 				}
 				else if (data == 0){
-					$('#msg').text("Bạn không thể phân quyên cho tài khoản này");
+					$('#msg').text("Bạn không thể phân quyền cho tài khoản này");
 					$('#msg').attr('style', "color:red;font-family: Arial;");	
 				}
 				else {
