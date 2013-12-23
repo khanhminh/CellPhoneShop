@@ -19,7 +19,7 @@
 		<div id="gallery" class="three_quarter">
 			<c:choose>
 				<c:when test="${empty listProduct}">
-					<h2>Không tìm được kết quả nào</h2>
+					<div class="not-found">Không tìm được kết quả nào</div>
 				</c:when>
 				<c:otherwise>
 					<div class="compare-bar">
@@ -114,7 +114,7 @@
 				</c:otherwise>
 			</c:choose>
 
-			<c:if test="${totalPage > 1}">
+			<c:if test="${totalPage > 0}">
 				<nav class="pagination">
 					<div class="info-page">
 						<span class="current-page">${page}</span> of <span

@@ -20,6 +20,7 @@ import cellphoneshop.util.JsonHandler;
 import cellphoneshop.util.Util;
 import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.viewmodel.RatingInfor;
+import cellphoneshop.viewmodel.SortBy;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -152,6 +153,17 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 		}
 				
 		return ERROR;
+	}
+	
+	public String getRelativeProduct(){
+		String strId = request.getParameter("id");
+		if (Util.tryParseInt(strId)){
+			//int id = Integer.parseInt(strId);
+			List<SanPham> listProduct = sanPhamService.getListSanPham(0, 15, new SortBy("name", true));
+			request.setAttribute("listProduct", listProduct);
+		}
+		
+		return SUCCESS;
 	}
 	
 	public void setServletRequest(HttpServletRequest request) {

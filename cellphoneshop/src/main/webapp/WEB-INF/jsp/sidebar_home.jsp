@@ -1,54 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="sidebox-wrapper">
-
-	<!-- <div id="categories" class="sidebox-wrapper">
-		<div class="sidebox-title">
-			<span>DANH MỤC SẢN PHẨM</span>
-		</div>
-		<div class="sidebox-body">
-			<div>
-				<div class="category">
-					<a href="#">Điện thoại thông minh</a>
-				</div>
-				<div class="category">
-					<a href="#">Tai nghe</a>
-				</div>
-				<div class="category">
-					<a href="#">Adapter</a>
-				</div>
-			</div>
-		</div>
-	</div> -->
-
-	<!-- <div class="push20"></div> -->
 
 	<div id="brand" class="sidebox-wrapper">
 		<div class="sidebox-title">
 			<span>NHÀ SẢN XUẤT</span>
 		</div>
 		<div class="sidebox-body">
-			<div class="icon-brand">
-				<a href="product?brand=1"> <img title="Apple"
-					src="resources/images/fb_apple.gif">
-				</a> <a href="product?brand=4"> <img title="Nokia"
-					src="resources/images/fb_nokia.jpg">
-				</a>
-			</div>
-			<div class="icon-brand">
-				<a href="product?brand=3"> <img title=LG
-					src="resources/images/fb_lg.gif">
-				</a> <a href="product?brand=5"> <img title="Samsung"
-					src="resources/images/fb_samsung.gif">
-				</a>
-			</div>
-			<div class="icon-brand">
+			<c:forEach var="nsx" items="${listNSX}" varStatus="status">
+				<c:choose>
+					<c:when test="${status.index % 2 == 0}">
+						<c:out value="<div class='icon-brand'>" escapeXml="false"/>						
+						<a href="product?brand=${nsx.maNhaSx}"> 
+							<img title="${nsx.tenNhaSx}" src="${nsx.logo}">
+						</a>
+					</c:when>
+					<c:otherwise>
+						<a href="product?brand=${nsx.maNhaSx}"> 
+							<img title="${nsx.tenNhaSx}" src="${nsx.logo}">
+						</a>
+						<c:out value="</div>" escapeXml="false"/>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<!-- <div class="icon-brand">
 				<a href="product?brand=2"> <img title="HTC"
 					src="resources/images/fb_HTC.gif">
 				</a>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
@@ -80,18 +61,12 @@
 		</div>
 		<div class="sidebox-body">
 			<div id="list-promotion">
-				<div class="promotion">
-					<img src="resources/images/km/km1.png"> 
-					<a>CTKM Laptop SONY tặng sổ tay cao cấp</a>
-				</div>
-				<div class="promotion">
-					<img src="resources/images/km/km2.png"> 
-					<a>CTKM Laptop SONY tặng sổ tay cao cấp</a>
-				</div>
-				<div class="promotion">
-					<img src="resources/images/km/km3.png"> 
-					<a>CTKM Laptop SONY tặng sổ tay cao cấp</a>
-				</div>
+				<c:forEach var="km" items="${requestScope.listKM}">
+					<div class="promotion">
+						<img src="${km.hinhAnh}"> 
+						<a>${km.tieuDe}</a>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

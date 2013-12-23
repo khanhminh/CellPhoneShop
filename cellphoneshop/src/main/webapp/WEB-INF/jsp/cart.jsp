@@ -63,8 +63,9 @@
 			</tbody>
 		</table>
 		<div id="button-cart">
-			<input type="button" value="Tiếp tục mua"
-				onclick="location.href = 'home';"> <input type="button"
+			<input type="button" value="Tiếp tục mua" class="button small blue"
+				onclick="location.href = 'home';"> 
+			<input type="button" class="button small blue"
 				value="Thanh toán" onclick="location.href = 'checkout';">
 		</div>
 	</div>

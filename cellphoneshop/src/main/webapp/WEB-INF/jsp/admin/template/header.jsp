@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>	
+<%@taglib prefix="s" uri="/struts-tags"%>
 
 <div class="navbar">
 	<div class="navbar-inner">
@@ -37,7 +38,7 @@
 			<div class="top-nav nav-collapse">
 				<ul class="nav">
 					<li>
-						<a href="/cellphoneshop/home.action">Trang chủ</a>
+						<s:a namespace="/" action="home" >Trang chủ</s:a>
 					</li>
 					<li>
 						<form class="navbar-search pull-left">

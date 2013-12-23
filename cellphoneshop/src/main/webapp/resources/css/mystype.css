@@ -278,7 +278,7 @@ body {
 }
 
 #name {
-    color: black;
+    color: blue;
     border-bottom: #ccc dotted 1px; 
 }
 
@@ -821,7 +821,7 @@ input, textarea {
 }
 
 .name-info {
-    color: #316ac5;
+    color: blue;
 }
 
 
@@ -977,16 +977,14 @@ input, textarea {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    width: 200px;
+    width: 300px;
 }
 
     #button-cart input[type='button'] {
         display: inline-block;
         margin-right: 20px;
-        background-color: green;
         color: white;
         margin-top: 20px;
-        border-color: orange;
     }
 
 
@@ -1648,4 +1646,13 @@ input[type="checkbox"].input-validation-error {
 	margin-top: 20px;
 	font: bold 15px Arial;
 	color: red;
+}
+
+.not-found {
+	font: bold 25px Arial;
+	color: red;
+}
+
+#mycarousel li{
+	display: inline;
 }

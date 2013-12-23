@@ -13,8 +13,7 @@
 		<result-types>
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
-		</result-types>		
-		
+		</result-types>				
 
 		<interceptors>
 			<interceptor name="searchInterceptor"
@@ -22,6 +21,9 @@
 			</interceptor>
 			<interceptor name="pageInterceptor"
 				class="pageInterceptor">
+			</interceptor>
+			<interceptor name="homeInterceptor"
+				class="homeInterceptor">
 			</interceptor>
 
 			<interceptor-stack name="newStack">
@@ -32,11 +34,25 @@
 				<interceptor-ref name="pageInterceptor" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
+			<interceptor-stack name="homeStack">
+				<interceptor-ref name="homeInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
 		</interceptors>
 		
 		<default-interceptor-ref name="pageStack" />
 		
+		<global-results>
+			<result name="unhandledException">/WEB-INF/jsp/error404.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.NullPointerException" result="unhandledException" />
+		</global-exception-mappings>
+		
 		<action name="home" class="homeAction">
+			<interceptor-ref name="newStack"/>
+			<interceptor-ref name="homeStack"/>
 			<result name="success" type="tiles">home</result>
 		</action>
 
@@ -117,12 +133,18 @@
 		<action name="getComments" method="getComments" class="productAction">
 			<result name="success">WEB-INF/jsp/ajax-page/comments.jsp</result>
 		</action>
-
+		
+		<action name="relative_product" method="getRelativeProduct" class="productAction">
+			<result name="success">WEB-INF/jsp/ajax-page/relative_products.jsp</result>
+		</action>
+		
 		<!-- test insert product -->
 		<action name="insert_product" method="insertProduct" class="testInsertProductAction">
 			<result name="success" type="tiles">test_insert_product</result>
 			<result name="input" type="tiles">test_insert_product</result>
 		</action>
+		
+		
 	</package>
 
 	<package name="ajax" extends="json-default" namespace="/">
@@ -141,6 +163,7 @@
 	</package>
 	
 	<package name="admin" extends="struts-default" namespace="/admin">
+
 		<result-types>
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />

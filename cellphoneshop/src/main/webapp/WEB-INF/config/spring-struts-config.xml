@@ -34,6 +34,8 @@
 	<bean id="orderManagerAction" class="cellphoneshop.controller.OrderManagerController" />
 	
 	<bean id="pageInterceptor" class="cellphoneshop.interceptor.PageInterceptor"/>
+	
+	<bean id="homeInterceptor" class="cellphoneshop.interceptor.HomeInterceptor"/>
 
 	<bean id="searchInterceptor" class="cellphoneshop.interceptor.SearchInterceptor">
 		<property name="listPrice">

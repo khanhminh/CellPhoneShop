@@ -8,6 +8,7 @@
 <c:set var="info" value="${detail.detail}" scope="request" />
 <c:set var="images" value="${detail.images}" scope="page" />
 
+<script type="text/javascript" src="resources/script/jquery.jcarousel.js"></script>
 <div class="wrapper row3">
 	<div id="container">
 		<h2 class="title-content push50">THÔNG TIN SẢN PHẨM</h2>
@@ -80,6 +81,13 @@
 			<jsp:include page="smartphone_detail.jsp" />
 		</div>
 		<div class="clear push50"></div>
+
+		<div id="relate-product">
+			<h3 class="title-info">SẢN PHẨM LIÊN QUAN</h3>
+			<ul id="mycarousel" class="jcarousel-skin-tango">
+				
+			</ul>
+		</div>
 
 		<div id="user-rating" data-productId="${sp.maSp}">
 			<h3 class="title-info">ĐÁNH GIÁ</h3>
@@ -226,21 +234,6 @@
 			success : callbackRating,
 		});
 	}
-
-	/* function setStar(number){
-		var list = $("#list-star").children();
-		for (var i = 0; i < list.length; i++){
-			var img = $(list[i]);
-			if (i < number){
-				img.attr('src', "resources/images/star-on.png");
-			}
-			else {
-				img.attr('src', "resources/images/star-off.png");
-			}
-		}
-		
-		return false;
-	} */
 	
 	function checkSelect(){
 		var number = -1;
@@ -353,8 +346,24 @@
 		loadComments(page);
 	}
 	
+	function showRelativeProduct(data){
+		$('#mycarousel').html(data);
+		jQuery('#mycarousel').jcarousel();
+	}
+	
+	function loadRelativeProduct(){
+		var id = $('#user-rating').attr('data-productId');
+		$.ajax({
+			url : "relative_product.action",
+			data : {
+				id : id,
+			},
+			type : "GET",
+			success : showRelativeProduct,
+		});
+	}
+	
 	$(document).ready(function(){
-		loadRating();
 		$('.rbtRating').click(function(){
 			//var number = $(this).attr("data-number");
 			$('#rating-notify').text("");
@@ -373,6 +382,8 @@
 			$('#notify-comment').text('');
 			sendComment();
 		});
+		loadRelativeProduct();
+		loadRating();
 		loadComments(1);
 	});
 </script>
