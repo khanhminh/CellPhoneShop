@@ -18,6 +18,14 @@
         <put-attribute name="title" value="Đăng ký" />
         <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />  
     </definition>
+    <definition name="update_account" extends="page">
+        <put-attribute name="title" value="Cập nhật thông tin tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/jsp/update_account.jsp" />  
+    </definition>
+    <definition name="change_password" extends="page">
+        <put-attribute name="title" value="Cập nhật thông tin tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/jsp/change_password.jsp" />  
+    </definition>
     
     <definition name="home" extends="page">
         <put-attribute name="title" value="Trang chủ" />
@@ -110,6 +118,11 @@
     <definition name="detail_account" extends="admin">
         <put-attribute name="title" value="Chi tiết tài khoản" />
         <put-attribute name="content" value="/WEB-INF/jsp/admin/detail_account.jsp" /> 
+    </definition>
+    
+    <definition name="search_account" extends="admin">
+        <put-attribute name="title" value="Tìm kiếm" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/search_account.jsp" /> 
     </definition>
     
 </tiles-definitions>
