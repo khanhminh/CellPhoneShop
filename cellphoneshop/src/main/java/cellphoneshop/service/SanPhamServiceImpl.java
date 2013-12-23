@@ -204,31 +204,9 @@ public class SanPhamServiceImpl implements SanPhamService {
 			return null;
 		}
 		
-		ProductFilter productFilter = new ProductFilter();
+		
 		CtSanPham ctSanPham  = productDetail.getDetail();
-		productFilter.addProducer(ctSanPham.getSanPham().getNhaSanXuat());
-		productFilter.addOS(ctSanPham.getHeDieuHanh());
-		List<SanPham> sanPhamList = getListSanPham(productFilter, 0, 15, new SortBy());
-		
-		if(sanPhamList != null && !sanPhamList.isEmpty()){
-			return sanPhamList;	
-		}
-		
-		productFilter.removeOS(ctSanPham.getHeDieuHanh());
-		sanPhamList = getListSanPham(productFilter, 0, 15, new SortBy());
-		
-		if(sanPhamList != null && !sanPhamList.isEmpty()){
-			return sanPhamList;
-		}
-		
-		productFilter.removeProducer(ctSanPham.getSanPham().getNhaSanXuat());
-		productFilter.addOS(ctSanPham.getHeDieuHanh());
-		sanPhamList = getListSanPham(productFilter, 0, 15, new SortBy());
-		
-		if(sanPhamList != null && !sanPhamList.isEmpty()){
-			return sanPhamList;
-		}
-		
-		return null;
+		return spDAO.getListSanPhamLienQuan(maSanPham, productDetail.getProduct().getNhaSanXuat().getMaNhaSx(), 
+				productDetail.getDetail().getHeDieuHanh().getMaHdh());
 	}
 }

@@ -62,5 +62,7 @@ public interface SanPhamDAO {
 	int demSoSanPham();
 	
 	List<SanPham> getListSanPhamBanChayNhat(int soSanPham);
+	
+	public List<SanPham> getListSanPhamLienQuan(Integer maSanPham, Integer maNhaSX, Integer maOS);
 
 }

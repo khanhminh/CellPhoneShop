@@ -488,4 +488,39 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 		return 0;
 	}
+
+	@Transactional(readOnly = true)
+	public List<SanPham> getListSanPhamLienQuan(Integer maSanPham,
+			Integer maNhaSX, Integer maOS) {
+		
+		if(maSanPham == null || maNhaSX == null || maOS == null){
+			return null;
+		}
+		List<SanPham> result = new ArrayList<SanPham>();
+		Session session = sessionFactory.getCurrentSession();
+		try {
+			String hql = "select distinct sp from SanPham as sp where sp.maSp != :maSanPham and sp.nhaSanXuat.maNhaSx = :maNhaSX";
+			Query query = session.createQuery(hql);
+			query.setInteger("maSanPham", maSanPham);
+			query.setInteger("maNhaSX", maNhaSX);
+			result = query.list();
+			
+			if(!result.isEmpty()){
+				return result;
+			}
+			
+			hql = "select distinct sp from SanPham as sp inner join sp.ctSanPhams as ct where sp.maSp != :maSanPham and ct.heDieuHanh.maHdh = :maOS";
+			query = session.createQuery(hql);
+			query.setInteger("maSanPham", maSanPham);
+			query.setInteger("maOS", maOS);
+			result = query.list();
+			
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		return result;
+	}
+
+	
+
 }
