@@ -6,8 +6,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import cellphoneshop.dao.HeDieuHanhDAO;
 import cellphoneshop.dao.NhaSanXuatDAO;
 import cellphoneshop.dao.SanPhamDAO;
@@ -190,5 +192,43 @@ public class SanPhamServiceImpl implements SanPhamService {
 		
 	public List<SanPham> getListSanPhamBanChayNhat(int soSanPham) {
 		return spDAO.getListSanPhamBanChayNhat(soSanPham);
+	}
+
+	public List<SanPham> getListSanPhamLienQuan(Integer maSanPham) {
+		if(maSanPham == null){
+			return null;
+		}
+		
+		ProductDetail productDetail = getSanPhamCungChiTietTheoId(maSanPham);
+		if(productDetail == null){
+			return null;
+		}
+		
+		ProductFilter productFilter = new ProductFilter();
+		CtSanPham ctSanPham  = productDetail.getDetail();
+		productFilter.addProducer(ctSanPham.getSanPham().getNhaSanXuat());
+		productFilter.addOS(ctSanPham.getHeDieuHanh());
+		List<SanPham> sanPhamList = getListSanPham(productFilter, 0, 15, new SortBy());
+		
+		if(sanPhamList != null && !sanPhamList.isEmpty()){
+			return sanPhamList;	
+		}
+		
+		productFilter.removeOS(ctSanPham.getHeDieuHanh());
+		sanPhamList = getListSanPham(productFilter, 0, 15, new SortBy());
+		
+		if(sanPhamList != null && !sanPhamList.isEmpty()){
+			return sanPhamList;
+		}
+		
+		productFilter.removeProducer(ctSanPham.getSanPham().getNhaSanXuat());
+		productFilter.addOS(ctSanPham.getHeDieuHanh());
+		sanPhamList = getListSanPham(productFilter, 0, 15, new SortBy());
+		
+		if(sanPhamList != null && !sanPhamList.isEmpty()){
+			return sanPhamList;
+		}
+		
+		return null;
 	}
 }

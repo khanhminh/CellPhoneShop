@@ -100,4 +100,6 @@ public interface SanPhamService {
 	 * Lay danh sach san pham ban chay nhat.
 	 */
 	List<SanPham> getListSanPhamBanChayNhat(int soSanPham);
+	
+	List<SanPham> getListSanPhamLienQuan(Integer maSanPham);
 }
