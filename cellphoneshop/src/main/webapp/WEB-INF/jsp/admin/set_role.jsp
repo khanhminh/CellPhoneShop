@@ -60,7 +60,7 @@
 								</tr>
 							</c:forEach>
 							<tr>
-								<td id="msg"></td>
+								<td id="msg" colspan="2"></td>
 							</tr>
 							<tr>
 								<td><input id="btnSubmit" type="submit" value="Cập nhật"
@@ -75,13 +75,17 @@
 		</div>
 		<script>		
 			function callback(data){
-				if (data){
+				if (data == 1){
 					$('#msg').text("Cập nhật thành công");
 					$('#msg').attr('style', "color:green;font-family: Arial;");
 				}
+				else if (data == 0){
+					$('#msg').text("Bạn không thể phân quyên cho tài khoản này");
+					$('#msg').attr('style', "color:red;font-family: Arial;");	
+				}
 				else {
 					$('#msg').text("Có lỗi xảy ra");
-					$('#msg').attr('style', "color:red;font-family: Arial;");
+					$('#msg').attr('style', "color:red;font-family: Arial;");					
 				}
 			}
 		

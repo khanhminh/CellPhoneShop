@@ -43,11 +43,11 @@
 		<default-interceptor-ref name="pageStack" />
 		
 		<global-results>
-			<result name="unhandledException">/WEB-INF/jsp/error404.jsp</result>
+			<result name="unhandledException">/WEB-INF/jsp/error.jsp</result>
 		</global-results>
 
 		<global-exception-mappings>
-			<exception-mapping exception="java.lang.NullPointerException" result="unhandledException" />
+			<exception-mapping exception="java.lang.Exception" result="unhandledException" />
 		</global-exception-mappings>
 		
 		<action name="home" class="homeAction">

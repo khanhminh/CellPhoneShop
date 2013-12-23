@@ -93,5 +93,4 @@ body {
 	<![endif]-->
 
 <!-- The fav icon -->
-<link rel="shortcut icon"
-	href="/cellphoneshop/resources/images/favicon.ico">
+<link rel="shortcut icon" href="<s:url value='/resources/images/favicon.ico'/>"/>
