@@ -42,13 +42,13 @@
 		
 		<default-interceptor-ref name="pageStack" />
 		
-		<global-results>
+		<!-- <global-results>
 			<result name="unhandledException">/WEB-INF/jsp/error.jsp</result>
 		</global-results>
 
 		<global-exception-mappings>
 			<exception-mapping exception="java.lang.Exception" result="unhandledException" />
-		</global-exception-mappings>
+		</global-exception-mappings> -->
 		
 		<action name="home" class="homeAction">
 			<interceptor-ref name="newStack"/>
@@ -85,6 +85,16 @@
 			<result name="input" type="tiles">register</result>
 			<result name="error" type="tiles">register</result>
 		</action>
+		
+		<action name="update_account" method="updateAcccount" class="updateAccountAction">
+			<result name="success" type="tiles">update_account</result>
+			<result name="input" type="tiles">update_account</result>
+		</action>
+		
+		<action name="change_password" method="changePassword" class="updateAccountAction">
+			<result name="success" type="tiles">change_password</result>
+			<result name="input" type="tiles">change_password</result>
+		</action>
 
 		<action name="detail" method="detail" class="productAction">
 			<result name="success" type="tiles">detail</result>
@@ -107,7 +117,6 @@
 			<result name="success" type="tiles">complete</result>
 			<result name="error" type="tiles">checkout</result>
 		</action>
-
 
 		<action name="compare" method="compare" class="filterAction">
 			<result name="success" type="tiles">compare</result>
@@ -176,8 +185,14 @@
 		<action name="set_role" method="setRole" class="accountManagerAction">
 			<result name="success" type="tiles">set_role</result>
 		</action>
+		
 		<action name="account_detail" method="detailAccount" class="accountManagerAction">
 			<result name="success" type="tiles">detail_account</result>
+		</action>
+		
+		<action name="search_account" method="searchAccount" class="accountManagerAction">
+			<result name="input" type="tiles">search_account</result>
+			<result name="success" type="tiles">search_account</result>
 		</action>
 	</package>
 	
