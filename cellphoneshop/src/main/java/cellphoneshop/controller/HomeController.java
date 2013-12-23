@@ -34,8 +34,6 @@ public class HomeController extends ActionSupport implements
 
 		request.setAttribute("currentPage", 1);
 		request.setAttribute("totalPage", totalPage);
-		
-
 		return SUCCESS;
 	}
 

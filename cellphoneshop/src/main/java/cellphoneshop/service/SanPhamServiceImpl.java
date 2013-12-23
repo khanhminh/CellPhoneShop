@@ -204,8 +204,6 @@ public class SanPhamServiceImpl implements SanPhamService {
 			return null;
 		}
 		
-		
-		CtSanPham ctSanPham  = productDetail.getDetail();
 		return spDAO.getListSanPhamLienQuan(maSanPham, productDetail.getProduct().getNhaSanXuat().getMaNhaSx(), 
 				productDetail.getDetail().getHeDieuHanh().getMaHdh());
 	}
