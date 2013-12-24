@@ -125,4 +125,14 @@
         <put-attribute name="content" value="/WEB-INF/jsp/admin/search_account.jsp" /> 
     </definition>
     
+    <definition name="list_order" extends="admin">
+        <put-attribute name="title" value="Danh sách đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/list_order.jsp" /> 
+    </definition>
+    
+    <definition name="admin_detail_order" extends="admin">
+        <put-attribute name="title" value="Chi tiết đơn hàng đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/detail_order.jsp" /> 
+    </definition>
+    
 </tiles-definitions>

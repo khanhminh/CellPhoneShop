@@ -52,10 +52,17 @@ public class OrderManagerController extends ActionSupport implements
 		if (Util.tryParseInt(strId)){
 			int id = Integer.parseInt(strId);
 			DonHang dh = dhService.getDonHangCungChiTietTheoId(id);
-			if (dh != null){
+			if (dh != null && 
+					SecurityHelper.getUser().getMaNd().intValue() == 
+					dh.getNguoiDung().getMaNd().intValue()){				
 				request.setAttribute("order", dh);
 			}
 		}
+		
+		return SUCCESS;
+	}
+	
+	public String listOrderAdmin(){
 		
 		return SUCCESS;
 	}

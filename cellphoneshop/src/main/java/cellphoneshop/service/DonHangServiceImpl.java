@@ -19,6 +19,7 @@ import cellphoneshop.model.NguoiNhan;
 import cellphoneshop.model.PtGiaoHang;
 import cellphoneshop.model.PtThanhToan;
 import cellphoneshop.model.TrangThaiDonHang;
+import cellphoneshop.viewmodel.SortBy;
 
 @Service
 public class DonHangServiceImpl implements DonHangService {
@@ -112,5 +113,32 @@ public class DonHangServiceImpl implements DonHangService {
 	
 	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, Integer maStatus){
 		return donHangDAO.getListDonHangTheoNguoiDung(maNguoiDung, maStatus);
+	}
+
+	public List<DonHang> getListDonHang(Integer maStatus, SortBy sortby, int start, int count) {
+		
+		TrangThaiDonHang ttdh = trangThaiDonHangDAO.getTrangThaiDonHang(maStatus);
+		if (ttdh == null){
+			return donHangDAO.getListDonHang(sortby.getBy(), sortby.isAsc(), start, count);
+		}		
+		
+		return donHangDAO.getListDonHang(maStatus, sortby.getBy(), sortby.isAsc(), start, count);
+	}
+
+	public int demoSoDonHang(Integer maStatus) {
+		TrangThaiDonHang ttdh = trangThaiDonHangDAO.getTrangThaiDonHang(maStatus);
+		if (ttdh == null){
+			return donHangDAO.demSoDonHang();
+		}		
+		
+		return donHangDAO.demSoDonHang(maStatus);		
+	}
+
+	public boolean xoaDonHang(Integer maDonHang) {
+		if (ctDonHangDAO.xoaCTDonHang(maDonHang)){
+			return donHangDAO.xoaDonHang(maDonHang);
+		}
+		
+		return false;
 	}
 }

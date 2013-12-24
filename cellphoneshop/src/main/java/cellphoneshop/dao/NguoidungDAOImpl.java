@@ -192,6 +192,15 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 			}
 			result = query.list();
 			
+			if (result == null || result.isEmpty()) {
+				return null;
+			}
+			
+			for (NguoiDung user : result) {
+				Hibernate.initialize(user.getVaiTros());
+			}
+
+			
 			return result;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());

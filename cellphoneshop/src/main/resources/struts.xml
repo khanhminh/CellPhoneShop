@@ -25,6 +25,9 @@
 			<interceptor name="homeInterceptor"
 				class="homeInterceptor">
 			</interceptor>
+			<interceptor name="orderInterceptor"
+				class="orderInterceptor">
+			</interceptor>
 
 			<interceptor-stack name="newStack">
 				<interceptor-ref name="searchInterceptor" />
@@ -36,6 +39,10 @@
 			</interceptor-stack>
 			<interceptor-stack name="homeStack">
 				<interceptor-ref name="homeInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<interceptor-stack name="orderStack">
+				<interceptor-ref name="orderInterceptor" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
@@ -177,6 +184,16 @@
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
+		<interceptors>			
+			<interceptor name="orderInterceptor"
+				class="orderInterceptor">
+			</interceptor>
+			
+			<interceptor-stack name="orderStack">
+				<interceptor-ref name="orderInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
 		
 		<action name="list_account" method="listAccount" class="accountManagerAction">
 			<result name="success" type="tiles">list_account</result>
@@ -194,6 +211,15 @@
 			<result name="input" type="tiles">search_account</result>
 			<result name="success" type="tiles">search_account</result>
 		</action>
+		
+		<action name="list_order" method="listOrder" class="adminOrderManagerAction">
+			<interceptor-ref name="orderStack"/>
+			<result name="success" type="tiles">list_order</result>
+		</action>
+		
+		<action name="order_detail" method="detailOrder" class="adminOrderManagerAction">
+			<result name="success" type="tiles">admin_detail_order</result>
+		</action>
 	</package>
 	
 	<package name="ajax_admin" extends="json-default" namespace="/admin">
@@ -201,6 +227,9 @@
 			<result name="json" type="json" />
 		</action>
 		<action name="lock_account" method="lockAccount" class="accountManagerAction">
+			<result name="json" type="json" />
+		</action>
+		<action name="delete_order" method="deleteOrder" class="adminOrderManagerAction">
 			<result name="json" type="json" />
 		</action>
 	</package>

@@ -30,13 +30,28 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 	@Autowired
 	private VaiTroService vtService;
 	private HttpServletRequest request;
-	private final int RecordPerPage = 10;
+	private final int RecordPerPage = 20;
+	private String query;
+	private String option;
 	private Logger log = Logger.getLogger(AccountManagerController.class);
 	
 	public String listAccount(){
 		int page = getPage();
 		int start = (page - 1) * RecordPerPage;
 		List<NguoiDung> listAccount = ndService.getListNguoiDung(start, RecordPerPage);
+		request.setAttribute("listAccount", listAccount);
+		
+		return SUCCESS;
+	}
+	
+	public String searchAccount(){
+		if (query == null || option == null){
+			request.setAttribute("isInput", true);
+			return INPUT;
+		}
+		List<NguoiDung> listAccount = 
+				ndService.getListNguoiDung(query, option, 0, RecordPerPage);
+		request.setAttribute("isInput", false);
 		request.setAttribute("listAccount", listAccount);
 		
 		return SUCCESS;
@@ -151,5 +166,21 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;		
+	}
+
+	public String getQuery() {
+		return query;
+	}
+
+	public void setQuery(String query) {
+		this.query = query;
+	}
+
+	public String getOption() {
+		return option;
+	}
+
+	public void setOption(String option) {
+		this.option = option;
 	}
 }

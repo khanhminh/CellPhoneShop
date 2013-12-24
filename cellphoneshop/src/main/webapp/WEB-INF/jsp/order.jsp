@@ -55,7 +55,9 @@
 					</c:choose>
 					>
 					<td>${dh.maDonHang}</td>
-					<td>${dh.ngayDatHang}</td>
+					<td>						
+						<fmt:formatDate pattern="dd/MM/yyyy" value="${dh.ngayDatHang}" />
+					</td>
 					<td>
 						<fmt:formatNumber value="${dh.tongGiaTri}" type="number" />
 						VNĐ

@@ -49,7 +49,7 @@
                             			<span class="label label-success" id="status-${acc.maNd}">Active</span>
                             		</c:when>
                             		<c:otherwise>
-                            			<span class="label label-important">Lock</span>
+                            			<span class="label label-important" id="status-${acc.maNd}">Lock</span>
                             		</c:otherwise>
                             	</c:choose>
                             </td>
@@ -71,7 +71,7 @@
 									</c:when>
 									<c:otherwise>
 										<a class="btn btn-danger unlock-acc" data-id="${acc.maNd}" id="btnLock-${acc.maNd}" href="#"> 
-											<i class="icon-lock icon-white""></i>
+											<i class="icon-lock icon-white"></i>
 											<span id="text-button-${acc.maNd}">UnLock</span>
 										</a>
 									</c:otherwise>

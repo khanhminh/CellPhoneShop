@@ -46,6 +46,10 @@ public class DonHangDAOImpl implements DonHangDAO {
 
 		try {
 			result = (DonHang) session.get(DonHang.class, maDonHang);
+			if (result != null){
+				Hibernate.initialize(result.getNguoiDung());
+				Hibernate.initialize(result.getTrangThaiDonHang());
+			}
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -191,6 +195,111 @@ public class DonHangDAOImpl implements DonHangDAO {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<DonHang> getListDonHang(String by, boolean asc, int start, int count) {
+		List<DonHang> result = new ArrayList<DonHang>();
+		Session session = sessionFactory.getCurrentSession();
+
+		String order = asc ? " asc" : " desc";
+		try {
+			String hql = "from DonHang dh order by " + by + order;
+
+			Query query = session.createQuery(hql);
+			query.setFirstResult(start);
+			query.setMaxResults(count);
+			result = query.list();
+			if (result != null) {
+				for (DonHang dh : result) {
+					Hibernate.initialize(dh.getTrangThaiDonHang());
+					Hibernate.initialize(dh.getNguoiDung());
+				}
+			}
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
+	public List<DonHang> getListDonHang(Integer maStatus, String by, boolean asc, int start, int count) {
+		List<DonHang> result = new ArrayList<DonHang>();
+		Session session = sessionFactory.getCurrentSession();
+
+		String order = asc ? " asc" : " desc";
+		try {
+			String hql = "from DonHang dh where dh.trangThaiDonHang.maTrangThai=:maStatus order by " + by + order;
+
+			Query query = session.createQuery(hql);
+			query.setInteger("maStatus", maStatus);
+			query.setFirstResult(start);
+			query.setMaxResults(count);
+			result = query.list();
+			if (result != null) {
+				for (DonHang dh : result) {
+					Hibernate.initialize(dh.getTrangThaiDonHang());
+					Hibernate.initialize(dh.getNguoiDung());
+				}
+			}
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return result;
+	}
+
+	@Transactional(readOnly = true)
+	public int demSoDonHang() {
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			String hql = "select count(*) from DonHang as dh";
+			Query query = session.createQuery(hql);
+			
+			return ((Long) query.iterate().next()).intValue();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return 0;
+	}
+
+	@Transactional(readOnly = true)
+	public int demSoDonHang(Integer maStatus) {
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			String hql = "select count(*) from DonHang as dh where dh.trangThaiDonHang.maTrangThai=:maStatus";
+			Query query = session.createQuery(hql);
+			query.setInteger("maStatus", maStatus);
+
+			return ((Long) query.iterate().next()).intValue();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return 0;
+	}
+	
+	@Transactional
+	public boolean xoaDonHang(Integer maDonHang) {
+		boolean result = true;
+		Session session = sessionFactory.getCurrentSession();
+		try {				
+			DonHang dh = (DonHang) session.get(DonHang.class, maDonHang);
+			if (dh != null){
+				session.delete(dh);
+			}
+		} catch (Exception ex) {
+			result = false;
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
 		return result;
 	}
 }

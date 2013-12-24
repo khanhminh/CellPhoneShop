@@ -103,9 +103,49 @@
 		</property>
 	</bean>
 
+	<bean id="orderInterceptor" class="cellphoneshop.interceptor.OrderManagerInterceptor">		
+		<property name="listRPP">
+			<list>
+				<value>10</value>
+				<value>15</value>
+				<value>20</value>
+			</list>
+		</property>
+		<property name="listSortby">
+			<list>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="ngayDatHang" />
+					<property name="asc" value="true" />
+					<property name="title" value="Cũ nhất" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="ngayDatHang" />
+					<property name="asc" value="false" />
+					<property name="title" value="Mới nhất" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="tongGiaTri" />
+					<property name="asc" value="true" />
+					<property name="title" value="Giá trị tăng dần" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="tongGiaTri" />
+					<property name="asc" value="false" />
+					<property name="title" value="Giá trị giảm dần" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 
 	<!-- Admin -->
 	<bean id="accountManagerAction" class="cellphoneshop.controller.AccountManagerController" />
+	<bean id="adminOrderManagerAction" class="cellphoneshop.controller.AdminOrderManagerController">
+		<property name="view" value="10"/>
+		<property name="sortby" value="ngayDatHang_desc"/>
+		<property name="page" value="1"/>
+		<property name="status" value="0"/>
+	</bean>
 	<bean id="testInsertProductAction" class="cellphoneshop.controller.TestProductManagerController"/> <!-- for test only -->
 </beans>
        				

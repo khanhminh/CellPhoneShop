@@ -73,4 +73,29 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 		
 		return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public boolean xoaCTDonHang(Integer maDonHang) {
+		boolean result = true;
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			List<CtDonHang> list = null;
+			String hql = "select CT from CtDonHang as CT where CT.donHang.maDonHang=:maDonHang";
+			Query query = session.createQuery(hql);
+			query.setInteger("maDonHang", maDonHang);
+			list = query.list();
+			if (list != null){
+				for (CtDonHang ctdh : list){
+					session.delete(ctdh);
+				}
+			}
+		} catch (Exception ex) {
+			result = false;
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}		
+		
+		return result;
+	}
 }

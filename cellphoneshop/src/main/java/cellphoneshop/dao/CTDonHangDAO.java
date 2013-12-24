@@ -9,5 +9,6 @@ public interface CTDonHangDAO {
 	CtDonHang getCTDonHang(Integer maCTDonHang);
 	void updateCTDonHang(CtDonHang ctDonHang);
 	List<CtDonHang> getListCTDonHangTheoMaDonHang(Integer maDonHang);
+	boolean xoaCTDonHang(Integer maDonHang);
 	//TODO: Them ham xoa CTDonHang
 }

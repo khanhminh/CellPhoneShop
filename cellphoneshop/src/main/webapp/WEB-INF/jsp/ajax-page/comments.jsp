@@ -7,7 +7,10 @@
 	<c:forEach var="cm" items="${list}">
 		<div class="comment">
 			<img class="avatar" src="resources/images/avatar.png"> <span
-				class="name">${cm.nguoiDung.ten}</span> <span class="time">${cm.ngayBinhLuan}</span>
+				class="name">${cm.nguoiDung.ten}</span> 
+				<span class="time">					
+					<fmt:formatDate pattern="dd/MM/yyyy" value="${cm.ngayBinhLuan}" />
+				</span>
 			<blockquote>${cm.loiBinh}</blockquote>
 		</div>
 	</c:forEach>
