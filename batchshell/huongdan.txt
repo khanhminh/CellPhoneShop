@@ -1,0 +1,11 @@
+\\Yeu cau may da cai maven
+-- Dat thu muc nay o o C:\ -------------
+B1: copy folder src cua Project vao thuc muc resource
+B2: copy script sql vao thuc muc database - cellphoneshop.sql
+B3:
+	+ thuc muc cai dat mysql: "C:\Program Files(x86)\MySQL\MySQL Server 5.5\bin\mysql.exe"
+	+ thuc muc chua tomcat: C:\Program Files\Tomcat\apache-tomcat-7.0.47\apache-tomcat-7.0.47\webapps"
+	- chay file batcg_build_createDatabase.bat
+	- sau do chay file 2.batch_copyfileWar_start_startTomcat.bat
+B4: Ra trinh duyet va truy cap vo web
+
