@@ -10,7 +10,14 @@
 		<p class="message-success"></p>
 
 		<div id="change-password">
-			<form action="change_password.action" method="post">				
+			<form action="change_password.action" method="post">	
+			<div class="validation-summary-errors">
+				<ul>
+					<c:forEach var="e" items="${requestScope.errors}">
+						<li>${e}</li>
+					</c:forEach>
+				</ul>
+			</div>			
 				<table>
 					<tbody>
 						<tr>

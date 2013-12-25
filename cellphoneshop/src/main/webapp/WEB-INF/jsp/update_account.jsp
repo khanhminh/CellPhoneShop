@@ -90,7 +90,11 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="3"></td>
+					<td colspan="3">
+						<c:if test="${isSuccess != null && isSuccess}">
+							<span style="color:green;font-weight: bold;">Cập nhật thành công</span>
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td></td>
