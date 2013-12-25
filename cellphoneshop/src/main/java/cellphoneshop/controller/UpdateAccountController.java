@@ -47,6 +47,7 @@ public class UpdateAccountController extends ActionSupport implements
 	public String updateAcccount() {
 		errors = new ArrayList<String>();
 		if (user == null) {
+			logger.info("Vo ham updateAccount");
 			return INPUT;
 		}
 
@@ -65,7 +66,7 @@ public class UpdateAccountController extends ActionSupport implements
 		}
 
 		String sex = user.getSex();
-		if (sex.equals("name")) {
+		if (sex.equals("Nam")) {
 			loginUser.setGioiTinh(1);
 		} else {
 			loginUser.setGioiTinh(0);
@@ -99,6 +100,7 @@ public class UpdateAccountController extends ActionSupport implements
 	}
 
 	public String changePassword() {
+		logger.info("Vo ham changePassword");
 		String currentPassword = request.getParameter("currentPassword");
 		String newPassword = request.getParameter("newPassword");
 		String confirmPassword = request.getParameter("confirmPassword");
