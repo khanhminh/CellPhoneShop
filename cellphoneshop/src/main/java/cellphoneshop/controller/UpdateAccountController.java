@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import cellphoneshop.model.NguoiDung;
+import cellphoneshop.security.SecurityHelper;
 import cellphoneshop.viewmodel.UpdateUser;
 
 import com.opensymphony.xwork2.ActionSupport;
