@@ -139,4 +139,9 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 			int ketquadautien, int soluong) {
 		return nguoiDungDAO.getListNguoiDung(tieuchi, loaiTieuChi, ketquadautien, soluong);
 	}
+
+	public int demSoNguoiDung() {
+		
+		return nguoiDungDAO.demSoNguoiDung();
+	}
 }

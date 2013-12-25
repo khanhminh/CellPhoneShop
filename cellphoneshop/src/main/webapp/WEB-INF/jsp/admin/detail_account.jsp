@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div>
 	<ul class="breadcrumb">
@@ -57,7 +58,8 @@
 								<label class="control-label">Ngày sinh</label>
 								<div class="controls">
 									<span class="input-xlarge uneditable-input">
-										${account.ngaySinh} </span>
+										<fmt:formatDate pattern="dd/MM/yyyy" value="${account.ngaySinh}" />
+									</span>
 								</div>
 							</div>
 							<div class="control-group">

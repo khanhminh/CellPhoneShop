@@ -58,14 +58,17 @@ public class DonHangDAOImpl implements DonHangDAO {
 	}
 
 	@Transactional
-	public void updateDonHang(DonHang donHang) {
+	public boolean updateDonHang(DonHang donHang) {
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
 			session.update(donHang);
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			return false;
 		}
+		
+		return true;
 	}
 
 	@Transactional(readOnly = true)
@@ -301,5 +304,49 @@ public class DonHangDAOImpl implements DonHangDAO {
 		}
 		
 		return result;
+	}
+
+	@Transactional
+	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNd, int start,
+			int view) {
+		List<DonHang> result = new ArrayList<DonHang>();
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			String hql = "select DH from DonHang as DH where DH.nguoiDung.maNd = :maNguoiDung";
+
+			Query query = session.createQuery(hql);
+			query.setInteger("maNguoiDung", maNd);
+			query.setFirstResult(start);
+			query.setMaxResults(view);
+			result = query.list();
+			if (result != null) {
+				for (DonHang dh : result) {
+					Hibernate.initialize(dh.getNguoiDung());
+					Hibernate.initialize(dh.getTrangThaiDonHang());
+				}
+			}
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return result;
+	}
+	
+	@Transactional
+	public int demSoDonHangTheoNguoiDung(Integer maNd) {
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			String hql = "select count(*) from DonHang as DH where DH.nguoiDung.maNd = :maNguoiDung";
+			Query query = session.createQuery(hql);
+			query.setInteger("maNguoiDung", maNd);
+
+			return ((Long) query.iterate().next()).intValue();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		
+		return 0;
 	}
 }

@@ -24,6 +24,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import cellphoneshop.model.NguoiDung;
 import cellphoneshop.service.NguoiDungService;
 import cellphoneshop.util.Message;
+import cellphoneshop.util.PatternRegex;
 import cellphoneshop.viewmodel.RegisterUser;
 
 import com.google.gson.Gson;
@@ -39,6 +40,8 @@ public class AccountController extends ActionSupport {
 
 	@Autowired
 	private Message message;
+	@Autowired
+	private PatternRegex patterns;
 	
 	@Autowired
 	@Qualifier("authenticationManager")
@@ -57,14 +60,14 @@ public class AccountController extends ActionSupport {
 	}
 
 	public String login() {
-
-		log.info("Vao login Controller AccountController");
+		log.info("vao trang dang nhap");
 		return INPUT;
 	}
 
 	public String loginFail() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("error", true);
+		log.info("dang nhap that bai");
 
 		return ERROR;
 	}
@@ -77,6 +80,7 @@ public class AccountController extends ActionSupport {
 
 		errors = new ArrayList<String>();
 		if (user == null || !validateRegister()) {
+			log.info("vao trang dang ky hoac du lieu nhap khon hop le");
 			request.setAttribute("errors", errors);
 			return INPUT;
 		}
@@ -96,7 +100,7 @@ public class AccountController extends ActionSupport {
 	}
 
 	public String checkEmail() throws IOException {
-		log.info("vao checkmail: " + user.getEmail());
+		log.info("kiem tra email bang ajax: " + user.getEmail());
 		NguoiDung ng = nguoiDungService.getNguoidung(user.getEmail());
 		boolean result = ng != null ? false : true;
 		returnJsonData(result);
@@ -109,7 +113,7 @@ public class AccountController extends ActionSupport {
 		errors = new ArrayList<String>();
 
 		try {
-			if (!user.getPassword().matches("^.{6,20}$")) {
+			if (!user.getPassword().matches(patterns.getPattern("password"))) {
 				errors.add(message.getMessageList().getProperty("errorPassword"));
 				result = false;
 			} else if (!user.getPassword().equals(user.getConfirm())) {
@@ -127,10 +131,7 @@ public class AccountController extends ActionSupport {
 				result = false;
 			}
 
-			if (!user
-					.getEmail()
-					.matches(
-							"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+			if (!user.getEmail().matches(patterns.getPattern("email"))) {
 				errors.add(message.getMessageList().getProperty("errorEmail"));
 				result = false;
 			} else if (nguoiDungService.getNguoidung(user.getEmail()) != null) {
@@ -143,7 +144,7 @@ public class AccountController extends ActionSupport {
 				result = false;
 			}
 
-			if (!user.getPhone().matches("^\\d{6,11}$")) {
+			if (!user.getPhone().matches(patterns.getPattern("phone"))) {
 				errors.add(message.getMessageList().getProperty("errorPhoneNumber"));
 				result = false;
 			}
@@ -153,6 +154,7 @@ public class AccountController extends ActionSupport {
 				result = false;
 			}
 		} catch (Exception e) {
+			log.info("du lieu dang ky khong hop le");
 			result = false;
 		}
 
@@ -161,7 +163,7 @@ public class AccountController extends ActionSupport {
 
 	private boolean tryParseDate(String strDate) {
 		boolean result = true;
-		DateFormat formater = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat formater = new SimpleDateFormat(patterns.getPattern("date_format"));
 		try {
 			formater.parse(strDate);
 		} catch (Exception e) {

@@ -2,18 +2,16 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 
-<div>
-	<ul class="breadcrumb">
-		<li><a href="#">Quản lý đơn hàng</a> <span class="divider">/</span>
-		</li>
-		<li><a href="#">Danh sách đơn hàng</a></li>
-	</ul>
-</div>
+<c:choose>
+	<c:when test="${listOrder == null || empty listOrder}">
+		<div class="alert alert-error">
+			<strong>Không tìm thấy đơn hàng nào!</strong>
+		</div>
+	</c:when>
+	<c:otherwise>
 
 
-<div class="row-fluid sortable">
 	<div class="box span12">
 		<div class="box-header well" data-original-title>
 			<h2>
@@ -22,59 +20,7 @@
 			<div class="box-icon">
 			</div>
 		</div>
-		<form action="list_order.action" method="get" id="frm-list-order">
-			<s:hidden name="status" id="frm-status" theme="simple"/>
-			<s:hidden name="view" id="frm-view" theme="simple"/>
-			<s:hidden name="page" id="frm-page" theme="simple"/>
-			<s:hidden name="sortby" id="frm-sortby" theme="simple"/>
-		<div class="box-content">
-			<div>
-				<label style="display: inline;">
-					Trạng thái:
-					<select style="width: 100px" id="select-status">
-						<option value="0" selected="selected">Tất cả</option>
-						<c:forEach var="tt" items="${listStatus}">							
-							<option value="${tt.maTrangThai}" 
-								<c:if test="${status == tt.maTrangThai}">
-									selected="selected"
-								</c:if>
-							>
-								${tt.tenTrangThai}
-							</option>
-						</c:forEach>
-					</select>
-				</label> 
-				<div style="float: right;">
-					<label style="display: inline; margin-right: 10px">
-							Số đơn hàng: 
-							<select style="width: 50px;" id="select-view">
-								<c:forEach var="number" items="${listRPP}">
-									<option value="${number}"
-										<c:if test="${number == view}">
-											selected="selected"
-										</c:if>
-									>
-										${number}
-									</option>
-								</c:forEach>
-							</select>
-					</label> 
-					<label style="display: inline;">
-							Sắp xếp: 
-							<select style="width: 120px" id="select-sortby">
-								<c:forEach var="sb" items="${listSortby}">
-									<option value="${sb.code}"
-										<c:if test="${sb.code == sortby}">
-											selected="selected"
-										</c:if>
-									>
-										${sb.title}
-									</option>
-								</c:forEach>
-							</select>
-					</label> 
-				</div>
-			</div>
+		<div class="box-content">			
 				<table
 					class="table table-striped table-bordered bootstrap-datatable">
 					<thead>
@@ -154,9 +100,7 @@
 			</div>
 			
 		</div>
-		</form>
 	</div>
-</div>
 <div id="dialog" title="Quản lý đơn hàng">
   <p>Hủy đơn hàng <span id="dialog-content" style="color:red;font-weight:bold;"></span></p>
 </div>
@@ -166,6 +110,8 @@
 <script>
 	var id = 0;
 	var isdeleting = false;
+	var query = "${param.query}";
+	var option = "${param.option}";
 	
 	$("#dialog").dialog({
 		autoOpen: false,
@@ -194,7 +140,7 @@
 	function callBack(data){
 		isdeleting = false;
 		if (data){
-			$('#frm-list-order').submit();
+			reloadData(1);
 		}
 		else {
 			$("#dialog-error").dialog("open");
@@ -210,30 +156,26 @@
 		});
 	}		
 	
-	$(document).ready(function(){
-		$('#select-status').change(function(){
-			var value = $(this).val();
-			$('#frm-status').val(value);
-			$('#frm-page').val(1);
-			$('#frm-list-order').submit();
+	function reloadData(page){
+		$.ajax({
+			url : "process_search_order.action",
+			type : 'POST',
+			data : {
+				page : page,
+				option : option,
+				query : query,
+			},
+			success : function(data) {
+				$('#data-search').html(data);
+			}
 		});
-		$('#select-view').change(function(){
-			var value = $(this).val();
-			$('#frm-view').val(value);
-			$('#frm-page').val(1);
-			$('#frm-list-order').submit();
-		});
-		$('#select-sortby').change(function(){
-			var value = $(this).val();
-			$('#frm-sortby').val(value);
-			$('#frm-page').val(1);
-			$('#frm-list-order').submit();
-		});
+	}
+	
+	$(document).ready(function(){		
 		$('.paging-order').click(function(e){
 			e.preventDefault();
 			var page = $(this).text().trim();
-			$('#frm-page').val(page);
-			$('#frm-list-order').submit();
+			reloadData(page);
 		});
 		$('.btnDelete').click(function(e){
 			e.preventDefault();
@@ -246,3 +188,6 @@
 		
 	});
 </script>
+
+	</c:otherwise>
+</c:choose>

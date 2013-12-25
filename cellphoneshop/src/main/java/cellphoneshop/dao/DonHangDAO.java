@@ -8,7 +8,7 @@ public interface DonHangDAO {
 	void insertDonHang(DonHang donHangMoi);
 	DonHang getDonHang(Integer maDonHang);
 	DonHang getDonHangCungChiTietTheoId(Integer maDonHang);
-	void updateDonHang(DonHang donHang);
+	boolean updateDonHang(DonHang donHang);
 	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, boolean isAsc, Integer maStatus, int kqDautien, int kqToiDa);
 	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung);
 	public List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, Integer maStatus);
@@ -18,4 +18,6 @@ public interface DonHangDAO {
 	int demSoDonHang();
 	int demSoDonHang(Integer maStatus);
 	boolean xoaDonHang(Integer maDonHang);
+	List<DonHang> getListDonHangTheoNguoiDung(Integer maNd, int start, int view);
+	int demSoDonHangTheoNguoiDung(Integer maNd);
 }

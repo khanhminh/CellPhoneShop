@@ -1,5 +1,6 @@
 package cellphoneshop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,16 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cellphoneshop.model.DonHang;
+import cellphoneshop.model.NguoiNhan;
+import cellphoneshop.model.PhieuGiaoHang;
+import cellphoneshop.model.PtGiaoHang;
+import cellphoneshop.model.PtThanhToan;
+import cellphoneshop.model.TrangThaiDonHang;
 import cellphoneshop.service.DonHangService;
+import cellphoneshop.service.PTGiaoHangService;
+import cellphoneshop.service.PTThanhToanService;
 import cellphoneshop.util.JsonHandler;
+import cellphoneshop.util.Message;
 import cellphoneshop.util.Util;
 import cellphoneshop.viewmodel.SortBy;
 
@@ -27,11 +36,16 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 	private Logger logger = Logger.getLogger(AdminOrderManagerController.class);	
 	@Autowired
 	private DonHangService dhService;
+	@Autowired
+	private Message message;
 	
 	private int status;
 	private int view;
 	private String sortby;
 	private int page;
+		
+	private DonHang donHang;
+	private List<String> errors;
 	
 	public String listOrder(){
 		
@@ -79,6 +93,122 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 		JsonHandler.writeJson(new Boolean(result));
 		
 		return "json";
+	}
+	
+	public String editOrder(){		
+		errors = new ArrayList<String>();
+		if (request.getMethod().equalsIgnoreCase("get")){
+			String strId = request.getParameter("id");
+			if (Util.tryParseInt(strId)){
+				int id = Integer.parseInt(strId);
+				DonHang order = dhService.getDonHangCungChiTietTheoId(id);
+				request.setAttribute("order", order);
+			}
+		}
+		else {
+			DonHang order = dhService.getDonHangCungChiTietTheoId(donHang.getMaDonHang());
+			donHang.setCtDonHangs(order.getCtDonHangs());			
+			request.setAttribute("order", donHang);
+			if (validateOrder()){
+				if (dhService.capnhatDonHang(donHang)){
+					request.setAttribute("isSuccess", true);				
+					logger.info("update order success");
+				}
+				else {
+					request.setAttribute("isSuccess", false);				
+					logger.info("update order fail");
+				}
+			}
+			else {
+				request.setAttribute("errors", errors);
+			}
+		}
+		
+		return SUCCESS;
+	}
+	
+	public String searchOrder(){
+		
+		return INPUT;
+	}
+	
+	public String processSearchOrder(){
+		try {
+			String key = request.getParameter("query");
+			String option = request.getParameter("option");
+			String page = request.getParameter("page");
+			int p = 1;
+			if (Util.tryParseInt(page)){
+				p = Integer.parseInt(page);
+				p = p > 0 ? p : 1;
+			}
+			int start = (p - 1) * view;
+			List<DonHang> listOrder = dhService.getListDonHang(key, option, start, view);
+			int count = dhService.demSoDonHang(key, option);
+			int totalPage = count / view;
+			if (totalPage * view < count){
+				totalPage++;
+			}
+			request.setAttribute("listOrder", listOrder);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("page", p);
+		} catch (Exception e) {
+			logger.error("search order fail: " + e.getMessage());
+		}			
+		
+		return SUCCESS;
+	}
+	
+	private boolean validateOrder(){
+		try {
+			if (donHang == null) {
+				errors.add(message.getMessage("unknowInfo"));
+				return false;
+			}
+			
+			NguoiNhan nguoinhan = donHang.getNguoiNhan();
+			if (nguoinhan == null) {
+				errors.add(message.getMessage("unknowInfo"));
+				return false;
+			}
+			if (nguoinhan.getHoTen().trim().equals("")){
+				errors.add(message.getMessage("unknowFullName"));
+				return false;
+			}
+			String phone = nguoinhan.getSoDienThoai().trim();
+			if (phone.equals("") || !phone.matches("^\\d{6,11}$")){
+				errors.add(message.getMessage("errorPhoneNumber"));
+				return false;
+			}
+			if (nguoinhan.getDiaChi().trim().equals("")){
+				errors.add(message.getMessage("unknowAddress"));
+				return false;
+			}
+			
+			PtGiaoHang ppgh = donHang.getPtGiaoHang();
+			if (ppgh == null) {
+				errors.add(message.getMessage("unknowInfo"));
+				return false;
+			}
+			
+			PtThanhToan pttt = donHang.getPtThanhToan();
+			if (pttt == null) {
+				errors.add(message.getMessage("unknowInfo"));
+				return false;
+			}
+			
+			TrangThaiDonHang ttdh = donHang.getTrangThaiDonHang();
+			if (ttdh == null) {
+				errors.add(message.getMessage("unknowInfo"));
+				return false;
+			}
+		} catch (Exception e) {
+			errors.add(message.getMessage("unknowInfo"));
+			logger.error("validate order fail: " + e.getMessage());
+			return false;
+		}
+		
+		return true;
 	}
 	
 	private SortBy getSortBy(){
@@ -130,4 +260,12 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 	public int getPage() {
 		return page;
 	}	
+	
+	public DonHang getDonHang() {
+		return donHang;
+	}
+
+	public void setDonHang(DonHang donHang) {
+		this.donHang = donHang;
+	}
 }

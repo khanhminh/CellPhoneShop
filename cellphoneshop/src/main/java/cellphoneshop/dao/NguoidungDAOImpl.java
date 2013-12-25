@@ -208,4 +208,19 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 
 		return result;
 	}
+
+	@Transactional
+	public int demSoNguoiDung() {
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			String hql = "select count(*) from NguoiDung";
+			Query query = session.createQuery(hql);
+			return ((Long) query.iterate().next()).intValue();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return 0;
+	}
 }

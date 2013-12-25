@@ -30,6 +30,20 @@ public class NguoiNhanDAOImpl implements NguoiNhanDAO {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
+	
+	@Transactional
+	public boolean capNhatNguoiNhan(NguoiNhan nguoiNhan) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			session.update(nguoiNhan);
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
 
 	@Transactional
 	public NguoiNhan getNguoiNhan(Integer maNguoiDung, String hoTenNguoiNhan) {

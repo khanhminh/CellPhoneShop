@@ -18,5 +18,8 @@ public interface DonHangService {
 	List<DonHang> getListDonHang(Integer maStatus, SortBy sortby, int start, int count);
 	int demoSoDonHang(Integer maStatus);
 	boolean xoaDonHang(Integer maDonHang);
+	boolean capnhatDonHang(DonHang donHang);
 	// TODO: lam chuc nang xoa don hang
+	List<DonHang> getListDonHang(String key, String option, int start, int view);
+	int demSoDonHang(String key, String option);
 }

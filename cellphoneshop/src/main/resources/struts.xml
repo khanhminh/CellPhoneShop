@@ -220,6 +220,19 @@
 		<action name="order_detail" method="detailOrder" class="adminOrderManagerAction">
 			<result name="success" type="tiles">admin_detail_order</result>
 		</action>
+		
+		<action name="edit_order" method="editOrder" class="adminOrderManagerAction">
+			<interceptor-ref name="orderStack"/>
+			<result name="success" type="tiles">edit_order</result>
+		</action>
+		
+		<action name="search_order" method="searchOrder" class="adminOrderManagerAction">
+			<result name="input" type="tiles">search_order</result>
+		</action>
+		
+		<action name="process_search_order" method="processSearchOrder" class="adminOrderManagerAction">
+			<result name="success">/WEB-INF/jsp/ajax-page/list_order.jsp</result>
+		</action>
 	</package>
 	
 	<package name="ajax_admin" extends="json-default" namespace="/admin">
