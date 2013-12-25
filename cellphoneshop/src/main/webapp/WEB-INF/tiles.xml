@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+	       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="page" template="/WEB-INF/jsp/template/template.jsp">
+        <put-attribute name="title" value="Page" />
+        <put-attribute name="head" value="/WEB-INF/jsp/template/head.jsp" />   
+        <put-attribute name="header" value="/WEB-INF/jsp/template/header.jsp" />  
+        <put-attribute name="footer" value="/WEB-INF/jsp/template/footer.jsp" />  
+    </definition>
+    
+    <definition name="login" extends="page">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content" value="/WEB-INF/jsp/login.jsp" />  
+    </definition>
+     <definition name="register" extends="page">
+        <put-attribute name="title" value="Đăng ký" />
+        <put-attribute name="content" value="/WEB-INF/jsp/register.jsp" />  
+    </definition>
+    <definition name="update_account" extends="page">
+        <put-attribute name="title" value="Cập nhật thông tin tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/jsp/update_account.jsp" />  
+    </definition>
+    <definition name="change_password" extends="page">
+        <put-attribute name="title" value="Cập nhật thông tin tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/jsp/change_password.jsp" />  
+    </definition>
+    
+    <definition name="home" extends="page">
+        <put-attribute name="title" value="Trang chủ" />
+        <put-attribute name="content" value="/WEB-INF/jsp/home.jsp" />  
+    </definition>
+    
+    <definition name="about" extends="page">
+        <put-attribute name="title" value="Giới thiệu" />
+        <put-attribute name="content" value="/WEB-INF/jsp/about.jsp" />  
+    </definition>
+    
+    <definition name="contact" extends="page">
+        <put-attribute name="title" value="Liên hệ" />
+        <put-attribute name="content" value="/WEB-INF/jsp/contact.jsp" />  
+    </definition>
+    
+    <definition name="product" extends="page">
+        <put-attribute name="title" value="Sản phẩm" />
+        <put-attribute name="content" value="/WEB-INF/jsp/product.jsp" />  
+    </definition>
+    
+    <definition name="detail" extends="page">
+        <put-attribute name="title" value="Chi tiết sản phẩm" />
+        <put-attribute name="content" value="/WEB-INF/jsp/detail.jsp" />  
+    </definition>
+    
+    <definition name="cart" extends="page">
+        <put-attribute name="title" value="Giỏ hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/cart.jsp" />  
+    </definition>
+    <definition name="emptycart" extends="page">
+        <put-attribute name="title" value="Giỏ hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/emptycart.jsp" />  
+    </definition>
+    <definition name="errorcart" extends="page">
+        <put-attribute name="title" value="Giỏ hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/errorcart.jsp" />  
+    </definition>
+    
+    <definition name="checkout" extends="page">
+        <put-attribute name="title" value="Thông tin thanh toán" />
+        <put-attribute name="content" value="/WEB-INF/jsp/checkout.jsp" />  
+    </definition>
+    
+     <definition name="complete" extends="page">
+        <put-attribute name="title" value="Hoàn tất" />
+        <put-attribute name="content" value="/WEB-INF/jsp/checkout_complete.jsp" />  
+    </definition>
+    
+    <definition name="compare" extends="page">
+        <put-attribute name="title" value="So sánh" />
+        <put-attribute name="content" value="/WEB-INF/jsp/compare.jsp" />  
+    </definition>
+    
+    <definition name="order" extends="page">
+        <put-attribute name="title" value="Quản lý đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/order.jsp" />  
+    </definition>
+    
+    <definition name="detail_order" extends="page">
+        <put-attribute name="title" value="Chi tiết đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/detail_order.jsp" />  
+    </definition>
+    
+    <!-- Amdin Pages -->
+    
+    <definition name="admin" template="/WEB-INF/jsp/admin/template/template.jsp">
+        <put-attribute name="title" value="Amin" />
+        <put-attribute name="head" value="/WEB-INF/jsp/admin/template/head.jsp" />   
+         <put-attribute name="sidebar" value="/WEB-INF/jsp/admin/template/sidebar.jsp" /> 
+        <put-attribute name="header" value="/WEB-INF/jsp/admin/template/header.jsp" />  
+        <put-attribute name="footer" value="/WEB-INF/jsp/admin/template/footer.jsp" />  
+    </definition>
+    
+    <definition name="list_account" extends="admin">
+        <put-attribute name="title" value="Danh sách tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/list_account.jsp" />  
+    </definition>
+    
+    <definition name="test_insert_product" extends="page">
+    	<put-attribute name="title" value="Thêm sản phẩm mới"/>
+    	<put-attribute name="content" value="/WEB-INF/jsp/admin/test_insert_product.jsp"/>
+    </definition>
+    	
+    <definition name="set_role" extends="admin">
+        <put-attribute name="title" value="Phân quyền" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/set_role.jsp" />  
+    </definition>
+    
+    <definition name="detail_account" extends="admin">
+        <put-attribute name="title" value="Chi tiết tài khoản" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/detail_account.jsp" /> 
+    </definition>
+    
+    <definition name="search_account" extends="admin">
+        <put-attribute name="title" value="Tìm kiếm" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/search_account.jsp" /> 
+    </definition>
+    
+    <definition name="list_order" extends="admin">
+        <put-attribute name="title" value="Danh sách đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/list_order.jsp" /> 
+    </definition>
+    
+    <definition name="admin_detail_order" extends="admin">
+        <put-attribute name="title" value="Chi tiết đơn hàng đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/detail_order.jsp" /> 
+    </definition>
+    
+    <definition name="edit_order" extends="admin">
+        <put-attribute name="title" value="Cập nhật đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/edit_order.jsp" /> 
+    </definition>
+    
+    <definition name="search_order" extends="admin">
+        <put-attribute name="title" value="Tìm kiếm đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/search_order.jsp" /> 
+    </definition>
+    
+</tiles-definitions>

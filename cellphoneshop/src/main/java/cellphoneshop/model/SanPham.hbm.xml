@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 10, 2010 7:19:01 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.SanPham" table="SanPham" catalog="CellPhoneShop">
+        <id name="maSp" type="java.lang.Integer">
+            <column name="maSP" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="nhaSanXuat" class="cellphoneshop.model.NhaSanXuat" fetch="select">
+            <column name="maNhaSX" />
+        </many-to-one>
+        <many-to-one name="loaiSanPham" class="cellphoneshop.model.LoaiSanPham" fetch="select">
+            <column name="maLoaiSP" not-null="true" />
+        </many-to-one>
+        <property name="tenSp" type="string">
+            <column name="tenSP" length="100" not-null="true" />
+        </property>
+        <property name="gioiThieu" type="string">
+            <column name="gioiThieu" length="800" />
+        </property>
+        <property name="gia" type="java.lang.Integer">
+            <column name="gia" />
+        </property>
+        <property name="soThangBaoHanh" type="java.lang.Integer">
+            <column name="soThangBaoHanh" />
+        </property>
+        <property name="hinhDaiDien" type="string">
+            <column name="hinhDaiDien" length="256" />
+        </property>
+        <property name="soLuongHienCo" type="java.lang.Integer">
+            <column name="soLuongHienCo" />
+        </property>
+        <property name="tongSoLuong" type="java.lang.Integer">
+            <column name="tongSoLuong" />
+        </property>
+        <property name="ngayNhap" type="date">
+            <column name="ngayNhap" length="10" />
+        </property>
+        <property name="diemDanhGiaTb" type="java.lang.Float">
+            <column name="diemDanhGiaTB" precision="12" scale="0" />
+        </property>
+        <set name="ctDonHangs" inverse="true">
+            <key>
+                <column name="maSP" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.CtDonHang" />
+        </set>
+        <set name="danhSachMongMuons" inverse="true" table="CtDSMongMuon">
+            <key>
+                <column name="maSP" not-null="true" />
+            </key>
+            <many-to-many entity-name="cellphoneshop.model.DanhSachMongMuon">
+                <column name="maDSMongMuon" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="ctSanPhams" inverse="true">
+            <key>
+                <column name="maSP" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.CtSanPham" />
+        </set>
+        <set name="khuyenMais" inverse="true" table="CtKhuyenMai">
+            <key>
+                <column name="maSP" not-null="true" />
+            </key>
+            <many-to-many entity-name="cellphoneshop.model.KhuyenMai">
+                <column name="maKM" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="binhLuans" inverse="true">
+            <key>
+                <column name="maSP" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.BinhLuan" />
+        </set>
+        <set name="danhGias" inverse="true">
+            <key>
+                <column name="maSP" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.DanhGia" />
+        </set>
+    </class>
+</hibernate-mapping>

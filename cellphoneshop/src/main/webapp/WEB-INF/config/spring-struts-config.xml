@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="cellphoneshop" />
+
+
+	<bean id="homeAction" class="cellphoneshop.controller.HomeController" scope="prototype">
+		<property name="productPerPage" value="8"/>
+	</bean>
+
+	<bean id="accountAction" class="cellphoneshop.controller.AccountController">
+	</bean>
+	
+	<bean id="updateAccountAction" class="cellphoneshop.controller.UpdateAccountController"/>
+
+	<bean id="productAction" class="cellphoneshop.controller.ProductController"
+		scope="prototype">
+	</bean>
+
+	<bean id="filterAction" class="cellphoneshop.controller.FilterController">
+		<property name="sortby" value="price_asc" />
+	</bean>
+
+	<bean id="shoppingCartAction" class="cellphoneshop.controller.ShoppingCartController">
+	</bean>
+
+	<bean id="checkoutAction" class="cellphoneshop.controller.CheckoutController" />
+
+	<bean id="orderManagerAction" class="cellphoneshop.controller.OrderManagerController" />
+	
+	<bean id="pageInterceptor" class="cellphoneshop.interceptor.PageInterceptor"/>
+	
+	<bean id="homeInterceptor" class="cellphoneshop.interceptor.HomeInterceptor"/>
+
+	<bean id="searchInterceptor" class="cellphoneshop.interceptor.SearchInterceptor">
+		<property name="listPrice">
+			<list>
+				<bean class="cellphoneshop.model.PriceConstraint">
+					<property name="minPrice" value="0" />
+					<property name="maxPrice" value="500000" />
+				</bean>
+				<bean class="cellphoneshop.model.PriceConstraint">
+					<property name="minPrice" value="500000" />
+					<property name="maxPrice" value="1000000" />
+				</bean>
+				<bean class="cellphoneshop.model.PriceConstraint">
+					<property name="minPrice" value="1000000" />
+					<property name="maxPrice" value="3000000" />
+				</bean>
+				<bean class="cellphoneshop.model.PriceConstraint">
+					<property name="minPrice" value="3000000" />
+					<property name="maxPrice" value="5000000" />
+				</bean>
+				<bean class="cellphoneshop.model.PriceConstraint">
+					<property name="minPrice" value="5000000" />
+					<property name="maxPrice" value="10000000" />
+				</bean>
+				<bean class="cellphoneshop.model.PriceConstraint">
+					<property name="minPrice" value="10000000" />
+					<property name="maxPrice" value="20000000" />
+				</bean>
+			</list>
+		</property>
+		<property name="listStar">
+			<list>
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+				<value>4</value>
+				<value>5</value>
+			</list>
+		</property>
+		<property name="listSortby">
+			<list>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="price" />
+					<property name="asc" value="true" />
+					<property name="title" value="Giá tăng dần" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="price" />
+					<property name="asc" value="false" />
+					<property name="title" value="Giá giảm dần" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="name" />
+					<property name="asc" value="true" />
+					<property name="title" value="Tên A-Z" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="name" />
+					<property name="asc" value="false" />
+					<property name="title" value="Tên Z-A" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="orderInterceptor" class="cellphoneshop.interceptor.OrderManagerInterceptor">		
+		<property name="listRPP">
+			<list>
+				<value>10</value>
+				<value>15</value>
+				<value>20</value>
+			</list>
+		</property>
+		<property name="listSortby">
+			<list>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="ngayDatHang" />
+					<property name="asc" value="true" />
+					<property name="title" value="Cũ nhất" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="ngayDatHang" />
+					<property name="asc" value="false" />
+					<property name="title" value="Mới nhất" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="tongGiaTri" />
+					<property name="asc" value="true" />
+					<property name="title" value="Giá trị tăng dần" />
+				</bean>
+				<bean class="cellphoneshop.viewmodel.SortBy">
+					<property name="by" value="tongGiaTri" />
+					<property name="asc" value="false" />
+					<property name="title" value="Giá trị giảm dần" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+
+	<!-- Admin -->
+	<bean id="accountManagerAction" class="cellphoneshop.controller.AccountManagerController">
+		<property name="RecordPerPage" value="20"/>
+	</bean>
+	<bean id="adminOrderManagerAction" class="cellphoneshop.controller.AdminOrderManagerController" scope="prototype">
+		<property name="view" value="10"/>
+		<property name="sortby" value="ngayDatHang_desc"/>
+		<property name="page" value="1"/>
+		<property name="status" value="0"/>
+	</bean>
+	<bean id="testInsertProductAction" class="cellphoneshop.controller.TestProductManagerController"/> <!-- for test only -->
+</beans>
+       				

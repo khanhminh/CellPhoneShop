@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 10, 2010 8:13:29 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="cellphoneshop.model.NguoiNhan" table="NguoiNhan" catalog="CellPhoneShop">
+        <id name="maNguoiNhan" type="int">
+            <column name="maNguoiNhan" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="nguoiDung" class="cellphoneshop.model.NguoiDung" fetch="select">
+            <column name="maND" not-null="true" />
+        </many-to-one>
+        <property name="hoTen" type="string">
+            <column name="hoTen" length="50" />
+        </property>
+        <property name="soDienThoai" type="string">
+            <column name="soDienThoai" length="15" />
+        </property>
+        <property name="diaChi" type="string">
+            <column name="diaChi" length="100" not-null="true" />
+        </property>
+        <set name="donHangs" inverse="true">
+            <key>
+                <column name="maNguoiNhan" not-null="true" />
+            </key>
+            <one-to-many class="cellphoneshop.model.DonHang" />
+        </set>
+    </class>
+</hibernate-mapping>

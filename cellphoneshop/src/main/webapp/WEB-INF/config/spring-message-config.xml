@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="cellphoneshop" />
+	
+<!-- 	<bean id="propertyConfigurer_message" -->
+<!-- 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" -->
+<!-- 		p:location="/WEB-INF/message.properties" /> -->
+
+	<bean id="message" class="cellphoneshop.util.Message">
+		<property name="messageList">
+		<props>
+			<prop key="errorPassword">Mật khẩu không hợp lệ</prop>
+			<prop key="mismatch">Mật khẩu không khớp</prop>
+			<prop key="unknowFirstName">Chưa nhập họ</prop>
+			<prop key="unknowName">Chưa nhập tên</prop>
+			<prop key="errorEmail">Địa chỉ Email không hợp lệ</prop>
+			<prop key="duplicateEmail">Địa chỉ Email đã được sử dụng</prop>
+			<prop key="errorBirthDate">Ngày sinh không hợp lệ</prop>
+			<prop key="errorPhoneNumber">Số điện thoại không hợp lệ</prop>
+			<prop key="unknowAddress">Vui lòng nhập địa chỉ</prop>
+			
+			<prop key="unknowFullName">Vui lòng nhập họ tên</prop>		
+			<prop key="unknowInfo">Vui lòng nhập đủ thông tin</prop>		
+		</props>
+		</property>
+	</bean>
+	
+	<bean id="regex" class="cellphoneshop.util.PatternRegex">
+		<property name="patternList">
+		<props>
+			<prop key="email">^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$</prop>
+			<prop key="phone">^\d{6,11}$</prop>		
+			<prop key="password">^.{6,20}$</prop>	
+			<prop key="date_format">MM/dd/yyyy</prop>		
+		</props>
+		</property>
+	</bean>
+
+</beans>
+       				
