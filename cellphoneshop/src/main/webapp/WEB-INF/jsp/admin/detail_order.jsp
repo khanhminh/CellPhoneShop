@@ -142,7 +142,7 @@
 				</div>
 			</div>
 		</div>
-		<a class="btn btn-info" href="edit_order"> <i class="icon-edit icon-white"></i>
+		<a class="btn btn-info" href="edit_order?id=${order.maDonHang}"> <i class="icon-edit icon-white"></i>
 			Cập nhật
 		</a>
 		<a class="btn btn-success" href="list_order"> <i class="icon-share-alt icon-white"></i>
@@ -151,7 +151,7 @@
 	</c:when>
 	<c:otherwise>
 		<div class="alert alert-error">
-			<strong>Không tìm thấy tài khoản!</strong>
+			<strong>Không tìm thấy đơn hàng!</strong>
 		</div>
 	</c:otherwise>
 </c:choose>

@@ -1,5 +1,6 @@
 package cellphoneshop.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +17,8 @@ import cellphoneshop.model.CtDonHang;
 import cellphoneshop.model.DonHang;
 import cellphoneshop.model.NguoiDung;
 import cellphoneshop.model.NguoiNhan;
-import cellphoneshop.model.PtGiaoHang;
-import cellphoneshop.model.PtThanhToan;
 import cellphoneshop.model.TrangThaiDonHang;
+import cellphoneshop.util.Util;
 import cellphoneshop.viewmodel.SortBy;
 
 @Service
@@ -140,5 +140,79 @@ public class DonHangServiceImpl implements DonHangService {
 		}
 		
 		return false;
+	}
+
+	public boolean capnhatDonHang(DonHang donHang) {
+		DonHang oldOrder = donHangDAO.getDonHangCungChiTietTheoId(donHang.getMaDonHang());
+		if (oldOrder != null){
+			NguoiNhan nguoinhan = donHang.getNguoiNhan();
+			oldOrder.getNguoiNhan().setDiaChi(nguoinhan.getDiaChi());
+			oldOrder.getNguoiNhan().setHoTen(nguoinhan.getHoTen());
+			oldOrder.getNguoiNhan().setSoDienThoai(nguoinhan.getSoDienThoai());
+			if (nguoiNhanDAO.capNhatNguoiNhan(oldOrder.getNguoiNhan())){
+				oldOrder.setTrangThaiDonHang(donHang.getTrangThaiDonHang());
+				oldOrder.setPtGiaoHang(donHang.getPtGiaoHang());
+				oldOrder.setPtThanhToan(donHang.getPtThanhToan());
+				
+				return donHangDAO.updateDonHang(oldOrder);
+			}			
+			else {
+				return false;
+			}			
+		}
+		
+		return false;
+	}
+
+	public List<DonHang> getListDonHang(String key, String option, int start,
+			int view) {
+		
+		if (key == null || option == null){
+			return null;
+		}
+		List<DonHang> result = new ArrayList<DonHang>();
+		
+		if (option.equalsIgnoreCase("id_order") && Util.tryParseInt(key)){
+			int id = Integer.parseInt(key);
+			DonHang dh = donHangDAO.getDonHang(id);
+			if (dh != null){
+				result.add(dh);
+			}
+		}
+		else if (option.equalsIgnoreCase("id") ||
+				option.equalsIgnoreCase("email")){
+			List<NguoiDung> list = nguoidungDAO.getListNguoiDung(key, option, 0, 1);
+			if (list != null && list.size() > 0){
+				NguoiDung nd = list.get(0);
+				result = donHangDAO.getListDonHangTheoNguoiDung(nd.getMaNd(), start, view);
+			}
+		}
+		
+		return result;
+	}
+
+	public int demSoDonHang(String key, String option) {
+		if (key == null || option == null){
+			return 0;
+		}
+		int result = 0;
+		
+		if (option.equalsIgnoreCase("id_order") && Util.tryParseInt(key)){
+			int id = Integer.parseInt(key);
+			DonHang dh = donHangDAO.getDonHang(id);
+			if (dh != null){
+				result = 1;
+			}
+		}
+		else if (option.equalsIgnoreCase("id") ||
+				option.equalsIgnoreCase("email")){
+			List<NguoiDung> list = nguoidungDAO.getListNguoiDung(key, option, 0, 1);
+			if (list != null && list.size() > 0){
+				NguoiDung nd = list.get(0);
+				result = donHangDAO.demSoDonHangTheoNguoiDung(nd.getMaNd());
+			}
+		}
+		
+		return result;
 	}
 }

@@ -23,7 +23,7 @@
 		</div>
 		<div class="box-content">
 			<table
-				class="table table-striped table-bordered bootstrap-datatable datatable">
+				class="table table-striped table-bordered bootstrap-datatable">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -81,6 +81,24 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<div class="dataTables_paginate paging_bootstrap pagination">
+				<ul>
+					<c:if test="${totalPage > 0}">
+						<li class="prev disabled"><a href="#">← Previous</a></li>
+					<c:forEach var="p" begin="1" end="${totalPage}">
+						<c:choose>
+							<c:when test="${p == param.page}">							
+								<li class="active"><a href="#" class="paging-order">${p}</a></li>
+							</c:when>	
+							<c:otherwise>
+								<li><a href="list_account?page=${p}" class="paging-order">${p}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<li class="next disabled"><a href="#">Next → </a></li>
+					</c:if>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>

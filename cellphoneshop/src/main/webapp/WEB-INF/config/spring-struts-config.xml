@@ -139,8 +139,10 @@
 	
 
 	<!-- Admin -->
-	<bean id="accountManagerAction" class="cellphoneshop.controller.AccountManagerController" />
-	<bean id="adminOrderManagerAction" class="cellphoneshop.controller.AdminOrderManagerController">
+	<bean id="accountManagerAction" class="cellphoneshop.controller.AccountManagerController">
+		<property name="RecordPerPage" value="20"/>
+	</bean>
+	<bean id="adminOrderManagerAction" class="cellphoneshop.controller.AdminOrderManagerController" scope="prototype">
 		<property name="view" value="10"/>
 		<property name="sortby" value="ngayDatHang_desc"/>
 		<property name="page" value="1"/>

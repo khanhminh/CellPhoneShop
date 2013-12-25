@@ -135,4 +135,14 @@
         <put-attribute name="content" value="/WEB-INF/jsp/admin/detail_order.jsp" /> 
     </definition>
     
+    <definition name="edit_order" extends="admin">
+        <put-attribute name="title" value="Cập nhật đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/edit_order.jsp" /> 
+    </definition>
+    
+    <definition name="search_order" extends="admin">
+        <put-attribute name="title" value="Tìm kiếm đơn hàng" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/search_order.jsp" /> 
+    </definition>
+    
 </tiles-definitions>

@@ -7,7 +7,7 @@
 	<ul class="breadcrumb">
 		<li><a href="#">Quản lý tài khoản</a> <span class="divider">/</span>
 		</li>
-		<li><a href="#">Danh sách tài khoản</a></li>
+		<li><a href="#">Tìm kiếm</a></li>
 	</ul>
 </div>
 

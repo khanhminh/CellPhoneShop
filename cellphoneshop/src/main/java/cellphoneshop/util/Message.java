@@ -12,5 +12,8 @@ public class Message {
 	public Properties getMessageList() {
 		return messageList;
 	}
-
+	
+	public String getMessage(String name) {
+		return messageList.getProperty(name);
+	}
 }

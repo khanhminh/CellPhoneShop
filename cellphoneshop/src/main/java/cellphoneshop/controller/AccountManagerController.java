@@ -30,7 +30,7 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 	@Autowired
 	private VaiTroService vtService;
 	private HttpServletRequest request;
-	private final int RecordPerPage = 20;
+	private int RecordPerPage;
 	private String query;
 	private String option;
 	private Logger log = Logger.getLogger(AccountManagerController.class);
@@ -39,6 +39,12 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 		int page = getPage();
 		int start = (page - 1) * RecordPerPage;
 		List<NguoiDung> listAccount = ndService.getListNguoiDung(start, RecordPerPage);
+		int count = ndService.demSoNguoiDung();
+		int totalPage = count / RecordPerPage;
+		if (totalPage * RecordPerPage < count){
+			totalPage++;
+		}
+		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("listAccount", listAccount);
 		
 		return SUCCESS;
@@ -182,5 +188,9 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 
 	public void setOption(String option) {
 		this.option = option;
+	}
+	
+	public void setRecordPerPage(int recordPerPage) {
+		RecordPerPage = recordPerPage;
 	}
 }

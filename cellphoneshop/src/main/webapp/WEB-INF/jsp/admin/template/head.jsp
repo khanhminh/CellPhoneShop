@@ -84,6 +84,8 @@ body {
 <script src="<s:url value='/resources/script/admin/jquery.uploadify-3.1.js'/>"></script>
 <script src="<s:url value='/resources/script/admin/jquery.history.js'/>"></script>
 <script src="<s:url value='/resources/script/admin/charisma.js'/>"></script>
+<script src="<s:url value='/resources/script/jquery.validate.js'/>"></script>
+<script src="<s:url value='/resources/script/jquery.validate.unobtrusive.js'/>"></script>
 
 
 
