@@ -135,6 +135,7 @@ public class DonHangServiceImpl implements DonHangService {
 	}
 
 	public boolean xoaDonHang(Integer maDonHang) {
+		
 		if (ctDonHangDAO.xoaCTDonHang(maDonHang)){
 			return donHangDAO.xoaDonHang(maDonHang);
 		}

@@ -62,4 +62,18 @@ public class NguoiNhanDAOImpl implements NguoiNhanDAO {
 		
 		return result;
 	}
+
+	@Transactional
+	public boolean xoaNguoiNhan(NguoiNhan nguoiNhan) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			session.delete(nguoiNhan);
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
 }

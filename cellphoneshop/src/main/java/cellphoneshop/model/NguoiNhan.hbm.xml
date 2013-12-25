@@ -6,7 +6,7 @@
     <class name="cellphoneshop.model.NguoiNhan" table="NguoiNhan" catalog="CellPhoneShop">
         <id name="maNguoiNhan" type="int">
             <column name="maNguoiNhan" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="nguoiDung" class="cellphoneshop.model.NguoiDung" fetch="select">
             <column name="maND" not-null="true" />
