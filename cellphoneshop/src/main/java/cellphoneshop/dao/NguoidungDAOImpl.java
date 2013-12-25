@@ -102,7 +102,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 
 	}
 
-	private String encodePassword(NguoiDung nguoidung) {
+	public String encodePassword(NguoiDung nguoidung) {
 		Object salt = saltSource.getSalt(new UserDetailsAdapter(nguoidung));
 		String encPassword = passwordEncoder.encodePassword(
 				nguoidung.getMatKhau(), salt);

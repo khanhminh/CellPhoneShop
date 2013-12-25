@@ -18,4 +18,5 @@ public interface NguoiDungService {
 	Boolean huyVaiTroNguoiDung(Integer maNguoiDung, Integer maVaiTro);
 	boolean capNhatTrangThaiNguoiDung(Integer maNguoiDung, boolean isLock);
 	List<NguoiDung> getListNguoiDung(String tieuchi, String loaiTieuChi, int ketquadautien, int soluong);
+	String encodePassword(NguoiDung nguoidung);
 }

@@ -140,8 +140,7 @@ public class NguoiDungServiceImpl implements NguoiDungService {
 		return nguoiDungDAO.getListNguoiDung(tieuchi, loaiTieuChi, ketquadautien, soluong);
 	}
 
-	public int demSoNguoiDung() {
-		
-		return nguoiDungDAO.demSoNguoiDung();
+	public String encodePassword(NguoiDung nguoidung) {
+		return nguoiDungDAO.encodePassword(nguoidung);
 	}
 }

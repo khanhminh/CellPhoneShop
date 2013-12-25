@@ -160,6 +160,7 @@ public class AccountController extends ActionSupport {
 
 		return result;
 	}
+	
 
 	private boolean tryParseDate(String strDate) {
 		boolean result = true;
