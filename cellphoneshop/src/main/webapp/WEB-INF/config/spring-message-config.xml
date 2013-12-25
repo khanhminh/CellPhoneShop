@@ -28,8 +28,17 @@
 			<prop key="errorPhoneNumber">Số điện thoại không hợp lệ</prop>
 			<prop key="unknowAddress">Vui lòng nhập địa chỉ</prop>
 			
+			<prop key="unknowLoginUser">Bạn phải đăng nhập mới có thể cập nhật thông tin tài khoản</prop>
+			<prop key="updateSuccess">Thông tin tài khoản của bạn đã được cập nhật thành công</prop>
+			<prop key="updateFail">Thông tin tài khoản của bạn chưa được cập nhật hoặc có lỗi trong quá trình cập nhật</prop>
+			<prop key="unknowSex">Thông tin giới tính không chính xác</prop> 
+			<prop key="updatePasswordSuccess">Mật khẩu của bạn đã được cập nhật thành công</prop>
+			<prop key="updatelFailPassword">Mật khẩu của bạn cập nhật không thành công, xin kiểm tra lại mật khẩu hiện tại đã nhập</prop>
+			<prop key="errorCurrentPassword">Mật khẩu hiện tại không chính xác</prop>
+			
 			<prop key="unknowFullName">Vui lòng nhập họ tên</prop>		
-			<prop key="unknowInfo">Vui lòng nhập đủ thông tin</prop>		
+			<prop key="unknowInfo">Vui lòng nhập đủ thông tin</prop>
+				
 		</props>
 		</property>
 	</bean>
