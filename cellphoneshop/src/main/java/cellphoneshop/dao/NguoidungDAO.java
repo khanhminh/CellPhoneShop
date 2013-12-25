@@ -12,6 +12,7 @@ public interface NguoidungDAO {
 	Boolean insertNguoidung(NguoiDung user);
 	Boolean updateNguoidung(NguoiDung user);
 	Boolean checkLogin(NguoiDung user);
+	String encodePassword(NguoiDung nguoidung);
 	
 	
 }
