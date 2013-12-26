@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 
 <div class="wrapper row3">
 	<div id="container">
 		<h2 class="title-content push50">THÔNG TIN TÀI KHOẢN</h2>
 		<div class="clear push20"></div>
 
+		<s:set var="ten">${requestScope.loginUser.ten}</s:set>
+		<s:set var="ho">${requestScope.loginUser.ho}</s:set>
+		<s:set var="ngaySinh"><fmt:formatDate pattern="MM/dd/yyyy" value="${requestScope.loginUser.ngaySinh}" /></s:set>
+		<s:set var="soDienThoai">${requestScope.loginUser.soDienThoai}</s:set>
+		<s:set var="diaChi">${requestScope.loginUser.diaChi}</s:set>
+		<s:set var="gioiTinh">${requestScope.loginUser.gioiTinh}</s:set>
+		
 		<div id="update-info">
 			<s:form action="update_account.action" method="post" theme="simple">
 			<div class="validation-summary-errors">
@@ -27,7 +36,7 @@
 						(<span class="mark">*</span>)
 					</td>
 					<td colspan="2">
-						<s:textfield type="text" name="user.firstname" theme="simple"
+						<s:textfield type="text" name="user.firstname" theme="simple" value="%{ho}"
 							data-val="true" data-val-required="Vui lòng nhập họ" />
 						<span class="field-validation-valid" data-valmsg-for="user.firstname" data-valmsg-replace="true"></span>
 					</td>
@@ -38,7 +47,7 @@
 						(<span class="mark">*</span>)
 					</td>
 					<td colspan="2">
-						<s:textfield type="text" name="user.name" theme="simple"
+						<s:textfield type="text" name="user.name" theme="simple" value="%{ten}"
 							data-val="true" data-val-required="Vui lòng nhập tên" />
 						<span class="field-validation-valid" data-valmsg-for="user.name" data-valmsg-replace="true"></span>
 					</td>
@@ -49,7 +58,8 @@
 						(<span class="mark">*</span>)
 					</td>
 					<td colspan="2">
-						<s:textfield type="text" name="user.birthday" theme="simple"
+						<s:textfield type="text" name="user.birthday" theme="simple" 
+							value="%{ngaySinh}"
 							data-val="true" data-val-date="Ngày sinh không hợp lệ" 
 							data-val-required="Vui lòng nhập ngày sinh"/>
 						<span class="field-validation-valid" data-valmsg-for="user.birthday" data-valmsg-replace="true"></span>						
@@ -61,8 +71,17 @@
 						(<span class="mark">*</span>)
 					</td>
 					<td colspan="2">
-						<input type="radio" name="user.sex" value="Nam" data-val="true" data-val-required="Vui lòng chọn giới tính"> Nam&nbsp;&nbsp;
-						<input type="radio" name="user.sex" value="Nữ">  Nữ						
+						<c:choose>
+							<c:when test="${gioiTinh == 1}">
+								<input type="radio" name="user.sex" value="Nam" checked="checked" data-val="true" data-val-required="Vui lòng chọn giới tính"> Nam&nbsp;&nbsp;
+								<input type="radio" name="user.sex" value="Nữ">  Nữ
+							</c:when>
+							
+							<c:when test="${gioiTinh == 0}">
+								<input type="radio" name="user.sex" value="Nam" data-val="true" data-val-required="Vui lòng chọn giới tính"> Nam&nbsp;&nbsp;
+								<input type="radio" name="user.sex" value="Nữ" checked="checked">  Nữ
+							</c:when>
+						</c:choose>								
 						<span class="field-validation-valid" data-valmsg-for="user.sex" data-valmsg-replace="true"></span>	
 					</td>				
 				</tr>
@@ -72,7 +91,7 @@
 						(<span class="mark">*</span>)
 					</td>
 					<td colspan="2">
-						<s:textfield type="text" name="user.phone" theme="simple"
+						<s:textfield type="text" name="user.phone" theme="simple" value="%{soDienThoai}"
 							data-val="true" data-val-regex="Số điện thoại không hợp lệ" data-val-regex-pattern="^\d{6,11}$" 
 							data-val-required="Vui lòng nhập điện thoại liên lạc" />
 						<span class="field-validation-valid" data-valmsg-for="user.phone" data-valmsg-replace="true"></span>						
@@ -84,7 +103,7 @@
 						(<span class="mark">*</span>)
 					</td>
 					<td colspan="2">
-						<s:textfield type="text" name="user.address" theme="simple"
+						<s:textfield type="text" name="user.address" theme="simple" value="%{diaChi}"
 							data-val="true" data-val-required="Vui lòng nhập địa chỉ" />
 						<span class="field-validation-valid" data-valmsg-for="user.address" data-valmsg-replace="true"></span>						
 					</td>
