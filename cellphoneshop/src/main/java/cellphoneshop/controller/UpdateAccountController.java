@@ -46,7 +46,15 @@ public class UpdateAccountController extends ActionSupport implements
 
 	public String updateAcccount() {
 		errors = new ArrayList<String>();
+		NguoiDung loginUser = SecurityHelper.getUser();
+		if (loginUser == null) {
+			errors.add(messages.getMessageList().getProperty("unknowLoginUser"));
+			request.setAttribute("errors", errors);
+			return INPUT;
+		}
+		
 		if (user == null) {
+			request.setAttribute("loginUser", loginUser);
 			logger.info("Vo ham updateAccount");
 			return INPUT;
 		}
@@ -58,12 +66,6 @@ public class UpdateAccountController extends ActionSupport implements
 
 		// / test;
 
-		NguoiDung loginUser = SecurityHelper.getUser();
-		if (loginUser == null) {
-			errors.add(messages.getMessageList().getProperty("unknowLoginUser"));
-			request.setAttribute("errors", errors);
-			return INPUT;
-		}
 
 		String sex = user.getSex();
 		if (sex.equals("Nam")) {
