@@ -19,6 +19,8 @@
 	</bean>
 	
 	<bean id="updateAccountAction" class="cellphoneshop.controller.UpdateAccountController"/>
+	<bean id="uploadFileAction" class="cellphoneshop.controller.SaleOfController">
+	</bean>
 
 	<bean id="productAction" class="cellphoneshop.controller.ProductController"
 		scope="prototype">
