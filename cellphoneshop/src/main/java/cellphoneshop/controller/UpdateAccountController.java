@@ -46,24 +46,28 @@ public class UpdateAccountController extends ActionSupport implements
 
 	public String updateAcccount() {
 		errors = new ArrayList<String>();
+		NguoiDung loginUser = SecurityHelper.getUser();
+		//loginUser = nguoiDungService.getNguoiDung(loginUser.getMaNd());
+		if (loginUser == null) {
+			errors.add(messages.getMessageList().getProperty("unknowLoginUser"));
+			request.setAttribute("errors", errors);
+			return INPUT;
+		}
+		
 		if (user == null) {
+			request.setAttribute("loginUser", loginUser);
 			logger.info("Vo ham updateAccount");
 			return INPUT;
 		}
 
 		if (!validateUpdate()) {
+			request.setAttribute("loginUser", loginUser);
 			request.setAttribute("errors", errors);
 			return INPUT;
 		}
 
 		// / test;
 
-		NguoiDung loginUser = SecurityHelper.getUser();
-		if (loginUser == null) {
-			errors.add(messages.getMessageList().getProperty("unknowLoginUser"));
-			request.setAttribute("errors", errors);
-			return INPUT;
-		}
 
 		String sex = user.getSex();
 		if (sex.equals("Nam")) {
@@ -75,17 +79,20 @@ public class UpdateAccountController extends ActionSupport implements
 		loginUser.setDiaChi(user.getAddress());
 		Date ngaysinh = ParseDate(user.getBirthday());
 		if (ngaysinh == null) {
+			request.setAttribute("loginUser", loginUser);
 			errors.add(messages.getMessageList().getProperty("errorBirthDate"));
 			request.setAttribute("errors", errors);
 			return INPUT;
 		}
 
 		loginUser.setNgaySinh(ngaysinh);
+		loginUser.setTen(user.getName());
 		loginUser.setHo(user.getFirstname());
 		loginUser.setSoDienThoai(user.getPhone());
 		loginUser.setNhanTinQuaEmail(false);
 
 		if (!nguoiDungService.updateNguoidung(loginUser)) {
+			request.setAttribute("loginUser", loginUser);
 			errors.add(messages.getMessageList().getProperty("updateFail"));
 			request.setAttribute("errors", errors);
 			return INPUT;
@@ -96,7 +103,8 @@ public class UpdateAccountController extends ActionSupport implements
 
 		// Set bien isSuccess = true - thanh cong
 		request.setAttribute("isSuccess", true);
-		return SUCCESS;
+		request.setAttribute("loginUser", loginUser);
+		return INPUT;
 	}
 
 	public String changePassword() {

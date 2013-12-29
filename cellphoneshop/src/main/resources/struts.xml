@@ -57,6 +57,9 @@
 			<exception-mapping exception="java.lang.Exception" result="unhandledException" />
 		</global-exception-mappings> -->
 		
+		<action name="uploadfile" class="uploadFileAction">
+		</action>
+		
 		<action name="home" class="homeAction">
 			<interceptor-ref name="newStack"/>
 			<interceptor-ref name="homeStack"/>
