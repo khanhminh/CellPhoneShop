@@ -91,12 +91,15 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 				
 				try {
 					danhGiaService.insertDanhGia(user, id, number);
+					log.info("nguoi dung " + user.getMaNd() + " danh gia san pham " + strId);
 				} catch (Exception e) {
+					log.error("danh gia san pham that bai: " + e.getMessage());
 					result = RATING_FAIL;
 				}
 			}
 		}
 		else {
+			log.info("nguoi dung chua login khi danh gia");
 			result = NO_LOGIN;
 		}
 		JsonHandler.writeJson(result);		
@@ -116,12 +119,16 @@ public class ProductController extends ActionSupport implements ServletRequestAw
 					SanPham sp = sanPhamService.getSanPhamTheoId(id);
 					BinhLuan bl = new BinhLuan(sp, user, msg, new Date());
 					binhLuanService.insertBinhLuan(bl);
+					
+					log.info("nguoi dung " + user.getMaNd() + " gui mot binh luan cho san pham " + strId);
 				} catch (Exception e) {
+					log.error("gui binh luan that bai " + e.getMessage());
 					result = RATING_FAIL;
 				}
 			}
 		}
 		else {
+			log.info("nguoi dung chua login khi binh luan");
 			result = NO_LOGIN;
 		}
 		JsonHandler.writeJson(result);		

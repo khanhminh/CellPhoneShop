@@ -60,8 +60,11 @@ public class CheckoutController extends ActionSupport implements ServletRequestA
 				request.setAttribute("orderId", id);
 				donHang = null;
 				
+				log.info("nguoi dung " + nguoiDung.getMaNd() + " dat don hang thanh cong: " + id);
+				
 				return SUCCESS;
 			} catch (Exception e) {
+				log.error("loi dat don hang: " + e.getMessage());
 				return ERROR;
 			}
 		}

@@ -92,6 +92,7 @@ public class AccountController extends ActionSupport {
 			SecurityContextHolder.getContext().setAuthentication(authResult);
 
 			user = null;
+			log.info("dang ký thanh cong");
 			return SUCCESS;
 		} else {
 			return INPUT;

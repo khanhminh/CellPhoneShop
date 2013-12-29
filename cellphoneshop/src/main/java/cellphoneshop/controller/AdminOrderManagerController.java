@@ -19,6 +19,7 @@ import cellphoneshop.model.PhieuGiaoHang;
 import cellphoneshop.model.PtGiaoHang;
 import cellphoneshop.model.PtThanhToan;
 import cellphoneshop.model.TrangThaiDonHang;
+import cellphoneshop.security.SecurityHelper;
 import cellphoneshop.service.DonHangService;
 import cellphoneshop.service.PTGiaoHangService;
 import cellphoneshop.service.PTThanhToanService;
@@ -87,7 +88,10 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 			String strId = request.getParameter("id");
 			int id = Integer.parseInt(strId);
 			result = dhService.xoaDonHang(id);
+			
+			logger.info(SecurityHelper.getUser().getEmail() + " xoa don hang: " + strId);
 		} catch (Exception e) {
+			logger.error("loi xoa don hang: " + e.getMessage());
 			result = false;
 		}
 		JsonHandler.writeJson(new Boolean(result));
@@ -112,15 +116,16 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 			if (validateOrder()){
 				if (dhService.capnhatDonHang(donHang)){
 					request.setAttribute("isSuccess", true);				
-					logger.info("update order success");
+					logger.info(SecurityHelper.getUser().getEmail() + " cap nhat don hang: " + order.getMaDonHang());
 				}
 				else {
 					request.setAttribute("isSuccess", false);				
-					logger.info("update order fail");
+					logger.info("cap nhat don hang that bai: " + order.getMaDonHang());
 				}
 			}
 			else {
 				request.setAttribute("errors", errors);
+				logger.info("thong tin don hang cap nhat khong hop le ");
 			}
 		}
 		

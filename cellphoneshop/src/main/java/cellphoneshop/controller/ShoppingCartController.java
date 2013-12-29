@@ -25,6 +25,7 @@ public class ShoppingCartController extends ActionSupport implements ServletRequ
 	
 	private Logger log = Logger.getLogger(ShoppingCartController.class);
 	
+	@SuppressWarnings("unchecked")
 	public String cart(){
 		HttpSession session = request.getSession();
 		List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
@@ -43,12 +44,15 @@ public class ShoppingCartController extends ActionSupport implements ServletRequ
 		}		
 		int id = Integer.parseInt(strId);
 		if (action.equalsIgnoreCase("add")){
+			log.info("them san pham vao gio hang: " + id);
 			addProduct(id);
 		}
 		else if (action.equalsIgnoreCase("delete")){
+			log.info("bo bot san pham trong gio hang: " + id);
 			deleteProduct(id);
 		}
 		else if (action.equalsIgnoreCase("remove")){
+			log.info("xoa san pham trong gio hang: " + id);
 			removeProduct(id);
 		}
 		else {

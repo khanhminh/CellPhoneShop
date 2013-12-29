@@ -11,6 +11,11 @@
 
 		<div id="change-password">
 			<form action="change_password.action" method="post">	
+			<div>
+				<c:if test="${isSuccess != null && isSuccess}">
+					<span style="color:green;font-weight:bold">Cập nhật mật khẩu thành công</span>
+				</c:if>
+			</div>
 			<div class="validation-summary-errors">
 				<ul>
 					<c:forEach var="e" items="${requestScope.errors}">

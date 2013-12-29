@@ -9,7 +9,6 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cellphoneshop.model.SanPham;
-import cellphoneshop.service.NguoiDungService;
 import cellphoneshop.service.SanPhamService;
 
 import com.opensymphony.xwork2.ActionSupport;

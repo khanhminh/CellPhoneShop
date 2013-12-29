@@ -1,10 +1,15 @@
 package cellphoneshop.controller;
 import java.io.File;
 
+import org.apache.commons.fileupload.RequestContext;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
+import org.springframework.http.HttpRequest;
 
 import java.io.IOException; 
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -24,12 +29,17 @@ public class SaleOfController  extends ActionSupport{
 
 	      try{
 	    	  
+	    	 HttpServletRequest request = ServletActionContext.getRequest();
+	    	 destPath = request.getSession().getServletContext().getRealPath("/resources/images/");
+	    	 
+	    	 log.info("destpath: " + destPath);
 	     	 log.info("Src File name: " + myFile);
 	     	 log.info("Dst File name: " + myFileFileName);
 	     	    	 
 	     	 File destFile  = new File(destPath, myFileFileName);
 	    	 FileUtils.copyFile(myFile, destFile);
-	  
+	    	 
+	    	 	  
 	      }catch(IOException e){
 	         e.printStackTrace();
 	         return ERROR;

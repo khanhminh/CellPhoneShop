@@ -47,6 +47,8 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("listAccount", listAccount);
 		
+		log.info("lay danh sach tai khoan");
+		
 		return SUCCESS;
 	}
 	
@@ -59,6 +61,8 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 				ndService.getListNguoiDung(query, option, 0, RecordPerPage);
 		request.setAttribute("isInput", false);
 		request.setAttribute("listAccount", listAccount);
+		
+		log.info("tim kiem tai khoan");
 		
 		return SUCCESS;
 	}
@@ -73,8 +77,8 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			}
 		}
 		List<VaiTro> listRole = vtService.getListVaiTro();
-		request.setAttribute("listRole", listRole);		
-		
+		request.setAttribute("listRole", listRole);			
+				
 		return SUCCESS;
 	}
 	
@@ -102,12 +106,14 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			if (admin.getMaNd() == id) {
 				// khong the phan quyen tu phan quyen
 				result = NoAccess;
+				log.info("loi phan quyen cho chinh tai khoan hien tai: " + admin.getEmail());
 			}
 			else {
 				if (roles != null){
 					for (String role : roles){
 						int r = Integer.parseInt(role);
 						if (!ndService.phanQuyenNguoiDung(id, r)){
+							log.info("loi phan quyen cho tai khoan: " + id);
 							result = Error;
 							break;
 						}
@@ -118,9 +124,14 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 						int r = Integer.parseInt(role);
 						if (!ndService.huyVaiTroNguoiDung(id, r)){
 							result = Error;
+							log.info("loi phan quyen cho tai khoan: " + id);
 							break;
 						}
 					}
+				}
+
+				if (result == Success){
+					log.info("phan quyen thanh cong cho tai khoan: " + id);
 				}
 			}			
 			
@@ -151,9 +162,13 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			else {
 				result = Error;
 			}
+			
+			if (result == Success){
+				log.info("lock tai khoan thanh cong: " + id);
+			}
 		} catch (Exception e) {
 			result = Error;
-			log.error(e.getMessage());
+			log.error("loi lock tai khoan" + e.getMessage());
 		}
 		JsonHandler.writeJson(result);
 		
