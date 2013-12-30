@@ -1,8 +1,10 @@
 package cellphoneshop.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import cellphoneshop.dao.KhuyenMaiDAO;
 import cellphoneshop.model.KhuyenMai;
 
@@ -29,5 +31,9 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 
 	public List<KhuyenMai> getListKhuyenMaiChuaDong() {
 		return khuyenMaiDAO.getListKhuyenMaiChuaDong();
+	}
+
+	public List<KhuyenMai> getListKhuyenMai(Integer vitriBD, Integer soluongKM) {
+		return khuyenMaiDAO.getListKhuyenMai(vitriBD, soluongKM);
 	}
 }

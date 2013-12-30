@@ -1,6 +1,7 @@
 package cellphoneshop.service;
 
 import java.util.List;
+
 import cellphoneshop.model.KhuyenMai;
 
 public interface KhuyenMaiService {
@@ -9,4 +10,5 @@ public interface KhuyenMaiService {
 	boolean updateKhuyenMai(KhuyenMai khuyenMai);
 	List<KhuyenMai> getListKhuyenMai();
 	List<KhuyenMai> getListKhuyenMaiChuaDong();
+	List<KhuyenMai> getListKhuyenMai(Integer vitriBD, Integer soluongKM);
 }
