@@ -8,25 +8,21 @@
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
 	<constant name="struts.devMode" value="false" />
 
-	<package name="action" extends="struts-default" namespace="/">		
-		
+	<package name="action" extends="struts-default" namespace="/">
+
 		<result-types>
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
-		</result-types>				
+		</result-types>
 
 		<interceptors>
-			<interceptor name="searchInterceptor"
-				class="searchInterceptor">
+			<interceptor name="searchInterceptor" class="searchInterceptor">
 			</interceptor>
-			<interceptor name="pageInterceptor"
-				class="pageInterceptor">
+			<interceptor name="pageInterceptor" class="pageInterceptor">
 			</interceptor>
-			<interceptor name="homeInterceptor"
-				class="homeInterceptor">
+			<interceptor name="homeInterceptor" class="homeInterceptor">
 			</interceptor>
-			<interceptor name="orderInterceptor"
-				class="orderInterceptor">
+			<interceptor name="orderInterceptor" class="orderInterceptor">
 			</interceptor>
 
 			<interceptor-stack name="newStack">
@@ -46,23 +42,16 @@
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
-		
-		<default-interceptor-ref name="pageStack" />
-		
-		<!-- <global-results>
-			<result name="unhandledException">/WEB-INF/jsp/error.jsp</result>
-		</global-results>
 
-		<global-exception-mappings>
-			<exception-mapping exception="java.lang.Exception" result="unhandledException" />
-		</global-exception-mappings> -->
-		
-		<action name="uploadfile" class="uploadFileAction">
-		</action>
-		
+		<default-interceptor-ref name="pageStack" />
+
+		<!-- <global-results> <result name="unhandledException">/WEB-INF/jsp/error.jsp</result> 
+			</global-results> <global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
+			result="unhandledException" /> </global-exception-mappings> -->
+
 		<action name="home" class="homeAction">
-			<interceptor-ref name="newStack"/>
-			<interceptor-ref name="homeStack"/>
+			<interceptor-ref name="newStack" />
+			<interceptor-ref name="homeStack" />
 			<result name="success" type="tiles">home</result>
 		</action>
 
@@ -75,8 +64,8 @@
 		</action>
 
 		<action name="product" method="filter" class="filterAction">
-			<interceptor-ref name="newStack"/>
-			<interceptor-ref name="pageStack"/>
+			<interceptor-ref name="newStack" />
+			<interceptor-ref name="pageStack" />
 			<result name="success" type="tiles">product</result>
 		</action>
 
@@ -95,12 +84,12 @@
 			<result name="input" type="tiles">register</result>
 			<result name="error" type="tiles">register</result>
 		</action>
-		
+
 		<action name="update_account" method="updateAcccount" class="updateAccountAction">
 			<result name="success" type="tiles">update_account</result>
 			<result name="input" type="tiles">update_account</result>
 		</action>
-		
+
 		<action name="change_password" method="changePassword" class="updateAccountAction">
 			<result name="success" type="tiles">change_password</result>
 			<result name="input" type="tiles">change_password</result>
@@ -131,11 +120,11 @@
 		<action name="compare" method="compare" class="filterAction">
 			<result name="success" type="tiles">compare</result>
 		</action>
-		
+
 		<action name="list_order" method="listOrder" class="orderManagerAction">
 			<result name="success" type="tiles">order</result>
 		</action>
-		
+
 		<action name="order_detail" method="detail" class="orderManagerAction">
 			<result name="success" type="tiles">detail_order</result>
 		</action>
@@ -144,26 +133,30 @@
 		<action name="new_products" method="newProducts" class="homeAction">
 			<result name="success">WEB-INF/jsp/ajax-page/new_products.jsp</result>
 		</action>
-		
-		<action name="bestselling_products" method="bestSellingProducts" class="homeAction">
-			<result name="success">WEB-INF/jsp/ajax-page/best_selling_products.jsp</result>
+
+		<action name="bestselling_products" method="bestSellingProducts"
+			class="homeAction">
+			<result name="success">WEB-INF/jsp/ajax-page/best_selling_products.jsp
+			</result>
 		</action>
 
 		<action name="getComments" method="getComments" class="productAction">
 			<result name="success">WEB-INF/jsp/ajax-page/comments.jsp</result>
 		</action>
-		
-		<action name="relative_product" method="getRelativeProduct" class="productAction">
-			<result name="success">WEB-INF/jsp/ajax-page/relative_products.jsp</result>
+
+		<action name="relative_product" method="getRelativeProduct"
+			class="productAction">
+			<result name="success">WEB-INF/jsp/ajax-page/relative_products.jsp
+			</result>
 		</action>
-		
+
 		<!-- test insert product -->
 		<action name="insert_product" method="insertProduct" class="testInsertProductAction">
 			<result name="success" type="tiles">test_insert_product</result>
 			<result name="input" type="tiles">test_insert_product</result>
 		</action>
-		
-		
+
+
 	</package>
 
 	<package name="ajax" extends="json-default" namespace="/">
@@ -180,64 +173,71 @@
 			<result name="json" type="json" />
 		</action>
 	</package>
-	
+
 	<package name="admin" extends="struts-default" namespace="/admin">
 
 		<result-types>
 			<result-type name="tiles"
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-		<interceptors>			
-			<interceptor name="orderInterceptor"
-				class="orderInterceptor">
+		<interceptors>
+			<interceptor name="orderInterceptor" class="orderInterceptor">
 			</interceptor>
-			
+
 			<interceptor-stack name="orderStack">
 				<interceptor-ref name="orderInterceptor" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
-		
+
 		<action name="list_account" method="listAccount" class="accountManagerAction">
 			<result name="success" type="tiles">list_account</result>
 		</action>
-		
+
 		<action name="set_role" method="setRole" class="accountManagerAction">
 			<result name="success" type="tiles">set_role</result>
 		</action>
-		
+
 		<action name="account_detail" method="detailAccount" class="accountManagerAction">
 			<result name="success" type="tiles">detail_account</result>
 		</action>
-		
+
 		<action name="search_account" method="searchAccount" class="accountManagerAction">
 			<result name="input" type="tiles">search_account</result>
 			<result name="success" type="tiles">search_account</result>
 		</action>
-		
+
 		<action name="list_order" method="listOrder" class="adminOrderManagerAction">
-			<interceptor-ref name="orderStack"/>
+			<interceptor-ref name="orderStack" />
 			<result name="success" type="tiles">list_order</result>
 		</action>
-		
+
 		<action name="order_detail" method="detailOrder" class="adminOrderManagerAction">
 			<result name="success" type="tiles">admin_detail_order</result>
 		</action>
-		
+
 		<action name="edit_order" method="editOrder" class="adminOrderManagerAction">
-			<interceptor-ref name="orderStack"/>
+			<interceptor-ref name="orderStack" />
 			<result name="success" type="tiles">edit_order</result>
 		</action>
-		
+
 		<action name="search_order" method="searchOrder" class="adminOrderManagerAction">
 			<result name="input" type="tiles">search_order</result>
 		</action>
-		
-		<action name="process_search_order" method="processSearchOrder" class="adminOrderManagerAction">
+
+		<action name="process_search_order" method="processSearchOrder"
+			class="adminOrderManagerAction">
 			<result name="success">/WEB-INF/jsp/ajax-page/list_order.jsp</result>
 		</action>
+
+		<action name="insert_km" method="insertKhuyenMai" class="uploadFileAction">
+		</action>
+
+		<action name="list_km" class="uploadFileAction">
+			<result name="success" type="tiles">list_km</result>
+		</action>
 	</package>
-	
+
 	<package name="ajax_admin" extends="json-default" namespace="/admin">
 		<action name="processSetRole" method="processSetRole" class="accountManagerAction">
 			<result name="json" type="json" />
