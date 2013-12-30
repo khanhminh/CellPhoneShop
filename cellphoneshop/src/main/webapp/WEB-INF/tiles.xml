@@ -145,4 +145,9 @@
         <put-attribute name="content" value="/WEB-INF/jsp/admin/search_order.jsp" /> 
     </definition>
     
+    <definition name="list_km" extends="admin">
+        <put-attribute name="title" value="Danh sách khuyến mãi" />
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/list_km.jsp" /> 
+    </definition>
+    
 </tiles-definitions>

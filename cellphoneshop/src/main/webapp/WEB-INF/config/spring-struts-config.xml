@@ -22,6 +22,7 @@
 	
 	<bean id="uploadFileAction" class="cellphoneshop.controller.SaleOfController">
 		<property name="saveDirectory" value="/resources/images/km"/>
+		<property name="saleOfPerPage" value="8"/>
 	</bean>
 
 	<bean id="productAction" class="cellphoneshop.controller.ProductController"

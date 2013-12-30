@@ -30,6 +30,27 @@
 					<span class="hidden-tablet">Tìm kiếm</span>
 				</a>
 			</li>
+			
+			<li class="nav-header hidden-tablet">Quản lý khuyến mãi</li>
+			<li>
+				<a class="ajax-link" href="list_km.action">
+					<i class="icon-align-justify"></i>
+					<span class="hidden-tablet">Danh sách khuyến mãi</span>
+				</a>
+			</li>
+			<li>
+				<a class="ajax-link" href="insert_km.action">
+					<i class="icon-align-justify"></i>
+					<span class="hidden-tablet">Thêm khuyến mãi</span>
+				</a>
+			</li>
+			
+			<li>
+				<a class="ajax-link" href="search_km.action">
+					<i class="icon-search"></i>
+					<span class="hidden-tablet">Tìm kiếm</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 </div>
