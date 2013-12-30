@@ -165,5 +165,9 @@
 		<put-attribute name="content" value="/WEB-INF/jsp/admin/detail_km.jsp" />
 	</definition>
 
+	<definition name="insert_product" extends="admin">
+		<put-attribute name="title" value="Thêm sản phẩm" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/insert_product.jsp" />
+	</definition>
 
 </tiles-definitions>

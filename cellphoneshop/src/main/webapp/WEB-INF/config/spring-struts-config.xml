@@ -154,6 +154,7 @@
 		<property name="page" value="1"/>
 		<property name="status" value="0"/>
 	</bean>
+	<bean id="productManagerAction" class="cellphoneshop.controller.ProductManagerController"/>
 	<bean id="testInsertProductAction" class="cellphoneshop.controller.TestProductManagerController"/> <!-- for test only -->
 </beans>
        				

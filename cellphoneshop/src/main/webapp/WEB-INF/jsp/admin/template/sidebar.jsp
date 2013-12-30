@@ -31,6 +31,27 @@
 				</a>
 			</li>
 			
+			<li class="nav-header hidden-tablet">Quản lý sản phẩm</li>
+			<li>
+				<a class="ajax-link" href="list_product.action">
+					<i class="icon-align-justify"></i>
+					<span class="hidden-tablet">Danh sách sản phẩm</span>
+				</a>
+			</li>
+			<li>
+				<a class="ajax-link" href="insert_product.action">
+					<i class="icon-align-justify"></i>
+					<span class="hidden-tablet">Thêm sản phẩm</span>
+				</a>
+			</li>
+			
+			<li>
+				<a class="ajax-link" href="search_product.action">
+					<i class="icon-search"></i>
+					<span class="hidden-tablet">Tìm kiếm</span>
+				</a>
+			</li>
+			
 			<li class="nav-header hidden-tablet">Quản lý khuyến mãi</li>
 			<li>
 				<a class="ajax-link" href="list_km.action">

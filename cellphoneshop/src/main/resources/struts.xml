@@ -248,6 +248,12 @@
 		<action name="update_km" method="updateKhuyenMai" class="khuyenmaiAction">
 			<result name="success" type="redirectAction">list_km</result>
 		</action>
+		
+		<!-- quan ly san pham -->
+		<action name="insert_product" method="insertProduct" class="productManagerAction">
+			<result name="success" type="tiles">insert_product</result>
+			<result name="input" type="tiles">insert_product</result>
+		</action>
 
 	</package>
 
