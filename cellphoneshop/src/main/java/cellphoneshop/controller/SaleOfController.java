@@ -9,10 +9,13 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cellphoneshop.model.KhuyenMai;
+import cellphoneshop.model.TrangThaiKhuyenMai;
 import cellphoneshop.service.KhuyenMaiService;
+import cellphoneshop.service.TrangThaiKhuyenMaiService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,20 +32,33 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 	private String myFileFileName;
 	private String destPath;
 	private HttpServletRequest request;
+	private Integer trangThaiDong;
 
 	private Logger log = Logger.getLogger(SaleOfController.class);
 	@Autowired
 	private KhuyenMaiService khuyenMaiService;
+	
+	@Autowired
+	private TrangThaiKhuyenMaiService trangThaiKhuyenMaiService;
 
 	public String execute() {
 		log.info("Vao ham execute controller");
 		Integer curentPage = getPageNumber(request.getParameter("page"));
 		List<KhuyenMai> khuyenmailList = this.getListKhuyenMail(curentPage);
-		for(KhuyenMai km : khuyenmailList){
-			log.info("Mo ta: " + km.getMoTa());
-		}
 		request.setAttribute("kmList", khuyenmailList);
 		
+		return SUCCESS;
+	}
+	
+	public String detailKhuyenMai(){
+		log.info("Vao detail khuyen mail Controller");
+		Integer maKM = this.getmaKM(request.getParameter("id"));
+		if(maKM != null){
+			KhuyenMai khuyenMai = khuyenMaiService.getKhuyenMai(maKM);
+			if(khuyenMai != null){
+				request.setAttribute("km", khuyenMai);
+			}
+		}
 		return SUCCESS;
 	}
 
@@ -51,6 +67,31 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 		// this.saveImage();
 		log.info("Vao ham insert khuyen mai controller");
 
+		return SUCCESS;
+	}
+	
+	public String stopKhuyenMai(){
+		log.info("Vao stop Khuyen mai controller");
+		Integer maKM = this.getmaKM(request.getParameter("id"));
+		if(maKM != null){
+			KhuyenMai khuyenMai = khuyenMaiService.getKhuyenMai(maKM);
+			if(khuyenMai != null){
+				khuyenMai.setNgayKetThuc(new Date());
+				TrangThaiKhuyenMai trangThaiKhuyenMai = trangThaiKhuyenMaiService.getTrangThaiKM(this.trangThaiDong);
+				khuyenMai.setTrangThaiKhuyenMai(trangThaiKhuyenMai);
+				
+				if(khuyenMaiService.updateKhuyenMai(khuyenMai)){
+					log.info("Stop khuyen mai "+ khuyenMai.getTieuDe() + " thanh cong");
+				}else{
+					log.error("Khong the stop khuyen mai");
+				}
+			}
+		}
+		return SUCCESS;
+	}
+	
+	public String updateKhuyenMai(){
+		log.info("Vao update khuyen mai controller");
 		return SUCCESS;
 	}
 
@@ -136,9 +177,41 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 		}
 	}
 	
+	public Integer getmaKM(String makm){
+		if (makm == null || makm.equals("")) {
+			return null;
+		}
+		
+		try {
+			return Integer.parseInt(makm);
+
+		} catch (Exception e) {
+			log.error("Parse makm error" + makm);
+			return null;
+		}
+	}
+	
 	public List<KhuyenMai> getListKhuyenMail(Integer page){
 		Integer vitriBD = (page - 1) * this.saleOfPerPage;
 		return khuyenMaiService.getListKhuyenMai(vitriBD, this.saleOfPerPage);
+	}
+	
+	public Integer getTotalPage(){
+		Integer kmNumber = khuyenMaiService.countKhuyenMai();
+		Integer nPage = kmNumber / this.saleOfPerPage;
+		if((kmNumber % this.saleOfPerPage) == 0){
+			nPage += 1;
+		}
+		
+		return nPage;
+	}
+
+	public Integer getTrangThaiDong() {
+		return trangThaiDong;
+	}
+
+	public void setTrangThaiDong(Integer trangThaiDong) {
+		this.trangThaiDong = trangThaiDong;
 	}
 }
 

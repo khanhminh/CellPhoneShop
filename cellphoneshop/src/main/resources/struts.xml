@@ -6,7 +6,7 @@
 
 <struts>
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
-	<constant name="struts.devMode" value="false" />
+	<constant name="struts.devMode" value="false"></constant>
 
 	<package name="action" extends="struts-default" namespace="/">
 
@@ -230,12 +230,25 @@
 			<result name="success">/WEB-INF/jsp/ajax-page/list_order.jsp</result>
 		</action>
 
-		<action name="insert_km" method="insertKhuyenMai" class="uploadFileAction">
+		<action name="insert_km" method="insertKhuyenMai" class="khuyenmaiAction">
 		</action>
 
-		<action name="list_km" class="uploadFileAction">
+		<action name="list_km" class="khuyenmaiAction">
 			<result name="success" type="tiles">list_km</result>
 		</action>
+
+		<action name="detail_km" method="detailKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="tiles">detail_km</result>
+		</action>
+		
+		<action name="stop_km" method="stopKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="redirectAction">list_km</result>
+		</action>
+		
+		<action name="update_km" method="updateKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="redirectAction">list_km</result>
+		</action>
+
 	</package>
 
 	<package name="ajax_admin" extends="json-default" namespace="/admin">

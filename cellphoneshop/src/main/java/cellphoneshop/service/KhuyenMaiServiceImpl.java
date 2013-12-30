@@ -36,4 +36,8 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 	public List<KhuyenMai> getListKhuyenMai(Integer vitriBD, Integer soluongKM) {
 		return khuyenMaiDAO.getListKhuyenMai(vitriBD, soluongKM);
 	}
+
+	public Integer countKhuyenMai() {
+		return khuyenMaiDAO.countKhuyenMai();
+	}
 }

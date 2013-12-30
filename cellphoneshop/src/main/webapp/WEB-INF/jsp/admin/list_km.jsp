@@ -47,30 +47,36 @@
 							<td>${km.maKm}</td>
 							<td>${km.tieuDe}</td>
 							<td>${km.moTa}</td>
-							<td><span class="label label-success" id="">Active</span></td>
-							<td><a class="btn btn-success" href="#"> <i
+							<td><span class="label label-success" id=""> ${km.trangThaiKhuyenMai.tenTrangThai} </span></td>
+							<td><a class="btn btn-success"
+								href="detail_km?id=${km.maKm}"> <i
 									class="icon-zoom-in icon-white"></i> Chi tiết
-							</a> <a class="btn btn-info" href="#"> <i
-									class="icon-edit icon-white"></i> Chỉnh Sửa
-							</a> <a class="btn btn-danger" href="#"> <i
-									class="icon-trash icon-white"></i> Stop
-							</a></td>
+							</a> <a class="btn btn-info" href="update_km?id=${km.maKm}"> <i
+									class="icon-edit icon-white"></i> Chỉnh Sửa</a>
+							<c:if test="${km.trangThaiKhuyenMai.maTrangThai == 1}">
+								 <a class="btn btn-danger" href="stop_km?id=${km.maKm}"> <i
+										class="icon-trash icon-white"></i> Stop
+								</a>
+							</c:if>
+							
+							</td>
 
 						</tr>
 					</c:forEach>
 
 				</tbody>
 			</table>
+			<div class="dataTables_paginate paging_bootstrap pagination">
+				<ul>
+					<li><a href="link" class="paging-order">1</a></li>
+					<li><a href="link" class="paging-order">2</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="dataTables_paginate paging_bootstrap pagination">
-	<ul>
-		<li><a href="link" class="paging-order">1</a></li>
-		<li><a href="link" class="paging-order">2</a></li>
-	</ul>
-</div>
+
 
 
 

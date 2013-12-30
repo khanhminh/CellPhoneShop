@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,7 +43,9 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
-			return (KhuyenMai) session.get(KhuyenMai.class, maKhuyenMai);
+			KhuyenMai khuyenMai = (KhuyenMai)session.get(KhuyenMai.class, maKhuyenMai);
+			Hibernate.initialize(khuyenMai.getTrangThaiKhuyenMai());
+			return khuyenMai;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -67,9 +70,16 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 	@Transactional(readOnly = true)
 	public List<KhuyenMai> getListKhuyenMai() {
 		Session session = sessionFactory.getCurrentSession();
+		List<KhuyenMai> khuyenmailList = new ArrayList<KhuyenMai>();
 
 		try {
-			return session.createQuery("from KhuyenMai").list();
+			khuyenmailList = session.createQuery("from KhuyenMai").list();
+//			for(KhuyenMai km : khuyenmailList){
+//				Hibernate.initialize(km.getTrangThaiKhuyenMai());
+//			}
+			
+			return khuyenmailList;
+			
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -93,13 +103,18 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 	@Transactional(readOnly = true)
 	public List<KhuyenMai> getListKhuyenMai(Integer vitriBD, Integer soluongKM) {
 		Session session = sessionFactory.getCurrentSession();
+		List<KhuyenMai> khuyenmailList = new ArrayList<KhuyenMai>();
 
 		try {
 			String hql = "from KhuyenMai";
 			Query query = session.createQuery(hql);
 			query.setFirstResult(vitriBD);
 			query.setMaxResults(soluongKM);
-			return query.list();
+			khuyenmailList = query.list();
+			for(KhuyenMai km : khuyenmailList){
+				Hibernate.initialize(km.getTrangThaiKhuyenMai());
+			}
+			return khuyenmailList;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -109,7 +124,16 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 
 	@Transactional(readOnly = true)
 	public Integer countKhuyenMai() {
+		Session session = sessionFactory.getCurrentSession();
+
+		try {
+			String hql = "select count(*) from KhuyenMai";
+			Query query = session.createQuery(hql);
+			return ((Long) query.iterate().next()).intValue();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
 		
-		return null;
+		return -1;
 	}
 }

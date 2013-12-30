@@ -20,9 +20,10 @@
 	
 	<bean id="updateAccountAction" class="cellphoneshop.controller.UpdateAccountController"/>
 	
-	<bean id="uploadFileAction" class="cellphoneshop.controller.SaleOfController">
+	<bean id="khuyenmaiAction" class="cellphoneshop.controller.SaleOfController">
 		<property name="saveDirectory" value="/resources/images/km"/>
 		<property name="saleOfPerPage" value="8"/>
+		<property name="trangThaiDong" value="2"/>
 	</bean>
 
 	<bean id="productAction" class="cellphoneshop.controller.ProductController"
