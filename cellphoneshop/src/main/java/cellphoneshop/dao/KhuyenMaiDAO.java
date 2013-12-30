@@ -9,5 +9,7 @@ public interface KhuyenMaiDAO {
 	KhuyenMai getKhuyenMai(Integer maKhuyenMai);
 	boolean updateKhuyenMai(KhuyenMai khuyenMai);
 	List<KhuyenMai> getListKhuyenMai();
+	List<KhuyenMai> getListKhuyenMai(Integer vitriBD, Integer soluongKM);
 	List<KhuyenMai> getListKhuyenMaiChuaDong();
+	Integer countKhuyenMai();
 }
