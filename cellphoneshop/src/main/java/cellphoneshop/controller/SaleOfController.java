@@ -1,12 +1,14 @@
 package cellphoneshop.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
+<<<<<<< HEAD
 import cellphoneshop.model.KhuyenMai;
 import cellphoneshop.service.KhuyenMaiService;
 
@@ -14,13 +16,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+=======
+>>>>>>> c59f6abe0e1530b0e5ac737e03b5f37a1f080705
 import javax.servlet.http.HttpServletRequest;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+<<<<<<< HEAD
 @SuppressWarnings("serial")
 public class SaleOfController extends ActionSupport implements
 		ServletRequestAware {
+=======
+public class SaleOfController extends ActionSupport implements ServletRequestAware{
+>>>>>>> c59f6abe0e1530b0e5ac737e03b5f37a1f080705
 	private File myFile;
 	private String myFileContentType;
 	private String saveDirectory;
@@ -111,6 +119,7 @@ public class SaleOfController extends ActionSupport implements
 	public String getLinkImage() {
 		return this.saveDirectory + "/" + this.myFileFileName;
 	}
+<<<<<<< HEAD
 
 	public Integer getSaleOfPerPage() {
 		return saleOfPerPage;
@@ -140,3 +149,6 @@ public class SaleOfController extends ActionSupport implements
 		return khuyenMaiService.getListKhuyenMai(vitriBD, this.saleOfPerPage);
 	}
 }
+=======
+}
+>>>>>>> c59f6abe0e1530b0e5ac737e03b5f37a1f080705
