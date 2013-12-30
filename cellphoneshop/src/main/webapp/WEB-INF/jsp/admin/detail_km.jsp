@@ -54,7 +54,6 @@
 	                   							value="${km.phanTramGiamGia}"                                         
 	                   							maxFractionDigits="2"                            
 	                   							minFractionDigits="1"/>
-												%
 										</c:when>
 										<c:otherwise>
 											Không Giảm Giá
