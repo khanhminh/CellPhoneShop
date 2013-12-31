@@ -12,6 +12,7 @@ import cellphoneshop.model.KhuyenMai;
 import cellphoneshop.model.TrangThaiKhuyenMai;
 import cellphoneshop.service.KhuyenMaiService;
 import cellphoneshop.service.TrangThaiKhuyenMaiService;
+import cellphoneshop.util.Message;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 	private HttpServletRequest request;
 	private Integer trangThaiDong;
 	private Integer totalKm;
+	private List<String> errors;
+	private KhuyenMai km;
 
 	private Logger log = Logger.getLogger(SaleOfController.class);
 	@Autowired
@@ -42,6 +45,9 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 	
 	@Autowired
 	private TrangThaiKhuyenMaiService trangThaiKhuyenMaiService;
+	
+	@Autowired
+	private Message messages;
 
 	public String execute() {
 		log.info("Vao ham execute controller");
@@ -70,6 +76,7 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 		// HttpServletRequest request = ServletActionContext.getRequest();
 		// this.saveImage();
 		log.info("Vao ham insert khuyen mai controller");
+		
 
 		return SUCCESS;
 	}
@@ -95,17 +102,49 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 	}
 	
 	public String updateKhuyenMai(){
+		errors = new ArrayList<String>();
 		log.info("Vao update khuyen mai controller");
+
+		if(km == null){
+			Integer maKM = this.getmaKM(request.getParameter("id"));
+			if(maKM == null){
+				errors.add(messages.getMessageList().getProperty("errorUpdateKM"));
+				request.setAttribute("errors", messages);
+				return SUCCESS;
+			}
+			
+			KhuyenMai khuyenmai = khuyenMaiService.getKhuyenMai(maKM);
+			if(khuyenmai == null){
+				errors.add(messages.getMessageList().getProperty("errorUpdateKM"));
+				request.setAttribute("errors", messages);
+				return SUCCESS;
+			}
+			
+			request.setAttribute("km", khuyenmai);
+			return SUCCESS;
+		}
+		
+		
+		
+				
+		if(km != null){
+			log.info("giam gia: " + km.getPhanTramGiamGia());
+		}
+		this.saveImage();
+		
+		request.setAttribute("km", km);
 		return SUCCESS;
 	}
 
 	public boolean saveImage() {
 		destPath = request.getSession().getServletContext()
 				.getRealPath(saveDirectory);
+		log.info("Path demo: " + request.getSession().getServletContext().getRealPath("/").concat(saveDirectory));
 
 		try {
 			File destFile = new File(destPath, myFileFileName);
 			FileUtils.copyFile(myFile, destFile);
+			log.info("Destpath: " + destPath);
 			log.info("Upload comlete, link image save on database is "
 					+ this.getLinkImage());
 			return true;
@@ -167,7 +206,6 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 	}
 
 	public Integer getPageNumber(String page) {
-		log.info("Page input: " + page);
 		if (page == null || page.equals("")) {
 			return 1;
 		}
@@ -240,6 +278,14 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 
 	public void setTotalKm(Integer totalKm) {
 		this.totalKm = totalKm;
+	}
+
+	public KhuyenMai getKm() {
+		return km;
+	}
+
+	public void setKm(KhuyenMai km) {
+		this.km = km;
 	}
 }
 

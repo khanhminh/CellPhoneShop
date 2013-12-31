@@ -47,35 +47,32 @@
 							<div class="control-group">
 								<label class="control-label">Giảm giá(%)</label>
 								<div class="controls">
-									<span class="input-xlarge uneditable-input">
-									<c:choose>
-										<c:when test="${km.phanTramGiamGia != null}">
-											<fmt:formatNumber type="number" 
-	                   							value="${km.phanTramGiamGia}"                                         
-	                   							maxFractionDigits="2"                            
-	                   							minFractionDigits="1"/>
-										</c:when>
-										<c:otherwise>
+									<span class="input-xlarge uneditable-input"> <c:choose>
+											<c:when test="${km.phanTramGiamGia != null && km.phanTramGiamGia != 0}">
+												<fmt:formatNumber type="number"
+													value="${km.phanTramGiamGia}" maxFractionDigits="2"
+													minFractionDigits="1" />
+											</c:when>
+											<c:otherwise>
 											Không Giảm Giá
 										</c:otherwise>
-									</c:choose>
-									
+										</c:choose>
+
 									</span>
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">Quà Tặng</label>
 								<div class="controls">
-									<span class="input-xlarge uneditable-input">
-									<c:choose>
-										<c:when test="${km.quaTang != null}">
+									<span class="input-xlarge uneditable-input"> <c:choose>
+											<c:when test="${km.quaTang != null}">
 											${km.quaTang}                                       
 										</c:when>
-										<c:otherwise>
+											<c:otherwise>
 											Không Tặng Quà
 										</c:otherwise>
-									</c:choose>
-									
+										</c:choose>
+
 									</span>
 								</div>
 							</div>
@@ -83,16 +80,15 @@
 								<label class="control-label">Trạng Thái KM</label>
 								<div class="controls">
 									<span class="input-xlarge uneditable-input">
-										${km.trangThaiKhuyenMai.tenTrangThai}
-									</span>
+										${km.trangThaiKhuyenMai.tenTrangThai} </span>
 								</div>
 							</div>
 
 							<div class="control-group">
 								<label class="control-label">Ngày Bắt Đầu</label>
 								<div class="controls">
-									<span class="input-xlarge uneditable-input"> 
-									<fmt:formatDate pattern="dd/MM/yyyy" value="${km.ngayBatDau}" />
+									<span class="input-xlarge uneditable-input"> <fmt:formatDate
+											pattern="dd/MM/yyyy" value="${km.ngayBatDau}" />
 									</span>
 								</div>
 							</div>
@@ -100,9 +96,17 @@
 							<div class="control-group">
 								<label class="control-label">Ngày Kết Thúc</label>
 								<div class="controls">
-									<span class="input-xlarge uneditable-input"> 
-										<fmt:formatDate pattern="dd/MM/yyyy" value="${km.ngayKetThuc}" />
+									<span class="input-xlarge uneditable-input"> <fmt:formatDate
+											pattern="dd/MM/yyyy" value="${km.ngayKetThuc}" />
 									</span>
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">Hình ảnh KM</label>
+								<div class="controls">
+									<span class="input-xlarge uneditable-input">
+										${km.hinhAnh} </span>
 								</div>
 							</div>
 							<div class="center">

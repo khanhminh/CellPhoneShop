@@ -38,6 +38,7 @@
 			
 			<prop key="unknowFullName">Vui lòng nhập họ tên</prop>		
 			<prop key="unknowInfo">Vui lòng nhập đủ thông tin</prop>
+			<prop key="errorUpdateKM">Thông tin khuyến mãi không được tìm thấy</prop>
 				
 		</props>
 		</property>

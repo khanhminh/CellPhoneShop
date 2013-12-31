@@ -165,9 +165,19 @@
 		<put-attribute name="content" value="/WEB-INF/jsp/admin/detail_km.jsp" />
 	</definition>
 
+	<definition name="update_km" extends="admin">
+		<put-attribute name="title" value="Cập nhật Thông tin khuyến mãi" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/update_km.jsp" />
+	</definition>
+
 	<definition name="insert_product" extends="admin">
 		<put-attribute name="title" value="Thêm sản phẩm" />
-		<put-attribute name="content" value="/WEB-INF/jsp/admin/insert_product.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/insert_product.jsp" />
 	</definition>
+
+
+
 
 </tiles-definitions>

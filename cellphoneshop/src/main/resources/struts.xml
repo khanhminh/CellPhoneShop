@@ -230,9 +230,8 @@
 			<result name="success">/WEB-INF/jsp/ajax-page/list_order.jsp</result>
 		</action>
 
-		<action name="insert_km" method="insertKhuyenMai" class="khuyenmaiAction">
-		</action>
 
+		<!-- Quan ly khuyen mai -->
 		<action name="list_km" class="khuyenmaiAction">
 			<result name="success" type="tiles">list_km</result>
 		</action>
@@ -240,15 +239,19 @@
 		<action name="detail_km" method="detailKhuyenMai" class="khuyenmaiAction">
 			<result name="success" type="tiles">detail_km</result>
 		</action>
-		
+
 		<action name="stop_km" method="stopKhuyenMai" class="khuyenmaiAction">
 			<result name="success" type="redirectAction">list_km</result>
 		</action>
-		
-		<action name="update_km" method="updateKhuyenMai" class="khuyenmaiAction">
-			<result name="success" type="redirectAction">list_km</result>
+
+		<action name="insert_km" method="insertKhuyenMai" class="khuyenmaiAction">
 		</action>
-		
+
+		<action name="update_km" method="updateKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="tiles">update_km</result>
+		</action>
+
+
 		<!-- quan ly san pham -->
 		<action name="insert_product" method="insertProduct" class="productManagerAction">
 			<result name="success" type="tiles">insert_product</result>

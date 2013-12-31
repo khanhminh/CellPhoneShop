@@ -20,12 +20,6 @@
 					class="icon-chevron-up"></i></a>
 			</div>
 		</div>
-		<!-- 		<div class="box-content"> -->
-		<!-- 			<form action="uploadfile" method="post" enctype="multipart/form-data"> -->
-		<!-- 				<label for="myFile">Upload your file</label> <input type="file" -->
-		<!-- 					name="myFile" /> <input type="submit" value="Upload" /> -->
-		<!-- 			</form> -->
-		<!-- 		</div> -->
 		<div class="box-content">
 			<table class="table table-striped table-bordered bootstrap-datatable">
 				<thead>
