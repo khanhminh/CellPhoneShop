@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
 <div>
 	<ul class="breadcrumb">
 		<li><a href="#">Quản lý Khuyến Mãi</a> <span class="divider">/</span>
@@ -97,11 +97,11 @@
 						<label class="control-label" for="km.ngayBatDau">Ngày Bắt
 							Đầu KM </label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused"
+							<s:textfield class="text-box single-line input-xlarge datepicker"
 								type="text" theme="simple" name="km.ngayBatDau" data-val="true"
 								data-val-required="Vui lòng nhập ngày bắt đầu"
-								data-val-regex="Giá trị không hợp lệ" value="%{ngayBD}" />
-
+								value="%{ngayBD}"
+								 />
 							<span class="field-validation-valid"
 								data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">
 							</span>
@@ -112,7 +112,7 @@
 						<label class="control-label" for="km.ngayKetThuc">Ngày Kết
 							Thúc KM </label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused"
+							<s:textfield class="text-box single-line input-xlarge focused datepicker"
 								type="text" theme="simple" name="km.ngayKetThuc" data-val="true"
 								data-val-required="Vui lòng nhập ngày bắt đầu"
 								data-val-regex="Giá trị không hợp lệ" value="%{ngayKT}" />
@@ -122,7 +122,7 @@
 							</span>
 						</div>
 					</div>
-
+					
 					<div class="control-group">
 						<label class="control-label" for="km.quaTang"> Quà Tặng đi
 							kèm</label>

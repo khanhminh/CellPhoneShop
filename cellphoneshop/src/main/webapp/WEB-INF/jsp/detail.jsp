@@ -335,7 +335,7 @@
 			}
 		}
 		if (score - limit > 0.1){
-			var img = $(list[index]);
+			var img = $(list[limit]);
 			img.attr('src', "resources/images/star-half.png");
 		}
 		$('#list-star').html($('#rating-score').html());

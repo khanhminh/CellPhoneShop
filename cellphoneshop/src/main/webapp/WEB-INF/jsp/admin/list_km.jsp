@@ -50,8 +50,8 @@
 									<a class="btn btn-info" href="update_km?id=${km.maKm}"> <i
 										class="icon-edit icon-white"></i> Chỉnh Sửa
 									</a>
-									<a class="btn btn-danger" href="stop_km?id=${km.maKm}"> <i
-										class="icon-trash icon-white"></i> Stop
+									<a class="btn btn-danger btnStop" href="stop_km?id=${km.maKm}" data-id="${km.maKm}"> 
+										<i class="icon-trash icon-white"></i> Stop
 									</a>
 								</c:if></td>
 
@@ -94,6 +94,40 @@
 </div>
 
 
+<div id="dialog" title="Dừng khuyến mãi">
+  <p>Bạn có muốn dừng khuyến mãi: <span id="dialog-content" style="color:red; font-weight: bold"></span></p>
+</div>
+
+<script>
+	var link = "";
+	
+	$("#dialog").dialog({
+		autoOpen: false,
+		modal: true,
+		buttons: {
+	        OK: function() { //ok
+	            $(this).dialog( "close" );
+	        	window.location.href = link;
+	        	
+	        },
+	        Cancel: function() { //cancel
+	            $(this).dialog( "close" );
+	        }
+	    }
+	});
+	
+	$(document).ready(function(){
+		$('.btnStop').click(function(e){
+			e.preventDefault();
+			
+			var id = $(this).attr("data-id");
+			$('#dialog-content').text(id);		
+			
+			link = $(this).attr("href");
+			$("#dialog").dialog("open");
+		});
+	});
+</script>
 
 
 
