@@ -47,29 +47,52 @@
 							<td>${km.maKm}</td>
 							<td>${km.tieuDe}</td>
 							<td>${km.moTa}</td>
-							<td><span class="label label-success" id=""> ${km.trangThaiKhuyenMai.tenTrangThai} </span></td>
+							<td><span class="label label-success" id="">
+									${km.trangThaiKhuyenMai.tenTrangThai} </span></td>
 							<td><a class="btn btn-success"
 								href="detail_km?id=${km.maKm}"> <i
 									class="icon-zoom-in icon-white"></i> Chi tiết
-							</a> <a class="btn btn-info" href="update_km?id=${km.maKm}"> <i
-									class="icon-edit icon-white"></i> Chỉnh Sửa</a>
-							<c:if test="${km.trangThaiKhuyenMai.maTrangThai == 1}">
-								 <a class="btn btn-danger" href="stop_km?id=${km.maKm}"> <i
+							</a> <c:if test="${km.trangThaiKhuyenMai.maTrangThai == 1}">
+									<a class="btn btn-info" href="update_km?id=${km.maKm}"> <i
+										class="icon-edit icon-white"></i> Chỉnh Sửa
+									</a>
+									<a class="btn btn-danger" href="stop_km?id=${km.maKm}"> <i
 										class="icon-trash icon-white"></i> Stop
-								</a>
-							</c:if>
-							
-							</td>
+									</a>
+								</c:if></td>
 
 						</tr>
 					</c:forEach>
 
 				</tbody>
 			</table>
+			<!-- phần phan trang cho bảng -->
 			<div class="dataTables_paginate paging_bootstrap pagination">
 				<ul>
-					<li><a href="link" class="paging-order">1</a></li>
-					<li><a href="link" class="paging-order">2</a></li>
+					<c:choose>
+						<c:when test="${currentPage - 1 <= 0}">
+							<li class="prev enabled"><a href="list_km?page=${totalPage}">←
+									Previous</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="prev enabled"><a
+								href="list_km?page=${currentPage - 1}">← Previous</a></li>
+						</c:otherwise>
+					</c:choose>
+
+
+					<li><a href="list_km?page=${currentPage}" class="paging-order">${currentPage}</a></li>
+					<c:choose>
+						<c:when test="${currentPage + 1 > totalPage }">
+							<li class="next enabled"><a href="list_km?page=1">Next →
+							</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="next enabled"><a
+								href="list_km?page=${currentPage + 1}">Next → </a></li>
+						</c:otherwise>
+					</c:choose>
+
 				</ul>
 			</div>
 		</div>

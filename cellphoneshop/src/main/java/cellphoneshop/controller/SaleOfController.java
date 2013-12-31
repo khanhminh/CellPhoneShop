@@ -15,6 +15,7 @@ import cellphoneshop.service.TrangThaiKhuyenMaiService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 	private String destPath;
 	private HttpServletRequest request;
 	private Integer trangThaiDong;
+	private Integer totalKm;
 
 	private Logger log = Logger.getLogger(SaleOfController.class);
 	@Autowired
@@ -43,9 +45,11 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 
 	public String execute() {
 		log.info("Vao ham execute controller");
-		Integer curentPage = getPageNumber(request.getParameter("page"));
-		List<KhuyenMai> khuyenmailList = this.getListKhuyenMail(curentPage);
+		Integer currentPage = getPageNumber(request.getParameter("page"));
+		List<KhuyenMai> khuyenmailList = this.getListKhuyenMail(currentPage);
 		request.setAttribute("kmList", khuyenmailList);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("totalPage", this.getTotalPage());
 		
 		return SUCCESS;
 	}
@@ -163,11 +167,12 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 	}
 
 	public Integer getPageNumber(String page) {
+		log.info("Page input: " + page);
 		if (page == null || page.equals("")) {
 			return 1;
 		}
 
-		try {
+		try{
 			return Integer.parseInt(page);
 
 		} catch (Exception e) {
@@ -197,13 +202,28 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 	}
 	
 	public Integer getTotalPage(){
-		Integer kmNumber = khuyenMaiService.countKhuyenMai();
-		Integer nPage = kmNumber / this.saleOfPerPage;
-		if((kmNumber % this.saleOfPerPage) == 0){
+		if(this.totalKm == null){
+			this.totalKm = khuyenMaiService.countKhuyenMai();
+		}
+		Integer nPage = this.totalKm / this.saleOfPerPage;
+		if((this.totalKm % this.saleOfPerPage) != 0){
 			nPage += 1;
 		}
 		
 		return nPage;
+	}
+	
+	public Integer getTotalPage(Integer total){
+		
+		if(total == null){
+			return 0;
+		}
+		Integer totalPage= total / this.getSaleOfPerPage();
+		if((this.totalKm % this.saleOfPerPage) != 0){
+			totalPage += 1;
+		}
+		
+		return totalPage;
 	}
 
 	public Integer getTrangThaiDong() {
@@ -212,6 +232,14 @@ public class SaleOfController extends ActionSupport implements ServletRequestAwa
 
 	public void setTrangThaiDong(Integer trangThaiDong) {
 		this.trangThaiDong = trangThaiDong;
+	}
+
+	public Integer getTotalKm() {
+		return totalKm;
+	}
+
+	public void setTotalKm(Integer totalKm) {
+		this.totalKm = totalKm;
 	}
 }
 
