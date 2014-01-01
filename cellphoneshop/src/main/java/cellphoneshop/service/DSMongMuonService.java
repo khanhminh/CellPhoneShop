@@ -6,8 +6,8 @@ import cellphoneshop.model.NguoiDung;
 import cellphoneshop.model.SanPham;
 
 public interface DSMongMuonService {
-	void insertDanhSachMongMuon(NguoiDung nguoiDung, List<SanPham> dsSanPham);
-	void insertDSMongMuon(DanhSachMongMuon dsmm);
+	boolean insertDanhSachMongMuon(NguoiDung nguoiDung, List<SanPham> dsSanPham);
+	boolean insertDSMongMuon(DanhSachMongMuon dsmm);
 	List<DanhSachMongMuon> getListDSMongMuon(Integer maNguoiDung);
 	DanhSachMongMuon getDSMongMuon(Integer maDSMongMuon);
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import cellphoneshop.model.DonHang;
 
 public interface DonHangDAO {
-	void insertDonHang(DonHang donHangMoi);
+	boolean insertDonHang(DonHang donHangMoi);
 	DonHang getDonHang(Integer maDonHang);
 	DonHang getDonHangCungChiTietTheoId(Integer maDonHang);
 	boolean updateDonHang(DonHang donHang);

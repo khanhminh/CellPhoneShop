@@ -22,14 +22,18 @@ public class PTGiaoHangDAOImpl implements PTGiaoHangDAO {
 	}
 
 	@Transactional
-	public void insertPTGiaoHang(PtGiaoHang ptGiaoHang) {
+	public boolean insertPTGiaoHang(PtGiaoHang ptGiaoHang) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(ptGiaoHang);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

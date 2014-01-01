@@ -13,8 +13,8 @@ public class PTThanhToanServiceImpl implements PTThanhToanService {
 	@Autowired
 	private PTThanhToanDAO ptThanhToanDAO;
 
-	public void insertPTThanhToan(PtThanhToan ptThanhToan) {
-		ptThanhToanDAO.insertPTThanhToan(ptThanhToan);
+	public boolean insertPTThanhToan(PtThanhToan ptThanhToan) {
+		return ptThanhToanDAO.insertPTThanhToan(ptThanhToan);
 
 	}
 

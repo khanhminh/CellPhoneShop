@@ -25,14 +25,18 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 	}
 
 	@Transactional
-	public void insertLoaiNguoiDung(LoaiNguoiDung loaiND) {
+	public boolean insertLoaiNguoiDung(LoaiNguoiDung loaiND) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(loaiND);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

@@ -10,7 +10,7 @@ public interface SanPhamService {
 	/**
 	 * Them san pham moi.
 	 */
-	void insertSanPham(SanPham sp);
+	boolean insertSanPham(SanPham sp);
 	
 	/**
 	 * Lay thong tin san pham theo Id.
@@ -20,7 +20,7 @@ public interface SanPhamService {
 	/**
 	 * Cap nhap thong tin cua san pham.
 	 */
-	void updateSanPham(SanPham sp);
+	boolean updateSanPham(SanPham sp);
 	
 	/**
 	 * Lay danh sach san pham moi trong tuan co phan trang.
@@ -86,16 +86,6 @@ public interface SanPhamService {
 	public List<SanPham> getListSanPham(int kqDauTien, int soKqToiDa, SortBy sortby);	
 	public int demSoSanPham();
 
-	/**
-	 * Lay danh sach san pham khi loc theo tieu chi. Xem them {@link #demSoSanPhamKhiGetListSanPham(ProductFilter)}
-	 */
-	
-	
-	/**
-	 * Dem so san pham thoa tieu chi loc.
-	 */
-	
-	
 	/**
 	 * Lay danh sach san pham ban chay nhat.
 	 */

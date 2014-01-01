@@ -21,14 +21,18 @@ public class NguoiNhanDAOImpl implements NguoiNhanDAO {
 	}
 
 	@Transactional
-	public void themNguoiNhan(NguoiNhan nguoiNhan) {
+	public boolean themNguoiNhan(NguoiNhan nguoiNhan) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(nguoiNhan);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return false;
 	}
 	
 	@Transactional

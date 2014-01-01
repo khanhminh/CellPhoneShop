@@ -13,6 +13,4 @@ public interface NguoidungDAO {
 	Boolean updateNguoidung(NguoiDung user);
 	Boolean checkLogin(NguoiDung user);
 	int demSoNguoiDung();
-	
-	
 }

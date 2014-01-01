@@ -11,8 +11,8 @@ public class CTSanPhamServiceImpl implements CTSanPhamService {
 	@Autowired
 	private CTSanPhamDAO ctspDAO;
 
-	public void insertCTSanPham(CtSanPham ctSanPham) {
-		ctspDAO.insertCTSanPham(ctSanPham);
+	public boolean insertCTSanPham(CtSanPham ctSanPham) {
+		return ctspDAO.insertCTSanPham(ctSanPham);
 	}
 
 	public CtSanPham getCTSanPhamTheoId(Integer maCtSP) {
@@ -23,7 +23,7 @@ public class CTSanPhamServiceImpl implements CTSanPhamService {
 		return ctspDAO.getCTSanPhamTheoMaSP(maSanPham);
 	}
 
-	public void updateCTSanPham(CtSanPham ctSanPham) {
-		ctspDAO.updateCTSanPham(ctSanPham);
+	public boolean updateCTSanPham(CtSanPham ctSanPham) {
+		return ctspDAO.updateCTSanPham(ctSanPham);
 	}
 }

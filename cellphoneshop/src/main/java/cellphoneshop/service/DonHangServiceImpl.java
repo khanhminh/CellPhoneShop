@@ -38,16 +38,16 @@ public class DonHangServiceImpl implements DonHangService {
 	@Autowired
 	private CTDonHangDAO ctDonHangDAO;
 	
-	public void insertDonHang(DonHang donHangMoi) {		
-		donHangDAO.insertDonHang(donHangMoi);
+	public boolean insertDonHang(DonHang donHangMoi) {		
+		return donHangDAO.insertDonHang(donHangMoi);
 	}
 
 	public DonHang getDonHang(Integer maDonHang) {
 		return donHangDAO.getDonHang(maDonHang);
 	}
 
-	public void updateDonHang(DonHang donHang) {
-		donHangDAO.updateDonHang(donHang);
+	public boolean updateDonHang(DonHang donHang) {
+		return donHangDAO.updateDonHang(donHang);
 	}
 
 

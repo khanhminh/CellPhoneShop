@@ -23,14 +23,18 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 	}
 
 	@Transactional
-	public void insertCTDonHang(CtDonHang ctDonHang) {
+	public boolean insertCTDonHang(CtDonHang ctDonHang) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(ctDonHang);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)
@@ -48,14 +52,18 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 	}
 
 	@Transactional
-	public void updateCTDonHang(CtDonHang ctDonHang) {
+	public boolean updateCTDonHang(CtDonHang ctDonHang) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.update(ctDonHang);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

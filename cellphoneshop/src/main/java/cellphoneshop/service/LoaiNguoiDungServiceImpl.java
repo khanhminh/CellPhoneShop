@@ -14,8 +14,8 @@ public class LoaiNguoiDungServiceImpl implements LoaiNguoiDungService {
 	@Autowired
 	private LoaiNguoiDungDAO loaiNDDAO;
 
-	public void insertLoaiNguoiDung(LoaiNguoiDung loaiND) {
-		loaiNDDAO.insertLoaiNguoiDung(loaiND);
+	public boolean insertLoaiNguoiDung(LoaiNguoiDung loaiND) {
+		return loaiNDDAO.insertLoaiNguoiDung(loaiND);
 	}
 
 	public LoaiNguoiDung getLoaiNguoiDungTheoId(Integer maLoaiND) {

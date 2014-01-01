@@ -23,14 +23,18 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 	}
 
 	@Transactional
-	public void insertCTSanPham(CtSanPham ctSanPham) {
+	public boolean insertCTSanPham(CtSanPham ctSanPham) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(ctSanPham);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)
@@ -63,13 +67,17 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 		return result;
 	}
 
-	public void updateCTSanPham(CtSanPham ctSanPham) {
+	public boolean updateCTSanPham(CtSanPham ctSanPham) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.update(ctSanPham);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 }

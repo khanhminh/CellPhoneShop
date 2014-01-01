@@ -15,7 +15,7 @@ import cellphoneshop.model.SanPham;
 public class DSMongMuonServiceImpl implements DSMongMuonService {
 	@Autowired DSMongMuonDAO dsmmDAO;
 
-	public void insertDanhSachMongMuon(NguoiDung nguoiDung, List<SanPham> dsSanPham) {
+	public boolean insertDanhSachMongMuon(NguoiDung nguoiDung, List<SanPham> dsSanPham) {
 		DanhSachMongMuon dsMongMuon = new DanhSachMongMuon(nguoiDung);
 		Date ngayTao = new Date();
 		dsMongMuon.setNgayTao(ngayTao);
@@ -24,11 +24,11 @@ public class DSMongMuonServiceImpl implements DSMongMuonService {
 			dsMongMuon.getSanPhams().add(sp);
 		}
 		
-		insertDSMongMuon(dsMongMuon);
+		return insertDSMongMuon(dsMongMuon);
 	}
 
-	public void insertDSMongMuon(DanhSachMongMuon dsmm) {
-		dsmmDAO.insertDSMongMuon(dsmm);	
+	public boolean insertDSMongMuon(DanhSachMongMuon dsmm) {
+		return dsmmDAO.insertDSMongMuon(dsmm);	
 	}
 
 	public List<DanhSachMongMuon> getListDSMongMuon(Integer maNguoiDung) {

@@ -7,7 +7,7 @@ public interface CTSanPhamService {
 	/**
 	 * Chen chi tiet san pham moi.
 	 */
-	void insertCTSanPham(CtSanPham ctSanPham);
+	boolean insertCTSanPham(CtSanPham ctSanPham);
 	
 	/**
 	 * Lay chi tiet san pham theo ma chi tiet san pham.
@@ -22,5 +22,5 @@ public interface CTSanPhamService {
 	/**
 	 * Cap nhap chi tiet san pham.
 	 */
-	void updateCTSanPham(CtSanPham ctSanPham);
+	boolean updateCTSanPham(CtSanPham ctSanPham);
 }

@@ -7,10 +7,10 @@ import cellphoneshop.model.DonHang;
 import cellphoneshop.viewmodel.SortBy;
 
 public interface DonHangService {
-	void insertDonHang(DonHang donHangMoi);
+	boolean insertDonHang(DonHang donHangMoi);
 	DonHang getDonHang(Integer maDonHang);
 	DonHang getDonHangCungChiTietTheoId(Integer maDonHang);
-	void updateDonHang(DonHang donHang);
+	boolean updateDonHang(DonHang donHang);
 	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung, boolean isAsc, Integer maStatus, int kqDautien, int kqToiDa);
 	Integer checkOut(Integer maND, List<CartItem> cartItemList, DonHang donHang);
 	List<DonHang> getListDonHangTheoNguoiDung(Integer maNguoiDung);

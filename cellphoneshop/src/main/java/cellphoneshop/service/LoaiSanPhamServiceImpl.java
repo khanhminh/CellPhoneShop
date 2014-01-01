@@ -13,8 +13,8 @@ public class LoaiSanPhamServiceImpl implements LoaiSanPhamService {
 	@Autowired
 	private LoaiSanPhamDAO loaiSpDAO;
 
-	public void insertLoaiSP(LoaiSanPham loaiSP) {
-		loaiSpDAO.insertLoaiSP(loaiSP);
+	public boolean insertLoaiSP(LoaiSanPham loaiSP) {
+		return loaiSpDAO.insertLoaiSP(loaiSP);
 	}
 
 	public LoaiSanPham getLoaiSPTheoId(Integer maLoaiSP) {

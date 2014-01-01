@@ -27,14 +27,18 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 	}
 	
 	@Transactional
-	public void insertLoaiSP(LoaiSanPham loaiSP) {
+	public boolean insertLoaiSP(LoaiSanPham loaiSP) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(loaiSP);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + " : " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

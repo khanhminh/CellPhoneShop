@@ -29,14 +29,18 @@ public class DonHangDAOImpl implements DonHangDAO {
 	}
 
 	@Transactional
-	public void insertDonHang(DonHang donHangMoi) {
+	public boolean insertDonHang(DonHang donHangMoi) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
 			session.save(donHangMoi);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

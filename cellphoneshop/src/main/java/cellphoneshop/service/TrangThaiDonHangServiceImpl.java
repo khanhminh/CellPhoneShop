@@ -13,8 +13,8 @@ public class TrangThaiDonHangServiceImpl implements TrangThaiDonHangService {
 	@Autowired
 	private TrangThaiDonHangDAO ttDonHangDAO;
 
-	public void insertTrangThaiDonHang(TrangThaiDonHang ttDonHang) {
-		ttDonHangDAO.insertTrangThaiDonHang(ttDonHang);
+	public boolean insertTrangThaiDonHang(TrangThaiDonHang ttDonHang) {
+		return ttDonHangDAO.insertTrangThaiDonHang(ttDonHang);
 	}
 
 	public TrangThaiDonHang getTrangThaiDonHang(Integer maTrangThai) {

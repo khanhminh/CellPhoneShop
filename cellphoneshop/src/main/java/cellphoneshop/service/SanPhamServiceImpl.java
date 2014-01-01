@@ -33,16 +33,16 @@ public class SanPhamServiceImpl implements SanPhamService {
 	private NhaSanXuatDAO nhaSXDAO;
 	
 	
-	public void insertSanPham(SanPham sp) {
-		spDAO.insertSanPham(sp);
+	public boolean insertSanPham(SanPham sp) {
+		return spDAO.insertSanPham(sp);
 	}
 
 	public SanPham getSanPhamTheoId(Integer maSp) {
 		return spDAO.getSanPhamTheoId(maSp);
 	}
 
-	public void updateSanPham(SanPham sp) {
-		spDAO.updateSanPham(sp);
+	public boolean updateSanPham(SanPham sp) {
+		return spDAO.updateSanPham(sp);
 	}
 	
 	public List<SanPham> getListSanPhamMoiTrongTuan(int ketQuaDauTien, int soKetQuaToiDa) {
