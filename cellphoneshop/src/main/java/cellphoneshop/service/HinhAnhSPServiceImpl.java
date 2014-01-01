@@ -11,12 +11,12 @@ public class HinhAnhSPServiceImpl implements HinhAnhSPService {
 	@Autowired
 	private HinhAnhSPDAO hinhAnhSPDAO;
 
-	public void insertHinhAnhSP(HinhAnhSp hinhSp) {
-		hinhAnhSPDAO.insertHinhAnhSP(hinhSp);
+	public boolean insertHinhAnhSP(HinhAnhSp hinhSp) {
+		return hinhAnhSPDAO.insertHinhAnhSP(hinhSp);
 	}
 
-	public void updateHinhAnhSp(HinhAnhSp hinhSp) {
-		hinhAnhSPDAO.updateHinhAnhSp(hinhSp);
+	public boolean updateHinhAnhSp(HinhAnhSp hinhSp) {
+		return hinhAnhSPDAO.updateHinhAnhSp(hinhSp);
 	}
 
 	public List<HinhAnhSp> getListHinhAnhSPTheoMaCTSP(Integer maChiTietSP) {

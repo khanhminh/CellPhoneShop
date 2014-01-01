@@ -27,14 +27,18 @@ public class DSMongMuonDAOImpl implements DSMongMuonDAO {
 	}
 
 	@Transactional
-	public void insertDSMongMuon(DanhSachMongMuon dsmm) {
+	public boolean insertDSMongMuon(DanhSachMongMuon dsmm) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(dsmm);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

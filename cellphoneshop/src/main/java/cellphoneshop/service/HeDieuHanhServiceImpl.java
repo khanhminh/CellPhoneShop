@@ -11,8 +11,8 @@ public class HeDieuHanhServiceImpl implements HeDieuHanhService {
 	@Autowired
 	private HeDieuHanhDAO hdhDAO;
 
-	public void insertHeDieuHanh(HeDieuHanh hdh) {
-		hdhDAO.insertHeDieuHanh(hdh);
+	public boolean insertHeDieuHanh(HeDieuHanh hdh) {
+		return hdhDAO.insertHeDieuHanh(hdh);
 	}
 
 	public HeDieuHanh getHeDieuHanhTheoId(Integer maHDH) {

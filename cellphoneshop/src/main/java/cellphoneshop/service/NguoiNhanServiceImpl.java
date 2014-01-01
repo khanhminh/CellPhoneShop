@@ -13,9 +13,8 @@ public class NguoiNhanServiceImpl implements NguoiNhanService{
 	private NguoiNhanDAO nguoiNhanDAO;
 	
 
-	public void themNguoiNhan(NguoiNhan nguoiNhan) {
-		nguoiNhanDAO.themNguoiNhan(nguoiNhan);
-		
+	public boolean themNguoiNhan(NguoiNhan nguoiNhan) {
+		return nguoiNhanDAO.themNguoiNhan(nguoiNhan);
 	}
 
 	public NguoiNhan getNguoiNhan(Integer maNguoiDung, String tenNguoiNhan) {

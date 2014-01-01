@@ -28,7 +28,8 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 	}
 
 	@Transactional
-	public void insertDanhGia(DanhGia danhGia) {
+	public boolean insertDanhGia(DanhGia danhGia) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
@@ -46,9 +47,12 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 			sanPham.setDiemDanhGiaTb(diemTB);
 			sanPhamDAO.updateSanPham(sanPham); // TODO: Co cach lam nao khac tot
 												// hon la phai goi ham nay
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)
@@ -70,7 +74,8 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 	}
 
 	@Transactional
-	public void updateDanhGia(DanhGia danhGia) {
+	public boolean updateDanhGia(DanhGia danhGia) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
@@ -87,9 +92,12 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 			sanPham.setDiemDanhGiaTb(diemTB);
 			sanPhamDAO.updateSanPham(sanPham); // TODO: Co cach lam nao khac tot
 												// hon la phai goi ham nay
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)
