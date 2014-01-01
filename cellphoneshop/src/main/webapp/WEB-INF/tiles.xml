@@ -167,13 +167,17 @@
 
 	<definition name="update_km" extends="admin">
 		<put-attribute name="title" value="Cập nhật Thông tin khuyến mãi" />
-		<put-attribute name="content"
-			value="/WEB-INF/jsp/admin/update_km.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/update_km.jsp" />
 	</definition>
-	
+
+	<definition name="insert_km" extends="admin">
+		<put-attribute name="title" value="Cập nhật Thông tin khuyến mãi" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/insert_km.jsp" />
+	</definition>
+
 	<definition name="search_km" extends="admin">
-		<put-attribute name="title" value="Tìm kiếm khuyến mãi"/>
-		<put-attribute name="content" value="/WEB-INF/jsp/admin/search_km.jsp"/>
+		<put-attribute name="title" value="Tìm kiếm khuyến mãi" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/search_km.jsp" />
 	</definition>
 
 	<definition name="insert_product" extends="admin">

@@ -79,7 +79,6 @@ public class SaleOfController extends ActionSupport implements
 		// HttpServletRequest request = ServletActionContext.getRequest();
 		// this.saveImage();
 		log.info("Vao ham insert khuyen mai controller");
-
 		return SUCCESS;
 	}
 

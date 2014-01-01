@@ -15,7 +15,7 @@
 	<div class="box span12">
 		<div class="box-header well" data-original-title>
 			<h2>
-				<i class="icon-user"></i>Cập nhật thông tin khuyến mãi đang mở
+				<i class="icon-user"></i>Thêm 1 chương trình khuyến mãi
 			</h2>
 			<div class="box-icon">
 				<a href="#" class="btn btn-minimize btn-round"><i
@@ -33,25 +33,7 @@
 						</c:forEach>
 					</ul>
 				</div>
-
-				<s:set var="tieuDe">${requestScope.km.tieuDe}</s:set>
-				<s:set var="moTa">${requestScope.km.moTa}</s:set>
-				<s:set var="giamgia">
-					<fmt:formatNumber type="number"
-						value="${requestScope.km.phanTramGiamGia}" maxFractionDigits="2"
-						minFractionDigits="1" />
-				</s:set>
-				<s:set var="ngayBD">
-					<fmt:formatDate pattern="MM/dd/yyyy"
-						value="${requestScope.km.ngayBatDau}" />
-				</s:set>
-				<s:set var="ngayKT">
-					<fmt:formatDate pattern="MM/dd/yyyy"
-						value="${requestScope.km.ngayKetThuc}" />
-				</s:set>
-				<s:set var="quaTang">${requestScope.km.quaTang}</s:set>
-
-
+	
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label" for="km.tieuDe"> Tiêu Đề KM </label>
@@ -59,7 +41,7 @@
 							<s:textarea class="text-box single-line input-xlarge focused"
 								type="text" theme="simple" name="km.tieuDe" data-val="true"
 								data-val-required="Vui lòng nhập tiêu đề của khuyến mãi"
-								value="%{tieuDe}" />
+								/>
 
 							<span class="field-validation-valid" data-valmsg-for="km.tieuDe"
 								data-valmsg-replace="true"> </span>
@@ -72,7 +54,7 @@
 							<s:textarea class="text-box single-line input-xlarge focused"
 								type="text" theme="simple" name="km.moTa" data-val="true"
 								data-val-required="Vui lòng nhập mô tả của khuyến mãi"
-								value="%{moTa}" />
+								/>
 
 							<span class="field-validation-valid" data-valmsg-for="km.moTa"
 								data-valmsg-replace="true"> </span>
@@ -99,9 +81,7 @@
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge datepicker"
 								type="text" theme="simple" name="km.ngayBatDau" data-val="true"
-								data-val-required="Vui lòng nhập ngày bắt đầu"
-								value="%{ngayBD}"
-								 />
+								data-val-required="Vui lòng nhập ngày bắt đầu"/>
 							<span class="field-validation-valid"
 								data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">
 							</span>
@@ -115,7 +95,7 @@
 							<s:textfield class="text-box single-line input-xlarge focused datepicker"
 								type="text" theme="simple" name="km.ngayKetThuc" data-val="true"
 								data-val-required="Vui lòng nhập ngày bắt đầu"
-								data-val-regex="Giá trị không hợp lệ" value="%{ngayKT}" />
+								data-val-regex="Giá trị không hợp lệ"/>
 
 							<span class="field-validation-valid"
 								data-valmsg-for="km.ngayKetThuc" data-valmsg-replace="true">
@@ -128,7 +108,7 @@
 							Kèm</label>
 						<div class="controls">
 							<s:textarea class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.quaTang" value="%{quaTang}" />
+								type="text" theme="simple" name="km.quaTang"/>
 
 							<span class="field-validation-valid" data-valmsg-for="km.quaTang"
 								data-valmsg-replace="true"> </span>
