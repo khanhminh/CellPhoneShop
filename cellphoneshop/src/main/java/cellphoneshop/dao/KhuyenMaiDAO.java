@@ -14,5 +14,5 @@ public interface KhuyenMaiDAO {
 	List<KhuyenMai> getListKhuyenMaiChuaDong();
 	Integer countKhuyenMai();
 	Integer countKhuyenMail(String query, String option);
-	
+	void updateKhuyenMaiTable();
 }

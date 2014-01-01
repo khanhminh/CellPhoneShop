@@ -182,10 +182,11 @@ public class SaleOfController extends ActionSupport implements
 	public boolean saveImage() {
 		destPath = request.getSession().getServletContext()
 				.getRealPath(saveDirectory);
-		log.info("Path demo: "
-				+ request.getSession().getServletContext().getRealPath("/")
-						.concat(saveDirectory));
-
+		if(myFile == null || myFileFileName == null){
+			return false;
+		}
+		log.info("destPath: " + destPath);
+		log.info("nameFile: " + myFileFileName);
 		try {
 			File destFile = new File(destPath, myFileFileName);
 			FileUtils.copyFile(myFile, destFile);

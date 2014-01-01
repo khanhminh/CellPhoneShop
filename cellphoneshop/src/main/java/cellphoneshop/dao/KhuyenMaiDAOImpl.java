@@ -1,6 +1,7 @@
 package cellphoneshop.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -88,15 +89,17 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 		return new ArrayList<KhuyenMai>();
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<KhuyenMai> getListKhuyenMaiChuaDong() {
 		Session session = sessionFactory.getCurrentSession();
-
+		String hql = "select km from KhuyenMai as km where km.trangThaiKhuyenMai.maTrangThai = :trangthai and km.ngayKetThuc >= :ngayHienTai";
+		Date nowTime = new Date();
 		try {
-			return session
-					.createQuery(
-							"select k from KhuyenMai as k where k.trangThaiKhuyenMai.maTrangThai = 1")
-					.list(); // TODO hard code
+			Query query = session.createQuery(hql);
+			query.setInteger("trangthai", 1);
+			query.setDate("ngayHienTai", nowTime);
+			
+			return query.list();
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -228,6 +231,11 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 		}
 
 		return null;
+	}
+
+	public void updateKhuyenMaiTable() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
