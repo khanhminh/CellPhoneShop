@@ -36,11 +36,15 @@
 
 				<s:set var="tieuDe">${requestScope.km.tieuDe}</s:set>
 				<s:set var="moTa">${requestScope.km.moTa}</s:set>
-				<s:set var="giamgia">
-					<fmt:formatNumber type="number"
-						value="${requestScope.km.phanTramGiamGia}" maxFractionDigits="2"
-						minFractionDigits="1" />
-				</s:set>
+				<c:if
+					test="${requestScope.km.phanTramGiamGia != null && requestScope.km.phanTramGiamGia != 0}">
+					<s:set var="giamgia">
+						<fmt:formatNumber type="number"
+							value="${requestScope.km.phanTramGiamGia}" maxFractionDigits="2"
+							minFractionDigits="1" />
+					</s:set>
+				</c:if>
+
 				<s:set var="ngayBD">
 					<fmt:formatDate pattern="MM/dd/yyyy"
 						value="${requestScope.km.ngayBatDau}" />
@@ -50,8 +54,6 @@
 						value="${requestScope.km.ngayKetThuc}" />
 				</s:set>
 				<s:set var="quaTang">${requestScope.km.quaTang}</s:set>
-
-
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label" for="km.tieuDe"> Tiêu Đề KM </label>
@@ -99,9 +101,7 @@
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge datepicker"
 								type="text" theme="simple" name="km.ngayBatDau" data-val="true"
-								data-val-required="Vui lòng nhập ngày bắt đầu"
-								value="%{ngayBD}"
-								 />
+								data-val-required="Vui lòng nhập ngày bắt đầu" value="%{ngayBD}" />
 							<span class="field-validation-valid"
 								data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">
 							</span>
@@ -112,7 +112,8 @@
 						<label class="control-label" for="km.ngayKetThuc">Ngày Kết
 							Thúc KM </label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused datepicker"
+							<s:textfield
+								class="text-box single-line input-xlarge focused datepicker"
 								type="text" theme="simple" name="km.ngayKetThuc" data-val="true"
 								data-val-required="Vui lòng nhập ngày bắt đầu"
 								data-val-regex="Giá trị không hợp lệ" value="%{ngayKT}" />
@@ -122,7 +123,7 @@
 							</span>
 						</div>
 					</div>
-					
+
 					<div class="control-group">
 						<label class="control-label" for="km.quaTang"> Quà Tặng Đi
 							Kèm</label>
