@@ -38,10 +38,13 @@
 			
 			<prop key="unknowFullName">Vui lòng nhập họ tên</prop>		
 			<prop key="unknowInfo">Vui lòng nhập đủ thông tin</prop>
-			<prop key="errorUpdateKM">Thông tin khuyến mãi không được tìm thấy</prop>
-			<prop key="errorIdStatus">Vui lòng kiểm tra lại mã trạng thái( 1: hết khuyến mãi, 2: còn khuyến mãi)!</prop>
+			<prop key="errorInfoKM">Thông tin khuyến mãi không được tìm thấy</prop>
+			<prop key="errorUpdateKM">Cập nhật thông tin khuyến mãi thất bại. Xin kiểm tra lại thông tin nhập</prop>
+			<prop key="errorIdStatus">Vui lòng kiểm tra lại mã trạng thái( 0: sắp diễn ra khuyến mãi, 1: hết khuyến mãi, 2: còn khuyến mãi)!</prop>
 			<prop key="errormaKM">Vui lòng kiểm tra lại mã khuyến mãi, có thể bạn đã nhập sai!</prop>
 			<prop key="notFoundKM">Không tìm thấy khuyến mãi này!</prop>
+			<prop key="errorNgayKT">Ngày kết thúc khuyến mãi phải lớn hơn hoặc cùng với ngày hiện tại</prop>
+			<prop key="errorNgayDB">Ngày bắt đầu khuyến mãi phải nhỏ hơn hoặc cùng với ngày hiện tại</prop>
 				
 		</props>
 		</property>

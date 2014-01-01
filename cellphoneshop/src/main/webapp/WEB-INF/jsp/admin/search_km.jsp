@@ -113,7 +113,7 @@
 										href="detail_km?id=${km.maKm}"> <i
 											class="icon-zoom-in icon-white"></i> Chi tiết
 									</a> <c:if test="${km.trangThaiKhuyenMai.maTrangThai == 1}">
-											<a class="btn btn-info" href="update_km?id=${km.maKm}"> <i
+											<a class="btn btn-info" href="show_update_km_form?id=${km.maKm}"> <i
 												class="icon-edit icon-white"></i> Chỉnh Sửa
 											</a>
 											<a class="btn btn-danger btnStop"

@@ -249,10 +249,15 @@
 			<result name="success" type="tiles">insert_km</result>
 		</action>
 
-		<action name="update_km" method="updateKhuyenMai" class="khuyenmaiAction">
-			<result name="success" type="tiles">update_km</result>
+		<action name="show_update_km_form" method="showUpdateKhuyenMaiForm" class="khuyenmaiAction">
+			<result name="input" type="tiles">update_km</result>
 		</action>
-		
+
+		<action name="process_update_km" method="processUpdateKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="tiles">update_km</result>
+			<result name="error" type="tiles">update_km</result>
+		</action>
+
 		<action name="search_km" method="searchKhuyenMai" class="khuyenmaiAction">
 			<result name="success" type="tiles">search_km</result>
 			<result name="input" type="tiles">search_km</result>
