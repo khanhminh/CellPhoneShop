@@ -39,6 +39,9 @@
 			<prop key="unknowFullName">Vui lòng nhập họ tên</prop>		
 			<prop key="unknowInfo">Vui lòng nhập đủ thông tin</prop>
 			<prop key="errorUpdateKM">Thông tin khuyến mãi không được tìm thấy</prop>
+			<prop key="errorIdStatus">Vui lòng kiểm tra lại mã trạng thái( 1: hết khuyến mãi, 2: còn khuyến mãi)!</prop>
+			<prop key="errormaKM">Vui lòng kiểm tra lại mã khuyến mãi, có thể bạn đã nhập sai!</prop>
+			<prop key="notFoundKM">Không tìm thấy khuyến mãi này!</prop>
 				
 		</props>
 		</property>

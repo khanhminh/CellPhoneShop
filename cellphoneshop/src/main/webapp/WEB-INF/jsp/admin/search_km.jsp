@@ -65,8 +65,13 @@
 	</c:when>
 	<c:when test="${kmList == null || empty kmList}">
 		<div class="alert alert-error">
-			<strong>Không tìm thấy khuyến mai!</strong>
+			<strong>
+				<c:forEach var="error" begin="0" items="${errors}">
+						${error}<br>
+				</c:forEach>
+			</strong>
 		</div>
+
 	</c:when>
 	<c:otherwise>
 		<div class="row-fluid sortable">

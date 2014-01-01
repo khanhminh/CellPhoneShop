@@ -114,7 +114,7 @@ public class SaleOfController extends ActionSupport implements
 			if (maKM == null) {
 				errors.add(messages.getMessageList().getProperty(
 						"errorUpdateKM"));
-				request.setAttribute("errors", messages);
+				request.setAttribute("errors", errors);
 				return SUCCESS;
 			}
 
@@ -122,7 +122,7 @@ public class SaleOfController extends ActionSupport implements
 			if (khuyenmai == null) {
 				errors.add(messages.getMessageList().getProperty(
 						"errorUpdateKM"));
-				request.setAttribute("errors", messages);
+				request.setAttribute("errors", errors);
 				return SUCCESS;
 			}
 
@@ -146,26 +146,36 @@ public class SaleOfController extends ActionSupport implements
 			request.setAttribute("isInput", true);
 			return INPUT;
 		}
-		
-		log.info("Query: " + this.query);
-		log.info("option: " + this.option);
-		
+				
 		request.setAttribute("isInput", false);
+		
+		if(!this.validateSearch()){
+			request.setAttribute("errors", errors);
+			return SUCCESS;
+		}
+		
 		Integer currentPage = this.getCurrentPage(request.getParameter("page"));
 		Integer vitriBD = this.getVitriBD(currentPage);
 		List<KhuyenMai> khuyenMaiList = khuyenMaiService.getListKhuyenMail(query, option, vitriBD, this.saleOfPerPage);
 		
 		if(khuyenMaiList == null || khuyenMaiList.isEmpty()){
+			errors = new ArrayList<String>();
+			errors.add(messages.getMessageList().getProperty("notFoundKM"));
+			request.setAttribute("errors", errors);
 			return SUCCESS;
 		}
 		
-		Integer totalspecialkm = khuyenMaiService.countKhuyenMail(query, option);
-		log.info("totalspecialKM: " + totalspecialkm);
-		Integer totalPage = this.getTotalPage(totalspecialkm);
-		
-		
-		request.setAttribute("currentPage", currentPage);
-		request.setAttribute("totalPage", totalPage);
+		if(option.equals("id")){
+			request.setAttribute("currentPage", 1);
+			request.setAttribute("totalPage", 1);
+		}else{
+			Integer totalspecialkm = khuyenMaiService.countKhuyenMail(query, option);
+			log.info("totalspecialKM: " + totalspecialkm);
+			Integer totalPage = this.getTotalPage(totalspecialkm);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("totalPage", totalPage);
+		}
+
 		request.setAttribute("kmList", khuyenMaiList);
 		return SUCCESS;
 	}
@@ -349,5 +359,29 @@ public class SaleOfController extends ActionSupport implements
 
 	public void setOption(String option) {
 		this.option = option;
+	}
+	
+	public boolean validateSearch(){
+		
+		errors = new ArrayList<String>();
+		
+		if(option.equals("status")){
+			if(!query.matches("[1-2]")){
+				errors.add(messages.getMessageList().getProperty("errorIdStatus"));
+				return false;
+			}
+			
+		}else{
+			if(option.equals("id")){
+				try{
+					Integer.parseInt(query);
+				}catch(Exception ex){
+					errors.add(messages.getMessageList().getProperty("errormaKM"));
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 }
