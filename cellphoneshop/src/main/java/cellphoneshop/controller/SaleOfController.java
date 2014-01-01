@@ -66,6 +66,7 @@ public class SaleOfController extends ActionSupport implements
 	public String detailKhuyenMai() {
 		log.info("Vao detail khuyen mail Controller");
 		Integer maKM = this.getmaKM(request.getParameter("id"));
+		
 		if (maKM != null) {
 			KhuyenMai khuyenMai = khuyenMaiService.getKhuyenMai(maKM);
 			if (khuyenMai != null) {
@@ -125,6 +126,8 @@ public class SaleOfController extends ActionSupport implements
 				return SUCCESS;
 			}
 
+			log.info("Quan tang: " + khuyenmai.getQuaTang());
+			log.info("Giam gia: " + khuyenmai.getPhanTramGiamGia());
 			request.setAttribute("km", khuyenmai);
 			return SUCCESS;
 		}

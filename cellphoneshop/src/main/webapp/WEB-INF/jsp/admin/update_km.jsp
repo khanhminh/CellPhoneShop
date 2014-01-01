@@ -36,15 +36,6 @@
 
 				<s:set var="tieuDe">${requestScope.km.tieuDe}</s:set>
 				<s:set var="moTa">${requestScope.km.moTa}</s:set>
-				<c:if
-					test="${requestScope.km.phanTramGiamGia != null && requestScope.km.phanTramGiamGia != 0}">
-					<s:set var="giamgia">
-						<fmt:formatNumber type="number"
-							value="${requestScope.km.phanTramGiamGia}" maxFractionDigits="2"
-							minFractionDigits="1" />
-					</s:set>
-				</c:if>
-
 				<s:set var="ngayBD">
 					<fmt:formatDate pattern="MM/dd/yyyy"
 						value="${requestScope.km.ngayBatDau}" />
@@ -53,7 +44,7 @@
 					<fmt:formatDate pattern="MM/dd/yyyy"
 						value="${requestScope.km.ngayKetThuc}" />
 				</s:set>
-				<s:set var="quaTang">${requestScope.km.quaTang}</s:set>
+
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label" for="km.tieuDe"> Tiêu Đề KM </label>
@@ -85,9 +76,27 @@
 						<label class="control-label" for="km.phanTramGiamGia"> %
 							Giảm giá </label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.phanTramGiamGia"
-								data-val="false" value="%{giamgia}" />
+
+							<c:choose>
+								<c:when
+									test="${requestScope.km.phanTramGiamGia != null && requestScope.km.phanTramGiamGia != 0}">
+									<s:set var="giamgia">
+										<fmt:formatNumber type="number"
+											value="${requestScope.km.phanTramGiamGia}"
+											maxFractionDigits="2" minFractionDigits="1" />
+									</s:set>
+									<s:textfield class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.phanTramGiamGia"
+										data-val="false" value="%{giamgia}" />
+								</c:when>
+								<c:otherwise>
+									<s:textfield class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.phanTramGiamGia"
+										data-val="false" />
+								</c:otherwise>
+
+							</c:choose>
+
 
 							<span class="field-validation-valid"
 								data-valmsg-for="km.phanTramGiamGia" data-valmsg-replace="true">
@@ -128,8 +137,19 @@
 						<label class="control-label" for="km.quaTang"> Quà Tặng Đi
 							Kèm</label>
 						<div class="controls">
-							<s:textarea class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.quaTang" value="%{quaTang}" />
+
+							<c:choose>
+								<c:when test="${requestScope.km.quaTang != null}">
+									<s:set var="quaTang">${requestScope.km.quaTang}</s:set>
+									<s:textarea class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.quaTang"
+										value="%{quaTang}" />
+								</c:when>
+								<c:otherwise>
+									<s:textarea class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.quaTang" />
+								</c:otherwise>
+							</c:choose>
 
 							<span class="field-validation-valid" data-valmsg-for="km.quaTang"
 								data-valmsg-replace="true"> </span>
