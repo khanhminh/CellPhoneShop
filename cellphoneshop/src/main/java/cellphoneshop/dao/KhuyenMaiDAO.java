@@ -10,6 +10,9 @@ public interface KhuyenMaiDAO {
 	boolean updateKhuyenMai(KhuyenMai khuyenMai);
 	List<KhuyenMai> getListKhuyenMai();
 	List<KhuyenMai> getListKhuyenMai(Integer vitriBD, Integer soluongKM);
+	List<KhuyenMai> getListKhuyenMail(String query, String option, Integer vitriBD, Integer soluongKM);
 	List<KhuyenMai> getListKhuyenMaiChuaDong();
 	Integer countKhuyenMai();
+	Integer countKhuyenMail(String query, String option);
+	
 }

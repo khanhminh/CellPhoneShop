@@ -250,6 +250,11 @@
 		<action name="update_km" method="updateKhuyenMai" class="khuyenmaiAction">
 			<result name="success" type="tiles">update_km</result>
 		</action>
+		
+		<action name="search_km" method="searchKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="tiles">search_km</result>
+			<result name="input" type="tiles">search_km</result>
+		</action>
 
 
 		<!-- quan ly san pham -->

@@ -40,4 +40,15 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 	public Integer countKhuyenMai() {
 		return khuyenMaiDAO.countKhuyenMai();
 	}
+
+	public List<KhuyenMai> getListKhuyenMail(String query, String option,
+			Integer vitriBD, Integer soluongKM) {
+		return khuyenMaiDAO.getListKhuyenMail(query, option, vitriBD, soluongKM);
+	}
+
+	public Integer countKhuyenMail(String value, String option) {
+		return khuyenMaiDAO.countKhuyenMail(value, option);
+	}
+	
+	
 }

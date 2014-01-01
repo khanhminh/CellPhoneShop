@@ -24,6 +24,7 @@
 		<property name="saveDirectory" value="/resources/images/km"/>
 		<property name="saleOfPerPage" value="8"/>
 		<property name="trangThaiDong" value="2"/>
+		<property name="trangThaiMo" value="1"/>
 	</bean>
 
 	<bean id="productAction" class="cellphoneshop.controller.ProductController"
