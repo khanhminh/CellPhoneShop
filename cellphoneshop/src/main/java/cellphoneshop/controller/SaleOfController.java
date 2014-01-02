@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cellphoneshop.interceptor.HomeInterceptor;
 import cellphoneshop.model.KhuyenMai;
 import cellphoneshop.model.TrangThaiKhuyenMai;
 import cellphoneshop.service.KhuyenMaiService;
@@ -105,6 +106,7 @@ public class SaleOfController extends ActionSupport implements
 				if (khuyenMaiService.updateKhuyenMai(khuyenMai)) {
 					log.info("Stop khuyen mai " + khuyenMai.getTieuDe()
 							+ " thanh cong");
+					this.reloadKhuyenMai();
 				} else {
 					log.error("Khong the stop khuyen mai");
 				}
@@ -146,7 +148,7 @@ public class SaleOfController extends ActionSupport implements
 
 		if (!vaildateUpdate()) {
 			request.setAttribute("errors", errors);
-			
+
 			return ERROR;
 		}
 
@@ -189,6 +191,7 @@ public class SaleOfController extends ActionSupport implements
 			log.info("Cap nhat - giam gia: " + khuyenmai.getPhanTramGiamGia());
 			log.info("Tang kem: " + khuyenmai.getQuaTang());
 			log.info("Cap nhat thanh cong khuyen mai: " + khuyenmai.getTieuDe());
+			this.reloadKhuyenMai();
 			return SUCCESS;
 		} else {
 			errors.add(messages.getMessageList().getProperty("errorUpdateKM"));
@@ -242,17 +245,16 @@ public class SaleOfController extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	public boolean saveImage() {		
+	public boolean saveImage() {
 		destPath = this.getPathSaveImage();
 		log.info("destPath: " + destPath);
-		if(destPath == null ){
+		if (destPath == null) {
 			return false;
 		}
-		
+
 		destPath += this.linkResources;
 		destPath += this.saveDirectory;
 
-		
 		if (myFile == null || myFileFileName == null) {
 			return false;
 		}
@@ -458,7 +460,6 @@ public class SaleOfController extends ActionSupport implements
 		return true;
 	}
 
-
 	public boolean tryParseDate(String strDate) {
 		boolean result = true;
 		DateFormat formater = new SimpleDateFormat("MM/dd/yyyy");
@@ -505,14 +506,14 @@ public class SaleOfController extends ActionSupport implements
 
 	public boolean vaildateUpdate() {
 
-//		errors = new ArrayList<String>();
-//		if (!this.validatekNgayBatDau()) {
-//			return false;
-//		}
+		// errors = new ArrayList<String>();
+		// if (!this.validatekNgayBatDau()) {
+		// return false;
+		// }
 
-//		if (!this.validateNgayKetThuc()) {
-//			return false;
-//		}
+		// if (!this.validateNgayKetThuc()) {
+		// return false;
+		// }
 
 		return true;
 	}
@@ -534,31 +535,30 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public String getPathSaveImage() {
-		
-		String path = request.getSession().getServletContext()
-				.getRealPath("/");
-		if(path == null || path.isEmpty()){
+
+		String path = request.getSession().getServletContext().getRealPath("/");
+		if (path == null || path.isEmpty()) {
 			return null;
 		}
-		
+
 		int count = 0;
-		
+
 		Integer pathLength = path.length();
 		char pattern = path.charAt(pathLength - 1);
 		String backupPath = path;
 		String projectName = null;
 		for (int i = path.length() - 1; i > 0; i--) {
-			log.info("ki thu thu: " + i + " gia tri: " + path.charAt(i -1));
+			log.info("ki thu thu: " + i + " gia tri: " + path.charAt(i - 1));
 			if (count == this.countCut) {
 				break;
 			}
 			if (path.charAt(i - 1) == pattern) {
-				if(projectName == null || projectName.isEmpty()){
+				if (projectName == null || projectName.isEmpty()) {
 					projectName = backupPath.substring(i, pathLength - 1);
 				}
 				count++;
 			}
-			
+
 			path = path.substring(0, i);
 		}
 		return (path + projectName + pattern + projectName);
@@ -586,6 +586,13 @@ public class SaleOfController extends ActionSupport implements
 
 	public void setSaveLinkImage(String saveLinkImage) {
 		this.saveLinkImage = saveLinkImage;
+	}
+
+	public void reloadKhuyenMai() {
+		HomeInterceptor instance = HomeInterceptor.getInstance();
+		if (instance != null) {
+			instance.loadListKM();
+		}
 	}
 
 }
