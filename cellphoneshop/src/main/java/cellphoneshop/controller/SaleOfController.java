@@ -252,18 +252,18 @@ public class SaleOfController extends ActionSupport implements
 			return false;
 		}
 
-		destPath += this.linkResources;
-		destPath += this.saveDirectory;
+//		destPath += this.linkResources;
+//		destPath += this.saveDirectory;
 
 		if (myFile == null || myFileFileName == null) {
 			return false;
 		}
-		log.info("destPath: " + destPath);
+//		log.info("destPath: " + destPath);
 		log.info("nameFile: " + myFileFileName);
 		try {
 			File destFile = new File(destPath, myFileFileName);
 			FileUtils.copyFile(myFile, destFile);
-			log.info("Destpath: " + destPath);
+//			log.info("Destpath: " + destPath);
 			log.info("Upload comlete, link image save on database is "
 					+ this.getLinkImage());
 			return true;
@@ -536,32 +536,34 @@ public class SaleOfController extends ActionSupport implements
 
 	public String getPathSaveImage() {
 
-		String path = request.getSession().getServletContext().getRealPath("/");
-		if (path == null || path.isEmpty()) {
-			return null;
-		}
-
-		int count = 0;
-
-		Integer pathLength = path.length();
-		char pattern = path.charAt(pathLength - 1);
-		String backupPath = path;
-		String projectName = null;
-		for (int i = path.length() - 1; i > 0; i--) {
-			log.info("ki thu thu: " + i + " gia tri: " + path.charAt(i - 1));
-			if (count == this.countCut) {
-				break;
-			}
-			if (path.charAt(i - 1) == pattern) {
-				if (projectName == null || projectName.isEmpty()) {
-					projectName = backupPath.substring(i, pathLength - 1);
-				}
-				count++;
-			}
-
-			path = path.substring(0, i);
-		}
-		return (path + projectName + pattern + projectName);
+//		String path = request.getSession().getServletContext().getRealPath("/");
+		String path = request.getSession().getServletContext().getRealPath(this.saveDirectory);
+		return path;
+		
+//		if (path == null || path.isEmpty()) {
+//			return null;
+//		}
+//
+//		int count = 0;
+//
+//		Integer pathLength = path.length();
+//		char pattern = path.charAt(pathLength - 1);
+//		String backupPath = path;
+//		String projectName = null;
+//		for (int i = path.length() - 1; i > 0; i--) {
+//			if (count == this.countCut) {
+//				break;
+//			}
+//			if (path.charAt(i - 1) == pattern) {
+//				if (projectName == null || projectName.isEmpty()) {
+//					projectName = backupPath.substring(i, pathLength - 1);
+//				}
+//				count++;
+//			}
+//
+//			path = path.substring(0, i);
+//		}
+//		return (path + projectName + pattern + projectName);
 	}
 
 	public Integer getCountCut() {

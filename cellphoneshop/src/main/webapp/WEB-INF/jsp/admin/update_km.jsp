@@ -132,7 +132,7 @@
 								<div class="controls">
 
 									<s:textfield
-										cssClass="text-box single-line input-xlarge uneditable-input datepicker"
+										cssClass="text-box single-line input-xlarge editable-input datepicker"
 										type="text" theme="simple" name="km.ngayBatDau"
 										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
 										value="%{ngayBD}" />
@@ -155,8 +155,8 @@
 									Bắt Đầu KM </label>
 								<div class="controls">
 
-									<s:hidden
-										cssClass="text-box single-line input-xlarge uneditable-input datepicker"
+									<s:textfield
+										cssClass="text-box single-line input-xlarge uneditable-input"
 										type="text" theme="simple" name="km.ngayBatDau"
 										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
 										value="%{ngayBD}" />
