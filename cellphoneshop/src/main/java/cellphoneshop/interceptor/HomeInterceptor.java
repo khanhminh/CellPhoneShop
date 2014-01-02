@@ -21,6 +21,8 @@ public class HomeInterceptor implements Interceptor {
 	@Autowired
 	private KhuyenMaiService kmService;
 	
+	private static HomeInterceptor Instance;
+	
 	Logger log = Logger.getLogger(HomeInterceptor.class);
 	private List<NhaSanXuat> listNSX;
 	private List<KhuyenMai> listKM;
@@ -32,9 +34,11 @@ public class HomeInterceptor implements Interceptor {
 		if (listKM != null){
 			listKM = null;
 		}
+		Instance = null;
 	}
 
 	public void init() {
+		Instance = this;
 		listNSX = nsxService.getListNhaSanXuat();
 		listKM = kmService.getListKhuyenMaiChuaDong();
 	}
@@ -46,5 +50,12 @@ public class HomeInterceptor implements Interceptor {
 				
 		return ai.invoke();
 	}
-
+	
+	public void loadListKM() {
+		listKM = kmService.getListKhuyenMaiChuaDong();
+	}
+	
+	public static HomeInterceptor getInstance() {
+		return Instance;
+	}
 }
