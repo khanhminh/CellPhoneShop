@@ -11,22 +11,27 @@
 	<context:component-scan base-package="cellphoneshop" />
 
 
-	<bean id="homeAction" class="cellphoneshop.controller.HomeController" scope="prototype">
-		<property name="productPerPage" value="8"/>
+	<bean id="homeAction" class="cellphoneshop.controller.HomeController"
+		scope="prototype">
+		<property name="productPerPage" value="8" />
 	</bean>
 
 	<bean id="accountAction" class="cellphoneshop.controller.AccountController">
 	</bean>
-	
-	<bean id="updateAccountAction" class="cellphoneshop.controller.UpdateAccountController"/>
-	
+
+	<bean id="updateAccountAction" class="cellphoneshop.controller.UpdateAccountController" />
+
 	<bean id="khuyenmaiAction" class="cellphoneshop.controller.SaleOfController">
-		<property name="saveDirectory" value="/resources/images/km"/>
-		<property name="saleOfPerPage" value="8"/>
-		<property name="trangThaiDong" value="2"/>
-		<property name="trangThaiMo" value="1"/>
-		<property name="trangThaiTuongLai" value="0"/>
-		<property name="regixTrangThaiKM" value="[012]"/>
+		<property name="linkResources" value="\src\main\webapp\" />
+		<property name="saveDirectory" value="resources\images\km\" />
+		<property name="saveLinkImage" value="resources/images/km/" />
+		<property name="saleOfPerPage" value="8" />
+		<property name="trangThaiDong" value="2" />
+		<property name="trangThaiMo" value="1" />
+		<property name="trangThaiTuongLai" value="0" />
+		<property name="regixTrangThaiKM" value="[012]" />
+		<property name="countCut" value="6" />
+
 	</bean>
 
 	<bean id="productAction" class="cellphoneshop.controller.ProductController"
@@ -43,10 +48,10 @@
 	<bean id="checkoutAction" class="cellphoneshop.controller.CheckoutController" />
 
 	<bean id="orderManagerAction" class="cellphoneshop.controller.OrderManagerController" />
-	
-	<bean id="pageInterceptor" class="cellphoneshop.interceptor.PageInterceptor"/>
-	
-	<bean id="homeInterceptor" class="cellphoneshop.interceptor.HomeInterceptor"/>
+
+	<bean id="pageInterceptor" class="cellphoneshop.interceptor.PageInterceptor" />
+
+	<bean id="homeInterceptor" class="cellphoneshop.interceptor.HomeInterceptor" />
 
 	<bean id="searchInterceptor" class="cellphoneshop.interceptor.SearchInterceptor">
 		<property name="listPrice">
@@ -112,7 +117,7 @@
 		</property>
 	</bean>
 
-	<bean id="orderInterceptor" class="cellphoneshop.interceptor.OrderManagerInterceptor">		
+	<bean id="orderInterceptor" class="cellphoneshop.interceptor.OrderManagerInterceptor">
 		<property name="listRPP">
 			<list>
 				<value>10</value>
@@ -145,19 +150,20 @@
 			</list>
 		</property>
 	</bean>
-	
+
 
 	<!-- Admin -->
 	<bean id="accountManagerAction" class="cellphoneshop.controller.AccountManagerController">
-		<property name="RecordPerPage" value="20"/>
+		<property name="RecordPerPage" value="20" />
 	</bean>
-	<bean id="adminOrderManagerAction" class="cellphoneshop.controller.AdminOrderManagerController" scope="prototype">
-		<property name="view" value="10"/>
-		<property name="sortby" value="ngayDatHang_desc"/>
-		<property name="page" value="1"/>
-		<property name="status" value="0"/>
+	<bean id="adminOrderManagerAction" class="cellphoneshop.controller.AdminOrderManagerController"
+		scope="prototype">
+		<property name="view" value="10" />
+		<property name="sortby" value="ngayDatHang_desc" />
+		<property name="page" value="1" />
+		<property name="status" value="0" />
 	</bean>
-	<bean id="productManagerAction" class="cellphoneshop.controller.ProductManagerController"/>
-	<bean id="testInsertProductAction" class="cellphoneshop.controller.TestProductManagerController"/> <!-- for test only -->
+	<bean id="productManagerAction" class="cellphoneshop.controller.ProductManagerController" />
+	<bean id="testInsertProductAction" class="cellphoneshop.controller.TestProductManagerController" /> <!-- for test only -->
 </beans>
        				

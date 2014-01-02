@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
@@ -46,6 +45,9 @@ public class SaleOfController extends ActionSupport implements
 	private String query;
 	private String option;
 	private String regixTrangThaiKM;
+	private Integer countCut;
+	private String linkResources;
+	private String saveLinkImage;
 
 	private Logger log = Logger.getLogger(SaleOfController.class);
 	@Autowired
@@ -70,6 +72,7 @@ public class SaleOfController extends ActionSupport implements
 
 	public String detailKhuyenMai() {
 		log.info("Vao detail khuyen mail Controller");
+		this.getPathSaveImage();
 		Integer maKM = this.getmaKM(request.getParameter("id"));
 
 		if (maKM != null) {
@@ -143,6 +146,7 @@ public class SaleOfController extends ActionSupport implements
 
 		if (!vaildateUpdate()) {
 			request.setAttribute("errors", errors);
+			
 			return ERROR;
 		}
 
@@ -163,10 +167,9 @@ public class SaleOfController extends ActionSupport implements
 			khuyenmai.setPhanTramGiamGia(updatekm.getPhanTramGiamGia());
 		}
 
+		khuyenmai.setNgayBatDau(updatekm.getNgayBatDau());
 		khuyenmai.setNgayKetThuc(updatekm.getNgayKetThuc());
-		if(khuyenmai.getTrangThaiKhuyenMai().getMaTrangThai() == this.trangThaiTuongLai){
-			khuyenmai.setNgayBatDau(updatekm.getNgayBatDau());
-		}
+		log.info("Ngay bat dau: " + updatekm.getNgayBatDau());
 		if (updatekm.getQuaTang().isEmpty()) {
 			khuyenmai.setQuaTang(null);
 		} else {
@@ -239,9 +242,17 @@ public class SaleOfController extends ActionSupport implements
 		return SUCCESS;
 	}
 
-	public boolean saveImage() {
-		destPath = request.getSession().getServletContext()
-				.getRealPath(saveDirectory);
+	public boolean saveImage() {		
+		destPath = this.getPathSaveImage();
+		log.info("destPath: " + destPath);
+		if(destPath == null ){
+			return false;
+		}
+		
+		destPath += this.linkResources;
+		destPath += this.saveDirectory;
+
+		
 		if (myFile == null || myFileFileName == null) {
 			return false;
 		}
@@ -300,7 +311,7 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public String getLinkImage() {
-		return this.saveDirectory + "/" + this.myFileFileName;
+		return this.saveLinkImage + this.myFileFileName;
 	}
 
 	public Integer getSaleOfPerPage() {
@@ -447,14 +458,6 @@ public class SaleOfController extends ActionSupport implements
 		return true;
 	}
 
-	public boolean validateFload(String fNumber) {
-		errors = new ArrayList<String>();
-		if (updatekm.getNgayKetThuc().compareTo(new Date()) <= 0) {
-			errors.add(messages.getMessageList().getProperty("errorNgayKT"));
-			return false;
-		}
-		return true;
-	}
 
 	public boolean tryParseDate(String strDate) {
 		boolean result = true;
@@ -479,9 +482,9 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public boolean validatekNgayBatDau() {
-		
-		//To do:
-		if(updatekm.getNgayBatDau() == null){
+
+		// To do:
+		if (updatekm.getNgayBatDau() == null) {
 			return true;
 		}
 		if (updatekm.getNgayBatDau().compareTo(new Date()) <= 0) {
@@ -502,14 +505,14 @@ public class SaleOfController extends ActionSupport implements
 
 	public boolean vaildateUpdate() {
 
-		errors = new ArrayList<String>();
-		if (!this.validatekNgayBatDau()) {
-			return false;
-		}
+//		errors = new ArrayList<String>();
+//		if (!this.validatekNgayBatDau()) {
+//			return false;
+//		}
 
-		if (!this.validateNgayKetThuc()) {
-			return false;
-		}
+//		if (!this.validateNgayKetThuc()) {
+//			return false;
+//		}
 
 		return true;
 	}
@@ -528,6 +531,61 @@ public class SaleOfController extends ActionSupport implements
 
 	public void setTrangThaiTuongLai(Integer trangThaiTuongLai) {
 		this.trangThaiTuongLai = trangThaiTuongLai;
+	}
+
+	public String getPathSaveImage() {
+		
+		String path = request.getSession().getServletContext()
+				.getRealPath("/");
+		if(path == null || path.isEmpty()){
+			return null;
+		}
+		
+		int count = 0;
+		
+		Integer pathLength = path.length();
+		char pattern = path.charAt(pathLength - 1);
+		String backupPath = path;
+		String projectName = null;
+		for (int i = path.length() - 1; i > 0; i--) {
+			log.info("ki thu thu: " + i + " gia tri: " + path.charAt(i -1));
+			if (count == this.countCut) {
+				break;
+			}
+			if (path.charAt(i - 1) == pattern) {
+				if(projectName == null || projectName.isEmpty()){
+					projectName = backupPath.substring(i, pathLength - 1);
+				}
+				count++;
+			}
+			
+			path = path.substring(0, i);
+		}
+		return (path + projectName + pattern + projectName);
+	}
+
+	public Integer getCountCut() {
+		return countCut;
+	}
+
+	public void setCountCut(Integer countCut) {
+		this.countCut = countCut;
+	}
+
+	public String getLinkResources() {
+		return linkResources;
+	}
+
+	public void setLinkResources(String linkResources) {
+		this.linkResources = linkResources;
+	}
+
+	public String getSaveLinkImage() {
+		return saveLinkImage;
+	}
+
+	public void setSaveLinkImage(String saveLinkImage) {
+		this.saveLinkImage = saveLinkImage;
 	}
 
 }
