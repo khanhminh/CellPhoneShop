@@ -128,7 +128,7 @@
 							Tổng số lượng
 						</label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused" 
+							<s:textfield cssClass="text-box single-line input-xlarge focused" 
 								type="text"
 								theme="simple"
 								name="sanPham.tongSoLuong"
@@ -149,8 +149,7 @@
 							<input class="input-file uniform_on" id="fileInput" type="file">
 						</div>
 					</div>
-
-
+					
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
 					</div>
