@@ -19,30 +19,31 @@ public class DanhGiaServiceImpl implements DanhGiaService {
 	@Autowired
 	private SanPhamDAO sanPhamDAO;
 
-	public void insertDanhGia(DanhGia danhGia) {
-		danhGiaDAO.insertDanhGia(danhGia);
+	public boolean insertDanhGia(DanhGia danhGia) {
+		return danhGiaDAO.insertDanhGia(danhGia);
 	}
 
 	public DanhGia getDanhGia(Integer maSanPham, Integer maNguoiDung) {
 		return danhGiaDAO.getDanhGia(maSanPham, maNguoiDung);
 	}
 
-	public void updateDanhGia(DanhGia danhGia) {
-		danhGiaDAO.updateDanhGia(danhGia);
+	public boolean updateDanhGia(DanhGia danhGia) {
+		return danhGiaDAO.updateDanhGia(danhGia);
 	}
 
-	public void insertDanhGia(NguoiDung nguoiDung, Integer maSp, float score) {
+	public boolean insertDanhGia(NguoiDung nguoiDung, Integer maSp, float score) {
 		SanPham sanPham = new SanPham();
 		sanPham.setMaSp(maSp);		
 		DanhGia danhGia = danhGiaDAO.getDanhGia(maSp, nguoiDung.getMaNd());
 		if (danhGia != null){
 			danhGia.setDiem(score);
 			updateDanhGia(danhGia);
+			return true;
 		}
 		else {
 			DanhGiaId id = new DanhGiaId(maSp, nguoiDung.getMaNd());
 			danhGia = new DanhGia(id, sanPham, nguoiDung, score);
-			danhGiaDAO.insertDanhGia(danhGia);			
+			return danhGiaDAO.insertDanhGia(danhGia);			
 		}
 	}
 

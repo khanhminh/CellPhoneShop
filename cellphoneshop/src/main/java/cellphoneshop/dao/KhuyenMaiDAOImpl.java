@@ -1,6 +1,7 @@
 package cellphoneshop.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -43,7 +44,8 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
-			KhuyenMai khuyenMai = (KhuyenMai)session.get(KhuyenMai.class, maKhuyenMai);
+			KhuyenMai khuyenMai = (KhuyenMai) session.get(KhuyenMai.class,
+					maKhuyenMai);
 			Hibernate.initialize(khuyenMai.getTrangThaiKhuyenMai());
 			return khuyenMai;
 		} catch (Exception ex) {
@@ -74,12 +76,12 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 
 		try {
 			khuyenmailList = session.createQuery("from KhuyenMai").list();
-//			for(KhuyenMai km : khuyenmailList){
-//				Hibernate.initialize(km.getTrangThaiKhuyenMai());
-//			}
-			
+			// for(KhuyenMai km : khuyenmailList){
+			// Hibernate.initialize(km.getTrangThaiKhuyenMai());
+			// }
+
 			return khuyenmailList;
-			
+
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -87,12 +89,17 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 		return new ArrayList<KhuyenMai>();
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public List<KhuyenMai> getListKhuyenMaiChuaDong() {
 		Session session = sessionFactory.getCurrentSession();
-
+		String hql = "select km from KhuyenMai as km where km.trangThaiKhuyenMai.maTrangThai = :trangthai and km.ngayKetThuc >= :ngayHienTai";
+		Date nowTime = new Date();
 		try {
-			return session.createQuery("select k from KhuyenMai as k where k.trangThaiKhuyenMai.maTrangThai = 1").list(); // TODO hard code
+			Query query = session.createQuery(hql);
+			query.setInteger("trangthai", 1);
+			query.setDate("ngayHienTai", nowTime);
+			
+			return query.list();
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
@@ -111,7 +118,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			query.setFirstResult(vitriBD);
 			query.setMaxResults(soluongKM);
 			khuyenmailList = query.list();
-			for(KhuyenMai km : khuyenmailList){
+			for (KhuyenMai km : khuyenmailList) {
 				Hibernate.initialize(km.getTrangThaiKhuyenMai());
 			}
 			return khuyenmailList;
@@ -133,7 +140,102 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
-		
-		return -1;
+
+		return null;
 	}
+
+	@Transactional(readOnly = true)
+	public List<KhuyenMai> getListKhuyenMail(String value, String option,
+			Integer vitriBD, Integer soluongKM) {
+
+		List<KhuyenMai> khuyenMailList = new ArrayList<KhuyenMai>();
+		if (value == null || option == null || vitriBD == null
+				|| soluongKM == null) {
+			return khuyenMailList;
+		}
+
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "";
+		if (option.equals("status")) {
+			hql += "from KhuyenMai km where km.trangThaiKhuyenMai.maTrangThai =:value";
+		} else {
+			if (option.equals("id")) {
+				hql += "from KhuyenMai km where km.maKm =:value";
+			} else {
+				if (option.equals("name")) {
+					hql += "from KhuyenMai km where km.tieuDe like :value";
+				}
+			}
+
+		}
+
+		try {
+			Query query = session.createQuery(hql);
+			if (option.equals("name")) {
+				query.setString("value", "%" + value + "%");
+			} else {
+				query.setString("value", value);
+			}
+
+			query.setFirstResult(vitriBD);
+			query.setMaxResults(soluongKM);
+
+			khuyenMailList = query.list();
+			if (khuyenMailList == null) {
+				return new ArrayList<KhuyenMai>();
+			}
+			for (KhuyenMai km : khuyenMailList) {
+				Hibernate.initialize(km.getTrangThaiKhuyenMai());
+			}
+
+			return khuyenMailList;
+
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return new ArrayList<KhuyenMai>();
+	}
+
+	@Transactional(readOnly = true)
+	public Integer countKhuyenMail(String value, String option) {
+		if(value == null || option == null){
+			return null;
+		}
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "select count(*) ";
+		if (option.equals("status")) {
+			hql += "from KhuyenMai km where km.trangThaiKhuyenMai.maTrangThai =:value";
+		} else {
+			if (option.equals("id")) {
+				hql += "from KhuyenMai km where km.maKm =:value";
+			} else {
+				if (option.equals("name")) {
+					hql += "from KhuyenMai km where km.tieuDe like :value";
+				}
+			}
+
+		}
+		
+		try {
+			Query query = session.createQuery(hql);
+			if (option.equals("name")) {
+				query.setString("value", "%" + value + "%");
+			} else {
+				query.setString("value", value);
+			}
+			
+			return ((Long) query.iterate().next()).intValue();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+
+		return null;
+	}
+
+	public void updateKhuyenMaiTable() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -26,14 +26,18 @@ public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 	}
 	
 	@Transactional
-	public void insertHeDieuHanh(HeDieuHanh hdh) {
+	public boolean insertHeDieuHanh(HeDieuHanh hdh) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(hdh);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + " : " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

@@ -25,25 +25,33 @@ public class HinhAnhSPDAOImpl implements HinhAnhSPDAO{
 	}
 
 	@Transactional
-	public void insertHinhAnhSP(HinhAnhSp hinhSp) {
+	public boolean insertHinhAnhSP(HinhAnhSp hinhSp) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(hinhSp);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional
-	public void updateHinhAnhSp(HinhAnhSp hinhSp) {
+	public boolean updateHinhAnhSp(HinhAnhSp hinhSp) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.update(hinhSp);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

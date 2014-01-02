@@ -16,12 +16,25 @@
 	<div class="box span12">
 		<div class="box-header well" data-original-title>
 			<h2>
-				<i class="icon-user"></i>Thông tin sản phẩm
+				<i class="icon-user"></i>Thêm sản phẩm mới
 			</h2>
 			<div class="box-icon"></div>
 		</div>
 		<div class="box-content">
-
+			<c:set var="insertProductResult" value="${insertSuccess}"/>
+			<c:if test="${insertProductResult == true}">
+				<div>
+					<img src="resources/images/success_tick.png">
+						<span>Thêm sản phẩm mới thành công</span>
+					<img/>
+					<form action="insert_product" method="post" style='display:inline;'>
+						<input type="hidden" value="true" name="themSanPhamFlag"/>
+						<button type="submit" class="btn btn-primary">Thêm sản phẩm mới</button>
+					</form>
+					<hr/>
+				</div>
+			</c:if>
+				
 			<form class="form-horizontal" action="insert_product" method="post">
 				<div class="validation-summary-errors">
 					<ul>
@@ -31,10 +44,30 @@
 						</c:forEach>
 					</ul>
 				</div>
+				
+				<h4>Tổng quan sản phẩm</h4>
+				<p></p>
+				
 				<fieldset>
+					<c:if test="${insertProductResult == true}">
+						<div class="control-group">
+							<label class="control-label">Mã sản phẩm</label>
+							<div class="controls">
+								<s:textfield class="text-box single-line input-xlarge focused"
+									type="text"
+									theme="simple"
+									name="sanPham.maSp"
+									data-val="false"/>
+								<span class="field-validation-valid"
+									data-valmsg-for="sanPham.maSp"
+									data-valmsg-replace="true">
+								</span>
+							</div>						
+						</div>
+					</c:if>
 					<div class="control-group">					
 						<label class="control-label" for="sanPham.tenSp">
-							Tên sản phẩm
+							Tên sản phẩm *
 						</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
@@ -51,20 +84,26 @@
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="maNhaSanXuat">Nhà sản xuất</label>
+						<label class="control-label" for="maNhaSanXuat">Nhà sản xuất *</label>
+						<c:set var="maNSXCuaSP" value="${sanPham.nhaSanXuat.maNhaSx}"/>
 						<div class="controls">
-							<select name="maNhaSanXuat">							
+							<select name="maNhaSanXuat">
 								<c:forEach items="${danhSachNhaSanXuat}" var="nsx">
-									<option value="${nsx.maNhaSx}">${nsx.tenNhaSx}</option>
+									<c:choose>
+										<c:when test="${maNSXCuaSP == nsx.maNhaSx}">
+											<option selected value="${nsx.maNhaSx}">${nsx.tenNhaSx}</option>
+										</c:when>
+										<c:otherwise>
+											<option value="${nsx.maNhaSx}">${nsx.tenNhaSx}</option>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 							</select>
 						</div>
 					</div>
 					
 					<div class="control-group">					
-						<label class="control-label" for="sanPham.gia">
-							Giá
-						</label>
+						<label class="control-label" for="sanPham.gia">Giá*</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
 								type="text"
@@ -82,10 +121,27 @@
 						</div>
 					</div>
 					
-					
 					<div class="control-group">					
+						<label class="control-label" for="sanPham.gioiThieu">
+							Giới thiệu sản phẩm
+						</label>
+						<div class="controls">
+							<s:textfield class="text-box single-line input-xlarge focused" 
+								type="text"
+								theme="simple"
+								name="sanPham.gioiThieu"
+								data-val="false" data-val-required="" /> 
+							
+							<span class="field-validation-valid" 
+								data-valmsg-for="sanPham.gioiThieu"
+								data-valmsg-replace="true"> 
+							</span>
+						</div>
+					</div>
+					
+					<div class="control-group">				
 						<label class="control-label" for="sanPham.soThangBaoHanh">
-							Số tháng bảo hành
+							Số tháng bảo hành *
 						</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
@@ -105,7 +161,7 @@
 					
 					<div class="control-group">					
 						<label class="control-label" for="sanPham.soLuongHienCo">
-							Số lượng hiện có
+							Số lượng hiện có *
 						</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
@@ -125,7 +181,7 @@
 					
 					<div class="control-group">					
 						<label class="control-label" for="sanPham.tongSoLuong">
-							Tổng số lượng
+							Tổng số lượng *
 						</label>
 						<div class="controls">
 							<s:textfield cssClass="text-box single-line input-xlarge focused" 
@@ -151,7 +207,9 @@
 					</div>
 					
 					<div class="form-actions">
-						<button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+						<c:if test="${insertProductResult == false}">
+							<button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+						</c:if>
 					</div>
 				</fieldset>
 			</form>

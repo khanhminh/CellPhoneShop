@@ -23,8 +23,8 @@
 			</div>
 		</div>
 		<div class="box-content">
-			<form class="form-horizontal" action="update_km" method="post"
-				enctype="multipart/form-data">
+			<form class="form-horizontal" action="process_update_km"
+				method="post" enctype="multipart/form-data">
 				<div class="validation-summary-errors">
 					<ul>
 						<!-- danh sách lỗi nếu có errors là List<String>-->
@@ -34,32 +34,30 @@
 					</ul>
 				</div>
 
-				<s:set var="tieuDe">${requestScope.km.tieuDe}</s:set>
-				<s:set var="moTa">${requestScope.km.moTa}</s:set>
-				<s:set var="giamgia">
-					<fmt:formatNumber type="number"
-						value="${requestScope.km.phanTramGiamGia}" maxFractionDigits="2"
-						minFractionDigits="1" />
-				</s:set>
-				<s:set var="ngayBD">
-					<fmt:formatDate pattern="MM/dd/yyyy"
-						value="${requestScope.km.ngayBatDau}" />
-				</s:set>
 				<s:set var="ngayKT">
 					<fmt:formatDate pattern="MM/dd/yyyy"
 						value="${requestScope.km.ngayKetThuc}" />
 				</s:set>
-				<s:set var="quaTang">${requestScope.km.quaTang}</s:set>
-
 
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label" for="km.tieuDe"> Tiêu Đề KM </label>
 						<div class="controls">
-							<s:textarea class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.tieuDe" data-val="true"
-								data-val-required="Vui lòng nhập tiêu đề của khuyến mãi"
-								value="%{tieuDe}" />
+							<c:choose>
+								<c:when test="${not empty requestScope.km.tieuDe}">
+									<s:set var="tieuDe">${requestScope.km.tieuDe}</s:set>
+									<s:textarea class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.tieuDe" data-val="true"
+										data-val-required="Vui lòng nhập tiêu đề của khuyến mãi"
+										value="%{tieuDe}" />
+								</c:when>
+								<c:otherwise>
+									<s:textarea class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.tieuDe" data-val="true"
+										data-val-required="Vui lòng nhập tiêu đề của khuyến mãi" />
+								</c:otherwise>
+							</c:choose>
+
 
 							<span class="field-validation-valid" data-valmsg-for="km.tieuDe"
 								data-valmsg-replace="true"> </span>
@@ -69,10 +67,20 @@
 					<div class="control-group">
 						<label class="control-label" for="km.moTa"> Mổ tả về KM </label>
 						<div class="controls">
-							<s:textarea class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.moTa" data-val="true"
-								data-val-required="Vui lòng nhập mô tả của khuyến mãi"
-								value="%{moTa}" />
+							<c:choose>
+								<c:when test="${not empty requestScope.km.moTa}">
+									<s:set var="moTa">${requestScope.km.moTa}</s:set>
+									<s:textarea class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.moTa" data-val="true"
+										data-val-required="Vui lòng nhập mô tả của khuyến mãi"
+										value="%{moTa}" />
+								</c:when>
+								<c:otherwise>
+									<s:textarea class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.moTa" data-val="true"
+										data-val-required="Vui lòng nhập mô tả của khuyến mãi" />
+								</c:otherwise>
+							</c:choose>
 
 							<span class="field-validation-valid" data-valmsg-for="km.moTa"
 								data-valmsg-replace="true"> </span>
@@ -83,9 +91,27 @@
 						<label class="control-label" for="km.phanTramGiamGia"> %
 							Giảm giá </label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.phanTramGiamGia"
-								data-val="false" value="%{giamgia}" />
+
+							<c:choose>
+								<c:when
+									test="${ not empty requestScope.km.phanTramGiamGia and requestScope.km.phanTramGiamGia != 0.0}">
+									<s:set var="giamgia">
+										<fmt:formatNumber type="number"
+											value="${requestScope.km.phanTramGiamGia}"
+											maxFractionDigits="2" minFractionDigits="1" />
+									</s:set>
+									<s:textfield class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.phanTramGiamGia"
+										data-val="false" value="%{giamgia}" />
+								</c:when>
+								<c:otherwise>
+									<s:textfield class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.phanTramGiamGia"
+										data-val="false" />
+								</c:otherwise>
+
+							</c:choose>
+
 
 							<span class="field-validation-valid"
 								data-valmsg-for="km.phanTramGiamGia" data-valmsg-replace="true">
@@ -93,42 +119,108 @@
 						</div>
 					</div>
 
-					<div class="control-group">
-						<label class="control-label" for="km.ngayBatDau">Ngày Bắt
-							Đầu KM </label>
-						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge datepicker"
-								type="text" theme="simple" name="km.ngayBatDau" data-val="true"
-								data-val-required="Vui lòng nhập ngày bắt đầu"
-								value="%{ngayBD}"
-								 />
-							<span class="field-validation-valid"
-								data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">
-							</span>
-						</div>
-					</div>
+					<c:choose>
+						<c:when
+							test="${not empty requestScope.km.ngayBatDau and(not empty requestScope.km.trangThaiKhuyenMai.maTrangThai and requestScope.km.trangThaiKhuyenMai.maTrangThai == 0)}">
+							<s:set var="ngayBD">
+								<fmt:formatDate pattern="MM/dd/yyyy"
+									value="${requestScope.km.ngayBatDau}" />
+							</s:set>
+							<div class="control-group">
+								<label class="control-label" for="km.ngayBatDau">Ngày
+									Bắt Đầu KM </label>
+								<div class="controls">
+
+									<s:textfield
+										cssClass="text-box single-line input-xlarge uneditable-input datepicker"
+										type="text" theme="simple" name="km.ngayBatDau"
+										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
+										value="%{ngayBD}" />
+
+
+									<span class="field-validation-valid"
+										data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">
+									</span>
+								</div>
+							</div>
+						</c:when>
+						<c:when
+							test="${not empty requestScope.km.ngayBatDau and(not empty requestScope.km.trangThaiKhuyenMai.maTrangThai and (requestScope.km.trangThaiKhuyenMai.maTrangThai == 1))}">
+							<s:set var="ngayBD">
+								<fmt:formatDate pattern="MM/dd/yyyy"
+									value="${requestScope.km.ngayBatDau}" />
+							</s:set>
+							<div class="control-group">
+								<label class="control-label" for="km.ngayBatDau">Ngày
+									Bắt Đầu KM </label>
+								<div class="controls">
+
+									<s:hidden
+										cssClass="text-box single-line input-xlarge uneditable-input datepicker"
+										type="text" theme="simple" name="km.ngayBatDau"
+										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
+										value="%{ngayBD}" />
+
+
+									<span class="field-validation-valid"
+										data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">
+									</span>
+								</div>
+							</div>
+						</c:when>
+					</c:choose>
 
 					<div class="control-group">
 						<label class="control-label" for="km.ngayKetThuc">Ngày Kết
 							Thúc KM </label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused datepicker"
-								type="text" theme="simple" name="km.ngayKetThuc" data-val="true"
-								data-val-required="Vui lòng nhập ngày bắt đầu"
-								data-val-regex="Giá trị không hợp lệ" value="%{ngayKT}" />
+							<c:choose>
+								<c:when test="${not empty requestScope.km.ngayKetThuc}">
+									<s:set var="ngayKT">
+										<fmt:formatDate pattern="MM/dd/yyyy"
+											value="${requestScope.km.ngayKetThuc}" />
+									</s:set>
+									<s:textfield
+										cssClass="text-box single-line input-xlarge focused datepicker"
+										type="text" theme="simple" name="km.ngayKetThuc"
+										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
+										data-val-regex="Giá trị không hợp lệ" value="%{ngayKT}" />
+								</c:when>
+								<c:otherwise>
+									<s:textfield
+										cssClass="text-box single-line input-xlarge focused datepicker"
+										type="text" theme="simple" name="km.ngayKetThuc"
+										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
+										data-val-regex="Giá trị không hợp lệ" />
+
+								</c:otherwise>
+							</c:choose>
+
 
 							<span class="field-validation-valid"
 								data-valmsg-for="km.ngayKetThuc" data-valmsg-replace="true">
 							</span>
 						</div>
 					</div>
-					
+
 					<div class="control-group">
-						<label class="control-label" for="km.quaTang"> Quà Tặng đi
-							kèm</label>
+						<label class="control-label" for="km.quaTang"> Quà Tặng Đi
+							Kèm</label>
 						<div class="controls">
-							<s:textarea class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.quaTang" value="%{quaTang}" />
+
+							<c:choose>
+								<c:when
+									test="${not empty requestScope.km.quaTang}">
+									<s:set var="quaTang">${requestScope.km.quaTang}</s:set>
+									<s:textarea class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.quaTang"
+										value="%{quaTang}" />
+								</c:when>
+								<c:otherwise>
+									<s:textarea class="text-box single-line input-xlarge focused"
+										type="text" theme="simple" name="km.quaTang" />
+								</c:otherwise>
+							</c:choose>
 
 							<span class="field-validation-valid" data-valmsg-for="km.quaTang"
 								data-valmsg-replace="true"> </span>

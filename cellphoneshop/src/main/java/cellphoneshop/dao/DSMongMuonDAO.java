@@ -4,7 +4,7 @@ import java.util.List;
 import cellphoneshop.model.DanhSachMongMuon;
 
 public interface DSMongMuonDAO {
-	void insertDSMongMuon(DanhSachMongMuon dsmm);
+	boolean insertDSMongMuon(DanhSachMongMuon dsmm);
 	List<DanhSachMongMuon> getListDSMongMuon(Integer maNguoiDung);
 	DanhSachMongMuon getDSMongMuon(Integer maDSMongMuon);
 }

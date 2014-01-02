@@ -6,10 +6,10 @@ import cellphoneshop.model.ProductFilter;
 import cellphoneshop.model.SanPham;
 
 public interface SanPhamDAO {
-	void insertSanPham(SanPham sp);
+	boolean insertSanPham(SanPham sp);
 	SanPham getSanPhamTheoId(Integer maSp);
 	SanPham getSanPhamCungChiTietTheoId(Integer maSp);
-	void updateSanPham(SanPham sp);
+	boolean updateSanPham(SanPham sp);
 	
 	/**
 	 * Lay danh sach san pham co ngay nhap truoc mot ngay nao do co phan trang.

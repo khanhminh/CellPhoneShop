@@ -2,6 +2,7 @@ package cellphoneshop.interceptor;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.RequestMap;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +21,7 @@ public class HomeInterceptor implements Interceptor {
 	@Autowired
 	private KhuyenMaiService kmService;
 	
+	Logger log = Logger.getLogger(HomeInterceptor.class);
 	private List<NhaSanXuat> listNSX;
 	private List<KhuyenMai> listKM;
 	
@@ -34,7 +36,7 @@ public class HomeInterceptor implements Interceptor {
 
 	public void init() {
 		listNSX = nsxService.getListNhaSanXuat();
-		listKM = kmService.getListKhuyenMai();
+		listKM = kmService.getListKhuyenMaiChuaDong();
 	}
 
 	public String intercept(ActionInvocation ai) throws Exception {

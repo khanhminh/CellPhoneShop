@@ -22,14 +22,18 @@ public class PTThanhToanDAOImpl implements PTThanhToanDAO {
 	}
 
 	@Transactional
-	public void insertPTThanhToan(PtThanhToan ptThanhToan) {
+	public boolean insertPTThanhToan(PtThanhToan ptThanhToan) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(ptThanhToan);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

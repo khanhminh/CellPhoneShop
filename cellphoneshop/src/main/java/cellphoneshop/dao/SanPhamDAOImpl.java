@@ -37,14 +37,18 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 	}
 
 	@Transactional
-	public void insertSanPham(SanPham sp) {
+	public boolean insertSanPham(SanPham sp) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
-			session.save(sp); // TODO: Neu san pham da co trong CSDL?
+			session.save(sp);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)
@@ -63,14 +67,18 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 	}
 
 	@Transactional
-	public void updateSanPham(SanPham sp) {
+	public boolean updateSanPham(SanPham sp) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
 			session.update(sp); // TODO: Neu san pham chua co trong CSDL?
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)

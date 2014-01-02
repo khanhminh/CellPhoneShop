@@ -13,8 +13,8 @@ public class PTGiaoHangServiceImpl implements PTGiaoHangService {
 	@Autowired
 	private PTGiaoHangDAO ptGiaoHangDAO;
 
-	public void insertPTGiaoHang(PtGiaoHang ptGiaoHang) {
-		ptGiaoHangDAO.insertPTGiaoHang(ptGiaoHang);
+	public boolean insertPTGiaoHang(PtGiaoHang ptGiaoHang) {
+		return ptGiaoHangDAO.insertPTGiaoHang(ptGiaoHang);
 	}
 
 	public PtGiaoHang getPTGiaoHang(Integer maPtGiaoHang) {

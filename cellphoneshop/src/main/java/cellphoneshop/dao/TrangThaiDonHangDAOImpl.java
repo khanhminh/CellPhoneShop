@@ -23,14 +23,18 @@ public class TrangThaiDonHangDAOImpl implements TrangThaiDonHangDAO {
 	}
 
 	@Transactional
-	public void insertTrangThaiDonHang(TrangThaiDonHang ttDonHang) {
+	public boolean insertTrangThaiDonHang(TrangThaiDonHang ttDonHang) {
+		boolean result = false;
 		Session session = sessionFactory.getCurrentSession();
 		
 		try {
 			session.save(ttDonHang);
+			result = true;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
+		
+		return result;
 	}
 
 	@Transactional(readOnly = true)
