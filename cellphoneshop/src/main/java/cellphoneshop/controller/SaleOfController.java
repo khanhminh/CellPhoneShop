@@ -122,6 +122,7 @@ public class SaleOfController extends ActionSupport implements
 			log.info("Them thanh cong khuyen mai, co id: "
 					+ this.insertKm.getMaKm());
 			this.insertKm = null;
+			this.totalKm += 1;
 			return SUCCESS;
 		} else {
 			errors.add(messages.getMessageList().getProperty("errorInsert"));

@@ -181,6 +181,10 @@ public class SanPhamServiceImpl implements SanPhamService {
 		}
 		else if (sortby.getBy().equalsIgnoreCase("name")){
 			orderby = "tenSp";
+		}else{
+			if(sortby.getBy().equalsIgnoreCase("id")){
+				orderby = "maSp";
+			}
 		}
 		
 		return spDAO.getListSanPham(kqDauTien, soKqToiDa, orderby, sortby.isAsc());

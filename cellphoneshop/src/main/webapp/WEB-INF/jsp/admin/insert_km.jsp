@@ -36,7 +36,7 @@
 	
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label" for="insertKm.tieuDe"> Tiêu Đề KM </label>
+						<label class="control-label" for="insertKm.tieuDe"> Tiêu Đề KM *</label>
 						<div class="controls">
 							<s:textarea class="text-box single-line input-xlarge focused"
 								type="text" theme="simple" name="insertKm.tieuDe" data-val="true"
@@ -49,7 +49,7 @@
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="insertKm.moTa"> Mổ tả về KM </label>
+						<label class="control-label" for="insertKm.moTa"> Mổ tả về KM *</label>
 						<div class="controls">
 							<s:textarea class="text-box single-line input-xlarge focused"
 								type="text" theme="simple" name="insertKm.moTa" data-val="true"
@@ -77,7 +77,7 @@
 
 					<div class="control-group">
 						<label class="control-label" for="insertKm.ngayBatDau">Ngày Bắt
-							Đầu KM </label>
+							Đầu KM *</label>
 						<div class="controls">
 							<s:textfield cssClass="text-box single-line input-xlarge datepicker"
 								type="text" theme="simple" name="insertKm.ngayBatDau" data-val="true"
@@ -90,7 +90,7 @@
 
 					<div class="control-group">
 						<label class="control-label" for="insertKm.ngayKetThuc">Ngày Kết
-							Thúc KM </label>
+							Thúc KM *</label>
 						<div class="controls">
 							<s:textfield cssClass="text-box single-line input-xlarge focused datepicker"
 								type="text" theme="simple" name="insertKm.ngayKetThuc" data-val="true"
@@ -117,7 +117,7 @@
 
 					<div class="control-group">
 
-						<label class="control-label" for="myFile">Hình ảnh KM</label>
+						<label class="control-label" for="myFile">Hình ảnh KM *</label>
 						<div class="controls">
 							<input class="input-file uniform_on" type="file" name="myFile"
 							data-val="true" data-val-required="Vui lòng chọn hình ảnh khuyến mãi"

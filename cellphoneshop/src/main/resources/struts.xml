@@ -276,6 +276,11 @@
 			<result name="input" type="tiles">insert_product</result>
 		</action>
 
+		<action name="list_product" method="listProduct" class="productManagerAction">
+			<result name="success" type="tiles">list_product</result>
+		</action>
+
+
 	</package>
 
 	<package name="ajax_admin" extends="json-default" namespace="/admin">

@@ -150,6 +150,20 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="linkList" class="cellphoneshop.util.LinksSaveImage">
+		<property name="links">
+			<props>
+				<prop key="dir">resources/images/Smartphone/</prop>
+				<prop key="apple">Apple</prop>
+				<prop key="htc">HTC</prop>
+				<prop key="lg">LG</prop>
+				<prop key="nokia">Nokia</prop>
+				<prop key="samsung">SamSung</prop>
+				<prop key="sony">Sony</prop>
+			</props>
+		</property>
+	</bean>
 
 
 	<!-- Admin -->
@@ -163,7 +177,12 @@
 		<property name="page" value="1" />
 		<property name="status" value="0" />
 	</bean>
-	<bean id="productManagerAction" class="cellphoneshop.controller.ProductManagerController" />
+	<bean id="productManagerAction" class="cellphoneshop.controller.ProductManagerController">
+		<property name="productPerPage" value="8"/>
+		<property name="imagesLink">
+			<ref bean="linkList"/>
+		</property>
+	</bean>
 	<bean id="testInsertProductAction" class="cellphoneshop.controller.TestProductManagerController" /> <!-- for test only -->
 </beans>
        				
