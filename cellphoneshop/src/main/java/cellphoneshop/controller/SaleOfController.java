@@ -16,7 +16,6 @@ import cellphoneshop.service.TrangThaiKhuyenMaiService;
 import cellphoneshop.util.Message;
 import cellphoneshop.viewmodel.UpdateKhuyenMai;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

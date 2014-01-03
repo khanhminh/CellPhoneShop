@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.io.File;
+import org.apache.commons.io.FileUtils;
 
 import cellphoneshop.model.LoaiSanPham;
 import cellphoneshop.model.NhaSanXuat;
@@ -44,6 +46,9 @@ public class ProductManagerController extends ActionSupport implements
 	private Logger log = Logger.getLogger(ProductManagerController.class);
 	private Integer productPerPage;
 	private Integer totalProduct;
+	private File imagesFile; // File uses to save on dir project
+	private String imagesFileContentType;
+	private String imagesFileFileName; // Name of image file upload
 
 	public String insertProduct() {
 		log.info("Size imagesLin: " + this.imagesLink.getLink("nokia"));
@@ -79,6 +84,7 @@ public class ProductManagerController extends ActionSupport implements
 		product.setDiemDanhGiaTb(0.0f);
 		product.setNgayNhap(new Date());
 		product.setNhaSanXuat(producer);
+		this.saveImageFile(producer.getTenNhaSx(), product.getTenSp());
 
 		if (productService.insertSanPham(product)) {
 			insertSuccess = true;
@@ -89,24 +95,25 @@ public class ProductManagerController extends ActionSupport implements
 			return INPUT;
 		}
 	}
-	
-	public String listProduct(){
+
+	public String listProduct() {
 		log.info("Go to listProduct Controller");
 		Integer currentPage = this.getCurrentPage(request.getParameter("page"));
 		Integer vitriBatDau = this.getViTriBatDau(currentPage);
 		SortBy sort = new SortBy();
 		sort.setBy("id");
-		
-		List<SanPham> sanPhamList = productService.getListSanPham(vitriBatDau, this.productPerPage, sort);
-		
-		if(totalProduct == null){
+
+		List<SanPham> sanPhamList = productService.getListSanPham(vitriBatDau,
+				this.productPerPage, sort);
+
+		if (totalProduct == null) {
 			totalProduct = productService.demSoSanPham();
 		}
-		
-		if(sanPhamList == null){
+
+		if (sanPhamList == null) {
 			return SUCCESS;
 		}
-		
+
 		Integer totalPage = this.getTotalPage(totalProduct);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("totalPage", totalPage);
@@ -217,24 +224,83 @@ public class ProductManagerController extends ActionSupport implements
 
 		}
 	}
-	
-	public Integer getTotalPage(Integer total){
-		if(total == null){
+
+	public Integer getTotalPage(Integer total) {
+		if (total == null) {
 			return 0;
 		}
-		
+
 		Integer totalPage = total / this.productPerPage;
-		if((total % this.productPerPage) != 0){
+		if ((total % this.productPerPage) != 0) {
 			totalPage += 1;
 		}
 		return totalPage;
 	}
-	
-	public Integer getViTriBatDau(Integer currentPage){
-		if(currentPage == null){
+
+	public Integer getViTriBatDau(Integer currentPage) {
+		if (currentPage == null) {
 			return 0;
 		}
-		return ( currentPage - 1) * this.productPerPage;
+		return (currentPage - 1) * this.productPerPage;
 	}
-	
+
+	// Save image file on disk
+	public boolean saveImageFile(String producer, String nameProduct) {
+
+		if (this.imagesFile == null || this.imagesFileFileName == null) {
+			log.info("loi null");
+			return false;
+		}
+		String destPath = request.getSession().getServletContext()
+				.getRealPath(this.imagesLink.getLink("dir") 
+						+ this.imagesLink.getLink(producer) 
+						+ nameProduct 
+						+ this.imagesLink.getLink("separation"));
+		File destFile  = new File(destPath, this.imagesFileFileName);
+		try {
+			FileUtils.copyFile(this.imagesFile, destFile);
+		} catch (Exception e) {
+			log.info("Save on disk unsuccessfully-name: " + this.imagesFileFileName);
+			return false;
+		}
+		log.info("destPath save image: " + destPath);
+		log.info("Save on disk successfully-name: " + this.imagesFileFileName);
+		log.info("NameProducer: " + producer);
+		log.info("Link save on Database: " + this.getImageUploadLink(producer, nameProduct));
+		return true;
+	}
+
+	// Get link( save on database)
+	public String getImageUploadLink(String producer, String nameProduct) {
+		return this.imagesLink.getLink("dir")
+				+ this.imagesLink.getLink(producer) 
+				+ nameProduct
+				+ this.imagesLink.getLink("separation")
+				+ this.imagesFileFileName;
+	}
+
+	public File getImagesFile() {
+		return imagesFile;
+	}
+
+	public void setImagesFile(File imagesFile) {
+		this.imagesFile = imagesFile;
+	}
+
+	public String getImagesFileContentType() {
+		return imagesFileContentType;
+	}
+
+	public void setImagesFileContentType(String imagesFileContentType) {
+		this.imagesFileContentType = imagesFileContentType;
+	}
+
+	public String getImagesFileFileName() {
+		return imagesFileFileName;
+	}
+
+	public void setImagesFileFileName(String imagesFileFileName) {
+		this.imagesFileFileName = imagesFileFileName;
+	}
+
 }

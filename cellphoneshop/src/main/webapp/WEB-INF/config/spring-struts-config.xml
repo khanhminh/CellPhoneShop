@@ -155,12 +155,13 @@
 		<property name="links">
 			<props>
 				<prop key="dir">resources/images/Smartphone/</prop>
-				<prop key="apple">Apple</prop>
-				<prop key="htc">HTC</prop>
-				<prop key="lg">LG</prop>
-				<prop key="nokia">Nokia</prop>
-				<prop key="samsung">SamSung</prop>
-				<prop key="sony">Sony</prop>
+				<prop key="separation">/</prop>
+				<prop key="Apple">Apple/</prop>
+				<prop key="HTC">HTC/</prop>
+				<prop key="LG">LG/</prop>
+				<prop key="Nokia">Nokia/</prop>
+				<prop key="Samsung">SamSung/</prop>
+				<prop key="Sony">Sony/</prop>
 			</props>
 		</property>
 	</bean>

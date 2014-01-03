@@ -35,7 +35,7 @@
 				</div>
 			</c:if>
 				
-			<form class="form-horizontal" action="insert_product" method="post">
+			<form class="form-horizontal" action="insert_product" method="post" enctype="multipart/form-data">
 				<div class="validation-summary-errors">
 					<ul>
 						<!-- danh sách lỗi nếu có errors là List<String>-->
@@ -200,9 +200,9 @@
 					</div>
 					
 					<div class="control-group">
-						<label class="control-label" for="fileInput">Hình đại diện</label>
+						<label class="control-label" for="imagesFile">Hình đại diện</label>
 						<div class="controls">
-							<input class="input-file uniform_on" id="fileInput" type="file">
+							<input class="input-file uniform_on" name="imagesFile" type="file">
 						</div>
 					</div>
 					
