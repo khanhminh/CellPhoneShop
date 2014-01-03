@@ -145,20 +145,23 @@ public class SaleOfController extends ActionSupport implements
 			request.setAttribute("errors", errors);
 			return ERROR;
 		}
-
-		if (!vaildateUpdate()) {
+		KhuyenMai khuyenmai = khuyenMaiService.getKhuyenMai(updatekm.getMaKm());
+		
+		if (!vaildateUpdate(khuyenmai)) {
 			request.setAttribute("errors", errors);
-
+			khuyenmai.setNgayBatDau(updatekm.getNgayBatDau());
+			khuyenmai.setNgayKetThuc(updatekm.getNgayKetThuc());
+			khuyenmai.setMoTa(updatekm.getMoTa());
+			khuyenmai.setTieuDe(updatekm.getTieuDe());
+			khuyenmai.setPhanTramGiamGia(updatekm.getPhanTramGiamGia());
+			khuyenmai.setQuaTang(updatekm.getQuaTang());
+			
+			request.setAttribute("km", khuyenmai);
+			request.setAttribute("errors", errors);
 			return ERROR;
 		}
 
 		log.info("ma: " + updatekm.getMaKm());
-		KhuyenMai khuyenmai = khuyenMaiService.getKhuyenMai(updatekm.getMaKm());
-		if (khuyenmai == null) {
-			errors.add(messages.getMessageList().getProperty("errorUpdateKM"));
-			request.setAttribute("errors", errors);
-			return ERROR;
-		}
 
 		khuyenmai.setTieuDe(updatekm.getTieuDe());
 		khuyenmai.setMoTa(updatekm.getMoTa());
@@ -252,18 +255,18 @@ public class SaleOfController extends ActionSupport implements
 			return false;
 		}
 
-//		destPath += this.linkResources;
-//		destPath += this.saveDirectory;
+		// destPath += this.linkResources;
+		// destPath += this.saveDirectory;
 
 		if (myFile == null || myFileFileName == null) {
 			return false;
 		}
-//		log.info("destPath: " + destPath);
+		// log.info("destPath: " + destPath);
 		log.info("nameFile: " + myFileFileName);
 		try {
 			File destFile = new File(destPath, myFileFileName);
 			FileUtils.copyFile(myFile, destFile);
-//			log.info("Destpath: " + destPath);
+			// log.info("Destpath: " + destPath);
 			log.info("Upload comlete, link image save on database is "
 					+ this.getLinkImage());
 			return true;
@@ -482,41 +485,66 @@ public class SaleOfController extends ActionSupport implements
 		}
 	}
 
-	public boolean validatekNgayBatDau() {
-
-		// To do:
+	public boolean validatekNgayBatDau(KhuyenMai khuyenmai, Date today) {
 		if (updatekm.getNgayBatDau() == null) {
-			return true;
+			errors.add(messages.getMessageList().getProperty("unknownNgayBD"));
+			return false;
 		}
-		if (updatekm.getNgayBatDau().compareTo(new Date()) <= 0) {
-			return true;
+		
+		if (updatekm.getNgayBatDau() == null) {
+			errors.add(messages.getMessageList().getProperty("unknownNgayBD"));
+			return false;
 		}
-		errors.add(messages.getMessageList().getProperty("errorNgayDB"));
-		return false;
+		
+		if(khuyenmai.getTrangThaiKhuyenMai().getMaTrangThai() == this.trangThaiTuongLai){
+			//DK today > ngayBatDau()
+			if (updatekm.getNgayBatDau().compareTo(today) < 0) {
+				errors.add(messages.getMessageList().getProperty("errorNgayBDTL"));
+				return false;
+			}
+		}else{
+			//DK today < ngayBatDau(<0)
+			if (updatekm.getNgayBatDau().compareTo(new Date()) > 0) {
+				errors.add(messages.getMessageList().getProperty("errorNgayBD"));
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
-	public boolean validateNgayKetThuc() {
-		if (updatekm.getNgayKetThuc().compareTo(new Date()) <= 0) {
+	public boolean validateNgayKetThuc(Date today) {
+		if (updatekm.getNgayKetThuc() == null) {
+			errors.add(messages.getMessageList().getProperty("unknownNgayKT"));
+			return false;
+		}
+		
+		log.info("Thoi gian ket thuc: " + updatekm.getNgayKetThuc()) ;
+		if (updatekm.getNgayKetThuc().compareTo(today) < 0) {
 			errors.add(messages.getMessageList().getProperty("errorNgayKT"));
 			return false;
 		}
-
 		return true;
 	}
 
-	public boolean vaildateUpdate() {
+	public boolean vaildateUpdate(KhuyenMai km) {
+		
+		errors = new ArrayList<String>();
+		Date today = new Date();
+		if (km == null) {
+			errors.add(messages.getMessageList().getProperty("errorUpdateKM"));
+			return false;
+		}
 
-		// errors = new ArrayList<String>();
-		// if (!this.validatekNgayBatDau()) {
-		// return false;
-		// }
+		this.validatekNgayBatDau(km, today);
+		this.validateNgayKetThuc(today);
+		if (errors.isEmpty()) {
+			return true;
+		}
 
-		// if (!this.validateNgayKetThuc()) {
-		// return false;
-		// }
-
-		return true;
+		return false;
 	}
+	
 
 	public String getRegixTrangThaiKM() {
 		return regixTrangThaiKM;
@@ -536,34 +564,36 @@ public class SaleOfController extends ActionSupport implements
 
 	public String getPathSaveImage() {
 
-//		String path = request.getSession().getServletContext().getRealPath("/");
-		String path = request.getSession().getServletContext().getRealPath(this.saveDirectory);
+		// String path =
+		// request.getSession().getServletContext().getRealPath("/");
+		String path = request.getSession().getServletContext()
+				.getRealPath(this.saveDirectory);
 		return path;
-		
-//		if (path == null || path.isEmpty()) {
-//			return null;
-//		}
-//
-//		int count = 0;
-//
-//		Integer pathLength = path.length();
-//		char pattern = path.charAt(pathLength - 1);
-//		String backupPath = path;
-//		String projectName = null;
-//		for (int i = path.length() - 1; i > 0; i--) {
-//			if (count == this.countCut) {
-//				break;
-//			}
-//			if (path.charAt(i - 1) == pattern) {
-//				if (projectName == null || projectName.isEmpty()) {
-//					projectName = backupPath.substring(i, pathLength - 1);
-//				}
-//				count++;
-//			}
-//
-//			path = path.substring(0, i);
-//		}
-//		return (path + projectName + pattern + projectName);
+
+		// if (path == null || path.isEmpty()) {
+		// return null;
+		// }
+		//
+		// int count = 0;
+		//
+		// Integer pathLength = path.length();
+		// char pattern = path.charAt(pathLength - 1);
+		// String backupPath = path;
+		// String projectName = null;
+		// for (int i = path.length() - 1; i > 0; i--) {
+		// if (count == this.countCut) {
+		// break;
+		// }
+		// if (path.charAt(i - 1) == pattern) {
+		// if (projectName == null || projectName.isEmpty()) {
+		// projectName = backupPath.substring(i, pathLength - 1);
+		// }
+		// count++;
+		// }
+		//
+		// path = path.substring(0, i);
+		// }
+		// return (path + projectName + pattern + projectName);
 	}
 
 	public Integer getCountCut() {
