@@ -244,16 +244,22 @@
 			<result name="success" type="redirectAction">list_km</result>
 		</action>
 
-		<action name="insert_km" method="insertKhuyenMai" class="khuyenmaiAction">
-			<result name="input" type="tiles">insert_km</result>
-			<result name="success" type="tiles">insert_km</result>
+		<action name="start_km" method="startKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="redirectAction">list_km</result>
 		</action>
 
-		<action name="show_update_km_form" method="showUpdateKhuyenMaiForm" class="khuyenmaiAction">
+		<action name="insert_km" method="insertKhuyenMai" class="khuyenmaiAction">
+			<result name="input" type="tiles">insert_km</result>
+			<result name="success" type="redirectAction">list_km</result>
+		</action>
+
+		<action name="show_update_km_form" method="showUpdateKhuyenMaiForm"
+			class="khuyenmaiAction">
 			<result name="input" type="tiles">update_km</result>
 		</action>
 
-		<action name="process_update_km" method="processUpdateKhuyenMai" class="khuyenmaiAction">
+		<action name="process_update_km" method="processUpdateKhuyenMai"
+			class="khuyenmaiAction">
 			<result name="success" type="tiles">update_km</result>
 			<result name="error" type="tiles">update_km</result>
 		</action>

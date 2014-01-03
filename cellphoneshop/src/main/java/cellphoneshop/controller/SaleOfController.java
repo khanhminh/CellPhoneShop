@@ -49,6 +49,7 @@ public class SaleOfController extends ActionSupport implements
 	private Integer countCut;
 	private String linkResources;
 	private String saveLinkImage;
+	private KhuyenMai insertKm;
 
 	private Logger log = Logger.getLogger(SaleOfController.class);
 	@Autowired
@@ -88,8 +89,47 @@ public class SaleOfController extends ActionSupport implements
 	public String insertKhuyenMai() {
 		// HttpServletRequest request = ServletActionContext.getRequest();
 		// this.saveImage();
+		errors = new ArrayList<String>();
 		log.info("Vao ham insert khuyen mai controller");
-		return SUCCESS;
+		if (this.insertKm == null) {
+			return INPUT;
+		}
+
+		if (!validateInsert()) {
+			request.setAttribute("errors", errors);
+			request.setAttribute("inputKm", this.insertKm);
+			return INPUT;
+
+		}
+		TrangThaiKhuyenMai statusKm = trangThaiKhuyenMaiService
+				.getTrangThaiKM(this.trangThaiTuongLai);
+		if (statusKm == null) {
+			errors.add(messages.getMessageList().getProperty("errorInsert"));
+			request.setAttribute("errors", errors);
+			request.setAttribute("inputKm", this.insertKm);
+			return INPUT;
+		}
+		
+		if(!this.saveImage()){
+			errors.add(messages.getMessageList().getProperty("errorSaveImage"));
+			request.setAttribute("errors", errors);
+			request.setAttribute("inputKm", this.insertKm);
+			return INPUT;
+		}
+		this.insertKm.setTrangThaiKhuyenMai(statusKm);
+		this.insertKm.setHinhAnh(this.getLinkImage());
+		if (khuyenMaiService.insertKhuyenMai(this.insertKm)) {
+			log.info("Them thanh cong khuyen mai, co id: "
+					+ this.insertKm.getMaKm());
+			this.insertKm = null;
+			return SUCCESS;
+		} else {
+			errors.add(messages.getMessageList().getProperty("errorInsert"));
+			request.setAttribute("errors", errors);
+			request.setAttribute("inputKm", this.insertKm);
+			log.info("Them khong thanh cong khuyen mai co tieu de: " + this.insertKm.getTieuDe());
+			return INPUT;
+		}
 	}
 
 	public String stopKhuyenMai() {
@@ -105,10 +145,33 @@ public class SaleOfController extends ActionSupport implements
 
 				if (khuyenMaiService.updateKhuyenMai(khuyenMai)) {
 					log.info("Stop khuyen mai " + khuyenMai.getTieuDe()
-							+ " thanh cong");
+							+ " ID: " + khuyenMai.getMaKm() + " thanh cong");
 					this.reloadKhuyenMai();
 				} else {
 					log.error("Khong the stop khuyen mai");
+				}
+			}
+		}
+		return SUCCESS;
+	}
+
+	public String startKhuyenMai() {
+		log.info("Vao start Khuyen mai controller");
+		Integer maKM = this.getmaKM(request.getParameter("id"));
+		if (maKM != null) {
+			KhuyenMai khuyenMai = khuyenMaiService.getKhuyenMai(maKM);
+			if (khuyenMai != null) {
+				khuyenMai.setNgayBatDau(new Date());
+				TrangThaiKhuyenMai trangThaiKhuyenMai = trangThaiKhuyenMaiService
+						.getTrangThaiKM(this.trangThaiMo);
+				khuyenMai.setTrangThaiKhuyenMai(trangThaiKhuyenMai);
+
+				if (khuyenMaiService.updateKhuyenMai(khuyenMai)) {
+					log.info("Start khuyen mai " + khuyenMai.getTieuDe()
+							+ " ID: " + khuyenMai.getMaKm() + " thanh cong");
+					this.reloadKhuyenMai();
+				} else {
+					log.error("Khong the tart khuyen mai");
 				}
 			}
 		}
@@ -146,7 +209,7 @@ public class SaleOfController extends ActionSupport implements
 			return ERROR;
 		}
 		KhuyenMai khuyenmai = khuyenMaiService.getKhuyenMai(updatekm.getMaKm());
-		
+
 		if (!vaildateUpdate(khuyenmai)) {
 			request.setAttribute("errors", errors);
 			khuyenmai.setNgayBatDau(updatekm.getNgayBatDau());
@@ -155,7 +218,7 @@ public class SaleOfController extends ActionSupport implements
 			khuyenmai.setTieuDe(updatekm.getTieuDe());
 			khuyenmai.setPhanTramGiamGia(updatekm.getPhanTramGiamGia());
 			khuyenmai.setQuaTang(updatekm.getQuaTang());
-			
+
 			request.setAttribute("km", khuyenmai);
 			request.setAttribute("errors", errors);
 			return ERROR;
@@ -490,26 +553,27 @@ public class SaleOfController extends ActionSupport implements
 			errors.add(messages.getMessageList().getProperty("unknownNgayBD"));
 			return false;
 		}
-		
+
 		if (updatekm.getNgayBatDau() == null) {
 			errors.add(messages.getMessageList().getProperty("unknownNgayBD"));
 			return false;
 		}
-		
-		if(khuyenmai.getTrangThaiKhuyenMai().getMaTrangThai() == this.trangThaiTuongLai){
-			//DK today > ngayBatDau()
+
+		if (khuyenmai.getTrangThaiKhuyenMai().getMaTrangThai() == this.trangThaiTuongLai) {
+			// DK today > ngayBatDau()
 			if (updatekm.getNgayBatDau().compareTo(today) < 0) {
-				errors.add(messages.getMessageList().getProperty("errorNgayBDTL"));
+				errors.add(messages.getMessageList().getProperty(
+						"errorNgayBDTL"));
 				return false;
 			}
-		}else{
-			//DK today < ngayBatDau(<0)
+		} else {
+			// DK today < ngayBatDau(<0)
 			if (updatekm.getNgayBatDau().compareTo(new Date()) > 0) {
 				errors.add(messages.getMessageList().getProperty("errorNgayBD"));
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -518,8 +582,8 @@ public class SaleOfController extends ActionSupport implements
 			errors.add(messages.getMessageList().getProperty("unknownNgayKT"));
 			return false;
 		}
-		
-		log.info("Thoi gian ket thuc: " + updatekm.getNgayKetThuc()) ;
+
+		log.info("Thoi gian ket thuc: " + updatekm.getNgayKetThuc());
 		if (updatekm.getNgayKetThuc().compareTo(today) < 0) {
 			errors.add(messages.getMessageList().getProperty("errorNgayKT"));
 			return false;
@@ -528,7 +592,7 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public boolean vaildateUpdate(KhuyenMai km) {
-		
+
 		errors = new ArrayList<String>();
 		Date today = new Date();
 		if (km == null) {
@@ -544,7 +608,45 @@ public class SaleOfController extends ActionSupport implements
 
 		return false;
 	}
-	
+
+	public boolean validateInsert() {
+		errors = new ArrayList<String>();
+		Date today = new Date();
+		if (insertKm.getTieuDe() == null || insertKm.getTieuDe().isEmpty()) {
+			errors.add(messages.getMessageList().getProperty("unknownTieuDe"));
+		}
+		if (insertKm.getMoTa() == null || insertKm.getMoTa().isEmpty()) {
+			errors.add(messages.getMessageList().getProperty("unknownMota"));
+		}
+
+		if (insertKm.getNgayBatDau() == null) {
+			errors.add(messages.getMessageList().getProperty("unknownNgayBD"));
+		} else {
+			if (insertKm.getNgayBatDau().compareTo(today) < 0) {
+				log.info("Loi ngay bat dau");
+				errors.add(messages.getMessageList().getProperty(
+						"errorNgayBDTL"));
+			}
+		}
+
+		if (insertKm.getNgayKetThuc() == null) {
+			errors.add(messages.getMessageList().getProperty("unknownNgayKT"));
+		}
+
+		if (insertKm.getNgayKetThuc().compareTo(today) < 0) {
+			errors.add(messages.getMessageList().getProperty("errorNgayKT"));
+		}
+
+		if (this.myFileFileName == null || this.myFile == null || this.myFileFileName.isEmpty()) {
+			errors.add(messages.getMessageList().getProperty("unknownImage"));
+		}
+
+		if (!errors.isEmpty()) {
+			return false;
+		}
+
+		return true;
+	}
 
 	public String getRegixTrangThaiKM() {
 		return regixTrangThaiKM;
@@ -625,6 +727,14 @@ public class SaleOfController extends ActionSupport implements
 		if (instance != null) {
 			instance.loadListKM();
 		}
+	}
+
+	public KhuyenMai getInsertKm() {
+		return insertKm;
+	}
+
+	public void setInsertKm(KhuyenMai insertKm) {
+		this.insertKm = insertKm;
 	}
 
 }

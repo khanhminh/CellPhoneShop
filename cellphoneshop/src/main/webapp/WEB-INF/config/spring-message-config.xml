@@ -48,6 +48,12 @@
 			<prop key="errorNgayBD">Ngày bắt đầu khuyến mãi phải nhỏ hơn hoặc cùng với ngày hiện tại</prop>
 			<prop key="errorNgayBDTL">Ngày bắt đầu khuyến mãi sắp diễn ra phải lớn hơn hoặc cùng với ngày hiện tại</prop>
 			<prop key="unknownNgayBD">Vui lòng nhập ngày bắt đầu của khuyến mãi</prop>
+			<prop key="unknownMota">Vui lòng nhập mô tả cho khuyến mãi</prop>
+			<prop key="unknownTieuDe">Vui lòng nhập tiêu đề của khuyến mãi</prop>
+			<prop key="unknownImage">Vui lòng chọn hình ảnh minh họa cho khuyến mãi</prop>
+			<prop key="unknownPhanTrangGiamGia">Xin vui lòng kiểm tra lại phần trăm giảm giá, thông tin nhập chưa chính xác</prop>
+			<prop key="errorInsert">Thêm khuyến mãi không thành công</prop>
+			<prop key="errorSaveImage">Không thể lưu hình ảnh khuyến mãi vừa upload lên!. Xin kiểm tra lại</prop>
 				
 		</props>
 		</property>

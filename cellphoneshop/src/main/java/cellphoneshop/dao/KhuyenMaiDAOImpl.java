@@ -92,13 +92,13 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 	@Transactional(readOnly = true)
 	public List<KhuyenMai> getListKhuyenMaiChuaDong() {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "select km from KhuyenMai as km where km.trangThaiKhuyenMai.maTrangThai = :trangthai and km.ngayKetThuc >= :ngayHienTai";
+		String hql = "select km from KhuyenMai as km where km.trangThaiKhuyenMai.maTrangThai = :trangthai and km.ngayKetThuc >= :ngayHienTai and km.ngayBatDau <= :ngayHienTai";
 		Date nowTime = new Date();
 		try {
 			Query query = session.createQuery(hql);
 			query.setInteger("trangthai", 1);
 			query.setDate("ngayHienTai", nowTime);
-			
+
 			return query.list();
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
@@ -199,7 +199,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 
 	@Transactional(readOnly = true)
 	public Integer countKhuyenMail(String value, String option) {
-		if(value == null || option == null){
+		if (value == null || option == null) {
 			return null;
 		}
 		Session session = sessionFactory.getCurrentSession();
@@ -216,7 +216,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			}
 
 		}
-		
+
 		try {
 			Query query = session.createQuery(hql);
 			if (option.equals("name")) {
@@ -224,7 +224,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			} else {
 				query.setString("value", value);
 			}
-			
+
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
@@ -235,7 +235,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 
 	public void updateKhuyenMaiTable() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
