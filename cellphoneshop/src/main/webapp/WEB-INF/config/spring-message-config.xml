@@ -54,6 +54,17 @@
 			<prop key="unknownPhanTrangGiamGia">Xin vui lòng kiểm tra lại phần trăm giảm giá, thông tin nhập chưa chính xác</prop>
 			<prop key="errorInsert">Thêm khuyến mãi không thành công</prop>
 			<prop key="errorSaveImage">Không thể lưu hình ảnh khuyến mãi vừa upload lên!. Xin kiểm tra lại</prop>
+			<prop key="errorInsertProduct">Lỗi không thể thêm sản phầm vào csdl. Vui lòng liên hệ với người quản trị để kiểm tra lỗi này.</prop>
+			<prop key="unchooseProducer">Bạn chưa chọn nhà sản xuất</prop>
+			<prop key="errorNamePhone">Tên sản phẩm chưa hợp lệ</prop>
+			<prop key="unknowProducer">Không tìm thấy nhà sản xuất</prop>
+			<prop key="errorProducer">Tên nhà sản xuất không hợp lệ</prop>
+			<prop key="errorPrice">Giá sản phẩm không hợp lệ</prop>
+			<prop key="errorSoThangBaoHanh">Số tháng bảo hành không hợp lệ</prop>
+			<prop key="errorSoLuongHienCo">Số lượng hiện có không hợp lệ</prop>
+			<prop key="errorTongSoLuong">Tổng số lượng nhập vào không hợp lệ</prop>
+			<prop key="lagerTongSoLuong">Số lượng hiện có không được lớn hơn tổ số lượng sản phẩm</prop>
+			
 				
 		</props>
 		</property>

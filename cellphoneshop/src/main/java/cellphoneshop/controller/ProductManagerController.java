@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.File;
+
 import org.apache.commons.io.FileUtils;
 
 import cellphoneshop.model.LoaiSanPham;
@@ -19,6 +21,7 @@ import cellphoneshop.service.LoaiSanPhamService;
 import cellphoneshop.service.NhaSanXuatService;
 import cellphoneshop.service.SanPhamService;
 import cellphoneshop.util.LinksSaveImage;
+import cellphoneshop.util.Message;
 import cellphoneshop.viewmodel.SortBy;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -33,6 +36,8 @@ public class ProductManagerController extends ActionSupport implements
 	private SanPhamService productService;
 	@Autowired
 	private LoaiSanPhamService categoryService;
+	@Autowired
+	private Message messages;
 
 	private LinksSaveImage imagesLink;
 
@@ -85,13 +90,13 @@ public class ProductManagerController extends ActionSupport implements
 		product.setNgayNhap(new Date());
 		product.setNhaSanXuat(producer);
 		this.saveImageFile(producer.getTenNhaSx(), product.getTenSp());
-
+		product.setHinhDaiDien(this.getImageUploadLink(producer.getTenNhaSx(), product.getTenSp()));
 		if (productService.insertSanPham(product)) {
 			insertSuccess = true;
 			return SUCCESS;
 		} else {
 			insertSuccess = false;
-			errors.add("Loi khong the them san pham vao csdl. Vui long lien he voi nguoi quan tri de kiem tra loi nay");
+			errors.add(messages.getMessage("errorInsertProduct"));
 			return INPUT;
 		}
 	}
@@ -126,7 +131,7 @@ public class ProductManagerController extends ActionSupport implements
 
 		String tenSp = product.getTenSp().trim();
 		if (tenSp == null || tenSp.isEmpty()) {
-			errors.add("Ten san pham khong hop le");
+			errors.add(messages.getMessage("errorNamePhone"));
 			return false;
 		}
 
@@ -134,43 +139,43 @@ public class ProductManagerController extends ActionSupport implements
 			int maNhaSanXuat = Integer.parseInt(request
 					.getParameter("maNhaSanXuat"));
 			if (maNhaSanXuat == -1) {
-				errors.add("Ban chua chon nha san xuat");
+				errors.add(messages.getMessage("unchooseProducer"));
 				return false;
 			}
 			producer = producerService.getNhaSanXuatTheoId(maNhaSanXuat);
 			if (producer == null) {
-				errors.add("Khong tim thay nha san xuat");
+				errors.add(messages.getMessage("unknowProducer"));
 				return false;
 			}
 		} catch (NumberFormatException ex) {
-			errors.add("Nha san xuat khong hop le");
+			errors.add(messages.getMessage("errorProducer"));
 			return false;
 		}
 
 		if (product.getGia() == null || product.getGia() < 0) {
-			errors.add("Gia san pham khong hop le");
+			errors.add(messages.getMessage("errorPrice"));
 			return false;
 		}
 
 		if (product.getSoThangBaoHanh() == null
 				|| product.getSoThangBaoHanh() < 0) {
-			errors.add("So thang bao hanh khong hop le");
+			errors.add(messages.getMessage("errorSoThangBaoHanh"));
 			return false;
 		}
 
 		if (product.getSoLuongHienCo() == null
 				|| product.getSoLuongHienCo() < 0) {
-			errors.add("So luong hien co khong hop le");
+			errors.add(messages.getMessage("errorSoLuongHienCo"));
 			return false;
 		}
 
 		if (product.getTongSoLuong() == null || product.getTongSoLuong() < 0) {
-			errors.add("Tong so luong khong hop le");
+			errors.add(messages.getMessage("errorTongSoLuong"));
 			return false;
 		}
 
 		if (product.getSoLuongHienCo() > product.getTongSoLuong()) {
-			errors.add("So luong hien co phai nho hon tong so luong");
+			errors.add(messages.getMessage("lagerTongSoLuong"));
 			return false;
 		}
 
@@ -211,6 +216,14 @@ public class ProductManagerController extends ActionSupport implements
 
 	public void setImagesLink(LinksSaveImage imagesLink) {
 		this.imagesLink = imagesLink;
+	}
+	
+	public Message getMessages() {
+		return messages;
+	}
+
+	public void setMessages(Message messages) {
+		this.messages = messages;
 	}
 
 	public Integer getCurrentPage(String page) {
