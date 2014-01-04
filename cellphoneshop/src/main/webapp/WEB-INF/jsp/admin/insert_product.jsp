@@ -292,18 +292,18 @@
 					</div>
 					
 					<div class="control-group">				
-						<label class="control-label" for="productDetail.loaiManHinh">
+						<label class="control-label" for="productDetail.loaiManhinh">
 							Loại màn hình
 						</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
 								type="text"
 								theme="simple"
-								name="productDetail.loaiManHinh"
+								name="productDetail.loaiManhinh"
 								data-val="false" data-val-required=""/> 
 							
 							<span class="field-validation-valid" 
-								data-valmsg-for="productDetail.loaiManHinh"
+								data-valmsg-for="productDetail.loaiManhinh"
 								data-valmsg-replace="true"> 
 							</span>
 						</div>
@@ -438,7 +438,7 @@
 					</div>
 					
 					<div class="control-group">				
-						<label class="control-label" for="productDetail.cameraTrước">
+						<label class="control-label" for="productDetail.cameraTruoc">
 							Thông tin camera trước (phụ)
 						</label>
 						<div class="controls">
@@ -513,20 +513,20 @@
 					</div>
 					
 					<div class="control-group">				
-						<label class="control-label" for="productDetail.soNhanCPU">
+						<label class="control-label" for="productDetail.soNhanCpu">
 							Số nhân CPU
 						</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
 								type="text"
 								theme="simple"
-								name="productDetail.soNhanCPU"
+								name="productDetail.soNhanCpu"
 								data-val="false" data-val-required=""
 								data-val-regex="Giá trị không hợp lệ"
 								data-val-regex-pattern="^\d{1,10}$" /> 
 							
 							<span class="field-validation-valid" 
-								data-valmsg-for="productDetail.soNhanCPU"
+								data-valmsg-for="productDetail.soNhanCpu"
 								data-valmsg-replace="true"> 
 							</span>
 						</div>
@@ -779,54 +779,54 @@
 					</div>
 					
 					<div class="control-group">				
-						<label class="control-label" for="productDetail.mang2G">
+						<label class="control-label" for="productDetail.mang2g">
 							Mạng 2G
 						</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
 								type="text"
 								theme="simple"
-								name="productDetail.mang2G"
+								name="productDetail.mang2g"
 								data-val="false" data-val-required=""/> 
 							
 							<span class="field-validation-valid" 
-								data-valmsg-for="productDetail.mang2G"
+								data-valmsg-for="productDetail.mang2g"
 								data-valmsg-replace="true"> 
 							</span>
 						</div>
 					</div>
 					
 					<div class="control-group">				
-						<label class="control-label" for="productDetail.mang3G">
+						<label class="control-label" for="productDetail.mang3g">
 							Mạng 3G
 						</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
 								type="text"
 								theme="simple"
-								name="productDetail.mang3G"
+								name="productDetail.mang3g"
 								data-val="false" data-val-required=""/> 
 							
 							<span class="field-validation-valid" 
-								data-valmsg-for="productDetail.mang3G"
+								data-valmsg-for="productDetail.mang3g"
 								data-valmsg-replace="true"> 
 							</span>
 						</div>
 					</div>
 					
 					<div class="control-group">				
-						<label class="control-label" for="productDetail.mang4G">
+						<label class="control-label" for="productDetail.mang4g">
 							Mạng 4G
 						</label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused" 
 								type="text"
 								theme="simple"
-								name="productDetail.mang4G"
+								name="productDetail.mang4g"
 								data-val="false" data-val-required=""/> 
 							
 							<span class="field-validation-valid" 
-								data-valmsg-for="productDetail.mang4G"
+								data-valmsg-for="productDetail.mang4g"
 								data-valmsg-replace="true"> 
 							</span>
 						</div>
