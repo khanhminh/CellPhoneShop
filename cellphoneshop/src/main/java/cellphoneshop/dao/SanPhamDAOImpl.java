@@ -47,7 +47,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
-		
+
 		return result;
 	}
 
@@ -77,7 +77,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
-		
+
 		return result;
 	}
 
@@ -456,6 +456,22 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 		return result;
 	}
 
+	@Transactional(readOnly = true)
+	public List<SanPham> getListSanPham(String order, boolean isAsc) {
+		List<SanPham> result = new ArrayList<SanPham>();
+		Session session = sessionFactory.getCurrentSession();
+
+		String s = isAsc ? "asc" : "desc";
+		try {
+			String hql = "from SanPham sp order by sp." + order + " " + s;
+			Query query = session.createQuery(hql);
+			result = query.list();
+		} catch (Exception ex) {
+			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+		}
+		return result;
+	}
+
 	@Transactional
 	public List<SanPham> getListSanPhamBanChayNhat(int soSanPham) {
 		List<SanPham> result = new ArrayList<SanPham>();
@@ -500,8 +516,8 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 	@Transactional(readOnly = true)
 	public List<SanPham> getListSanPhamLienQuan(Integer maSanPham,
 			Integer maNhaSX, Integer maOS) {
-		
-		if(maSanPham == null || maNhaSX == null || maOS == null){
+
+		if (maSanPham == null || maNhaSX == null || maOS == null) {
 			return null;
 		}
 		List<SanPham> result = new ArrayList<SanPham>();
@@ -512,23 +528,21 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			query.setInteger("maSanPham", maSanPham);
 			query.setInteger("maNhaSX", maNhaSX);
 			result = query.list();
-			
-			if(!result.isEmpty()){
+
+			if (!result.isEmpty()) {
 				return result;
 			}
-			
+
 			hql = "select distinct sp from SanPham as sp inner join sp.ctSanPhams as ct where sp.maSp != :maSanPham and ct.heDieuHanh.maHdh = :maOS";
 			query = session.createQuery(hql);
 			query.setInteger("maSanPham", maSanPham);
 			query.setInteger("maOS", maOS);
 			result = query.list();
-			
+
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		return result;
 	}
-
-	
 
 }

@@ -64,6 +64,11 @@
 			<prop key="errorSoLuongHienCo">Số lượng hiện có không hợp lệ</prop>
 			<prop key="errorTongSoLuong">Tổng số lượng nhập vào không hợp lệ</prop>
 			<prop key="lagerTongSoLuong">Số lượng hiện có không được lớn hơn tổ số lượng sản phẩm</prop>
+			<prop key="unknownMaKM">Vui lòng chọn khuyến mãi</prop>
+			<prop key="unknownmaSP">Vui lòng chọn sản phẩm để áp dụng khuyến mãi</prop>
+			<prop key="errormaSP">Sản phẩm bạn chọn có thể chưa chính xác. Vui lòng kiểm tra lại</prop>
+			<prop key="errorInsertCTKM">Không thể thêm sản phẩm này vào khuyến mãi</prop>
+			
 			
 				
 		</props>

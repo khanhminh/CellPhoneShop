@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cellphoneshop.interceptor.HomeInterceptor;
 import cellphoneshop.model.KhuyenMai;
+import cellphoneshop.model.SanPham;
 import cellphoneshop.model.TrangThaiKhuyenMai;
 import cellphoneshop.service.KhuyenMaiService;
+import cellphoneshop.service.SanPhamService;
 import cellphoneshop.service.TrangThaiKhuyenMaiService;
+import cellphoneshop.util.CTKhuyenMai;
 import cellphoneshop.util.Message;
 import cellphoneshop.viewmodel.UpdateKhuyenMai;
 
@@ -49,6 +52,13 @@ public class SaleOfController extends ActionSupport implements
 	private String linkResources;
 	private String saveLinkImage;
 	private KhuyenMai insertKm;
+	
+	//Chitiet khuyen mai
+	private int idKhuyenMai;
+	private CTKhuyenMai ctKhuyenMai;
+	@Autowired
+	private SanPhamService sanPhamService;
+	
 
 	private Logger log = Logger.getLogger(SaleOfController.class);
 	@Autowired
@@ -61,7 +71,10 @@ public class SaleOfController extends ActionSupport implements
 	private Message messages;
 
 	public String execute() {
+		
 		log.info("Vao ham execute controller");
+		log.info("Them chi tiet khuyen mai: " + khuyenMaiService.ApdungKhuyenMaiChoSanPham(1, 7));
+		log.info("Huy chi tiet khuyen mai: " + khuyenMaiService.HuyApDungKhuyenMaiChoSanPham(1, 7));
 		Integer currentPage = getCurrentPage(request.getParameter("page"));
 		List<KhuyenMai> khuyenmailList = this.getListKhuyenMail(currentPage);
 		request.setAttribute("kmList", khuyenmailList);
@@ -310,7 +323,88 @@ public class SaleOfController extends ActionSupport implements
 		request.setAttribute("kmList", khuyenMaiList);
 		return SUCCESS;
 	}
+	
+	public String listCTKhuyenMai(){
+		return SUCCESS;
+	}
 
+	public String insertCTKhuyenMai(){
+		if(this.ctKhuyenMai == null){
+			this.inputDataCTKhuyenMai();
+			return INPUT;
+		}
+		
+		if(!validateInsertCtKhuyenMai()){
+			request.setAttribute("errors", errors);
+			return INPUT;
+		}
+		
+		if(khuyenMaiService.ApdungKhuyenMaiChoSanPham(this.ctKhuyenMai.getSanPham().getMaSp(), this.ctKhuyenMai.getKhuyenMai().getMaKm())){
+			log.info("Add thanhg cong san pham " + this.ctKhuyenMai.getSanPham().getMaSp() 
+					+ " vao khuyen mai " + this.ctKhuyenMai.getKhuyenMai().getMaKm());
+			this.ctKhuyenMai = null;
+			request.setAttribute("isSuccess", true);
+			return SUCCESS;
+			
+		}else{
+			log.info("Add khong thanh thanhg cong san pham " + this.ctKhuyenMai.getSanPham().getMaSp() 
+					+ " vao khuyen mai " + this.ctKhuyenMai.getKhuyenMai().getMaKm());
+		}
+		
+		errors = new ArrayList<String>();
+		errors.add(messages.getMessage("errorInsertCTKM"));
+		request.setAttribute("errors", errors);
+		ctKhuyenMai = null;
+		this.inputDataCTKhuyenMai();
+		return INPUT;
+	}
+	
+	public void inputDataCTKhuyenMai(){
+		List<SanPham> spList = sanPhamService.getListSanPham("maSp", true);
+		List<KhuyenMai> openkmList = khuyenMaiService.getListKhuyenMail(this.trangThaiMo + "", "status", null, null);
+		List<KhuyenMai> futurekmList = khuyenMaiService.getListKhuyenMail(this.trangThaiTuongLai + "", "status", null, null);
+		List<KhuyenMai> kmList = new ArrayList<KhuyenMai>();
+		if(openkmList != null){
+			for(KhuyenMai km : openkmList){
+				kmList.add(km);
+			}
+		}
+		
+		if(futurekmList != null){
+			for(KhuyenMai km : futurekmList){
+				kmList.add(km);
+			}
+		}
+		
+		request.setAttribute("spList", spList);
+		request.setAttribute("kmList", kmList);
+	}
+	
+	public boolean validateInsertCtKhuyenMai(){
+		errors = new ArrayList<String>();
+		if(ctKhuyenMai.getKhuyenMai().getMaKm() == null){
+			errors.add(messages.getMessage("unknownMaKM"));
+		}else{
+			if(khuyenMaiService.getKhuyenMai(ctKhuyenMai.getKhuyenMai().getMaKm()) == null){
+				errors.add(messages.getMessage("errormaKM"));
+			}
+		}
+		
+		if(ctKhuyenMai.getSanPham().getMaSp() == null){
+			errors.add(messages.getMessage("unknownmaSP"));
+		}else{
+			if(sanPhamService.getSanPhamTheoId(ctKhuyenMai.getSanPham().getMaSp()) == null){
+				errors.add(messages.getMessage("errormaSP"));
+			}
+		}
+		
+		if(errors.isEmpty()){
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public boolean saveImage() {
 		destPath = this.getPathSaveImage();
 		log.info("destPath: " + destPath);
@@ -735,6 +829,22 @@ public class SaleOfController extends ActionSupport implements
 
 	public void setInsertKm(KhuyenMai insertKm) {
 		this.insertKm = insertKm;
+	}
+
+	public int getIdKhuyenMai() {
+		return idKhuyenMai;
+	}
+
+	public void setIdKhuyenMai(int idKhuyenMai) {
+		this.idKhuyenMai = idKhuyenMai;
+	}
+
+	public CTKhuyenMai getCtKhuyenMai() {
+		return ctKhuyenMai;
+	}
+
+	public void setCtKhuyenMai(CTKhuyenMai ctKhuyenMai) {
+		this.ctKhuyenMai = ctKhuyenMai;
 	}
 
 }

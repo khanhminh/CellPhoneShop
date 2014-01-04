@@ -150,8 +150,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			Integer vitriBD, Integer soluongKM) {
 
 		List<KhuyenMai> khuyenMailList = new ArrayList<KhuyenMai>();
-		if (value == null || option == null || vitriBD == null
-				|| soluongKM == null) {
+		if (value == null || option == null) {
 			return khuyenMailList;
 		}
 
@@ -178,9 +177,13 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 				query.setString("value", value);
 			}
 
-			query.setFirstResult(vitriBD);
-			query.setMaxResults(soluongKM);
-
+			if(vitriBD != null){
+				query.setFirstResult(vitriBD);
+			}
+			if(soluongKM != null ){
+				query.setMaxResults(soluongKM);
+			}
+		
 			khuyenMailList = query.list();
 			if (khuyenMailList == null) {
 				return new ArrayList<KhuyenMai>();

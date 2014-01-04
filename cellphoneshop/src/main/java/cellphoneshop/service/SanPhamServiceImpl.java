@@ -211,4 +211,8 @@ public class SanPhamServiceImpl implements SanPhamService {
 		return spDAO.getListSanPhamLienQuan(maSanPham, productDetail.getProduct().getNhaSanXuat().getMaNhaSx(), 
 				productDetail.getDetail().getHeDieuHanh().getMaHdh());
 	}
+
+	public List<SanPham> getListSanPham(String order, boolean isAsc) {
+		return spDAO.getListSanPham(order, isAsc);
+	}
 }

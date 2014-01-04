@@ -1,6 +1,7 @@
 package cellphoneshop.service;
 
 import java.util.List;
+
 import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.viewmodel.SortBy;
 import cellphoneshop.model.ProductFilter;
@@ -92,4 +93,6 @@ public interface SanPhamService {
 	List<SanPham> getListSanPhamBanChayNhat(int soSanPham);
 	
 	List<SanPham> getListSanPhamLienQuan(Integer maSanPham);
+	
+	public List<SanPham> getListSanPham(String order, boolean isAsc);
 }
