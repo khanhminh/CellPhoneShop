@@ -14,9 +14,11 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 
+import cellphoneshop.model.CtSanPham;
 import cellphoneshop.model.LoaiSanPham;
 import cellphoneshop.model.NhaSanXuat;
 import cellphoneshop.model.SanPham;
+import cellphoneshop.service.CTSanPhamService;
 import cellphoneshop.service.LoaiSanPhamService;
 import cellphoneshop.service.NhaSanXuatService;
 import cellphoneshop.service.SanPhamService;
@@ -35,6 +37,8 @@ public class ProductManagerController extends ActionSupport implements
 	@Autowired
 	private SanPhamService productService;
 	@Autowired
+	private CTSanPhamService productDetailService;
+	@Autowired
 	private LoaiSanPhamService categoryService;
 	@Autowired
 	private Message messages;
@@ -42,6 +46,7 @@ public class ProductManagerController extends ActionSupport implements
 	private LinksSaveImage imagesLink;
 
 	private SanPham product;
+	private CtSanPham productDetail;
 	private List<String> errors;
 	private NhaSanXuat emptyProducer;
 	private LoaiSanPham productCategory;
@@ -61,9 +66,9 @@ public class ProductManagerController extends ActionSupport implements
 				.getParameter("themSanPhamFlag");
 		if (insertNewProductRequest != null
 				&& insertNewProductRequest.equals("true")) {
-			System.out.println("xxx:" + insertNewProductRequest);
 			insertSuccess = false;
 			product = null;
+			productDetail = null;
 		}
 
 		List<NhaSanXuat> danhSachNhaSanXuat = producerService
@@ -75,9 +80,9 @@ public class ProductManagerController extends ActionSupport implements
 		danhSachNhaSanXuat.add(0, emptyProducer);
 		request.setAttribute("danhSachNhaSanXuat", danhSachNhaSanXuat);
 
-		if (product == null) {
+		if (product == null || productDetail == null) {
 			return INPUT;
-		} else if (!validateProduct()) {
+		} else if (!validateProduct() || !validateProductDetail()) {
 			request.setAttribute("errors", errors);
 			return INPUT;
 		}
@@ -85,13 +90,18 @@ public class ProductManagerController extends ActionSupport implements
 		if (productCategory == null) {
 			productCategory = categoryService.getLoaiSPTheoId(1);
 		}
+		
 		product.setLoaiSanPham(productCategory);
 		product.setDiemDanhGiaTb(0.0f);
 		product.setNgayNhap(new Date());
 		product.setNhaSanXuat(producer);
 		this.saveImageFile(producer.getTenNhaSx(), product.getTenSp());
 		product.setHinhDaiDien(this.getImageUploadLink(producer.getTenNhaSx(), product.getTenSp()));
-		if (productService.insertSanPham(product)) {
+		
+		productDetail.setSanPham(product);
+		
+		if (productService.insertSanPham(product) 
+				&& productDetailService.insertCTSanPham(productDetail)) {
 			insertSuccess = true;
 			return SUCCESS;
 		} else {
@@ -185,6 +195,10 @@ public class ProductManagerController extends ActionSupport implements
 
 		return true;
 	}
+	
+	private boolean validateProductDetail() {
+		return true;
+	}
 
 	public void setServletRequest(HttpServletRequest request) {
 		this.request = request;
@@ -196,6 +210,14 @@ public class ProductManagerController extends ActionSupport implements
 
 	public void setSanPham(SanPham sanPham) {
 		this.product = sanPham;
+	}
+	
+	public CtSanPham getProductDetail() {
+		return productDetail;
+	}
+	
+	public void setProductDetail(CtSanPham productDetail) {
+		this.productDetail = productDetail;
 	}
 
 	public boolean getInsertSuccess() {
