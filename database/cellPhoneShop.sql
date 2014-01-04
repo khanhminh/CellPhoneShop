@@ -443,7 +443,7 @@ DROP PROCEDURE IF EXISTS taoDuLieuKhuyenMai;
 DELIMITER //
 CREATE PROCEDURE taoTaiKhoanAdmin()
 	BEGIN
-		INSERT  INTO `nguoidung` 
+		INSERT  INTO `NguoiDung` 
 		VALUES (1,'Admin','Admin','admin@cellphoneshop.com','917cce88e0510b78bb2d11286af982b9',NULL,1,'1900-01-01',NULL,NULL,NULL,0,1);
 	END //
 DELIMITER ;

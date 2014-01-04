@@ -15,10 +15,12 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 
 import cellphoneshop.model.CtSanPham;
+import cellphoneshop.model.HinhAnhSp;
 import cellphoneshop.model.LoaiSanPham;
 import cellphoneshop.model.NhaSanXuat;
 import cellphoneshop.model.SanPham;
 import cellphoneshop.service.CTSanPhamService;
+import cellphoneshop.service.HinhAnhSPService;
 import cellphoneshop.service.LoaiSanPhamService;
 import cellphoneshop.service.NhaSanXuatService;
 import cellphoneshop.service.SanPhamService;
@@ -40,6 +42,8 @@ public class ProductManagerController extends ActionSupport implements
 	private CTSanPhamService productDetailService;
 	@Autowired
 	private LoaiSanPhamService categoryService;
+	@Autowired
+	private HinhAnhSPService productImageService;
 	@Autowired
 	private Message messages;
 
@@ -101,16 +105,27 @@ public class ProductManagerController extends ActionSupport implements
 		product.setNgayNhap(new Date());
 		product.setNhaSanXuat(producer);
 		this.saveImageFile(producer.getTenNhaSx(), product.getTenSp());
-		if(this.file != null){
-			List<String> imageLinks = this.saveMuiltImageFile(producer.getTenNhaSx(), product.getTenSp());
-		}
 		product.setHinhDaiDien(this.getImageUploadLink(producer.getTenNhaSx(),
 				product.getTenSp()));
 
 		productDetail.setSanPham(product);
+		
+		List<HinhAnhSp> productImageList = new ArrayList<HinhAnhSp>();
+		if(this.file != null){
+			List<String> imageLinks = this.saveMuiltImageFile(producer.getTenNhaSx(), product.getTenSp());
+			if (imageLinks != null) {
+				for (int i = imageLinks.size() - 1; i >= 0; i--) {
+					HinhAnhSp image = new HinhAnhSp(productDetail, imageLinks.get(i), i+1);
+					productImageList.add(image);
+				}
+			}
+		}
 
 		if (productService.insertSanPham(product)
 				&& productDetailService.insertCTSanPham(productDetail)) {
+			for (HinhAnhSp img : productImageList) {
+				productImageService.insertHinhAnhSP(img);
+			}
 			insertSuccess = true;
 			return SUCCESS;
 		} else {
