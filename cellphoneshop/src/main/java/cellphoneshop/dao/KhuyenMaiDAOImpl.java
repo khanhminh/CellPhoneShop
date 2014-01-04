@@ -47,6 +47,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			KhuyenMai khuyenMai = (KhuyenMai) session.get(KhuyenMai.class,
 					maKhuyenMai);
 			Hibernate.initialize(khuyenMai.getTrangThaiKhuyenMai());
+			Hibernate.initialize(khuyenMai.getSanPhams());
 			return khuyenMai;
 		} catch (Exception ex) {
 			log.error(ex.getClass().getName() + ": " + ex.getMessage());
