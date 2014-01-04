@@ -421,23 +421,24 @@ DROP PROCEDURE IF EXISTS taoDuLieuPTThanhToan;
 DELIMITER //
 CREATE PROCEDURE taoDuLieuTrangThaiKhuyenMai()
 	BEGIN
-		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Đang mở');
-		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Đã đóng');
+		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Đang diễn ra');
+		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Đã kết thúc');
+		INSERT INTO TrangThaiKhuyenMai (tenTrangThai) VALUES('Sắp diễn ra');
 	END //
 DELIMITER ;
 CALL taoDuLieuTrangThaiKhuyenMai();
 DROP PROCEDURE IF EXISTS taoDuLieuTrangThaiKhuyenMai;
 
-DELIMITER //
-CREATE PROCEDURE taoDuLieuKhuyenMai()
-	BEGIN
-		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Năm mới giảm giá smartphone', 'resources/images/km/km1.png', 1);
-		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Khuyến mãi cuối năm cho IPhone', 'resources/images/km/km2.png', 1);
-		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Mua sắm cuối tuần nhận khuyến mãi khủng', 'resources/images/km/km3.png', 2);
-	END //
-DELIMITER ;
-CALL taoDuLieuKhuyenMai();
-DROP PROCEDURE IF EXISTS taoDuLieuKhuyenMai;
+#DELIMITER //
+#CREATE PROCEDURE taoDuLieuKhuyenMai()
+#	BEGIN
+#		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Năm mới giảm giá smartphone', 'resources/images/km/km1.png', 1);
+#		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Khuyến mãi cuối năm cho IPhone', 'resources/images/km/km2.png', 1);
+#		INSERT INTO KhuyenMai (tieuDe,hinhAnh,maTrangThaiKM) VALUES('Mua sắm cuối tuần nhận khuyến mãi khủng', 'resources/images/km/km3.png', 2);
+#	END //
+#DELIMITER ;
+#CALL taoDuLieuKhuyenMai();
+#DROP PROCEDURE IF EXISTS taoDuLieuKhuyenMai;
 
 
 DELIMITER //
