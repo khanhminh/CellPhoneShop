@@ -60,6 +60,11 @@ public class ProductManagerController extends ActionSupport implements
 	private String imagesFileContentType;
 	private String imagesFileFileName; // Name of image file upload
 
+	// Upload Multifile image
+	private File[] file;
+	private String[] fileContentType;
+	private String[] fileFileName;
+
 	public String insertProduct() {
 		log.info("Size imagesLin: " + this.imagesLink.getLink("nokia"));
 		String insertNewProductRequest = request
@@ -90,17 +95,21 @@ public class ProductManagerController extends ActionSupport implements
 		if (productCategory == null) {
 			productCategory = categoryService.getLoaiSPTheoId(1);
 		}
-		
+
 		product.setLoaiSanPham(productCategory);
 		product.setDiemDanhGiaTb(0.0f);
 		product.setNgayNhap(new Date());
 		product.setNhaSanXuat(producer);
 		this.saveImageFile(producer.getTenNhaSx(), product.getTenSp());
-		product.setHinhDaiDien(this.getImageUploadLink(producer.getTenNhaSx(), product.getTenSp()));
-		
+		if(this.file != null){
+			List<String> imageLinks = this.saveMuiltImageFile(producer.getTenNhaSx(), product.getTenSp());
+		}
+		product.setHinhDaiDien(this.getImageUploadLink(producer.getTenNhaSx(),
+				product.getTenSp()));
+
 		productDetail.setSanPham(product);
-		
-		if (productService.insertSanPham(product) 
+
+		if (productService.insertSanPham(product)
 				&& productDetailService.insertCTSanPham(productDetail)) {
 			insertSuccess = true;
 			return SUCCESS;
@@ -135,8 +144,8 @@ public class ProductManagerController extends ActionSupport implements
 		request.setAttribute("productList", sanPhamList);
 		return SUCCESS;
 	}
-	
-	public String detailProduct(){
+
+	public String detailProduct() {
 		return SUCCESS;
 	}
 
@@ -195,7 +204,7 @@ public class ProductManagerController extends ActionSupport implements
 
 		return true;
 	}
-	
+
 	private boolean validateProductDetail() {
 		return true;
 	}
@@ -211,11 +220,11 @@ public class ProductManagerController extends ActionSupport implements
 	public void setSanPham(SanPham sanPham) {
 		this.product = sanPham;
 	}
-	
+
 	public CtSanPham getProductDetail() {
 		return productDetail;
 	}
-	
+
 	public void setProductDetail(CtSanPham productDetail) {
 		this.productDetail = productDetail;
 	}
@@ -243,7 +252,7 @@ public class ProductManagerController extends ActionSupport implements
 	public void setImagesLink(LinksSaveImage imagesLink) {
 		this.imagesLink = imagesLink;
 	}
-	
+
 	public Message getMessages() {
 		return messages;
 	}
@@ -290,32 +299,85 @@ public class ProductManagerController extends ActionSupport implements
 			log.info("loi null");
 			return false;
 		}
-		String destPath = request.getSession().getServletContext()
-				.getRealPath(this.imagesLink.getLink("dir") 
-						+ this.imagesLink.getLink(producer) 
-						+ nameProduct 
-						+ this.imagesLink.getLink("separation"));
-		File destFile  = new File(destPath, this.imagesFileFileName);
+		String destPath = this.getDestinationPath(producer, nameProduct);
+		File destFile = new File(destPath, this.imagesFileFileName);
 		try {
 			FileUtils.copyFile(this.imagesFile, destFile);
 		} catch (Exception e) {
-			log.info("Save on disk unsuccessfully-name: " + this.imagesFileFileName);
+			log.info("Save on disk unsuccessfully-name: "
+					+ this.imagesFileFileName);
 			return false;
 		}
 		log.info("destPath save image: " + destPath);
 		log.info("Save on disk successfully-name: " + this.imagesFileFileName);
 		log.info("NameProducer: " + producer);
-		log.info("Link save on Database: " + this.getImageUploadLink(producer, nameProduct));
+		log.info("Link save on Database: "
+				+ this.getImageUploadLink(producer, nameProduct));
 		return true;
+	}
+
+	
+	public List<String> saveMuiltImageFile(String producer, String productName) {
+		List<String> saveLinks = new ArrayList<String>();
+
+		String destPath = this.getDestinationPath(producer, productName);
+		if (destPath == null || destPath.isEmpty()) {
+			return new ArrayList<String>();
+		}
+		log.info("destination Path: " + destPath);
+
+		for (int i = 0; i < this.file.length; i++) {
+			if(fileFileName[i] == null || file[i] == null){
+				continue;
+			}
+			File destFile = new File(destPath, this.fileFileName[i]);
+			
+			try {
+				FileUtils.copyFile(this.file[i], destFile);
+			} catch (Exception e) {
+				log.info("Save on disk unsuccessfully-name: "
+						+ this.fileFileName[i]);
+				return new ArrayList<String>();
+			}
+			log.info("File Name " + (i + 1) + "is: " + getFileFileName()[i]);
+			log.info("File ContentType " + (i + 1) + " is: "
+					+ getFileContentType()[i]);
+			System.out.println("Files Directory is:"
+					+ this.getImageUploadLink(producer, productName,
+							this.fileFileName[i]));
+			log.info("Save on disk successfully-name: " + this.fileFileName[i]);
+			saveLinks.add(this.getImageUploadLink(producer, productName,
+					this.fileFileName[i]));
+		}
+
+		return saveLinks;
+	}
+
+	public String getDestinationPath(String producer, String nameProduct) {
+		String destPath = request
+				.getSession()
+				.getServletContext()
+				.getRealPath(
+						this.imagesLink.getLink("dir")
+								+ this.imagesLink.getLink(producer)
+								+ nameProduct
+								+ this.imagesLink.getLink("separation"));
+		return destPath;
 	}
 
 	// Get link( save on database)
 	public String getImageUploadLink(String producer, String nameProduct) {
 		return this.imagesLink.getLink("dir")
-				+ this.imagesLink.getLink(producer) 
-				+ nameProduct
+				+ this.imagesLink.getLink(producer) + nameProduct
 				+ this.imagesLink.getLink("separation")
 				+ this.imagesFileFileName;
+	}
+
+	public String getImageUploadLink(String producer, String nameProduct,
+			String fileName) {
+		return this.imagesLink.getLink("dir")
+				+ this.imagesLink.getLink(producer) + nameProduct
+				+ this.imagesLink.getLink("separation") + fileName;
 	}
 
 	public File getImagesFile() {
@@ -340,6 +402,30 @@ public class ProductManagerController extends ActionSupport implements
 
 	public void setImagesFileFileName(String imagesFileFileName) {
 		this.imagesFileFileName = imagesFileFileName;
+	}
+
+	public File[] getFile() {
+		return file;
+	}
+
+	public void setFile(File[] file) {
+		this.file = file;
+	}
+
+	public String[] getFileContentType() {
+		return fileContentType;
+	}
+
+	public void setFileContentType(String[] fileContentType) {
+		this.fileContentType = fileContentType;
+	}
+
+	public String[] getFileFileName() {
+		return fileFileName;
+	}
+
+	public void setFileFileName(String[] fileFileName) {
+		this.fileFileName = fileFileName;
 	}
 
 }

@@ -73,8 +73,6 @@ public class SaleOfController extends ActionSupport implements
 	public String execute() {
 		
 		log.info("Vao ham execute controller");
-		log.info("Them chi tiet khuyen mai: " + khuyenMaiService.ApdungKhuyenMaiChoSanPham(1, 7));
-		log.info("Huy chi tiet khuyen mai: " + khuyenMaiService.HuyApDungKhuyenMaiChoSanPham(1, 7));
 		Integer currentPage = getCurrentPage(request.getParameter("page"));
 		List<KhuyenMai> khuyenmailList = this.getListKhuyenMail(currentPage);
 		request.setAttribute("kmList", khuyenmailList);
