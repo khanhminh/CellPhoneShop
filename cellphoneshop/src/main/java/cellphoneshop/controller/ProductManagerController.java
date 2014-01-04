@@ -341,7 +341,7 @@ public class ProductManagerController extends ActionSupport implements
 			}
 			log.info("File Name " + (i + 1) + "is: " + getFileFileName()[i]);
 			log.info("File ContentType " + (i + 1) + " is: "
-					+ getFileContentType()[i]);
+					+ getFileContentType()[i]);			
 			System.out.println("Files Directory is:"
 					+ this.getImageUploadLink(producer, productName,
 							this.fileFileName[i]));
