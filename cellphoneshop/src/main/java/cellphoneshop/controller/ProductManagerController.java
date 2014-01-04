@@ -125,6 +125,10 @@ public class ProductManagerController extends ActionSupport implements
 		request.setAttribute("productList", sanPhamList);
 		return SUCCESS;
 	}
+	
+	public String detailProduct(){
+		return SUCCESS;
+	}
 
 	private boolean validateProduct() {
 		errors = new ArrayList<String>();

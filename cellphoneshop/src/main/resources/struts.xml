@@ -280,6 +280,10 @@
 			<result name="success" type="tiles">list_product</result>
 		</action>
 
+		<action name="detail_product" method="detailProduct" class="productManagerAction">
+			<result name="success" type="tiles">detail_product</result>
+		</action>
+
 
 	</package>
 

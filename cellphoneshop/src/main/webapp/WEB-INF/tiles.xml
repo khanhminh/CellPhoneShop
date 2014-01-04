@@ -187,12 +187,20 @@
 		<put-attribute name="content"
 			value="/WEB-INF/jsp/admin/insert_product.jsp" />
 	</definition>
-	
+
 	<definition name="list_product" extends="admin">
 		<put-attribute name="title" value="Danh sách sản phẩm" />
 		<put-attribute name="content"
 			value="/WEB-INF/jsp/admin/list_product.jsp" />
 	</definition>
+
+	<definition name="detail_product" extends="admin">
+		<put-attribute name="title" value="Chi tiết sản phẩm" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/detail_product.jsp" />
+	</definition>
+
+
 
 
 
