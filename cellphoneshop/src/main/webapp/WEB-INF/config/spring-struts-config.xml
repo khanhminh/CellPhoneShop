@@ -28,8 +28,8 @@
 		<property name="saleOfPerPage" value="8" />
 		<property name="trangThaiDong" value="2" />
 		<property name="trangThaiMo" value="1" />
-		<property name="trangThaiTuongLai" value="0" />
-		<property name="regixTrangThaiKM" value="[012]" />
+		<property name="trangThaiTuongLai" value="3" />
+		<property name="regixTrangThaiKM" value="[123]" />
 		<property name="countCut" value="6" />
 
 	</bean>
