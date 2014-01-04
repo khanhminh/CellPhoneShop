@@ -14,4 +14,6 @@ public interface KhuyenMaiService {
 	List<KhuyenMai> getListKhuyenMail(String query, String option, Integer vitriBD, Integer soluongKM);
 	Integer countKhuyenMai();
 	Integer countKhuyenMail(String query, String option);
+	boolean ApdungKhuyenMaiChoSanPham(Integer masP, Integer maKm);
+	boolean HuyApDungKhuyenMaiChoSanPham(Integer masP, Integer maKm);
 }
