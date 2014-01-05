@@ -29,11 +29,13 @@
 						<label class="control-label" id="label-search" for="query-search">Từ
 							khóa</label>
 						<div class="controls">
-							<s:textfield class="input-xlarge focused" id="query-search"
+							<s:textfield cssClass="input-xlarge focused" id="query-search"
 								type="text" name="query" theme="simple" 
 								data-val="true"
 								data-val-required="Vui lòng nhập nhập từ khóa"/>
-							<span class="help-inline" style="color: red;" id="error-search"></span>
+							<span class="field-validation-valid" data-valmsg-for="query"
+										data-valmsg-replace="true">
+							</span>
 						</div>
 					</div>
 					<div class="control-group">
