@@ -805,6 +805,7 @@ public class SaleOfController extends ActionSupport implements
 				|| this.myFileFileName.isEmpty()) {
 			errors.add(messages.getMessageList().getProperty("unknownImage"));
 		}
+		
 
 		if (!errors.isEmpty()) {
 			return false;
