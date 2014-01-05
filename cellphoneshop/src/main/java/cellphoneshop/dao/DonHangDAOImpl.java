@@ -37,7 +37,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 			session.save(donHangMoi);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -55,7 +55,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				Hibernate.initialize(result.getTrangThaiDonHang());
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -68,7 +68,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 		try {
 			session.update(donHang);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 			return false;
 		}
 		
@@ -89,7 +89,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 			query.setDate("ngayDatHang", ngayDatHang);
 			return (Integer) query.uniqueResult();
 		} catch (HibernateException ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return -1;
@@ -118,7 +118,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -148,7 +148,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 			query.setMaxResults(kqToiDa);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -175,7 +175,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -199,7 +199,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -226,7 +226,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -254,7 +254,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -270,7 +270,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 			
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return 0;
@@ -287,7 +287,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return 0;
@@ -304,7 +304,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 			}
 		} catch (Exception ex) {
 			result = false;
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -331,7 +331,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -348,7 +348,7 @@ public class DonHangDAOImpl implements DonHangDAO {
 
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return 0;

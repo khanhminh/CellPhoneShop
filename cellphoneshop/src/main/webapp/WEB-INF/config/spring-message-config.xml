@@ -44,7 +44,33 @@
 			<prop key="errormaKM">Vui lòng kiểm tra lại mã khuyến mãi, có thể bạn đã nhập sai!</prop>
 			<prop key="notFoundKM">Không tìm thấy khuyến mãi này!</prop>
 			<prop key="errorNgayKT">Ngày kết thúc khuyến mãi phải lớn hơn hoặc cùng với ngày hiện tại</prop>
-			<prop key="errorNgayDB">Ngày bắt đầu khuyến mãi phải nhỏ hơn hoặc cùng với ngày hiện tại</prop>
+			<prop key="unkownNgayKT">Vui lòng nhật ngày kết thúc của khuyến mãi</prop>
+			<prop key="errorNgayBD">Ngày bắt đầu khuyến mãi phải nhỏ hơn hoặc cùng với ngày hiện tại</prop>
+			<prop key="errorNgayBDTL">Ngày bắt đầu khuyến mãi sắp diễn ra phải lớn hơn hoặc cùng với ngày hiện tại</prop>
+			<prop key="unknownNgayBD">Vui lòng nhập ngày bắt đầu của khuyến mãi</prop>
+			<prop key="unknownMota">Vui lòng nhập mô tả cho khuyến mãi</prop>
+			<prop key="unknownTieuDe">Vui lòng nhập tiêu đề của khuyến mãi</prop>
+			<prop key="unknownImage">Vui lòng chọn hình ảnh minh họa cho khuyến mãi</prop>
+			<prop key="unknownPhanTrangGiamGia">Xin vui lòng kiểm tra lại phần trăm giảm giá, thông tin nhập chưa chính xác</prop>
+			<prop key="errorInsert">Thêm khuyến mãi không thành công</prop>
+			<prop key="errorSaveImage">Không thể lưu hình ảnh khuyến mãi vừa upload lên!. Xin kiểm tra lại</prop>
+			<prop key="errorInsertProduct">Lỗi không thể thêm sản phầm vào csdl. Vui lòng liên hệ với người quản trị để kiểm tra lỗi này.</prop>
+			<prop key="unchooseProducer">Bạn chưa chọn nhà sản xuất</prop>
+			<prop key="errorNamePhone">Tên sản phẩm chưa hợp lệ</prop>
+			<prop key="unknowProducer">Không tìm thấy nhà sản xuất</prop>
+			<prop key="errorProducer">Tên nhà sản xuất không hợp lệ</prop>
+			<prop key="errorPrice">Giá sản phẩm không hợp lệ</prop>
+			<prop key="errorSoThangBaoHanh">Số tháng bảo hành không hợp lệ</prop>
+			<prop key="errorSoLuongHienCo">Số lượng hiện có không hợp lệ</prop>
+			<prop key="errorTongSoLuong">Tổng số lượng nhập vào không hợp lệ</prop>
+			<prop key="lagerTongSoLuong">Số lượng hiện có không được lớn hơn tổ số lượng sản phẩm</prop>
+			<prop key="unknownMaKM">Vui lòng chọn khuyến mãi</prop>
+			<prop key="unknownmaSP">Vui lòng chọn sản phẩm để áp dụng khuyến mãi</prop>
+			<prop key="errormaSP">Sản phẩm bạn chọn có thể chưa chính xác. Vui lòng kiểm tra lại</prop>
+			<prop key="errorInsertCTKM">Không thể thêm sản phẩm này vào khuyến mãi</prop>
+			<prop key="unFoundctkm">Không tìm thấy chi tiết của khuyến mãi này!</prop>
+			
+			
 				
 		</props>
 		</property>

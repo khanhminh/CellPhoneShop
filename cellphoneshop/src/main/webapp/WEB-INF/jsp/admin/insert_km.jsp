@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<div class="box-content">
-			<form class="form-horizontal" action="update_km" method="post"
+			<form class="form-horizontal" action="insert_km" method="post"
 				enctype="multipart/form-data">
 				<div class="validation-summary-errors">
 					<ul>
@@ -36,96 +36,98 @@
 	
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label" for="km.tieuDe"> Tiêu Đề KM </label>
+						<label class="control-label" for="insertKm.tieuDe"> Tiêu Đề KM *</label>
 						<div class="controls">
 							<s:textarea class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.tieuDe" data-val="true"
+								type="text" theme="simple" name="insertKm.tieuDe" data-val="true"
 								data-val-required="Vui lòng nhập tiêu đề của khuyến mãi"
 								/>
 
-							<span class="field-validation-valid" data-valmsg-for="km.tieuDe"
+							<span class="field-validation-valid" data-valmsg-for="insertKm.tieuDe"
 								data-valmsg-replace="true"> </span>
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="km.moTa"> Mổ tả về KM </label>
+						<label class="control-label" for="insertKm.moTa"> Mổ tả về KM *</label>
 						<div class="controls">
 							<s:textarea class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.moTa" data-val="true"
+								type="text" theme="simple" name="insertKm.moTa" data-val="true"
 								data-val-required="Vui lòng nhập mô tả của khuyến mãi"
 								/>
 
-							<span class="field-validation-valid" data-valmsg-for="km.moTa"
+							<span class="field-validation-valid" data-valmsg-for="insertKm.moTa"
 								data-valmsg-replace="true"> </span>
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="km.phanTramGiamGia"> %
+						<label class="control-label" for="insertKm.phanTramGiamGia"> %
 							Giảm giá </label>
 						<div class="controls">
 							<s:textfield class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.phanTramGiamGia"
+								type="text" theme="simple" name="insertKm.phanTramGiamGia"
 								data-val="false" value="%{giamgia}" />
 
 							<span class="field-validation-valid"
-								data-valmsg-for="km.phanTramGiamGia" data-valmsg-replace="true">
+								data-valmsg-for="insertKm.phanTramGiamGia" data-valmsg-replace="true">
 							</span>
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="km.ngayBatDau">Ngày Bắt
-							Đầu KM </label>
+						<label class="control-label" for="insertKm.ngayBatDau">Ngày Bắt
+							Đầu KM *</label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge datepicker"
-								type="text" theme="simple" name="km.ngayBatDau" data-val="true"
+							<s:textfield cssClass="text-box single-line input-xlarge datepicker"
+								type="text" theme="simple" name="insertKm.ngayBatDau" data-val="true"
 								data-val-required="Vui lòng nhập ngày bắt đầu"/>
 							<span class="field-validation-valid"
-								data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">
+								data-valmsg-for="insertKm.ngayBatDau" data-valmsg-replace="true">
 							</span>
 						</div>
 					</div>
 
 					<div class="control-group">
-						<label class="control-label" for="km.ngayKetThuc">Ngày Kết
-							Thúc KM </label>
+						<label class="control-label" for="insertKm.ngayKetThuc">Ngày Kết
+							Thúc KM *</label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused datepicker"
-								type="text" theme="simple" name="km.ngayKetThuc" data-val="true"
-								data-val-required="Vui lòng nhập ngày bắt đầu"
+							<s:textfield cssClass="text-box single-line input-xlarge focused datepicker"
+								type="text" theme="simple" name="insertKm.ngayKetThuc" data-val="true"
+								data-val-required="Vui lòng nhập ngày kết thúc"
 								data-val-regex="Giá trị không hợp lệ"/>
 
 							<span class="field-validation-valid"
-								data-valmsg-for="km.ngayKetThuc" data-valmsg-replace="true">
+								data-valmsg-for="insertKm.ngayKetThuc" data-valmsg-replace="true">
 							</span>
 						</div>
 					</div>
 					
 					<div class="control-group">
-						<label class="control-label" for="km.quaTang"> Quà Tặng Đi
+						<label class="control-label" for="insertKm.quaTang"> Quà Tặng Đi
 							Kèm</label>
 						<div class="controls">
 							<s:textarea class="text-box single-line input-xlarge focused"
-								type="text" theme="simple" name="km.quaTang"/>
+								type="text" theme="simple" name="insertKm.quaTang"/>
 
-							<span class="field-validation-valid" data-valmsg-for="km.quaTang"
+							<span class="field-validation-valid" data-valmsg-for="insertKm.quaTang"
 								data-valmsg-replace="true"> </span>
 						</div>
 					</div>
 
 					<div class="control-group">
 
-						<label class="control-label" for="myFile">Hình ảnh KM</label>
+						<label class="control-label" for="myFile">Hình ảnh KM *</label>
 						<div class="controls">
-							<input class="input-file uniform_on" type="file" name="myFile" />
+							<input class="input-file uniform_on" type="file" name="myFile"
+							data-val="true" data-val-required="Vui lòng chọn hình ảnh khuyến mãi"
+							/>
 						</div>
 					</div>
 					<!-- 					<input type="file" name="myFile" /> -->
 
 					<div class="form-actions">
-						<button type="submit" class="btn btn-primary">Cập nhật
+						<button type="submit" class="btn btn-primary">Thêm
 							khuyến mãi</button>
 					</div>
 				</fieldset>

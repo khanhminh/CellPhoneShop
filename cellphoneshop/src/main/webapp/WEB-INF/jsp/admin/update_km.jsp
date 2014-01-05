@@ -40,6 +40,24 @@
 				</s:set>
 
 				<fieldset>
+<!-- 					<div class="control-group"> -->
+<!-- 						<label class="control-label" for="km.tieuDe"> ID KM </label> -->
+<!-- 						<div class="controls"> -->
+<%-- 							<c:choose> --%>
+<%-- 								<c:when test="${not empty requestScope.km.maKm}"> --%>
+<%-- 									<s:set var="tieuDe">${requestScope.km.maKm}</s:set> --%>
+<%-- 									<s:textarea cssClass="uneditable-input" name="km.tieuDe" value="%{tieuDe}" /> --%>
+<%-- 								</c:when> --%>
+<%-- 								<c:otherwise> --%>
+<%-- 								<s:textarea cssClass="text-box single-line uneditable-input" --%>
+<%-- 										type="text" theme="simple" name="km.tieuDe" data-val="true" --%>
+<%-- 										data-val-required="Vui lòng nhập tiêu đề của khuyến mãi"/> --%>
+<%-- 								</c:otherwise> --%>
+<%-- 							</c:choose> --%>
+<%-- 							<span class="field-validation-valid" data-valmsg-for="km.tieuDe" --%>
+<%-- 								data-valmsg-replace="true"> </span> --%>
+<!-- 						</div> -->
+<!-- 					</div> -->
 					<div class="control-group">
 						<label class="control-label" for="km.tieuDe"> Tiêu Đề KM </label>
 						<div class="controls">
@@ -132,7 +150,7 @@
 								<div class="controls">
 
 									<s:textfield
-										cssClass="text-box single-line input-xlarge uneditable-input datepicker"
+										cssClass="text-box single-line input-xlarge editable-input datepicker"
 										type="text" theme="simple" name="km.ngayBatDau"
 										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
 										value="%{ngayBD}" />
@@ -155,8 +173,8 @@
 									Bắt Đầu KM </label>
 								<div class="controls">
 
-									<s:hidden
-										cssClass="text-box single-line input-xlarge uneditable-input datepicker"
+									<s:textfield
+										cssClass="text-box single-line input-xlarge uneditable-input"
 										type="text" theme="simple" name="km.ngayBatDau"
 										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
 										value="%{ngayBD}" />
@@ -209,8 +227,7 @@
 						<div class="controls">
 
 							<c:choose>
-								<c:when
-									test="${not empty requestScope.km.quaTang}">
+								<c:when test="${not empty requestScope.km.quaTang}">
 									<s:set var="quaTang">${requestScope.km.quaTang}</s:set>
 									<s:textarea class="text-box single-line input-xlarge focused"
 										type="text" theme="simple" name="km.quaTang"

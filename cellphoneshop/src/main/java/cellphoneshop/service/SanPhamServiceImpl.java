@@ -181,6 +181,10 @@ public class SanPhamServiceImpl implements SanPhamService {
 		}
 		else if (sortby.getBy().equalsIgnoreCase("name")){
 			orderby = "tenSp";
+		}else{
+			if(sortby.getBy().equalsIgnoreCase("id")){
+				orderby = "maSp";
+			}
 		}
 		
 		return spDAO.getListSanPham(kqDauTien, soKqToiDa, orderby, sortby.isAsc());
@@ -206,5 +210,9 @@ public class SanPhamServiceImpl implements SanPhamService {
 		
 		return spDAO.getListSanPhamLienQuan(maSanPham, productDetail.getProduct().getNhaSanXuat().getMaNhaSx(), 
 				productDetail.getDetail().getHeDieuHanh().getMaHdh());
+	}
+
+	public List<SanPham> getListSanPham(String order, boolean isAsc) {
+		return spDAO.getListSanPham(order, isAsc);
 	}
 }

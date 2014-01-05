@@ -44,15 +44,15 @@ public class ShoppingCartController extends ActionSupport implements ServletRequ
 		}		
 		int id = Integer.parseInt(strId);
 		if (action.equalsIgnoreCase("add")){
-			log.info("them san pham vao gio hang: " + id);
+			log.warn("them san pham vao gio hang: " + id);
 			addProduct(id);
 		}
 		else if (action.equalsIgnoreCase("delete")){
-			log.info("bo bot san pham trong gio hang: " + id);
+			log.warn("bo bot san pham trong gio hang: " + id);
 			deleteProduct(id);
 		}
 		else if (action.equalsIgnoreCase("remove")){
-			log.info("xoa san pham trong gio hang: " + id);
+			log.warn("xoa san pham trong gio hang: " + id);
 			removeProduct(id);
 		}
 		else {

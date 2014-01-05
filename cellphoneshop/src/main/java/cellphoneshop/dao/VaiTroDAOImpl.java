@@ -35,7 +35,7 @@ public class VaiTroDAOImpl implements VaiTroDAO{
 			Query query = session.createQuery(hql);
 			list = query.list();
 		} catch (HibernateException ex) {
-			log.error(ex.getMessage());
+			log.warn(ex.getMessage());
 		}
 		
 		return list;

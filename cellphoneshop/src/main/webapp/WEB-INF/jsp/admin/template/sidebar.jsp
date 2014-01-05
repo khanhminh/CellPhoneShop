@@ -72,6 +72,27 @@
 					<span class="hidden-tablet">Tìm kiếm</span>
 				</a>
 			</li>
+			
+			<li class="nav-header hidden-tablet">Quản lý chi tiết KM</li>
+			<li>
+				<a class="ajax-link" href="list_ctkm.action">
+					<i class="icon-align-justify"></i>
+					<span class="hidden-tablet">Danh sách chi tiết KM</span>
+				</a>
+			</li>
+			<li>
+				<a class="ajax-link" href="insert_ctkm.action">
+					<i class="icon-align-justify"></i>
+					<span class="hidden-tablet">Thêm chi tiết KM</span>
+				</a>
+			</li>
+			
+			<li>
+				<a class="ajax-link" href="search_ctkm.action">
+					<i class="icon-search"></i>
+					<span class="hidden-tablet">Tìm kiếm</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 </div>

@@ -29,7 +29,7 @@ public class NguoiNhanDAOImpl implements NguoiNhanDAO {
 			session.save(nguoiNhan);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return false;
@@ -42,7 +42,7 @@ public class NguoiNhanDAOImpl implements NguoiNhanDAO {
 		try {
 			session.update(nguoiNhan);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 			return false;
 		}
 		
@@ -61,7 +61,7 @@ public class NguoiNhanDAOImpl implements NguoiNhanDAO {
 			query.setString("hoTenNguoiNhan", hoTenNguoiNhan);
 			result = (NguoiNhan) query.uniqueResult();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -74,7 +74,7 @@ public class NguoiNhanDAOImpl implements NguoiNhanDAO {
 		try {
 			session.delete(nguoiNhan);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 			return false;
 		}
 		

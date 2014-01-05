@@ -30,7 +30,9 @@
 							khóa</label>
 						<div class="controls">
 							<s:textfield class="input-xlarge focused" id="query-search"
-								type="text" name="query" theme="simple" />
+								type="text" name="query" theme="simple" 
+								data-val="true"
+								data-val-required="Vui lòng nhập nhập từ khóa"/>
 							<span class="help-inline" style="color: red;" id="error-search"></span>
 						</div>
 					</div>
@@ -61,12 +63,10 @@
 
 <c:choose>
 	<c:when test="${isInput}">
-
 	</c:when>
 	<c:when test="${kmList == null || empty kmList}">
 		<div class="alert alert-error">
-			<strong>
-				<c:forEach var="error" begin="0" items="${errors}">
+			<strong> <c:forEach var="error" begin="0" items="${errors}">
 						${error}<br>
 				</c:forEach>
 			</strong>
@@ -74,90 +74,6 @@
 
 	</c:when>
 	<c:otherwise>
-		<div class="row-fluid sortable">
-			<div class="box span12">
-				<div class="box-header well">
-					<h2>
-						<i class="icon-user"></i>Tài khoản
-					</h2>
-					<div class="box-icon">
-						<a href="#" class="btn btn-minimize btn-round"><i
-							class="icon-chevron-up"></i></a>
-					</div>
-				</div>
-				<div class="box-content">
-					<table
-						class="table table-striped table-bordered bootstrap-datatable">
-						<thead>
-							<!-- Header của bảng -->
-							<tr>
-								<th>ID</th>
-								<th>Tên Khuyến Mãi</th>
-								<th>Mô Tả</th>
-								<th style="font-family: Arial;">Trạng thái</th>
-								<th>Chức năng</th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<!-- các dòng dữ liệu  -->
-
-							<c:forEach var="km" begin="0" items="${kmList}">
-								<tr>
-									<td>${km.maKm}</td>
-									<td>${km.tieuDe}</td>
-									<td>${km.moTa}</td>
-									<td><span class="label label-success" id="">
-											${km.trangThaiKhuyenMai.tenTrangThai} </span></td>
-									<td><a class="btn btn-success"
-										href="detail_km?id=${km.maKm}"> <i
-											class="icon-zoom-in icon-white"></i> Chi tiết
-									</a> <c:if test="${km.trangThaiKhuyenMai.maTrangThai == 1}">
-											<a class="btn btn-info" href="show_update_km_form?id=${km.maKm}"> <i
-												class="icon-edit icon-white"></i> Chỉnh Sửa
-											</a>
-											<a class="btn btn-danger btnStop"
-												href="stop_km?id=${km.maKm}" data-id="${km.maKm}"> <i
-												class="icon-trash icon-white"></i> Stop
-											</a>
-										</c:if></td>
-
-								</tr>
-							</c:forEach>
-
-						</tbody>
-					</table>
-					<div class="dataTables_paginate paging_bootstrap pagination">
-						<ul>
-							<c:choose>
-								<c:when test="${currentPage - 1 <= 0}">
-									<li class="prev enabled"><a
-										href="search_km?page=${totalPage}">← Previous</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="prev enabled"><a
-										href="search_km?page=${currentPage - 1}">← Previous</a></li>
-								</c:otherwise>
-							</c:choose>
-
-
-							<li><a href="search_km?page=${currentPage}"
-								class="paging-order">${currentPage}</a></li>
-							<c:choose>
-								<c:when test="${currentPage + 1 > totalPage }">
-									<li class="next enabled"><a href="search_km?page=1">Next
-											→ </a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="next enabled"><a
-										href="search_km?page=${currentPage + 1}">Next → </a></li>
-								</c:otherwise>
-							</c:choose>
-
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+		<jsp:include page="list_km.jsp" />
 	</c:otherwise>
 </c:choose>

@@ -49,7 +49,7 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 												// hon la phai goi ham nay
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -67,7 +67,7 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 			query.setInteger("maNguoiDung", maNguoiDung);
 			result = (DanhGia) query.uniqueResult();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -94,7 +94,7 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 												// hon la phai goi ham nay
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -113,7 +113,7 @@ public class DanhGiaDAOImpl implements DanhGiaDAO {
 			return ((Long) query.list().iterator().next()).intValue();
 
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 			// TODO: handle exception
 		}
 

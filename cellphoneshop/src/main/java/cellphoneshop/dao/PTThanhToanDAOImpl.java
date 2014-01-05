@@ -30,7 +30,7 @@ public class PTThanhToanDAOImpl implements PTThanhToanDAO {
 			session.save(ptThanhToan);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -44,7 +44,7 @@ public class PTThanhToanDAOImpl implements PTThanhToanDAO {
 		try {
 			result = (PtThanhToan) session.get(PtThanhToan.class, maPtThanhToan);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -59,7 +59,7 @@ public class PTThanhToanDAOImpl implements PTThanhToanDAO {
 			Query query = session.createQuery("from PtThanhToan");
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

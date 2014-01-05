@@ -31,7 +31,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 			session.save(ctDonHang);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -45,7 +45,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 		try {
 			result = (CtDonHang) session.get(CtDonHang.class, maCTDonHang);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -60,7 +60,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 			session.update(ctDonHang);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -76,7 +76,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -101,7 +101,7 @@ public class CTDonHangDAOImpl implements CTDonHangDAO {
 			}
 		} catch (Exception ex) {
 			result = false;
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}		
 		
 		return result;

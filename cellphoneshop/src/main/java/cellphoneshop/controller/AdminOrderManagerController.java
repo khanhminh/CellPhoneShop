@@ -89,9 +89,9 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 			int id = Integer.parseInt(strId);
 			result = dhService.xoaDonHang(id);
 			
-			logger.info(SecurityHelper.getUser().getEmail() + " xoa don hang: " + strId);
+			logger.warn(SecurityHelper.getUser().getEmail() + " xoa don hang: " + strId);
 		} catch (Exception e) {
-			logger.error("loi xoa don hang: " + e.getMessage());
+			logger.warn("loi xoa don hang: " + e.getMessage());
 			result = false;
 		}
 		JsonHandler.writeJson(new Boolean(result));
@@ -116,16 +116,16 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 			if (validateOrder()){
 				if (dhService.capnhatDonHang(donHang)){
 					request.setAttribute("isSuccess", true);				
-					logger.info(SecurityHelper.getUser().getEmail() + " cap nhat don hang: " + order.getMaDonHang());
+					logger.warn(SecurityHelper.getUser().getEmail() + " cap nhat don hang: " + order.getMaDonHang());
 				}
 				else {
 					request.setAttribute("isSuccess", false);				
-					logger.info("cap nhat don hang that bai: " + order.getMaDonHang());
+					logger.warn("cap nhat don hang that bai: " + order.getMaDonHang());
 				}
 			}
 			else {
 				request.setAttribute("errors", errors);
-				logger.info("thong tin don hang cap nhat khong hop le ");
+				logger.warn("thong tin don hang cap nhat khong hop le ");
 			}
 		}
 		
@@ -158,7 +158,7 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 			request.setAttribute("totalPage", totalPage);
 			request.setAttribute("page", p);
 		} catch (Exception e) {
-			logger.error("search order fail: " + e.getMessage());
+			logger.warn("search order fail: " + e.getMessage());
 		}			
 		
 		return SUCCESS;
@@ -209,7 +209,7 @@ public class AdminOrderManagerController extends ActionSupport implements Servle
 			}
 		} catch (Exception e) {
 			errors.add(message.getMessage("unknowInfo"));
-			logger.error("validate order fail: " + e.getMessage());
+			logger.warn("validate order fail: " + e.getMessage());
 			return false;
 		}
 		

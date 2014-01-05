@@ -10,6 +10,7 @@ public interface SanPhamDAO {
 	SanPham getSanPhamTheoId(Integer maSp);
 	SanPham getSanPhamCungChiTietTheoId(Integer maSp);
 	boolean updateSanPham(SanPham sp);
+	public List<SanPham> getListSanPham(String order, boolean isAsc);
 	
 	/**
 	 * Lay danh sach san pham co ngay nhap truoc mot ngay nao do co phan trang.

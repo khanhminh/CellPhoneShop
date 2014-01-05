@@ -1,5 +1,5 @@
-# Phien ban 0.4
-# Ngày: 21/12/2013
+# Phien ban 0.5
+# Ngày: 05/01/2013
 
 use CellPhoneShop;
 
@@ -87,7 +87,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiSony()
 			NULL,				# thoiGianChoQuayPhim float
 			NULL,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'HSDPA, 42 Mbps; HSUPA, 5.76 Mbps',				# mang3G
@@ -199,7 +199,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiSamsung()
 			NULL,				# thoiGianChoQuayPhim float
 			NULL,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			1,				# soLuongSim int
 			NULL,				# mang2G
 			'HSDPA, 42 Mbps; HSUPA, 5.76 Mbps',				# mang3G
@@ -278,7 +278,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiSamsung()
 			NULL,				# thoiGianChoQuayPhim float
 			NULL,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			1,				# soLuongSim int
 			NULL,				# mang2G
 			'HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
@@ -356,7 +356,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiSamsung()
 			NULL,				# thoiGianChoQuayPhim float
 			NULL,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			2,				# soLuongSim int
 			NULL,				# mang2G
 			'HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
@@ -432,7 +432,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiSamsung()
 			NULL,				# thoiGianChoQuayPhim float
 			NULL,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			2,				# soLuongSim int
 			NULL,				# mang2G
 			'HSDPA, 42 Mbps; HSUPA, 5.76 Mbps',				# mang3G
@@ -608,7 +608,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 			NULL,				# thoiGianChoQuayPhim float
 			23.9,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'Có',				# mang3G
@@ -689,7 +689,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 			NULL,				# thoiGianChoQuayPhim float
 			18.3,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'Có',				# mang3G
@@ -770,7 +770,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 			NULL,				# thoiGianChoQuayPhim float
 			18.3,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'Có',				# mang3G
@@ -853,7 +853,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 			NULL,				# thoiGianChoQuayPhim float
 			18.3,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'Có',				# mang3G
@@ -937,7 +937,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 			NULL,				# thoiGianChoQuayPhim float
 			18.3,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'Có',				# mang3G
@@ -1021,7 +1021,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 			NULL,				# thoiGianChoQuayPhim float
 			18.3,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'Có',				# mang3G
@@ -1102,7 +1102,7 @@ CREATE PROCEDURE chenDuLieuDienThoaiNokia()
 			NULL,				# thoiGianChoQuayPhim float
 			18.3,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'Có',				# mang3G
@@ -1208,14 +1208,14 @@ CREATE PROCEDURE chenDuLieuDienThoaiLG()
 			'4 GB',				# boNhoTrong
 			'MicroSD (T-Flash)',				# theNhoNgoai
 			32,				    # dungLuongTheToiDa int
-			'Pin chuẩn Li-Ion',				# dungLuongPin float
-			NULL,				# congNghePin
+			0,				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
 			TRUE,				# pinCoTheThaoRoi boolean
 			NULL,				    # thoiGianChoToiDa float
 			NULL,				# thoiGianChoQuayPhim float
 			NULL,				    # thoiGianChoGoiDien float
 			maHDH,				# maHDH
-			NULL,				# loaiBanPhim
+			'Không có',				# loaiBanPhim
 			NULL,				# soLuongSim int
 			NULL,				# mang2G
 			'HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
@@ -1240,7 +1240,477 @@ CREATE PROCEDURE chenDuLieuDienThoaiLG()
 		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/dien-thoai-di-dong-lg-optimus-l9-4.jpg', 4);
 		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/dien-thoai-di-dong-lg-optimus-l9-5.jpg', 5);
 		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/OptimusL9/dien-thoai-di-dong-lg-optimus-l9-6.jpg', 6);
+		
+		
+		#===================================================================================================
+		#==== LG G Pro Lite DUAL =============================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('LG G Pro Lite DUAL',
+				NULL,
+				6990000,
+				24,
+				'resources/images/Smartphone/LG/ProLiteDual/lg-g-pro-lite-dual-300-nowatermark-120x120.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'LG G Pro Lite DUAL';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			125, 			# trongLuong
+			131.9,			# chieuCao
+			62.8, 			# chieuRong
+			8.8,			# doDay
+			NULL,				# ngaySX date
+			'IPS LCD',				# loaiManHinh
+			'16 triệu màu',				# soMauManHinh
+			'540 x 960 pixels',					# doPhanGiaiManHinh
+			'qHD',				# chuanManHinh
+			5.5,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'8.0 MP',					# cameraSau
+			'1.3 MP',				# cameraTruoc
+			'Tự động lấy nét. Nhận diện khuôn mặt',	    # tinhNangCamera
+			'Quay phim FullHD 1080p@30fps',					# quayPhim
+			false,				# videoCall boolean
+			1,				# tocDoCPU float
+			2,				    # soNhanCPU int
+			'MTK 6577',				# chipset
+			'1 GB',				# RAM
+			'PowerVR SGX531',				# GPU
+			'8 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			32,				    # dungLuongTheToiDa int
+			4130,				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			TRUE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			'Không có',				# loaiBanPhim
+			2,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 7.2 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Không',				# mang4G
+			'Wi-Fi 802.11 a/b/g/n, DLNA, Wi-Fi Direct, dual-band, Wi-Fi hotspot',		# wifi
+			'V3.0 với EDR',				# bluetooth
+			'Class 12 (4+1/3+2/2+3/1+4 slots), 32 - 48 kbps',				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/ProLiteDual/Knockon-1.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/ProLiteDual/But-1.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/ProLiteDual/LG-G-Pro-Lite-5.jpg', 3);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/ProLiteDual/LG-G-Pro-Lite-D686-trang-11.jpg', 4);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/ProLiteDual/LG-G-Pro-Lite-D686-trang-12.jpg', 5);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/LG/ProLiteDual/LG-G-Pro-Lite-D686-trang-13.jpg', 6);
 	END //
 DELIMITER ;
 CALL chenDuLieuDienThoaiLG();
 DROP PROCEDURE IF EXISTS chenDuLieuDienThoaiLG;
+
+
+
+# HTC
+DELIMITER //
+CREATE PROCEDURE chenDuLieuDienThoaiHTC()
+	BEGIN
+		DECLARE maSP INT;
+		DECLARE maNhaSX INT;
+		DECLARE maLoaiSP INT;
+		DECLARE maHDH INT;
+		DECLARE ngayNhap DATE;
+		
+		DECLARE maCTSP INT;
+		
+		SELECT DISTINCT(LSP.maLoaiSP)
+		INTO maLoaiSP
+		FROM LoaiSanPham AS LSP
+		WHERE LSP.tenLoaiSP LIKE 'Điện thoại di động';
+		
+		SELECT DISTINCT(NSX.maNhaSX)
+		INTO maNhaSX
+		FROM NhaSanXuat AS NSX
+		WHERE NSX.tenNhaSX LIKE 'HTC';
+		
+		SELECT DISTINCT(HDH.maHDH)
+		INTO maHDH
+		FROM HeDieuHanh AS HDH
+		WHERE HDH.tenHDH LIKE 'Android';
+		
+		SET ngayNhap = NOW();
+		
+		#===================================================================================================
+		#==== HTC Desire L Dual Sim =============================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('HTC Desire L Dual Sim',
+				NULL,
+				5990000,
+				24,
+				'resources/images/Smartphone/HTC/DesignLDualSim/htc-desire-l-dual-sim-300-nowatermark-120x120.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'HTC Desire L Dual Sim';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			120, 			# trongLuong
+			128,			# chieuCao
+			66.9, 			# chieuRong
+			8.9,			# doDay
+			NULL,				# ngaySX date
+			"Super LCD",				# loaiManHinh
+			'16 triệu màu',				# soMauManHinh
+			'480 x 480 pixels',					# doPhanGiaiManHinh
+			'WVGA',				# chuanManHinh
+			4.3,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'5.0 MP',					# cameraSau
+			'Không',				# cameraTruoc
+			'Tự động lấy nét, chống rung',	    # tinhNangCamera
+			'Quay phim FullHD 720p@30fps',					# quayPhim
+			false,				# videoCall boolean
+			1,				# tocDoCPU float
+			2,				    # soNhanCPU int
+			'Qualcomm',				# chipset
+			'1 GB',				# RAM
+			'Adreno 220',				# GPU
+			'4 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			32,				    # dungLuongTheToiDa int
+			'1800',				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			TRUE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			'Không có',				# loaiBanPhim
+			NULL,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 7.2 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Không',				# mang4G
+			'Wi-Fi 802.11 b/g/n, Wi-Fi hotspot',		# wifi
+			'V4.0 with A2DP',				# bluetooth
+			'Có',				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/HTC/DesignLDualSim/man-hinh-htc-desire-l-dual.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/HTC/DesignLDualSim/Camera-htc-desire-l-dual.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/HTC/DesignLDualSim/beat-audio-htc-desire-l-dual.jpg', 3);
+		
+		
+		#===================================================================================================
+		#==== HTC 8S =============================================================================
+		#===================================================================================================
+		
+		SELECT DISTINCT(HDH.maHDH)
+		INTO maHDH
+		FROM HeDieuHanh AS HDH
+		WHERE HDH.tenHDH LIKE 'Windows Phone';
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('HTC 8S',
+				NULL,
+				3290000,
+				24,
+				'resources/images/Smartphone/HTC/HTC8S/htc8s.png',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'HTC 8S';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			113, 			# trongLuong
+			120.5,			# chieuCao
+			63, 			# chieuRong
+			10.3,			# doDay
+			NULL,				# ngaySX date
+			"Super LCD",				# loaiManHinh
+			'16 triệu màu',				# soMauManHinh
+			'480 x 480 pixels',					# doPhanGiaiManHinh
+			'WVGA',				# chuanManHinh
+			4.0,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'5.0 MP',					# cameraSau
+			'Không',				# cameraTruoc
+			'Tự động lấy nét, chạm lấy nét. Nhận diện khuôn mặt',	    # tinhNangCamera
+			'Quay phim HD 720p@30fps',					# quayPhim
+			false,				# videoCall boolean
+			1,				# tocDoCPU float
+			2,				    # soNhanCPU int
+			'Qualcomm Snapdragon S4',				# chipset
+			'512 MB',				# RAM
+			'Adreno 305',				# GPU
+			'4 GB',				# boNhoTrong
+			'MicroSD (T-Flash)',				# theNhoNgoai
+			32,				    # dungLuongTheToiDa int
+			'1700',				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			FALSE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			'Không có',				# loaiBanPhim
+			1,				# soLuongSim int
+			NULL,				# mang2G
+			'HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Không',				# mang4G
+			'Wi-Fi 802.11 b/g/n',		# wifi
+			'V3.1',				# bluetooth
+			'Có',				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/HTC/HTC8S/HTC-8S-Den-1.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/HTC/HTC8S/HTC-8S-14.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/HTC/HTC8S/HTC-8S-Den-10.jpg', 3);
+	END //
+DELIMITER ;
+CALL chenDuLieuDienThoaiHTC();
+DROP PROCEDURE IF EXISTS chenDuLieuDienThoaiHTC;
+
+
+// Apple
+DELIMITER //
+CREATE PROCEDURE chenDuLieuDienThoaiApple()
+	BEGIN
+		DECLARE maSP INT;
+		DECLARE maNhaSX INT;
+		DECLARE maLoaiSP INT;
+		DECLARE maHDH INT;
+		DECLARE ngayNhap DATE;
+		
+		DECLARE maCTSP INT;
+		
+		SELECT DISTINCT(LSP.maLoaiSP)
+		INTO maLoaiSP
+		FROM LoaiSanPham AS LSP
+		WHERE LSP.tenLoaiSP LIKE 'Điện thoại di động';
+		
+		SELECT DISTINCT(NSX.maNhaSX)
+		INTO maNhaSX
+		FROM NhaSanXuat AS NSX
+		WHERE NSX.tenNhaSX LIKE 'Apple';
+		
+		SELECT DISTINCT(HDH.maHDH)
+		INTO maHDH
+		FROM HeDieuHanh AS HDH
+		WHERE HDH.tenHDH LIKE 'iOS';
+		
+		SET ngayNhap = NOW();
+		
+		#===================================================================================================
+		#==== iPhone 5S 64GB =============================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('iPhone 5S 64GB',
+				NULL,
+				22290000,
+				24,
+				'resources/images/Smartphone/Apple/iPhone5S64GB/iphone-5s-64gb-300-nowatermark-120x120.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'iPhone 5S 64GB';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			112, 			# trongLuong
+			123.8,			# chieuCao
+			58.6, 			# chieuRong
+			7.6,			# doDay
+			NULL,				# ngaySX date
+			"LED-backlit IPS LCD",				# loaiManHinh
+			'16 triệu màu',				# soMauManHinh
+			'480 x 480 pixels',					# doPhanGiaiManHinh
+			'DVGA',			# chuanManHinh
+			4.0,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'8.0 MP',					# cameraSau
+			'1.2 MP',				# cameraTruoc
+			'Tự động lấy nét, chạm lấy nét. Nhận diện khuôn mặt, nụ cười. Chống rung',	    # tinhNangCamera
+			'Quay phim FullHD 1080p@30fps',					# quayPhim
+			TRUE,				# videoCall boolean
+			1.3,				# tocDoCPU float
+			2,				    # soNhanCPU int
+			'Apple A7',				# chipset
+			'1 GB',				# RAM
+			'PowerVR G6430',				# GPU
+			'64 GB',				# boNhoTrong
+			'Không',				# theNhoNgoai
+			0,				    # dungLuongTheToiDa int
+			'1560',				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			FALSE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			NULL,				# loaiBanPhim
+			1,				# soLuongSim int
+			NULL,				# mang2G
+			'DC-HSDPA, 42 Mbps; HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Có',				# mang4G
+			'Wi-Fi 802.11 a/b/g/n, dual-band, Wi-Fi hotspot',		# wifi
+			'V4.0 with A2DP',				# bluetooth
+			'Có',				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5S64GB/iphone-5s-1.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5S64GB/iphone-5s-2.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5S64GB/iphone-5s-4.jpg', 3);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5S64GB/iphone-5s-7.jpg', 4);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5S64GB/iphone-5s-8.jpg', 5);
+		
+		
+		#===================================================================================================
+		#==== iPhone 5C 32 GB =============================================================================
+		#===================================================================================================
+		
+		INSERT INTO SanPham (tenSP, gioiThieu, gia, soThangBaoHanh, hinhDaiDien, soLuongHienCo, tongSoLuong, ngayNhap, maLoaiSP, maNhaSX)
+		VALUES ('iPhone 5C 32 GB',
+				NULL,
+				14990000,
+				24,
+				'resources/images/Smartphone/Apple/iPhone5C32GB/iphone-5c-300-nowatermark-120x120.jpg',
+				50,
+				50,
+				ngayNhap, maLoaiSP, maNhaSX);
+		
+		SELECT DISTINCT (S.maSP)
+		INTO maSP
+		FROM SanPham as S
+		WHERE S.tenSP like 'iPhone 5C 32 GB';
+		
+		INSERT INTO CtSanPham (maSP, trongLuong, chieuCao, chieuRong, doDay, ngaySX, loaiManHinh, soMauManHinh, doPhanGiaiManHinh, chuanManHinh, kichThuocManHinh, camUng, matDoDiemAnh, cameraSau, cameraTruoc, tinhNangCamera, quayPhim, videoCall, tocDoCPU, soNhanCPU, chipset, RAM, GPU, boNhoTrong, theNhoNgoai, dungLuongTheToiDa, dungLuongPin, congNghePin, pinCoTheThaoRoi, thoiGianChoToiDa, thoiGianChoQuayPhim, thoiGianChoGoiDien, maHDH, loaiBanPhim, soLuongSim, mang2G, mang3G, mang4G, wifi, bluetooth, GPRS, GPS, boCamBien, denFlash, denPin)
+		VALUES (
+			maSP,
+			132, 			# trongLuong
+			124.4,			# chieuCao
+			59.2,			# chieuRong
+			9,			# doDay
+			NULL,				# ngaySX date
+			"LED-backlit IPS LCD",				# loaiManHinh
+			'16 triệu màu',				# soMauManHinh
+			'640 x 1136 pixels',					# doPhanGiaiManHinh
+			'DVGA',				# chuanManHinh
+			4.0,					# kichThuocManHinh float
+			'Cảm ứng điện dung đa điểm',				# camUng
+			NULL,				# matDoDiemAnh
+			'8.0 MP',					# cameraSau
+			'1.2 MP',				# cameraTruoc
+			'Tự động lấy nét, chạm lấy nét. Nhận diện khuôn mặt',	    # tinhNangCamera
+			'Quay phim FullHD 1080p@30fps',					# quayPhim
+			true,				# videoCall boolean
+			1.3,				# tocDoCPU float
+			2,				    # soNhanCPU int
+			'Apple A6',				# chipset
+			'1 GB',				# RAM
+			'PowerVR SGX 543MP3',				# GPU
+			'32 GB',				# boNhoTrong
+			'Không',				# theNhoNgoai
+			0,				    # dungLuongTheToiDa int
+			'1510',				# dungLuongPin float
+			'Pin chuẩn Li-Ion',				# congNghePin
+			FALSE,				# pinCoTheThaoRoi boolean
+			NULL,				    # thoiGianChoToiDa float
+			NULL,				# thoiGianChoQuayPhim float
+			NULL,				    # thoiGianChoGoiDien float
+			maHDH,				# maHDH
+			NULL,				# loaiBanPhim
+			1,				# soLuongSim int
+			NULL,				# mang2G
+			'DC-HSDPA, 42 Mbps; HSDPA, 21 Mbps; HSUPA, 5.76 Mbps',				# mang3G
+			'Có',				# mang4G
+			'Wi-Fi 802.11 a/b/g/n, dual-band, Wi-Fi hotspot',		# wifi
+			'V4.0 with A2DP',				# bluetooth
+			'Có',				# GPRS
+			'A-GPS và GLONASS',				# GPS
+			NULL,				# boCamBien
+			'Có',				# denFlash
+			'Không'				# denPin
+			);
+		
+		SELECT DISTINCT (C.maCTSP)
+		INTO maCTSP
+		FROM SanPham as S, CtSanPham as C
+		WHERE S.maSP = maSP and C.maSP = S.maSP;
+		
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5C32GB/iphone-5C-xanh-duong-1.jpg', 1);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5C32GB/iphone-5C-xanh-la-1.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5C32GB/iphone-5C-xanh-la-2.jpg', 3);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5C32GB/iphone-5C-trang-1.jpg', 2);
+		INSERT INTO HinhAnhSP (maCTSP, duongDan, STT) values (maCTSP, 'resources/images/Smartphone/Apple/iPhone5C32GB/iphone-5C-hong-1.jpg', 3);
+	END //
+DELIMITER ;
+CALL chenDuLieuDienThoaiApple();
+DROP PROCEDURE IF EXISTS chenDuLieuDienThoaiApple;
+

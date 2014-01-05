@@ -29,7 +29,7 @@ public class TrangThaiKhuyenMaiDAOImpl implements TrangThaiKhuyenMaiDAO {
 			session.save(ttkm);
 			return true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return false;
@@ -43,7 +43,7 @@ public class TrangThaiKhuyenMaiDAOImpl implements TrangThaiKhuyenMaiDAO {
 		try {
 			result = (TrangThaiKhuyenMai) session.get(TrangThaiKhuyenMai.class, maTrangThaiKM);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -59,7 +59,7 @@ public class TrangThaiKhuyenMaiDAOImpl implements TrangThaiKhuyenMaiDAO {
 			Query query = session.createQuery(hql);
 			result = (TrangThaiKhuyenMai) query.uniqueResult();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -72,7 +72,7 @@ public class TrangThaiKhuyenMaiDAOImpl implements TrangThaiKhuyenMaiDAO {
 		try {
 			return session.createQuery("from TrangThaiKhuyenMai").list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return new ArrayList<TrangThaiKhuyenMai>();

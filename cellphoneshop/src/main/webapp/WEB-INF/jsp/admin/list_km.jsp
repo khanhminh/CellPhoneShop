@@ -46,17 +46,26 @@
 							<td><a class="btn btn-success"
 								href="detail_km?id=${km.maKm}"> <i
 									class="icon-zoom-in icon-white"></i> Chi tiết
-							</a> <c:if test="${km.trangThaiKhuyenMai.maTrangThai <= 1}">
+							</a> <c:if test="${km.trangThaiKhuyenMai.maTrangThai == 1 || km.trangThaiKhuyenMai.maTrangThai == 3}">
 									<a class="btn btn-info"
 										href="show_update_km_form?id=${km.maKm}"> <i
 										class="icon-edit icon-white"></i> Chỉnh Sửa
 									</a>
-									<c:if test="${km.trangThaiKhuyenMai.maTrangThai == 1}">
-										<a class="btn btn-danger btnStop" href="stop_km?id=${km.maKm}"
-											data-id="${km.maKm}"> <i class="icon-trash icon-white"></i>
-											Stop
-										</a>
-									</c:if>
+									<c:choose>
+										<c:when test="${km.trangThaiKhuyenMai.maTrangThai == 1}">
+											<a class="btn btn-danger btnStop"
+												href="stop_km?id=${km.maKm}" data-id="${km.maKm}"> <i
+												class="icon-trash icon-white"></i> Stop
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a class="btn btn-danger btnStart"
+												href="start_km?id=${km.maKm}" data-id="${km.maKm}"> <i
+												class="icon-trash icon-white"></i> Start
+											</a>
+										</c:otherwise>
+									</c:choose>
+
 								</c:if></td>
 
 						</tr>

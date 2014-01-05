@@ -28,8 +28,8 @@
 		<property name="saleOfPerPage" value="8" />
 		<property name="trangThaiDong" value="2" />
 		<property name="trangThaiMo" value="1" />
-		<property name="trangThaiTuongLai" value="0" />
-		<property name="regixTrangThaiKM" value="[012]" />
+		<property name="trangThaiTuongLai" value="3" />
+		<property name="regixTrangThaiKM" value="[123]" />
 		<property name="countCut" value="6" />
 
 	</bean>
@@ -150,6 +150,21 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="linkList" class="cellphoneshop.util.LinksSaveImage">
+		<property name="links">
+			<props>
+				<prop key="dir">resources/images/Smartphone/</prop>
+				<prop key="separation">/</prop>
+				<prop key="Apple">Apple/</prop>
+				<prop key="HTC">HTC/</prop>
+				<prop key="LG">LG/</prop>
+				<prop key="Nokia">Nokia/</prop>
+				<prop key="Samsung">SamSung/</prop>
+				<prop key="Sony">Sony/</prop>
+			</props>
+		</property>
+	</bean>
 
 
 	<!-- Admin -->
@@ -163,7 +178,12 @@
 		<property name="page" value="1" />
 		<property name="status" value="0" />
 	</bean>
-	<bean id="productManagerAction" class="cellphoneshop.controller.ProductManagerController" />
+	<bean id="productManagerAction" class="cellphoneshop.controller.ProductManagerController">
+		<property name="productPerPage" value="8"/>
+		<property name="imagesLink">
+			<ref bean="linkList"/>
+		</property>
+	</bean>
 	<bean id="testInsertProductAction" class="cellphoneshop.controller.TestProductManagerController" /> <!-- for test only -->
 </beans>
        				

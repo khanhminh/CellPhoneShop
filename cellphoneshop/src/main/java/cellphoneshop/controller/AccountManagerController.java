@@ -47,7 +47,7 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("listAccount", listAccount);
 		
-		log.info("lay danh sach tai khoan");
+		log.warn("lay danh sach tai khoan");
 		
 		return SUCCESS;
 	}
@@ -62,7 +62,7 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 		request.setAttribute("isInput", false);
 		request.setAttribute("listAccount", listAccount);
 		
-		log.info("tim kiem tai khoan");
+		log.warn("tim kiem tai khoan");
 		
 		return SUCCESS;
 	}
@@ -106,14 +106,14 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			if (admin.getMaNd() == id) {
 				// khong the phan quyen tu phan quyen
 				result = NoAccess;
-				log.info("loi phan quyen cho chinh tai khoan hien tai: " + admin.getEmail());
+				log.warn("loi phan quyen cho chinh tai khoan hien tai: " + admin.getEmail());
 			}
 			else {
 				if (roles != null){
 					for (String role : roles){
 						int r = Integer.parseInt(role);
 						if (!ndService.phanQuyenNguoiDung(id, r)){
-							log.info("loi phan quyen cho tai khoan: " + id);
+							log.warn("loi phan quyen cho tai khoan: " + id);
 							result = Error;
 							break;
 						}
@@ -124,19 +124,19 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 						int r = Integer.parseInt(role);
 						if (!ndService.huyVaiTroNguoiDung(id, r)){
 							result = Error;
-							log.info("loi phan quyen cho tai khoan: " + id);
+							log.warn("loi phan quyen cho tai khoan: " + id);
 							break;
 						}
 					}
 				}
 
 				if (result == Success){
-					log.info("phan quyen thanh cong cho tai khoan: " + id);
+					log.warn("phan quyen thanh cong cho tai khoan: " + id);
 				}
 			}			
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.warn(e.getMessage());
 			result = Error;
 		}
 		JsonHandler.writeJson(result);
@@ -164,11 +164,11 @@ public class AccountManagerController extends ActionSupport implements ServletRe
 			}
 			
 			if (result == Success){
-				log.info("lock tai khoan thanh cong: " + id);
+				log.warn("lock tai khoan thanh cong: " + id);
 			}
 		} catch (Exception e) {
 			result = Error;
-			log.error("loi lock tai khoan" + e.getMessage());
+			log.warn("loi lock tai khoan" + e.getMessage());
 		}
 		JsonHandler.writeJson(result);
 		

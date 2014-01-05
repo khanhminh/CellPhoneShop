@@ -43,7 +43,9 @@ public class HomeController extends ActionSupport implements
 	public String newProducts() {
 		int currentPage = getPage(request.getParameter("page"));
 		int start = (currentPage - 1) * productPerPage;
-		List<SanPham> newProducts = sanPhamService.getListSanPhamMoiTrongTuan(
+		/*List<SanPham> newProducts = sanPhamService.getListSanPhamMoiTrongTuan(
+				start, productPerPage);*/
+		List<SanPham> newProducts = sanPhamService.getListSanPhamMoiTrongThang(
 				start, productPerPage);
 
 		request.setAttribute("newProducts", newProducts);

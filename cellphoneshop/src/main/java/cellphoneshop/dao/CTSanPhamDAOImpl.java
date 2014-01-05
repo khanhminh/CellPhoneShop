@@ -31,7 +31,7 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 			session.save(ctSanPham);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -45,7 +45,7 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 		try {
 			result = (CtSanPham) session.get(CtSanPham.class, maCtSP);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -61,7 +61,7 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 			Query query = session.createQuery(hql);
 			result = (CtSanPham) query.uniqueResult();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -75,7 +75,7 @@ public class CTSanPhamDAOImpl implements CTSanPhamDAO {
 			session.update(ctSanPham);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

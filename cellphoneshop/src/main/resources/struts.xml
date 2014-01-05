@@ -244,16 +244,22 @@
 			<result name="success" type="redirectAction">list_km</result>
 		</action>
 
-		<action name="insert_km" method="insertKhuyenMai" class="khuyenmaiAction">
-			<result name="input" type="tiles">insert_km</result>
-			<result name="success" type="tiles">insert_km</result>
+		<action name="start_km" method="startKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="redirectAction">list_km</result>
 		</action>
 
-		<action name="show_update_km_form" method="showUpdateKhuyenMaiForm" class="khuyenmaiAction">
+		<action name="insert_km" method="insertKhuyenMai" class="khuyenmaiAction">
+			<result name="input" type="tiles">insert_km</result>
+			<result name="success" type="redirectAction">list_km</result>
+		</action>
+
+		<action name="show_update_km_form" method="showUpdateKhuyenMaiForm"
+			class="khuyenmaiAction">
 			<result name="input" type="tiles">update_km</result>
 		</action>
 
-		<action name="process_update_km" method="processUpdateKhuyenMai" class="khuyenmaiAction">
+		<action name="process_update_km" method="processUpdateKhuyenMai"
+			class="khuyenmaiAction">
 			<result name="success" type="tiles">update_km</result>
 			<result name="error" type="tiles">update_km</result>
 		</action>
@@ -263,12 +269,43 @@
 			<result name="input" type="tiles">search_km</result>
 		</action>
 
+		<!-- Quan ly CT khuyen mai -->
+		<action name="list_ctkm" method="listCTKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="tiles">list_ctkm</result>
+		</action>
+
+		<action name="insert_ctkm" method="insertCTKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="tiles">insert_ctkm</result>
+			<result name="input" type="tiles">insert_ctkm</result>
+		</action>
+
+		<action name="delete_ctkm" method="deleteCTKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="redirectAction">list_ctkm</result>
+		</action>
+		
+		<action name="search_ctkm" method="searchCTKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="tiles">search_ctkm</result>
+		</action>
+
 
 		<!-- quan ly san pham -->
 		<action name="insert_product" method="insertProduct" class="productManagerAction">
 			<result name="success" type="tiles">insert_product</result>
 			<result name="input" type="tiles">insert_product</result>
 		</action>
+
+		<action name="list_product" method="listProduct" class="productManagerAction">
+			<result name="success" type="tiles">list_product</result>
+		</action>
+
+		<action name="detail_product" method="detailProduct" class="productManagerAction">
+			<result name="success" type="tiles">detail_product</result>
+		</action>
+		
+		
+
+
+
 
 	</package>
 

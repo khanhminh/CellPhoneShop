@@ -33,7 +33,7 @@ public class HinhAnhSPDAOImpl implements HinhAnhSPDAO{
 			session.save(hinhSp);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -48,7 +48,7 @@ public class HinhAnhSPDAOImpl implements HinhAnhSPDAO{
 			session.update(hinhSp);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -64,7 +64,7 @@ public class HinhAnhSPDAOImpl implements HinhAnhSPDAO{
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

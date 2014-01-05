@@ -35,7 +35,7 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 			session.save(loaiSP);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
@@ -49,7 +49,7 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 		try {
 			result = (LoaiSanPham) session.get(LoaiSanPham.class, maLoaiSP);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
@@ -65,7 +65,7 @@ public class LoaiSanPhamDAOImpl implements LoaiSanPhamDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;

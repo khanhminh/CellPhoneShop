@@ -180,11 +180,43 @@
 		<put-attribute name="content" value="/WEB-INF/jsp/admin/search_km.jsp" />
 	</definition>
 
+	<definition name="list_ctkm" extends="admin">
+		<put-attribute name="title" value="Danh sách chi tiết khuyến mãi" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/list_ctkm.jsp" />
+	</definition>
+
+	<definition name="insert_ctkm" extends="admin">
+		<put-attribute name="title" value="Áp dụng chính sách khuyến mãi cho sản phẩm" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/insert_ctkm.jsp" />
+	</definition>
+	
+	<definition name="search_ctkm" extends="admin">
+		<put-attribute name="title" value="Tìm kiếm chi tiết khuyến mãi cho các sản phẩm" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/search_ctkm.jsp" />
+	</definition>
+
+
+
+
+	<!-- Quan ly san pham -->
 	<definition name="insert_product" extends="admin">
 		<put-attribute name="title" value="Thêm sản phẩm" />
 		<put-attribute name="content"
 			value="/WEB-INF/jsp/admin/insert_product.jsp" />
 	</definition>
+
+	<definition name="list_product" extends="admin">
+		<put-attribute name="title" value="Danh sách sản phẩm" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/list_product.jsp" />
+	</definition>
+
+	<definition name="detail_product" extends="admin">
+		<put-attribute name="title" value="Chi tiết sản phẩm" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/admin/detail_product.jsp" />
+	</definition>
+
 
 
 
