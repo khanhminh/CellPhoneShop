@@ -9,7 +9,12 @@
 	</ul>
 </div>
 
+<c:if test="${empty  ctkmList}">
+	<strong> Không có sản phẩm nào được áp dụng khuyến mãi</strong>
+</c:if>
+
 <c:forEach var="ctkm" items="${ctkmList}" begin="0">
+	<c:if test="${not empty ctkm.sanphamList}">
 	<div class="row-fluid sortable">
 		<div class="box span12">
 			<div class="box-header well" data-original-title>
@@ -85,6 +90,7 @@
 			</div>
 		</div>
 	</div>
+	</c:if>
 </c:forEach>
 
 

@@ -18,4 +18,5 @@ public interface KhuyenMaiService {
 	boolean ApdungKhuyenMaiChoSanPham(Integer masP, Integer maKm);
 	boolean HuyApDungKhuyenMaiChoSanPham(Integer masP, Integer maKm);
 	List<CTKhuyenMaiView> getListCTKhuyenMai();
+	List<KhuyenMai> getKhuyenMaiDangDienRa(Integer maSP);
 }

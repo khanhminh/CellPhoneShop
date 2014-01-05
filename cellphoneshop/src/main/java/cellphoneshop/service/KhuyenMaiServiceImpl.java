@@ -126,13 +126,39 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 				spList.add(sp);
 			}
 
-			CTKhuyenMaiView ctkm = new CTKhuyenMaiView();
-			ctkm.setKhuyenmai(km);
-			ctkm.setSanphamList(spList);
-			listCTKMView.add(ctkm);
+			if (!spList.isEmpty()) {
+				CTKhuyenMaiView ctkm = new CTKhuyenMaiView();
+				ctkm.setKhuyenmai(km);
+				ctkm.setSanphamList(spList);
+				listCTKMView.add(ctkm);
+			}
+
 		}
 
 		return listCTKMView;
+	}
+
+	public List<KhuyenMai> getKhuyenMaiDangDienRa(Integer maSP) {
+		List<KhuyenMai> kmList = khuyenMaiDAO.getListKhuyenMail("1", "status", null, null);
+		for(KhuyenMai km : kmList){
+			boolean isKm = false;
+			Iterator<SanPham> iterator = km.getSanPhams().iterator();
+			while(iterator.hasNext()){
+				SanPham sp = (SanPham) iterator.next();
+				if(sp.getMaSp() == maSP){
+					isKm = true;
+					break;
+				}
+			}
+			if(!isKm){
+				kmList.remove(km);
+			}
+		}
+		
+		if(kmList.isEmpty()){
+			return null;
+		}
+		return kmList;
 	}
 
 }
