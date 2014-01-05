@@ -59,7 +59,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 				Hibernate.initialize(result.getVaiTros());
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -79,7 +79,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 			user.setMatKhau(pass);
 			session.update(user);
 		} catch (HibernateException ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return true;
@@ -147,7 +147,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
-			log.error("Error Update: " + e.getMessage());
+			log.warn("Error Update: " + e.getMessage());
 			return false;
 		} finally {
 			session.close();
@@ -203,7 +203,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 			
 			return result;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -218,7 +218,7 @@ public class NguoidungDAOImpl implements NguoidungDAO {
 			Query query = session.createQuery(hql);
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
