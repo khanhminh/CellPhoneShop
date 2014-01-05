@@ -126,7 +126,7 @@ public class SaleOfController extends ActionSupport implements
 		this.insertKm.setTrangThaiKhuyenMai(statusKm);
 		this.insertKm.setHinhAnh(this.getLinkImage());
 		if (khuyenMaiService.insertKhuyenMai(this.insertKm)) {
-			log.info("Them thanh cong khuyen mai, co id: "
+			log.warn("Them thanh cong khuyen mai, co id: "
 					+ this.insertKm.getMaKm());
 			this.insertKm = null;
 			this.totalKm += 1;
@@ -135,7 +135,7 @@ public class SaleOfController extends ActionSupport implements
 			errors.add(messages.getMessageList().getProperty("errorInsert"));
 			request.setAttribute("errors", errors);
 			request.setAttribute("inputKm", this.insertKm);
-			log.info("Them khong thanh cong khuyen mai co tieu de: "
+			log.warn("Them khong thanh cong khuyen mai co tieu de: "
 					+ this.insertKm.getTieuDe());
 			return INPUT;
 		}
@@ -152,7 +152,7 @@ public class SaleOfController extends ActionSupport implements
 				khuyenMai.setTrangThaiKhuyenMai(trangThaiKhuyenMai);
 
 				if (khuyenMaiService.updateKhuyenMai(khuyenMai)) {
-					log.info("Stop khuyen mai " + khuyenMai.getTieuDe()
+					log.warn("Stop khuyen mai " + khuyenMai.getTieuDe()
 							+ " ID: " + khuyenMai.getMaKm() + " thanh cong");
 					this.reloadKhuyenMai();
 				} else {
@@ -174,7 +174,7 @@ public class SaleOfController extends ActionSupport implements
 				khuyenMai.setTrangThaiKhuyenMai(trangThaiKhuyenMai);
 
 				if (khuyenMaiService.updateKhuyenMai(khuyenMai)) {
-					log.info("Start khuyen mai " + khuyenMai.getTieuDe()
+					log.warn("Start khuyen mai " + khuyenMai.getTieuDe()
 							+ " ID: " + khuyenMai.getMaKm() + " thanh cong");
 					this.reloadKhuyenMai();
 				} else {
@@ -230,7 +230,7 @@ public class SaleOfController extends ActionSupport implements
 			return ERROR;
 		}
 
-		log.info("ma: " + updatekm.getMaKm());
+		log.warn("ma: " + updatekm.getMaKm());
 
 		khuyenmai.setTieuDe(updatekm.getTieuDe());
 		khuyenmai.setMoTa(updatekm.getMoTa());
@@ -243,7 +243,7 @@ public class SaleOfController extends ActionSupport implements
 
 		khuyenmai.setNgayBatDau(updatekm.getNgayBatDau());
 		khuyenmai.setNgayKetThuc(updatekm.getNgayKetThuc());
-		log.info("Ngay bat dau: " + updatekm.getNgayBatDau());
+		log.warn("Ngay bat dau: " + updatekm.getNgayBatDau());
 		if (updatekm.getQuaTang().isEmpty()) {
 			khuyenmai.setQuaTang(null);
 		} else {
@@ -260,15 +260,15 @@ public class SaleOfController extends ActionSupport implements
 		if (khuyenMaiService.updateKhuyenMai(khuyenmai)) {
 			request.setAttribute("isSuccess", true);
 			request.setAttribute("km", khuyenmai);
-			log.info("Cap nhat - giam gia: " + khuyenmai.getPhanTramGiamGia());
-			log.info("Tang kem: " + khuyenmai.getQuaTang());
-			log.info("Cap nhat thanh cong khuyen mai: " + khuyenmai.getTieuDe());
+			log.warn("Cap nhat - giam gia: " + khuyenmai.getPhanTramGiamGia());
+			log.warn("Tang kem: " + khuyenmai.getQuaTang());
+			log.warn("Cap nhat thanh cong khuyen mai: " + khuyenmai.getTieuDe());
 			this.reloadKhuyenMai();
 			return SUCCESS;
 		} else {
 			errors.add(messages.getMessageList().getProperty("errorUpdateKM"));
 			request.setAttribute("errors", errors);
-			log.info("Cap nhat khong thanh cong khuyen mai: "
+			log.warn("Cap nhat khong thanh cong khuyen mai: "
 					+ khuyenmai.getTieuDe());
 			return ERROR;
 		}
@@ -306,7 +306,7 @@ public class SaleOfController extends ActionSupport implements
 		} else {
 			Integer totalspecialkm = khuyenMaiService.countKhuyenMai(query,
 					option);
-			log.info("totalspecialKM: " + totalspecialkm);
+			log.warn("totalspecialKM: " + totalspecialkm);
 			Integer totalPage = this.getTotalPage(totalspecialkm);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("totalPage", totalPage);
@@ -340,7 +340,7 @@ public class SaleOfController extends ActionSupport implements
 		if (khuyenMaiService.ApdungKhuyenMaiChoSanPham(this.ctKhuyenMai
 				.getSanPham().getMaSp(), this.ctKhuyenMai.getKhuyenMai()
 				.getMaKm())) {
-			log.info("Add thanhg cong san pham "
+			log.warn("Add thanhg cong san pham "
 					+ this.ctKhuyenMai.getSanPham().getMaSp()
 					+ " vao khuyen mai "
 					+ this.ctKhuyenMai.getKhuyenMai().getMaKm());
@@ -349,7 +349,7 @@ public class SaleOfController extends ActionSupport implements
 			return SUCCESS;
 
 		} else {
-			log.info("Add khong thanh thanhg cong san pham "
+			log.warn("Add khong thanh thanhg cong san pham "
 					+ this.ctKhuyenMai.getSanPham().getMaSp()
 					+ " vao khuyen mai "
 					+ this.ctKhuyenMai.getKhuyenMai().getMaKm());
@@ -380,10 +380,10 @@ public class SaleOfController extends ActionSupport implements
 		}
 		if (khuyenMaiService.HuyApDungKhuyenMaiChoSanPham(idSp, idKm)) {
 			request.setAttribute("isSuccess", true);
-			log.info("Delete success ctkm: idSP: " + idSp + " idKm: " + idKm);
+			log.warn("Delete success ctkm: idSP: " + idSp + " idKm: " + idKm);
 			return SUCCESS;
 		} else {
-			log.info("Delete unsuccess ctkm: idSP: " + idSp + " idKm: " + idKm);
+			log.warn("Delete unsuccess ctkm: idSP: " + idSp + " idKm: " + idKm);
 			return SUCCESS;
 		}
 
@@ -464,7 +464,7 @@ public class SaleOfController extends ActionSupport implements
 
 	public boolean saveImage() {
 		destPath = this.getPathSaveImage();
-		log.info("destPath: " + destPath);
+		log.warn("destPath: " + destPath);
 		if (destPath == null) {
 			return false;
 		}
@@ -475,13 +475,13 @@ public class SaleOfController extends ActionSupport implements
 		if (myFile == null || myFileFileName == null) {
 			return false;
 		}
-		// log.info("destPath: " + destPath);
-		log.info("nameFile: " + myFileFileName);
+		// log.warn("destPath: " + destPath);
+		log.warn("nameFile: " + myFileFileName);
 		try {
 			File destFile = new File(destPath, myFileFileName);
 			FileUtils.copyFile(myFile, destFile);
-			// log.info("Destpath: " + destPath);
-			log.info("Upload comlete, link image save on database is "
+			// log.warn("Destpath: " + destPath);
+			log.warn("Upload comlete, link image save on database is "
 					+ this.getLinkImage());
 			return true;
 
@@ -734,7 +734,7 @@ public class SaleOfController extends ActionSupport implements
 			return false;
 		}
 
-		log.info("Thoi gian ket thuc: " + updatekm.getNgayKetThuc());
+		log.warn("Thoi gian ket thuc: " + updatekm.getNgayKetThuc());
 		if (updatekm.getNgayKetThuc().compareTo(today) < 0) {
 			errors.add(messages.getMessageList().getProperty("errorNgayKT"));
 			return false;
@@ -774,7 +774,7 @@ public class SaleOfController extends ActionSupport implements
 			errors.add(messages.getMessageList().getProperty("unknownNgayBD"));
 		} else {
 			if (insertKm.getNgayBatDau().compareTo(today) < 0) {
-				log.info("Loi ngay bat dau");
+				log.warn("Loi ngay bat dau");
 				errors.add(messages.getMessageList().getProperty(
 						"errorNgayBDTL"));
 			}

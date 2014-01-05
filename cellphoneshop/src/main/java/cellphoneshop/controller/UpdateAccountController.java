@@ -26,7 +26,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class UpdateAccountController extends ActionSupport implements
 		ServletRequestAware {
-	Logger logger = Logger.getLogger(UpdateAccountController.class);
+	Logger log = Logger.getLogger(UpdateAccountController.class);
 	private HttpServletRequest request;
 	private UpdateUser user;
 
@@ -56,7 +56,7 @@ public class UpdateAccountController extends ActionSupport implements
 		
 		if (user == null) {
 			request.setAttribute("loginUser", loginUser);
-			logger.info("Vo ham updateAccount");
+			log.warn("Vo ham updateAccount");
 			return INPUT;
 		}
 
@@ -98,7 +98,7 @@ public class UpdateAccountController extends ActionSupport implements
 			return INPUT;
 		}
 		// errors.add(messages.getMessageList().getProperty("updateSuccess"));
-		logger.info("Tai khoan " + loginUser.getEmail()
+		log.warn("Tai khoan " + loginUser.getEmail()
 				+ " da duoc cap nhat thong tin thanh cong!");
 
 		// Set bien isSuccess = true - thanh cong
@@ -138,7 +138,7 @@ public class UpdateAccountController extends ActionSupport implements
 			loginUser.setMatKhau(password);
 			if(nguoiDungService.updateNguoidung(loginUser)){
 				request.setAttribute("isSuccess", true);
-				logger.info("Update thanh cong mat khau cho email: " + loginUser.getEmail());
+				log.warn("Update thanh cong mat khau cho email: " + loginUser.getEmail());
 				return SUCCESS;
 				
 			}else{
@@ -224,7 +224,7 @@ public class UpdateAccountController extends ActionSupport implements
 		try {
 			return formater.parse(strDate);
 		} catch (Exception e) {
-			logger.error("Parse date is not success");
+			log.warn("Parse date is not success");
 			return null;
 		}
 	}

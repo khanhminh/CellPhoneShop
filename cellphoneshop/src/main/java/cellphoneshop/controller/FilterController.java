@@ -85,7 +85,7 @@ public class FilterController  extends ActionSupport implements ServletRequestAw
 		request.setAttribute("listProduct", list);
 		request.setAttribute("totalPage", totalPage);
 		
-		log.info(sort.getBy() + "_" + sort.isAsc());
+		log.warn(sort.getBy() + "_" + sort.isAsc());
 		
 		price = null;
 		brand = null;

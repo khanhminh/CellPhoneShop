@@ -64,7 +64,7 @@ public class CheckoutController extends ActionSupport implements ServletRequestA
 				
 				return SUCCESS;
 			} catch (Exception e) {
-				log.error("loi dat don hang: " + e.getMessage());
+				log.warn("loi dat don hang: " + e.getMessage());
 				return ERROR;
 			}
 		}

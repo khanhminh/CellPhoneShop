@@ -70,7 +70,7 @@ public class ProductManagerController extends ActionSupport implements
 	private String[] fileFileName;
 
 	public String insertProduct() {
-		log.info("Size imagesLin: " + this.imagesLink.getLink("nokia"));
+		log.warn("Size imagesLin: " + this.imagesLink.getLink("nokia"));
 		String insertNewProductRequest = request
 				.getParameter("themSanPhamFlag");
 		if (insertNewProductRequest != null
@@ -136,7 +136,7 @@ public class ProductManagerController extends ActionSupport implements
 	}
 
 	public String listProduct() {
-		log.info("Go to listProduct Controller");
+		log.warn("Go to listProduct Controller");
 		Integer currentPage = this.getCurrentPage(request.getParameter("page"));
 		Integer vitriBatDau = this.getViTriBatDau(currentPage);
 		SortBy sort = new SortBy();
@@ -311,7 +311,7 @@ public class ProductManagerController extends ActionSupport implements
 	public boolean saveImageFile(String producer, String nameProduct) {
 
 		if (this.imagesFile == null || this.imagesFileFileName == null) {
-			log.info("loi null");
+			log.warn("loi null");
 			return false;
 		}
 		String destPath = this.getDestinationPath(producer, nameProduct);
@@ -319,14 +319,14 @@ public class ProductManagerController extends ActionSupport implements
 		try {
 			FileUtils.copyFile(this.imagesFile, destFile);
 		} catch (Exception e) {
-			log.info("Save on disk unsuccessfully-name: "
+			log.warn("Save on disk unsuccessfully-name: "
 					+ this.imagesFileFileName);
 			return false;
 		}
-		log.info("destPath save image: " + destPath);
-		log.info("Save on disk successfully-name: " + this.imagesFileFileName);
-		log.info("NameProducer: " + producer);
-		log.info("Link save on Database: "
+		log.warn("destPath save image: " + destPath);
+		log.warn("Save on disk successfully-name: " + this.imagesFileFileName);
+		log.warn("NameProducer: " + producer);
+		log.warn("Link save on Database: "
 				+ this.getImageUploadLink(producer, nameProduct));
 		return true;
 	}
@@ -339,7 +339,7 @@ public class ProductManagerController extends ActionSupport implements
 		if (destPath == null || destPath.isEmpty()) {
 			return new ArrayList<String>();
 		}
-		log.info("destination Path: " + destPath);
+		log.warn("destination Path: " + destPath);
 
 		for (int i = 0; i < this.file.length; i++) {
 			if(fileFileName[i] == null || file[i] == null){
@@ -350,17 +350,17 @@ public class ProductManagerController extends ActionSupport implements
 			try {
 				FileUtils.copyFile(this.file[i], destFile);
 			} catch (Exception e) {
-				log.info("Save on disk unsuccessfully-name: "
+				log.warn("Save on disk unsuccessfully-name: "
 						+ this.fileFileName[i]);
 				return new ArrayList<String>();
 			}
-			log.info("File Name " + (i + 1) + "is: " + getFileFileName()[i]);
-			log.info("File ContentType " + (i + 1) + " is: "
+			log.warn("File Name " + (i + 1) + "is: " + getFileFileName()[i]);
+			log.warn("File ContentType " + (i + 1) + " is: "
 					+ getFileContentType()[i]);			
 			System.out.println("Files Directory is:"
 					+ this.getImageUploadLink(producer, productName,
 							this.fileFileName[i]));
-			log.info("Save on disk successfully-name: " + this.fileFileName[i]);
+			log.warn("Save on disk successfully-name: " + this.fileFileName[i]);
 			saveLinks.add(this.getImageUploadLink(producer, productName,
 					this.fileFileName[i]));
 		}

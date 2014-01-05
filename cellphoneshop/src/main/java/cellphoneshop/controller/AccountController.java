@@ -60,27 +60,27 @@ public class AccountController extends ActionSupport {
 	}
 
 	public String login() {
-		log.info("vao trang dang nhap");
+		log.warn("vao trang dang nhap");
 		return INPUT;
 	}
 
 	public String loginFail() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("error", true);
-		log.info("dang nhap that bai");
+		log.warn("dang nhap that bai");
 
 		return ERROR;
 	}
 
 	public String register() throws UnsupportedEncodingException {
-		log.info("Vao register Controller AccountController");
+		log.warn("Vao register Controller AccountController");
 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setCharacterEncoding("UTF-8");
 
 		errors = new ArrayList<String>();
 		if (user == null || !validateRegister()) {
-			log.info("vao trang dang ky hoac du lieu nhap khon hop le");
+			log.warn("vao trang dang ky hoac du lieu nhap khon hop le");
 			request.setAttribute("errors", errors);
 			return INPUT;
 		}
@@ -92,7 +92,7 @@ public class AccountController extends ActionSupport {
 			SecurityContextHolder.getContext().setAuthentication(authResult);
 
 			user = null;
-			log.info("dang ky thanh cong");
+			log.warn("dang ky thanh cong");
 			return SUCCESS;
 		} else {
 			return INPUT;
@@ -101,7 +101,7 @@ public class AccountController extends ActionSupport {
 	}
 
 	public String checkEmail() throws IOException {
-		log.info("kiem tra email bang ajax: " + user.getEmail());
+		log.warn("kiem tra email bang ajax: " + user.getEmail());
 		NguoiDung ng = nguoiDungService.getNguoidung(user.getEmail());
 		boolean result = ng != null ? false : true;
 		returnJsonData(result);
@@ -155,7 +155,7 @@ public class AccountController extends ActionSupport {
 				result = false;
 			}
 		} catch (Exception e) {
-			log.info("du lieu dang ky khong hop le");
+			log.warn("du lieu dang ky khong hop le");
 			result = false;
 		}
 
@@ -186,7 +186,7 @@ public class AccountController extends ActionSupport {
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
-			log.error("Loi tra ve json");
+			log.warn("Loi tra ve json");
 		}
 	}
 }
