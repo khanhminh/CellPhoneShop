@@ -129,7 +129,7 @@ public class SaleOfController extends ActionSupport implements
 			log.warn("Them thanh cong khuyen mai, co id: "
 					+ this.insertKm.getMaKm());
 			this.insertKm = null;
-			this.totalKm += 1;
+			this.updateTotalKm();
 			return SUCCESS;
 		} else {
 			errors.add(messages.getMessageList().getProperty("errorInsert"));
@@ -577,6 +577,19 @@ public class SaleOfController extends ActionSupport implements
 
 	public Integer getVitriBD(Integer page) {
 		return (page - 1) * this.saleOfPerPage;
+	}
+	
+	public boolean updateTotalKm(){
+		if(this.totalKm == null){
+			this.totalKm = khuyenMaiService.countKhuyenMai();
+		}
+		
+		if(totalKm != null){
+			totalKm += 1;
+			return true;
+		}
+		
+		return false;
 	}
 
 	public Integer getTotalPage() {
