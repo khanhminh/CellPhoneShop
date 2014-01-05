@@ -151,7 +151,7 @@
 
 									<s:textfield
 										cssClass="text-box single-line input-xlarge editable-input datepicker"
-										type="text" theme="simple" name="km.ngayBatDau"
+										type="text" theme="simple" name="km.ngayBatDau"										
 										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
 										value="%{ngayBD}" />
 
