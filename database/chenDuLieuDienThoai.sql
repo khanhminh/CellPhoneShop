@@ -1522,7 +1522,7 @@ CALL chenDuLieuDienThoaiHTC();
 DROP PROCEDURE IF EXISTS chenDuLieuDienThoaiHTC;
 
 
-// Apple
+# Apple
 DELIMITER //
 CREATE PROCEDURE chenDuLieuDienThoaiApple()
 	BEGIN
