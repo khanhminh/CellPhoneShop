@@ -55,13 +55,13 @@
 										<c:when test="${km.trangThaiKhuyenMai.maTrangThai == 1}">
 											<a class="btn btn-danger btnStop"
 												href="stop_km?id=${km.maKm}" data-id="${km.maKm}"> <i
-												class="icon-trash icon-white"></i> Stop
+												class="icon-off icon-white"></i> Stop
 											</a>
 										</c:when>
 										<c:otherwise>
-											<a class="btn btn-danger btnStart"
+											<a class="btn btn-success btnStart"
 												href="start_km?id=${km.maKm}" data-id="${km.maKm}"> <i
-												class="icon-trash icon-white"></i> Start
+												class="icon-off icon-white"></i> Start
 											</a>
 										</c:otherwise>
 									</c:choose>
@@ -114,10 +114,32 @@
 	</p>
 </div>
 
+<div id="dg-start" title="Bắt đầu khuyến mãi">
+	<p>
+		Bạn có muốn áp dụng khuyến mãi: <span id="dg-star-content"
+			style="color: red; font-weight: bold"></span>
+	</p>
+</div>
+
 <script>
 	var link = "";
 
 	$("#dialog").dialog({
+		autoOpen : false,
+		modal : true,
+		buttons : {
+			OK : function() { //ok
+				$(this).dialog("close");
+				window.location.href = link;
+
+			},
+			Cancel : function() { //cancel
+				$(this).dialog("close");
+			}
+		}
+	});
+	
+	$("#dg-start").dialog({
 		autoOpen : false,
 		modal : true,
 		buttons : {
@@ -141,6 +163,16 @@
 
 			link = $(this).attr("href");
 			$("#dialog").dialog("open");
+		});
+		
+		$('.btnStart').click(function(e) {
+			e.preventDefault();
+
+			var id = $(this).attr("data-id");
+			$('#dg-star-content').text(id);
+
+			link = $(this).attr("href");
+			$("#dg-start").dialog("open");
 		});
 	});
 </script>
