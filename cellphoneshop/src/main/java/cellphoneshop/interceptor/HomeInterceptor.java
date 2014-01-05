@@ -51,7 +51,7 @@ public class HomeInterceptor implements Interceptor {
 		return ai.invoke();
 	}
 	
-	public void loadListKM() {
+	public void loadListKM() {		
 		listKM = kmService.getListKhuyenMaiChuaDong();
 	}
 	
