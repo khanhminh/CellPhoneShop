@@ -139,7 +139,7 @@
 
 					<c:choose>
 						<c:when
-							test="${not empty requestScope.km.ngayBatDau and(not empty requestScope.km.trangThaiKhuyenMai.maTrangThai and requestScope.km.trangThaiKhuyenMai.maTrangThai == 3)}">
+							test="${not empty requestScope.km.ngayBatDau and(not empty requestScope.km.trangThaiKhuyenMai.maTrangThai and requestScope.km.trangThaiKhuyenMai.maTrangThai == 0)}">
 							<s:set var="ngayBD">
 								<fmt:formatDate pattern="MM/dd/yyyy"
 									value="${requestScope.km.ngayBatDau}" />
@@ -179,6 +179,8 @@
 										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
 										readonly="readonly"
 										value="%{ngayBD}" />
+
+
 									<span class="field-validation-valid"
 										data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">
 									</span>
