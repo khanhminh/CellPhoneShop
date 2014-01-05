@@ -35,7 +35,7 @@ public class DSMongMuonDAOImpl implements DSMongMuonDAO {
 			session.save(dsmm);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -51,7 +51,7 @@ public class DSMongMuonDAOImpl implements DSMongMuonDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -72,7 +72,7 @@ public class DSMongMuonDAOImpl implements DSMongMuonDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

@@ -33,7 +33,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			session.save(khuyenMai);
 			return true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return false;
@@ -50,7 +50,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			Hibernate.initialize(khuyenMai.getSanPhams());
 			return khuyenMai;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return null;
@@ -64,7 +64,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			session.update(khuyenMai);
 			return true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return false;
@@ -84,7 +84,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			return khuyenmailList;
 
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return new ArrayList<KhuyenMai>();
@@ -102,7 +102,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 
 			return query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return new ArrayList<KhuyenMai>();
@@ -124,7 +124,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			}
 			return khuyenmailList;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return new ArrayList<KhuyenMai>();
@@ -139,7 +139,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			Query query = session.createQuery(hql);
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return null;
@@ -195,7 +195,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			return khuyenMailList;
 
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return new ArrayList<KhuyenMai>();
@@ -244,7 +244,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			return khuyenMailList;
 
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return new ArrayList<KhuyenMai>();
@@ -280,7 +280,7 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return null;

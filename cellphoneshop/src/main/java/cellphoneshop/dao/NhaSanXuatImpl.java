@@ -34,7 +34,7 @@ public class NhaSanXuatImpl implements NhaSanXuatDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
@@ -49,7 +49,7 @@ public class NhaSanXuatImpl implements NhaSanXuatDAO {
 			session.save(nhaSX);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
@@ -63,7 +63,7 @@ public class NhaSanXuatImpl implements NhaSanXuatDAO {
 		try {
 			result = (NhaSanXuat) session.get(NhaSanXuat.class, maNhaSX);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		return result;
 	}

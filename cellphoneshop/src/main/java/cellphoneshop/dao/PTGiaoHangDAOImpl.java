@@ -30,7 +30,7 @@ public class PTGiaoHangDAOImpl implements PTGiaoHangDAO {
 			session.save(ptGiaoHang);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -44,7 +44,7 @@ public class PTGiaoHangDAOImpl implements PTGiaoHangDAO {
 		try {
 			result = (PtGiaoHang) session.get(PtGiaoHang.class, maPtGiaoHang);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -58,7 +58,7 @@ public class PTGiaoHangDAOImpl implements PTGiaoHangDAO {
 		try {
 			result = session.createQuery("from PtGiaoHang").list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

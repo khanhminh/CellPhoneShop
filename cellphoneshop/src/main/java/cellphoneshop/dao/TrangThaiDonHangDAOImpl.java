@@ -31,7 +31,7 @@ public class TrangThaiDonHangDAOImpl implements TrangThaiDonHangDAO {
 			session.save(ttDonHang);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -45,7 +45,7 @@ public class TrangThaiDonHangDAOImpl implements TrangThaiDonHangDAO {
 		try {
 			result = (TrangThaiDonHang) session.get(TrangThaiDonHang.class, maTrangThai);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -59,7 +59,7 @@ public class TrangThaiDonHangDAOImpl implements TrangThaiDonHangDAO {
 		try {
 			result = session.createQuery("from TrangThaiDonHang").list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

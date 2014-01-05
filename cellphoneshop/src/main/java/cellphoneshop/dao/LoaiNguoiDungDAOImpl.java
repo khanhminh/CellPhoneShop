@@ -33,7 +33,7 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 			session.save(loaiND);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -47,7 +47,7 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 		try {
 			result = (LoaiNguoiDung) session.get(LoaiNguoiDung.class, maLoaiND);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -63,7 +63,7 @@ public class LoaiNguoiDungDAOImpl implements LoaiNguoiDungDAO{
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;

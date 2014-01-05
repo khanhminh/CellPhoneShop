@@ -34,7 +34,7 @@ public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 			session.save(hdh);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
@@ -48,7 +48,7 @@ public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 		try {
 			result = (HeDieuHanh) session.get(HeDieuHanh.class, maHDH);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;
@@ -64,7 +64,7 @@ public class HeDieuHanhDAOImpl implements HeDieuHanhDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + " : " + ex.getMessage());
+			log.warn(ex.getClass().getName() + " : " + ex.getMessage());
 		}
 		
 		return result;

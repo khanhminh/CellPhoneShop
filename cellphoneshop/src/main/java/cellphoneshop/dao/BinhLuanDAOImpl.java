@@ -32,7 +32,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 			session.save(binhLuanMoi);
 			return true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return false;
@@ -45,7 +45,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 		try {
 			return (BinhLuan) session.get(BinhLuan.class, maBinhLuan);
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return null;
@@ -59,7 +59,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 			session.update(binhLuan);
 			return true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return false;
@@ -77,7 +77,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 			query.setMaxResults(soKqToiDa);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return result;
@@ -92,7 +92,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 			Query query = session.createQuery(hql);
 			return ((Long)query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return 0;
@@ -106,7 +106,7 @@ public class BinhLuanDAOImpl implements BinhLuanDAO {
 			session.delete(binhLuan);
 			return true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		
 		return false;

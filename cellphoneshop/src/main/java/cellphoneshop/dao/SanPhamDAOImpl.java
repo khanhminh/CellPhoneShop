@@ -45,7 +45,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			session.save(sp);
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -60,7 +60,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			result = (SanPham) session.get(SanPham.class, maSp);
 			Hibernate.initialize(result.getNhaSanXuat());
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -75,7 +75,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			session.update(sp); // TODO: Neu san pham chua co trong CSDL?
 			result = true;
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -97,7 +97,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -114,7 +114,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
@@ -137,7 +137,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -155,7 +155,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
@@ -192,7 +192,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -211,7 +211,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			Query query = session.createQuery(hql);
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
@@ -246,7 +246,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			query.setMaxResults((int) amount);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -312,7 +312,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -418,7 +418,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			Query query = session.createQuery(hql);
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
@@ -451,7 +451,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		return result;
 	}
@@ -467,7 +467,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			Query query = session.createQuery(hql);
 			result = query.list();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		return result;
 	}
@@ -492,7 +492,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 				}
 			}
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return result;
@@ -507,7 +507,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			Query query = session.createQuery(hql);
 			return ((Long) query.iterate().next()).intValue();
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 
 		return 0;
@@ -540,7 +540,7 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 			result = query.list();
 
 		} catch (Exception ex) {
-			log.error(ex.getClass().getName() + ": " + ex.getMessage());
+			log.warn(ex.getClass().getName() + ": " + ex.getMessage());
 		}
 		return result;
 	}
