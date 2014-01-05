@@ -47,8 +47,9 @@
 								<td>${sp.maSp}</td>
 								<td>${sp.tenSp}</td>
 								<td>
-								<a class="btn btn-danger btnStop"
-									href="delete_ctkm?idkm=${ctkm.khuyenmai.maKm}&idsp=${sp.maSp}"> <i
+								<a class="btn btn-danger btnDelete"
+									href="delete_ctkm?idkm=${ctkm.khuyenmai.maKm}&idsp=${sp.maSp}"
+									data-name="${sp.tenSp}" > <i
 										class="icon-zoom-in icon-white"></i> Xóa
 								</a>
 								</td>
@@ -92,5 +93,44 @@
 	</div>
 	</c:if>
 </c:forEach>
+
+<div id="dialog" title="Xóa chi tiết khuyến mãi">
+	<p>
+		Bạn có muốn xóa chi tiết khuyến mãi sản phẩm: <span id="dialog-content"
+			style="color: red; font-weight: bold"></span>
+	</p>
+</div>
+
+<script>
+	var link = "";
+
+	$("#dialog").dialog({
+		autoOpen : false,
+		modal : true,
+		buttons : {
+			OK : function() { //ok
+				$(this).dialog("close");
+				window.location.href = link;
+
+			},
+			Cancel : function() { //cancel
+				$(this).dialog("close");
+			}
+		}
+	});
+	
+	$(document).ready(function() {
+		$('.btnDelete').click(function(e) {
+			e.preventDefault();
+
+			var name = $(this).attr("data-name");
+			$('#dialog-content').text(name);
+
+			link = $(this).attr("href");
+			$("#dialog").dialog("open");
+		});
+		
+	});
+</script>
 
 

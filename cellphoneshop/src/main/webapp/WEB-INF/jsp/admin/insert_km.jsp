@@ -65,9 +65,12 @@
 						<label class="control-label" for="insertKm.phanTramGiamGia"> %
 							Giảm giá </label>
 						<div class="controls">
-							<s:textfield class="text-box single-line input-xlarge focused"
+							<s:textfield cssClass="text-box single-line input-xlarge focused"
 								type="text" theme="simple" name="insertKm.phanTramGiamGia"
-								data-val="false" value="%{giamgia}" />
+								data-val="true"
+								data-val-regex="Giá trị không hợp lệ"
+								data-val-regex-pattern="^(?:[1-9]\d*|0)?(?:\.\d+)?$"
+								value="%{giamgia}" />
 
 							<span class="field-validation-valid"
 								data-valmsg-for="insertKm.phanTramGiamGia" data-valmsg-replace="true">
