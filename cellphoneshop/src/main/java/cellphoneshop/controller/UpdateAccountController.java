@@ -108,7 +108,6 @@ public class UpdateAccountController extends ActionSupport implements
 	}
 
 	public String changePassword() {
-		logger.info("Vo ham changePassword");
 		String currentPassword = request.getParameter("currentPassword");
 		String newPassword = request.getParameter("newPassword");
 		String confirmPassword = request.getParameter("confirmPassword");

@@ -72,7 +72,6 @@ public class SaleOfController extends ActionSupport implements
 
 	public String execute() {
 
-		log.info("Vao ham execute controller");
 		Integer currentPage = getCurrentPage(request.getParameter("page"));
 		List<KhuyenMai> khuyenmailList = this.getListKhuyenMail(currentPage);
 		request.setAttribute("kmList", khuyenmailList);
@@ -83,7 +82,6 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public String detailKhuyenMai() {
-		log.info("Vao detail khuyen mail Controller");
 		this.getPathSaveImage();
 		Integer maKM = this.getmaKM(request.getParameter("id"));
 
@@ -100,7 +98,6 @@ public class SaleOfController extends ActionSupport implements
 		// HttpServletRequest request = ServletActionContext.getRequest();
 		// this.saveImage();
 		errors = new ArrayList<String>();
-		log.info("Vao ham insert khuyen mai controller");
 		if (this.insertKm == null) {
 			return INPUT;
 		}
@@ -145,7 +142,6 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public String stopKhuyenMai() {
-		log.info("Vao stop Khuyen mai controller");
 		Integer maKM = this.getmaKM(request.getParameter("id"));
 		if (maKM != null) {
 			KhuyenMai khuyenMai = khuyenMaiService.getKhuyenMai(maKM);
@@ -168,7 +164,6 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public String startKhuyenMai() {
-		log.info("Vao start Khuyen mai controller");
 		Integer maKM = this.getmaKM(request.getParameter("id"));
 		if (maKM != null) {
 			KhuyenMai khuyenMai = khuyenMaiService.getKhuyenMai(maKM);
@@ -192,7 +187,6 @@ public class SaleOfController extends ActionSupport implements
 
 	public String showUpdateKhuyenMaiForm() {
 		errors = new ArrayList<String>();
-		log.info("Go to show updateKhuyenMai form");
 		Integer maKM = this.getmaKM(request.getParameter("id"));
 		if (maKM == null) {
 			errors.add(messages.getMessageList().getProperty("errorInfoKM"));
@@ -281,7 +275,6 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public String searchKhuyenMai() {
-		log.info("Go to searchKhuyenMai controller");
 
 		if (query == null || option == null) {
 			request.setAttribute("isInput", true);
@@ -371,7 +364,6 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public String deleteCTKhuyenMai() {
-		log.info("Go to deleteCTKhuyenMai controller");
 		String idSPString = request.getParameter("idsp");
 		String idKMString = request.getParameter("idkm");
 		Integer idKm = null;
