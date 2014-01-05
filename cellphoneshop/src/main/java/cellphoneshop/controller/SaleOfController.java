@@ -53,13 +53,12 @@ public class SaleOfController extends ActionSupport implements
 	private String linkResources;
 	private String saveLinkImage;
 	private KhuyenMai insertKm;
-	
-	//Chitiet khuyen mai
+
+	// Chitiet khuyen mai
 	private int idKhuyenMai;
 	private CTKhuyenMai ctKhuyenMai;
 	@Autowired
 	private SanPhamService sanPhamService;
-	
 
 	private Logger log = Logger.getLogger(SaleOfController.class);
 	@Autowired
@@ -72,7 +71,7 @@ public class SaleOfController extends ActionSupport implements
 	private Message messages;
 
 	public String execute() {
-		
+
 		log.info("Vao ham execute controller");
 		Integer currentPage = getCurrentPage(request.getParameter("page"));
 		List<KhuyenMai> khuyenmailList = this.getListKhuyenMail(currentPage);
@@ -120,8 +119,8 @@ public class SaleOfController extends ActionSupport implements
 			request.setAttribute("inputKm", this.insertKm);
 			return INPUT;
 		}
-		
-		if(!this.saveImage()){
+
+		if (!this.saveImage()) {
 			errors.add(messages.getMessageList().getProperty("errorSaveImage"));
 			request.setAttribute("errors", errors);
 			request.setAttribute("inputKm", this.insertKm);
@@ -139,7 +138,8 @@ public class SaleOfController extends ActionSupport implements
 			errors.add(messages.getMessageList().getProperty("errorInsert"));
 			request.setAttribute("errors", errors);
 			request.setAttribute("inputKm", this.insertKm);
-			log.info("Them khong thanh cong khuyen mai co tieu de: " + this.insertKm.getTieuDe());
+			log.info("Them khong thanh cong khuyen mai co tieu de: "
+					+ this.insertKm.getTieuDe());
 			return INPUT;
 		}
 	}
@@ -297,7 +297,7 @@ public class SaleOfController extends ActionSupport implements
 
 		Integer currentPage = this.getCurrentPage(request.getParameter("page"));
 		Integer vitriBD = this.getVitriBD(currentPage);
-		List<KhuyenMai> khuyenMaiList = khuyenMaiService.getListKhuyenMail(
+		List<KhuyenMai> khuyenMaiList = khuyenMaiService.getListKhuyenMai(
 				query, option, vitriBD, this.saleOfPerPage);
 
 		if (khuyenMaiList == null || khuyenMaiList.isEmpty()) {
@@ -311,7 +311,7 @@ public class SaleOfController extends ActionSupport implements
 			request.setAttribute("currentPage", 1);
 			request.setAttribute("totalPage", 1);
 		} else {
-			Integer totalspecialkm = khuyenMaiService.countKhuyenMail(query,
+			Integer totalspecialkm = khuyenMaiService.countKhuyenMai(query,
 					option);
 			log.info("totalspecialKM: " + totalspecialkm);
 			Integer totalPage = this.getTotalPage(totalspecialkm);
@@ -322,39 +322,46 @@ public class SaleOfController extends ActionSupport implements
 		request.setAttribute("kmList", khuyenMaiList);
 		return SUCCESS;
 	}
-	
-	public String listCTKhuyenMai(){
-		List<CTKhuyenMaiView> ctKhuyenMaiList = khuyenMaiService.getListCTKhuyenMai();
-		
+
+	public String listCTKhuyenMai() {
+		List<CTKhuyenMaiView> ctKhuyenMaiList = khuyenMaiService
+				.getListCTKhuyenMai();
+
 		request.setAttribute("ctkmList", ctKhuyenMaiList);
 		request.setAttribute("currentPage", 1);
 		request.setAttribute("totalPage", 1);
 		return SUCCESS;
 	}
 
-	public String insertCTKhuyenMai(){
-		if(this.ctKhuyenMai == null){
+	public String insertCTKhuyenMai() {
+		if (this.ctKhuyenMai == null) {
 			this.inputDataCTKhuyenMai();
 			return INPUT;
 		}
-		
-		if(!validateInsertCtKhuyenMai()){
+
+		if (!validateInsertCtKhuyenMai()) {
 			request.setAttribute("errors", errors);
 			return INPUT;
 		}
-		
-		if(khuyenMaiService.ApdungKhuyenMaiChoSanPham(this.ctKhuyenMai.getSanPham().getMaSp(), this.ctKhuyenMai.getKhuyenMai().getMaKm())){
-			log.info("Add thanhg cong san pham " + this.ctKhuyenMai.getSanPham().getMaSp() 
-					+ " vao khuyen mai " + this.ctKhuyenMai.getKhuyenMai().getMaKm());
+
+		if (khuyenMaiService.ApdungKhuyenMaiChoSanPham(this.ctKhuyenMai
+				.getSanPham().getMaSp(), this.ctKhuyenMai.getKhuyenMai()
+				.getMaKm())) {
+			log.info("Add thanhg cong san pham "
+					+ this.ctKhuyenMai.getSanPham().getMaSp()
+					+ " vao khuyen mai "
+					+ this.ctKhuyenMai.getKhuyenMai().getMaKm());
 			this.ctKhuyenMai = null;
 			request.setAttribute("isSuccess", true);
 			return SUCCESS;
-			
-		}else{
-			log.info("Add khong thanh thanhg cong san pham " + this.ctKhuyenMai.getSanPham().getMaSp() 
-					+ " vao khuyen mai " + this.ctKhuyenMai.getKhuyenMai().getMaKm());
+
+		} else {
+			log.info("Add khong thanh thanhg cong san pham "
+					+ this.ctKhuyenMai.getSanPham().getMaSp()
+					+ " vao khuyen mai "
+					+ this.ctKhuyenMai.getKhuyenMai().getMaKm());
 		}
-		
+
 		errors = new ArrayList<String>();
 		errors.add(messages.getMessage("errorInsertCTKM"));
 		request.setAttribute("errors", errors);
@@ -362,81 +369,107 @@ public class SaleOfController extends ActionSupport implements
 		this.inputDataCTKhuyenMai();
 		return INPUT;
 	}
-	
-	public String deleteCTKhuyenMai(){
+
+	public String deleteCTKhuyenMai() {
 		log.info("Go to deleteCTKhuyenMai controller");
 		String idSPString = request.getParameter("idsp");
 		String idKMString = request.getParameter("idkm");
 		Integer idKm = null;
 		Integer idSp = null;
-		
-		if(idKMString != null){
+
+		if (idKMString != null) {
 			try {
 				idKm = Integer.parseInt(idKMString);
 				idSp = Integer.parseInt(idSPString);
 			} catch (Exception e) {
 				return SUCCESS;
 			}
-			
+
 		}
-		if(khuyenMaiService.HuyApDungKhuyenMaiChoSanPham(idSp, idKm)){
+		if (khuyenMaiService.HuyApDungKhuyenMaiChoSanPham(idSp, idKm)) {
 			request.setAttribute("isSuccess", true);
-			log.info("Delete success ctkm: idSP: " + idSp  + " idKm: " + idKm);
+			log.info("Delete success ctkm: idSP: " + idSp + " idKm: " + idKm);
 			return SUCCESS;
-		}else{
-			log.info("Delete unsuccess ctkm: idSP: " + idSp  + " idKm: " + idKm);
+		} else {
+			log.info("Delete unsuccess ctkm: idSP: " + idSp + " idKm: " + idKm);
 			return SUCCESS;
 		}
-		
-		
+
 	}
-	
-	public void inputDataCTKhuyenMai(){
+
+	public String searchCTKhuyenMai() {
+		
+		if(this.query == null || this.option == null){
+			request.setAttribute("isInput", true);
+			return SUCCESS;
+		}
+		errors = new ArrayList<String>();
+		
+		List<CTKhuyenMaiView> ctKhuyenMaiList = khuyenMaiService
+				.getListCTKhuyenMai(this.query, this.option);
+		
+		if(ctKhuyenMaiList == null || ctKhuyenMaiList.isEmpty()){
+			errors.add(messages.getMessage("unFoundctkm"));
+			request.setAttribute("errors", errors);
+			return SUCCESS;
+		}
+
+		request.setAttribute("ctkmList", ctKhuyenMaiList);
+		request.setAttribute("currentPage", 1);
+		request.setAttribute("totalPage", 1);
+		return SUCCESS;
+	}
+
+	public void inputDataCTKhuyenMai() {
 		List<SanPham> spList = sanPhamService.getListSanPham("maSp", true);
-		List<KhuyenMai> openkmList = khuyenMaiService.getListKhuyenMail(this.trangThaiMo + "", "status", null, null);
-		List<KhuyenMai> futurekmList = khuyenMaiService.getListKhuyenMail(this.trangThaiTuongLai + "", "status", null, null);
+		List<KhuyenMai> openkmList = khuyenMaiService.getListKhuyenMai(
+				this.trangThaiMo + "", "status", null, null);
+		List<KhuyenMai> futurekmList = khuyenMaiService.getListKhuyenMai(
+				this.trangThaiTuongLai + "", "status", null, null);
 		List<KhuyenMai> kmList = new ArrayList<KhuyenMai>();
-		if(openkmList != null){
-			for(KhuyenMai km : openkmList){
+		if (openkmList != null) {
+			for (KhuyenMai km : openkmList) {
 				kmList.add(km);
 			}
 		}
-		
-		if(futurekmList != null){
-			for(KhuyenMai km : futurekmList){
+
+		if (futurekmList != null) {
+			for (KhuyenMai km : futurekmList) {
 				kmList.add(km);
 			}
 		}
-		
+
 		request.setAttribute("spList", spList);
 		request.setAttribute("kmList", kmList);
 	}
-	
-	public boolean validateInsertCtKhuyenMai(){
+
+	public boolean validateInsertCtKhuyenMai() {
 		errors = new ArrayList<String>();
-		if(ctKhuyenMai.getKhuyenMai().getMaKm() == null){
+		if (ctKhuyenMai.getKhuyenMai().getMaKm() == null) {
 			errors.add(messages.getMessage("unknownMaKM"));
-		}else{
-			if(khuyenMaiService.getKhuyenMai(ctKhuyenMai.getKhuyenMai().getMaKm()) == null){
+		} else {
+			if (khuyenMaiService.getKhuyenMai(ctKhuyenMai.getKhuyenMai()
+					.getMaKm()) == null) {
 				errors.add(messages.getMessage("errormaKM"));
 			}
 		}
-		
-		if(ctKhuyenMai.getSanPham().getMaSp() == null){
+
+		if (ctKhuyenMai.getSanPham().getMaSp() == null) {
 			errors.add(messages.getMessage("unknownmaSP"));
-		}else{
-			if(sanPhamService.getSanPhamTheoId(ctKhuyenMai.getSanPham().getMaSp()) == null){
+		} else {
+			if (sanPhamService.getSanPhamTheoId(ctKhuyenMai.getSanPham()
+					.getMaSp()) == null) {
 				errors.add(messages.getMessage("errormaSP"));
 			}
 		}
-		
-		if(errors.isEmpty()){
+
+		if (errors.isEmpty()) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public boolean saveImage() {
 		destPath = this.getPathSaveImage();
 		log.info("destPath: " + destPath);
@@ -763,7 +796,8 @@ public class SaleOfController extends ActionSupport implements
 			errors.add(messages.getMessageList().getProperty("errorNgayKT"));
 		}
 
-		if (this.myFileFileName == null || this.myFile == null || this.myFileFileName.isEmpty()) {
+		if (this.myFileFileName == null || this.myFile == null
+				|| this.myFileFileName.isEmpty()) {
 			errors.add(messages.getMessageList().getProperty("unknownImage"));
 		}
 

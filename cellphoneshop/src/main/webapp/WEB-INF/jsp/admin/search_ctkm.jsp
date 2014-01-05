@@ -23,16 +23,16 @@
 			</div>
 		</div>
 		<div class="box-content">
-			<form class="form-horizontal" action="search_km.action" method="get">
+			<form class="form-horizontal" action="search_ctkm.action"
+				method="get">
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label" id="label-search" for="query-search">Từ
 							khóa</label>
 						<div class="controls">
 							<s:textfield class="input-xlarge focused" id="query-search"
-								type="text" name="query" theme="simple" 
-								data-val="true"
-								data-val-required="Vui lòng nhập nhập từ khóa"/>
+								type="text" name="query" theme="simple" data-val="true"
+								data-val-required="Vui lòng nhập nhập từ khóa" />
 							<span class="help-inline" style="color: red;" id="error-search"></span>
 						</div>
 					</div>
@@ -50,6 +50,10 @@
 							<label class="radio"> <input type="radio" name="option"
 								value="name" /> Tên Khuyến Mãi
 							</label>
+							<div style="clear: both"></div>
+							<label class="radio"> <input type="radio" name="option"
+								value="idsp" /> Mã Sản Phẩm
+							</label>
 						</div>
 					</div>
 					<div class="form-actions">
@@ -64,7 +68,7 @@
 <c:choose>
 	<c:when test="${isInput}">
 	</c:when>
-	<c:when test="${kmList == null || empty kmList}">
+	<c:when test="${ctkmList == null || empty ctkmList}">
 		<div class="alert alert-error">
 			<strong> <c:forEach var="error" begin="0" items="${errors}">
 						${error}<br>
@@ -74,6 +78,6 @@
 
 	</c:when>
 	<c:otherwise>
-		<jsp:include page="list_km.jsp" />
+		<jsp:include page="list_ctkm.jsp" />
 	</c:otherwise>
 </c:choose>

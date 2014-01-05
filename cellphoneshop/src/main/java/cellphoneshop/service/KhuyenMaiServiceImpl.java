@@ -50,13 +50,13 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 		return khuyenMaiDAO.countKhuyenMai();
 	}
 
-	public List<KhuyenMai> getListKhuyenMail(String query, String option,
+	public List<KhuyenMai> getListKhuyenMai(String query, String option,
 			Integer vitriBD, Integer soluongKM) {
 		return khuyenMaiDAO
-				.getListKhuyenMail(query, option, vitriBD, soluongKM);
+				.getListKhuyenMai(query, option, vitriBD, soluongKM);
 	}
 
-	public Integer countKhuyenMail(String value, String option) {
+	public Integer countKhuyenMai(String value, String option) {
 		return khuyenMaiDAO.countKhuyenMail(value, option);
 	}
 
@@ -137,9 +137,11 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 
 		return listCTKMView;
 	}
+	
+	
 
 	public List<KhuyenMai> getKhuyenMaiDangDienRa(Integer maSP) {
-		List<KhuyenMai> kmList = khuyenMaiDAO.getListKhuyenMail("1", "status", null, null);
+		List<KhuyenMai> kmList = khuyenMaiDAO.getListKhuyenMai("1", "status");
 		for(KhuyenMai km : kmList){
 			boolean isKm = false;
 			Iterator<SanPham> iterator = km.getSanPhams().iterator();
@@ -159,6 +161,51 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 			return null;
 		}
 		return kmList;
+	}
+
+	public List<CTKhuyenMaiView> getListCTKhuyenMai(String query, String option) {
+		
+		if(query == null || option == null){
+			return new ArrayList<CTKhuyenMaiView>();
+		}
+			
+		List<KhuyenMai> kmList = new ArrayList<KhuyenMai>();
+		if(option.equals("idsp")){
+			kmList = khuyenMaiDAO.getListKhuyenMai();
+		}else{
+			kmList = khuyenMaiDAO.getListKhuyenMai(query, option);
+		}
+		
+		List<CTKhuyenMaiView> listCTKMView = new ArrayList<CTKhuyenMaiView>();
+		for (KhuyenMai km : kmList) {
+			Iterator<SanPham> iterator = km.getSanPhams().iterator();
+			List<SanPham> spList = new ArrayList<SanPham>();
+			while (iterator.hasNext()) {
+				SanPham sp = (SanPham) iterator.next();
+				if(option.equals("idsp")){
+					try {
+						if(sp.getMaSp() == Integer.parseInt(query)){
+							spList.add(sp);
+						}
+					} catch (Exception e) {
+						return new ArrayList<CTKhuyenMaiView>();
+					}
+					
+				}else{
+					spList.add(sp);
+				}
+				
+			}
+
+			if (!spList.isEmpty()) {
+				CTKhuyenMaiView ctkm = new CTKhuyenMaiView();
+				ctkm.setKhuyenmai(km);
+				ctkm.setSanphamList(spList);
+				listCTKMView.add(ctkm);
+			}
+
+		}
+		return listCTKMView;
 	}
 
 }

@@ -282,6 +282,10 @@
 		<action name="delete_ctkm" method="deleteCTKhuyenMai" class="khuyenmaiAction">
 			<result name="success" type="redirectAction">list_ctkm</result>
 		</action>
+		
+		<action name="search_ctkm" method="searchCTKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="tiles">search_ctkm</result>
+		</action>
 
 
 		<!-- quan ly san pham -->
@@ -297,6 +301,8 @@
 		<action name="detail_product" method="detailProduct" class="productManagerAction">
 			<result name="success" type="tiles">detail_product</result>
 		</action>
+		
+		
 
 
 

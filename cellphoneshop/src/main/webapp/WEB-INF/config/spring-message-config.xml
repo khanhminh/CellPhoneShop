@@ -68,6 +68,7 @@
 			<prop key="unknownmaSP">Vui lòng chọn sản phẩm để áp dụng khuyến mãi</prop>
 			<prop key="errormaSP">Sản phẩm bạn chọn có thể chưa chính xác. Vui lòng kiểm tra lại</prop>
 			<prop key="errorInsertCTKM">Không thể thêm sản phẩm này vào khuyến mãi</prop>
+			<prop key="unFoundctkm">Không tìm thấy chi tiết của khuyến mãi này!</prop>
 			
 			
 				

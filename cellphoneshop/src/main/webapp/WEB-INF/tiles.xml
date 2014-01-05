@@ -189,6 +189,11 @@
 		<put-attribute name="title" value="Áp dụng chính sách khuyến mãi cho sản phẩm" />
 		<put-attribute name="content" value="/WEB-INF/jsp/admin/insert_ctkm.jsp" />
 	</definition>
+	
+	<definition name="search_ctkm" extends="admin">
+		<put-attribute name="title" value="Tìm kiếm chi tiết khuyến mãi cho các sản phẩm" />
+		<put-attribute name="content" value="/WEB-INF/jsp/admin/search_ctkm.jsp" />
+	</definition>
 
 
 
