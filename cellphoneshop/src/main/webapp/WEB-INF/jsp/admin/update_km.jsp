@@ -177,6 +177,7 @@
 										cssClass="text-box single-line input-xlarge uneditable-input"
 										type="text" theme="simple" name="km.ngayBatDau"
 										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
+										readonly="readonly"
 										value="%{ngayBD}" />
 									<span class="field-validation-valid"
 										data-valmsg-for="km.ngayBatDau" data-valmsg-replace="true">

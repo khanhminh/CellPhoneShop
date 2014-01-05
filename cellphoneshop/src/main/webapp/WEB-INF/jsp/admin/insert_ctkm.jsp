@@ -25,7 +25,7 @@
 			<c:set var="insertCTKMResult" value="${insertSuccess}" />
 			<c:if test="${isSuccess == true}">
 				<div>
-					<img src='<c:url value='/resources/images/success_tick.png' />'> <span>Thêm
+					<span>Thêm
 						1 sản phẩm vào trong khuyến mãi thành công</span> <img />
 					<form action="insert_ctkm" method="post" style='display: inline;'>
 						<input type="hidden" value="true" name="themSanPhamFlag" />
