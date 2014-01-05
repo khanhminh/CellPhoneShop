@@ -279,6 +279,10 @@
 			<result name="input" type="tiles">insert_ctkm</result>
 		</action>
 
+		<action name="delete_ctkm" method="deleteCTKhuyenMai" class="khuyenmaiAction">
+			<result name="success" type="redirectAction">list_ctkm</result>
+		</action>
+
 
 		<!-- quan ly san pham -->
 		<action name="insert_product" method="insertProduct" class="productManagerAction">

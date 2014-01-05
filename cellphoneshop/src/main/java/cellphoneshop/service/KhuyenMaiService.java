@@ -3,6 +3,7 @@ package cellphoneshop.service;
 import java.util.List;
 
 import cellphoneshop.model.KhuyenMai;
+import cellphoneshop.viewmodel.CTKhuyenMaiView;
 
 public interface KhuyenMaiService {
 	boolean insertKhuyenMai(KhuyenMai khuyenMai);
@@ -16,4 +17,5 @@ public interface KhuyenMaiService {
 	Integer countKhuyenMail(String query, String option);
 	boolean ApdungKhuyenMaiChoSanPham(Integer masP, Integer maKm);
 	boolean HuyApDungKhuyenMaiChoSanPham(Integer masP, Integer maKm);
+	List<CTKhuyenMaiView> getListCTKhuyenMai();
 }

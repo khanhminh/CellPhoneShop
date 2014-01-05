@@ -17,6 +17,7 @@ import cellphoneshop.service.SanPhamService;
 import cellphoneshop.service.TrangThaiKhuyenMaiService;
 import cellphoneshop.util.CTKhuyenMai;
 import cellphoneshop.util.Message;
+import cellphoneshop.viewmodel.CTKhuyenMaiView;
 import cellphoneshop.viewmodel.UpdateKhuyenMai;
 
 import java.text.DateFormat;
@@ -323,6 +324,11 @@ public class SaleOfController extends ActionSupport implements
 	}
 	
 	public String listCTKhuyenMai(){
+		List<CTKhuyenMaiView> ctKhuyenMaiList = khuyenMaiService.getListCTKhuyenMai();
+		
+		request.setAttribute("ctkmList", ctKhuyenMaiList);
+		request.setAttribute("currentPage", 1);
+		request.setAttribute("totalPage", 1);
 		return SUCCESS;
 	}
 
@@ -355,6 +361,34 @@ public class SaleOfController extends ActionSupport implements
 		ctKhuyenMai = null;
 		this.inputDataCTKhuyenMai();
 		return INPUT;
+	}
+	
+	public String deleteCTKhuyenMai(){
+		log.info("Go to deleteCTKhuyenMai controller");
+		String idSPString = request.getParameter("idsp");
+		String idKMString = request.getParameter("idkm");
+		Integer idKm = null;
+		Integer idSp = null;
+		
+		if(idKMString != null){
+			try {
+				idKm = Integer.parseInt(idKMString);
+				idSp = Integer.parseInt(idSPString);
+			} catch (Exception e) {
+				return SUCCESS;
+			}
+			
+		}
+		if(khuyenMaiService.HuyApDungKhuyenMaiChoSanPham(idSp, idKm)){
+			request.setAttribute("isSuccess", true);
+			log.info("Delete success ctkm: idSP: " + idSp  + " idKm: " + idKm);
+			return SUCCESS;
+		}else{
+			log.info("Delete unsuccess ctkm: idSP: " + idSp  + " idKm: " + idKm);
+			return SUCCESS;
+		}
+		
+		
 	}
 	
 	public void inputDataCTKhuyenMai(){

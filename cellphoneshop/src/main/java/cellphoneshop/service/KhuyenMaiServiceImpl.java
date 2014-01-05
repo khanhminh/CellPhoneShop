@@ -1,5 +1,6 @@
 package cellphoneshop.service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import cellphoneshop.dao.KhuyenMaiDAO;
 import cellphoneshop.dao.SanPhamDAO;
 import cellphoneshop.model.KhuyenMai;
 import cellphoneshop.model.SanPham;
+import cellphoneshop.viewmodel.CTKhuyenMaiView;
 
 @Service
 public class KhuyenMaiServiceImpl implements KhuyenMaiService {
@@ -82,7 +84,8 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 
 			khuyenmai.getSanPhams().add(sp);
 		} catch (Exception e) {
-			log.error("Loi trong ap dung khuyen mai cho san pham" + e.getMessage());
+			log.error("Loi trong ap dung khuyen mai cho san pham"
+					+ e.getMessage());
 			return false;
 		}
 		return khuyenMaiDAO.updateKhuyenMai(khuyenmai);
@@ -90,26 +93,46 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 	}
 
 	public boolean HuyApDungKhuyenMaiChoSanPham(Integer masP, Integer maKm) {
-		if(masP == null || maKm == null){
+		if (masP == null || maKm == null) {
 			return false;
 		}
 		KhuyenMai khuyenMai = khuyenMaiDAO.getKhuyenMai(maKm);
 		SanPham sp = sanPhamDAO.getSanPhamTheoId(masP);
-		
-		if(sp == null || khuyenMai == null){
+
+		if (sp == null || khuyenMai == null) {
 			return false;
 		}
-		
+
 		Iterator iterator = khuyenMai.getSanPhams().iterator();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			SanPham sanPham = (SanPham) iterator.next();
-			if(sanPham.getMaSp() == masP){
+			if (sanPham.getMaSp() == masP) {
 				khuyenMai.getSanPhams().remove(sanPham);
 				return khuyenMaiDAO.updateKhuyenMai(khuyenMai);
 			}
 		}
-		
+
 		return false;
+	}
+
+	public List<CTKhuyenMaiView> getListCTKhuyenMai() {
+		List<KhuyenMai> kmList = khuyenMaiDAO.getListKhuyenMai();
+		List<CTKhuyenMaiView> listCTKMView = new ArrayList<CTKhuyenMaiView>();
+		for (KhuyenMai km : kmList) {
+			Iterator<SanPham> iterator = km.getSanPhams().iterator();
+			List<SanPham> spList = new ArrayList<SanPham>();
+			while (iterator.hasNext()) {
+				SanPham sp = (SanPham) iterator.next();
+				spList.add(sp);
+			}
+
+			CTKhuyenMaiView ctkm = new CTKhuyenMaiView();
+			ctkm.setKhuyenmai(km);
+			ctkm.setSanphamList(spList);
+			listCTKMView.add(ctkm);
+		}
+
+		return listCTKMView;
 	}
 
 }

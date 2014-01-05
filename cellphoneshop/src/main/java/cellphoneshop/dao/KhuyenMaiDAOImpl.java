@@ -77,10 +77,10 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 
 		try {
 			khuyenmailList = session.createQuery("from KhuyenMai").list();
-			// for(KhuyenMai km : khuyenmailList){
-			// Hibernate.initialize(km.getTrangThaiKhuyenMai());
-			// }
-
+			 for(KhuyenMai km : khuyenmailList){
+				 Hibernate.initialize(km.getTrangThaiKhuyenMai());
+				 Hibernate.initialize(km.getSanPhams());
+			 }
 			return khuyenmailList;
 
 		} catch (Exception ex) {
