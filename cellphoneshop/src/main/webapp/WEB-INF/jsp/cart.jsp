@@ -18,6 +18,7 @@
 					<th class="row-title-cart">Tên sản phẩm</th>
 					<th class="row-title-cart">Giá</th>
 					<th class="row-title-cart">Số lượng</th>
+					<th class="row-title-cart">Khuyến mãi</th>
 					<th class="row-title-cart">Tổng cộng</th>
 					<th class="row-title-cart">Xóa</th>
 				</tr>
@@ -43,8 +44,12 @@
 								<img id="icon-remove" src="resources/images/remove.png">
 						   	</a>
 						</td>
+						<td class="align-right">
+							<fmt:formatNumber value="${item.count * p.gia}" type="number" /> VNĐ
+						</td>
 						<td class="align-right"><fmt:formatNumber
-								value="${item.count * p.gia}" type="number" /> VNĐ</td>
+								value="${item.count * p.gia}" type="number" /> VNĐ
+						</td>
 						<td class="align-center">
 							<a href="editcart?action=delete&product=${p.maSp}" 
 								class="delete-item" data-name="${p.tenSp}" data-id="${p.maSp}"> 
