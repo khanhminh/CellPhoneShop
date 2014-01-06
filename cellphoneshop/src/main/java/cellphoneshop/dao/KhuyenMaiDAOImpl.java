@@ -2,6 +2,7 @@ package cellphoneshop.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cellphoneshop.model.KhuyenMai;
+import cellphoneshop.model.SanPham;
 
 @Repository
 public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
@@ -238,7 +240,12 @@ public class KhuyenMaiDAOImpl implements KhuyenMaiDAO {
 			}
 			for (KhuyenMai km : khuyenMailList) {
 				Hibernate.initialize(km.getTrangThaiKhuyenMai());
-				Hibernate.initialize(km.getSanPhams());
+				Iterator<SanPham> itr = km.getSanPhams().iterator();
+				while (itr.hasNext()) {
+					SanPham sanPham = itr.next();
+					Hibernate.initialize(sanPham);
+				}
+				//Hibernate.initialize(km.getSanPhams());
 			}
 
 			return khuyenMailList;
