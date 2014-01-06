@@ -18,23 +18,39 @@
 					<th class="row-title-cart">Tên sản phẩm</th>
 					<th class="row-title-cart">Giá</th>
 					<th class="row-title-cart">Số lượng</th>
-					<th class="row-title-cart">Khuyến mãi</th>
 					<th class="row-title-cart">Tổng cộng</th>
 					<th class="row-title-cart">Xóa</th>
 				</tr>
 				
 				<c:forEach var="item" items="${sessionScope.cart}">
 					<c:set scope="page" var="p" value="${item.product}" />
-					<c:set scope="page" var="total"
-						value="${total + (item.count * p.gia)}" />
 
 					<tr class="row_item_cart">
 						<td class="align-center">${sessionScope.cart.indexOf(item) + 1}</td>
 						<td class="image-product-cart align-center"><img
 							src="${p.hinhDaiDien}"></td>
 						<td class="name-product"><a href="detail?product=${p.maSp}">${p.tenSp}</a></td>
-						<td class="align-right"><fmt:formatNumber value="${p.gia}"
-								type="number" /> VNĐ</td>
+						
+						
+						<c:set var="kms" value="${p.khuyenMais}"/>
+						<c:set var="sale" value="${0 * p.gia}" scope="page" />
+						<c:if test="${kms != null && not empty kms}">
+							<c:forEach var="km" items="${kms}">
+								<c:if test="${km.phanTramGiamGia != null}">
+									<c:set var="sale" value="${sale + km.phanTramGiamGia}" scope="page" />
+								</c:if>
+							</c:forEach>
+						</c:if>
+						<td class="align-right">
+							<fmt:formatNumber value="${p.gia}" type="number" /> VNĐ							
+							
+							<c:if test="${sale != null && sale > 0.000001}">
+								<br>
+								- <fmt:formatNumber value="${p.gia * (sale * 1.0 / 100)}" type="number" /> VNĐ
+							</c:if>	
+						</td>
+												
+											
 						<td class="align-center">
 							<a href="editcart?action=add&product=${p.maSp}"> 
 								<img id="icon-add" src="resources/images/add.png">
@@ -44,12 +60,12 @@
 								<img id="icon-remove" src="resources/images/remove.png">
 						   	</a>
 						</td>
-						<td class="align-right">
-							<fmt:formatNumber value="${item.count * p.gia}" type="number" /> VNĐ
-						</td>
 						<td class="align-right"><fmt:formatNumber
-								value="${item.count * p.gia}" type="number" /> VNĐ
+								value="${item.count * p.gia - (p.gia * (sale * 1.0 / 100))}" type="number" /> VNĐ
 						</td>
+						<c:set scope="page" var="total"
+							value="${total + (item.count * p.gia - (p.gia * (sale * 1.0 / 100)))}" />
+							
 						<td class="align-center">
 							<a href="editcart?action=delete&product=${p.maSp}" 
 								class="delete-item" data-name="${p.tenSp}" data-id="${p.maSp}"> 

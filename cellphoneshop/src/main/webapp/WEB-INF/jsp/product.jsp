@@ -94,45 +94,39 @@
 													<fmt:formatNumber value="${sp.gia}" type="number" />
 													VNĐ
 												</h2>
-												<div class="safe_off" style="text-align: center;font-size: 12px;">
-													<span class="cost-safe"> -<fmt:formatNumber
-															value="${sp.gia * (total * 1.0 / 100)}" type="number" />
-														VNĐ
-													</span>
-												</div>
-												<%-- <c:if test="${kms != null && not empty kms}">
-													<div>
+												<c:set var="kms" value="${sp.khuyenMais}"/>
+												<c:choose>
+												<c:when test="${kms != null && not empty kms}">
+													
 														<c:forEach var="km" items="${kms}">
 															<c:if test="${km.phanTramGiamGia != null}">
 																<c:set var="total" value="${total + km.phanTramGiamGia}" />
 															</c:if>
 														</c:forEach>
-														<c:if test="${total != null && total > 0}">
-															<div class="safe_off">
-																<span class="title-safe">Giảm giá: </span> <span
-																	class="cost-safe"> -<fmt:formatNumber
-																		value="${sp.gia * (total * 1.0 / 100)}" type="number" />
-																	VNĐ
-																</span>
-															</div>
-														</c:if>
-														<div class="safe_off">
-															<span class="title-safe">Quà tặng: </span>
-															<ul>
-																<c:forEach var="km" items="${kms}">
-																	<c:if test="${km.quaTang != null}">
-																		<li>${km.quaTang}</li>
-																	</c:if>
-																</c:forEach>
-															</ul>
+														<c:if test="${total != null && total > 0}">															
+														<div class="safe_off" style="text-align: center;font-size: 12px;">
+															<span class="cost-safe"> -<fmt:formatNumber
+																value="${sp.gia * (total * 1.0 / 100)}" type="number" />
+																VNĐ
+															</span>
 														</div>
-													</div>
-												</c:if> --%>
-												<h3>Quà tặng:</h3>
-												<ul>
-													<li>Tặng ốp lưng</li>
-													<li>Tai nghe</li>
-												</ul>
+														</c:if>
+														
+														<h3>Quà tặng:</h3>
+														<ul>
+															<c:forEach var="km" items="${kms}">							
+																<c:if test="${km.quaTang != null}">
+																	<li>${km.quaTang}</li>
+																</c:if>
+															</c:forEach>
+														</ul>
+												</c:when>
+												<c:otherwise>
+													<h3></h3>
+														<ul style="height: 175px">
+														</ul>
+												</c:otherwise>
+												</c:choose>
 												<div class="btn-addcart">
 													<a href="editcart?action=add&product=${sp.maSp}"> <img
 														src="resources/images/btn_addcart_vn.gif" />

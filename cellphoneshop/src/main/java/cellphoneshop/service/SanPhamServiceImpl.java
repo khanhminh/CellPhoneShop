@@ -71,7 +71,14 @@ public class SanPhamServiceImpl implements SanPhamService {
 
 	public List<SanPham> timKiemSanPhamTheoTen(String tuKhoa, int kqDauTien,
 			int soKqToiDa) {
-		return spDAO.timKiemSanPhamTheoTen(tuKhoa, kqDauTien, soKqToiDa);
+		List<SanPham> result = spDAO.timKiemSanPhamTheoTen(tuKhoa, kqDauTien, soKqToiDa);
+		if (result != null){
+			for (SanPham sp : result){
+				getKhuyenMaiChoSanPham(sp);
+			}
+		}
+		
+		return result;
 	}
 
 	public long demSoSanPhamKhiTimKiemTheoTen(String tuKhoa) {
@@ -108,15 +115,7 @@ public class SanPhamServiceImpl implements SanPhamService {
 			return null;
 		}
 		
-		List<KhuyenMai> dsKM = kmService.getKhuyenMaiDangDienRa(sanPham.getMaSp());
-		if (dsKM != null){
-			Set<KhuyenMai> kmsp = new HashSet<KhuyenMai>();
-			for (KhuyenMai km : dsKM){
-				kmsp.add(km);
-			}
-			sanPham.setKhuyenMais(kmsp);
-		}
-		
+		getKhuyenMaiChoSanPham(sanPham);		
 		ProductDetail productDetail = new ProductDetail();
 		productDetail.setProduct(sanPham);
 		
@@ -180,8 +179,14 @@ public class SanPhamServiceImpl implements SanPhamService {
 		else if (sortby.getBy().equalsIgnoreCase("name")){
 			orderby = "tenSp";
 		}
+		List<SanPham> result = spDAO.getListSanPham(productFilter, kqDauTien, soKqToiDa, orderby, sortby.isAsc());
+		if (result != null){
+			for (SanPham sp : result){
+				getKhuyenMaiChoSanPham(sp);
+			}
+		}
 		
-		return spDAO.getListSanPham(productFilter, kqDauTien, soKqToiDa, orderby, sortby.isAsc());
+		return result;
 	}
 	
 	public int demSoSanPhamKhiGetListSanPham(ProductFilter productFilter) {
@@ -200,8 +205,14 @@ public class SanPhamServiceImpl implements SanPhamService {
 				orderby = "maSp";
 			}
 		}
+		List<SanPham> result = spDAO.getListSanPham(kqDauTien, soKqToiDa, orderby, sortby.isAsc());
+		if (result != null){
+			for (SanPham sp : result){
+				getKhuyenMaiChoSanPham(sp);
+			}
+		}
 		
-		return spDAO.getListSanPham(kqDauTien, soKqToiDa, orderby, sortby.isAsc());
+		return result;
 	}
 	
 	public int demSoSanPham() {
@@ -229,4 +240,19 @@ public class SanPhamServiceImpl implements SanPhamService {
 	public List<SanPham> getListSanPham(String order, boolean isAsc) {
 		return spDAO.getListSanPham(order, isAsc);
 	}
+	
+	public void getKhuyenMaiChoSanPham(SanPham sp){
+		List<KhuyenMai> dsKM = kmService.getKhuyenMaiDangDienRa(sp.getMaSp());
+		if (dsKM != null){
+			Set<KhuyenMai> kmsp = new HashSet<KhuyenMai>();
+			for (KhuyenMai km : dsKM){
+				kmsp.add(km);
+			}
+			sp.setKhuyenMais(kmsp);
+		}
+		else {
+			sp.setKhuyenMais(new HashSet<KhuyenMai>());
+		}
+	}
+	
 }

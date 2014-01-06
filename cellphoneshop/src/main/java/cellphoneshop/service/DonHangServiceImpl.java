@@ -2,7 +2,9 @@ package cellphoneshop.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,10 @@ import cellphoneshop.dao.TrangThaiDonHangDAO;
 import cellphoneshop.model.CartItem;
 import cellphoneshop.model.CtDonHang;
 import cellphoneshop.model.DonHang;
+import cellphoneshop.model.KhuyenMai;
 import cellphoneshop.model.NguoiDung;
 import cellphoneshop.model.NguoiNhan;
+import cellphoneshop.model.SanPham;
 import cellphoneshop.model.TrangThaiDonHang;
 import cellphoneshop.util.Util;
 import cellphoneshop.viewmodel.SortBy;
@@ -77,11 +81,18 @@ public class DonHangServiceImpl implements DonHangService {
 		donHang.setNgayDatHang(ngayDatHang);
 		
 		Integer sumPrice = 0;
+		int saleOff = 0;
 		for(CartItem iCartItem : cartItemList){
-			sumPrice += iCartItem.getProduct().getGia() * iCartItem.getCount();
+			SanPham sp  = iCartItem.getProduct();
+			float pSaleOff = tinhPhanTramKhuyenMai(sp) / 100;
+			float price = sp.getGia() - (sp.getGia() * pSaleOff);
+			
+			sumPrice += (int)price * iCartItem.getCount();
+			saleOff += (int)(sp.getGia() * pSaleOff);
 		}
 		
 		donHang.setTongGiaTri(sumPrice);
+		donHang.setGiamGia(saleOff);
 		//TODO Sua lai lay trang thai don hang theo ten
 		TrangThaiDonHang trangThaiDonHang = trangThaiDonHangDAO.getTrangThaiDonHang(1);
 		donHang.setTrangThaiDonHang(trangThaiDonHang);
@@ -90,13 +101,35 @@ public class DonHangServiceImpl implements DonHangService {
 		
 		// chen chi tiet don hang
 		for (CartItem item : cartItemList) {
-			Integer tongGiaTri = item.getProduct().getGia() * item.getCount();
+			SanPham sp  = item.getProduct();
+			float pSaleOff = tinhPhanTramKhuyenMai(sp) / 100;
+			float price = sp.getGia() - (sp.getGia() * pSaleOff);
+			
+			Integer tongGiaTri = (int)price * item.getCount();
 			CtDonHang ct = new CtDonHang(item.getProduct(), donHang, item.getProduct().getGia(), 0, item.getCount(), tongGiaTri);
+			ct.setGiamGiaTungSp((int)(sp.getGia() * pSaleOff));
 			ctDonHangDAO.insertCTDonHang(ct);
 		}
 		
 		return donHang.getMaDonHang();
 	}
+	
+	private float tinhPhanTramKhuyenMai(SanPham sp){
+		float result = 0;
+		Set<KhuyenMai> dsKm = sp.getKhuyenMais();
+		if (dsKm != null){
+			Iterator i = dsKm.iterator();
+			while (i.hasNext()) {
+				KhuyenMai km = (KhuyenMai) i.next();
+				if (km.getPhanTramGiamGia() != null){
+					result += km.getPhanTramGiamGia().floatValue();
+				}
+			}
+		}
+		
+		return result;
+	}
+	
 
 	public DonHang getDonHangCungChiTietTheoId(Integer maDonHang) {
 		return donHangDAO.getDonHangCungChiTietTheoId(maDonHang);

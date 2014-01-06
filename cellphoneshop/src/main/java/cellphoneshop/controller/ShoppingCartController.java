@@ -29,7 +29,7 @@ public class ShoppingCartController extends ActionSupport implements ServletRequ
 	public String cart(){
 		HttpSession session = request.getSession();
 		List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
-		if (cart != null && !cart.isEmpty()){
+		if (cart != null && !cart.isEmpty()){			
 			return "view";
 		}
 		
@@ -103,7 +103,8 @@ public class ShoppingCartController extends ActionSupport implements ServletRequ
 				session.setAttribute("cart", cart);
 			}
 			SanPham product = sanPhamService.getSanPhamTheoId(id);
-			CartItem item = new CartItem(product, 1);
+			sanPhamService.getKhuyenMaiChoSanPham(product);
+			CartItem item = new CartItem(product, 1);			
 			cart.add(item);
 		}
 	}

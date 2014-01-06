@@ -95,4 +95,6 @@ public interface SanPhamService {
 	List<SanPham> getListSanPhamLienQuan(Integer maSanPham);
 	
 	public List<SanPham> getListSanPham(String order, boolean isAsc);
+	
+	public void getKhuyenMaiChoSanPham(SanPham sp);
 }

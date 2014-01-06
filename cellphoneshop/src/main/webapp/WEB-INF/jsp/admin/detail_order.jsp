@@ -32,11 +32,12 @@
 							<th>Sản phẩm</th>
 							<th>Giá</th>
 							<th>Số lượng</th>
+							<th>Giảm giá</th>
 							<th>Tổng cộng</th>
 						</tr>
 						<c:forEach var="detail" items="${order.ctDonHangs}" varStatus="i">
 							<c:set var="total"
-								value="${total + (detail.giaTungSp * detail.soLuong)}" />
+								value="${total + (detail.giaTungSp * detail.soLuong - detail.giamGiaTungSp)}" />
 							<tr
 								<c:choose>
 						<c:when test="${i.index % 2 == 0}">
@@ -53,12 +54,14 @@
 								<td><fmt:formatNumber value="${detail.giaTungSp}"
 										type="number" /> VNĐ</td>
 								<td>${detail.soLuong}</td>
+								<td><fmt:formatNumber value="${detail.giamGiaTungSp}"
+										type="number" /> VNĐ</td>
 								<td><fmt:formatNumber value="${detail.tongGiaTri}"
 										type="number" /> VNĐ</td>
 							</tr>
 						</c:forEach>
 						<tr>
-							<td colspan="4" style="font-weight: bold; text-align: right;">Tổng
+							<td colspan="5" style="font-weight: bold; text-align: right;">Tổng
 								cộng</td>
 							<td style="font-weight: bold; color: red;"><fmt:formatNumber
 									value="${total}" type="number" /> VNĐ</td>

@@ -37,7 +37,7 @@ public class CheckoutController extends ActionSupport implements ServletRequestA
 	
 	private HttpServletRequest request;
 	
-	private DonHang donHang;
+	private DonHang donHang;	
 	
 	@SuppressWarnings("unchecked")
 	public String checkout(){
