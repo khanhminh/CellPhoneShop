@@ -53,6 +53,36 @@
 				<fmt:formatNumber value="${sp.gia}" type="number" />
 				VNĐ
 			</h2>
+			<c:set var="kms" value="${sp.khuyenMais}"/>
+			<c:if test="${kms != null && not empty kms}">
+				<div>
+					<h2>Khuyến mãi:</h2>
+					<c:forEach var="km" items="${kms}">
+						<c:if test="${km.phanTramGiamGia != null}">
+							<c:set var="total" value="${total + km.phanTramGiamGia}"/>
+						</c:if>
+					</c:forEach>
+					<c:if test="${total != null && total > 0}">
+						<div>
+							<span>Giảm giá: </span>
+							<span>
+								<fmt:formatNumber value="${sp.gia * (total * 1.0 / 100)}" type="number" />
+								VNĐ
+							</span>
+						</div>
+					</c:if>
+					<div>
+						<h4>Quà tặng: </h4>
+						<ul>
+						<c:forEach var="km" items="${kms}">							
+							<c:if test="${km.quaTang != null}">
+								<li>${km.quaTang}</li>
+							</c:if>
+						</c:forEach>
+						</ul>
+					</div>
+				</div>
+			</c:if>			
 			<table>
 				<tr>
 					<td class="sub-info">Hãng sản xuất:</td>

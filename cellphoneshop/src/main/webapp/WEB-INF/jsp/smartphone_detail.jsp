@@ -15,7 +15,6 @@
         <tr>
         	<td class="none-border"></td>
             <td class="name-info">Loại màn hình:</td>
-            <%-- <td>${info.loaiManhinh}&nbsp;${info.loaiManhinh.soMauManHinh}</td> --%>
             <td>${info.loaiManhinh}&nbsp;${info.soMauManHinh}</td>
         </tr>
         <tr>

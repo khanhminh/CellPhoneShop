@@ -10,26 +10,12 @@
 		</div>
 		<div class="sidebox-body">
 			<c:forEach var="nsx" items="${listNSX}" varStatus="status">
-				<c:choose>
-					<c:when test="${status.index % 2 == 0}">
-						<c:out value="<div class='icon-brand'>" escapeXml="false"/>						
-						<a href="product?brand=${nsx.maNhaSx}"> 
-							<img title="${nsx.tenNhaSx}" src="${nsx.logo}">
-						</a>
-					</c:when>
-					<c:otherwise>
-						<a href="product?brand=${nsx.maNhaSx}"> 
-							<img title="${nsx.tenNhaSx}" src="${nsx.logo}">
-						</a>
-						<c:out value="</div>" escapeXml="false"/>
-					</c:otherwise>
-				</c:choose>
+				<div class='icon-brand'>
+					<a href="product?brand=${nsx.maNhaSx}"> 
+						<img title="${nsx.tenNhaSx}" src="${nsx.logo}">
+					</a>
+				</div>				
 			</c:forEach>
-			<!-- <div class="icon-brand">
-				<a href="product?brand=2"> <img title="HTC"
-					src="resources/images/fb_HTC.gif">
-				</a>
-			</div> -->
 		</div>
 	</div>
 

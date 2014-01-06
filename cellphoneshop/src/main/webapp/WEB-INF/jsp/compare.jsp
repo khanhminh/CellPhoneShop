@@ -75,7 +75,7 @@
 					<td class="header-row">Loại màn hình</td>
 					<c:forEach var="detail" items="${requestScope.listProduct}">
 						<c:set var="info" value="${detail.detail}" scope="page" />
-						<td style="width: ${width}%">${info.loaiManhinh}&nbsp;${info.loaiManhinh.soMauManHinh}</td>
+						<td style="width: ${width}%">${info.loaiManhinh}&nbsp;${info.soMauManHinh}</td>
 					</c:forEach>
 				</tr>
 				<tr>

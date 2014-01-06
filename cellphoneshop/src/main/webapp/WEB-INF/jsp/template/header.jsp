@@ -46,14 +46,14 @@
                   </c:forEach>
               	</ul>				
 			</li>
-			<li><a href="contact.action">Liên hệ</a></li>
-			<li><a href="about.action">Giới thiệu</a></li>
 			<security:authorize access="isAuthenticated()"> 
 				<li><a href="list_order.action">Quản lý đơn hàng</a></li>
 			</security:authorize>
 			<security:authorize access="hasAnyRole('Admin')"> 
 				<li><a href="/cellphoneshop/admin/list_account.action">Admin</a></li>
 			</security:authorize>
+			<li><a href="contact.action">Liên hệ</a></li>
+			<li><a href="about.action">Giới thiệu</a></li>
 		</ul>
 	</nav>
 </div>
@@ -68,12 +68,6 @@
 					<li><img src="resources/images/slider/2.png" alt="2" /></li>
 					<li><img src="resources/images/slider/3.png" alt="3" /></li>
 				</ul>
-				<!-- <ul class="amazingslider-thumbnails" style="display: none;">
-					<li><img src="resources/images/thumbnails/1.jpg" /></li>
-					<li><img src="resources/images/thumbnails/2.jpg" /></li>
-					<li><img src="resources/images/thumbnails/3.jpg" /></li>
-					<li><img src="resources/images/thumbnails/4.jpg" /></li>
-				</ul> -->
 			</div>
 		</div>
 	</div>

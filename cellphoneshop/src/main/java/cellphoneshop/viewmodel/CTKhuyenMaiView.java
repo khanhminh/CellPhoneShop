@@ -20,7 +20,4 @@ public class CTKhuyenMaiView {
 	public void setSanphamList(List<SanPham> sanphamList) {
 		this.sanphamList = sanphamList;
 	}
-	
-
-
 }

@@ -3,9 +3,11 @@ package cellphoneshop.service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import cellphoneshop.dao.NhaSanXuatDAO;
 import cellphoneshop.dao.SanPhamDAO;
 import cellphoneshop.model.CtSanPham;
 import cellphoneshop.model.HinhAnhSp;
+import cellphoneshop.model.KhuyenMai;
 import cellphoneshop.model.ProductFilter;
 import cellphoneshop.viewmodel.ProductDetail;
 import cellphoneshop.viewmodel.SortBy;
@@ -32,6 +35,8 @@ public class SanPhamServiceImpl implements SanPhamService {
 	@Autowired
 	private NhaSanXuatDAO nhaSXDAO;
 	
+	@Autowired
+	private KhuyenMaiService kmService;	
 	
 	public boolean insertSanPham(SanPham sp) {
 		return spDAO.insertSanPham(sp);
@@ -101,6 +106,15 @@ public class SanPhamServiceImpl implements SanPhamService {
 		
 		if (sanPham == null) {
 			return null;
+		}
+		
+		List<KhuyenMai> dsKM = kmService.getKhuyenMaiDangDienRa(sanPham.getMaSp());
+		if (dsKM != null){
+			Set<KhuyenMai> kmsp = new HashSet<KhuyenMai>();
+			for (KhuyenMai km : dsKM){
+				kmsp.add(km);
+			}
+			sanPham.setKhuyenMais(kmsp);
 		}
 		
 		ProductDetail productDetail = new ProductDetail();
