@@ -118,14 +118,20 @@
 											value="${requestScope.km.phanTramGiamGia}"
 											maxFractionDigits="2" minFractionDigits="1" />
 									</s:set>
-									<s:textfield class="text-box single-line input-xlarge focused"
+									<s:textfield cssClass="text-box single-line input-xlarge focused"
 										type="text" theme="simple" name="km.phanTramGiamGia"
-										data-val="false" value="%{giamgia}" />
+										value="%{giamgia}"
+										data-val="true"
+										data-val-regex="Giá trị không hợp lệ"
+										data-val-regex-pattern="^(?:[1-9]\d*|0)?(?:\.\d+)?$" />
+																		
 								</c:when>
 								<c:otherwise>
-									<s:textfield class="text-box single-line input-xlarge focused"
+									<s:textfield cssClass="text-box single-line input-xlarge focused"
 										type="text" theme="simple" name="km.phanTramGiamGia"
-										data-val="false" />
+										data-val="true"
+										data-val-regex="Giá trị không hợp lệ"
+										data-val-regex-pattern="^(?:[1-9]\d*|0)?(?:\.\d+)?$" />
 								</c:otherwise>
 
 							</c:choose>
@@ -177,7 +183,7 @@
 										cssClass="text-box single-line input-xlarge uneditable-input"
 										type="text" theme="simple" name="km.ngayBatDau"
 										data-val="true" data-val-required="Vui lòng nhập ngày bắt đầu"
-										readonly="readonly"
+										readonly="true"
 										value="%{ngayBD}" />
 
 

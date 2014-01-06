@@ -50,7 +50,7 @@
 								<a class="btn btn-danger btnDelete"
 									href="delete_ctkm?idkm=${ctkm.khuyenmai.maKm}&idsp=${sp.maSp}"
 									data-name="${sp.tenSp}" > <i
-										class="icon-zoom-in icon-white"></i> Xóa
+										class="icon-trash icon-white"></i> Xóa
 								</a>
 								</td>
 							</tr>
