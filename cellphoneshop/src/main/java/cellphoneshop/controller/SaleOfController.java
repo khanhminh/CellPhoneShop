@@ -125,6 +125,10 @@ public class SaleOfController extends ActionSupport implements
 		}
 		this.insertKm.setTrangThaiKhuyenMai(statusKm);
 		this.insertKm.setHinhAnh(this.getLinkImage());
+		if(this.insertKm.getPhanTramGiamGia() == null){
+			this.insertKm.setPhanTramGiamGia(0f);
+		}
+		
 		if (khuyenMaiService.insertKhuyenMai(this.insertKm)) {
 			log.warn("Them thanh cong khuyen mai, co id: "
 					+ this.insertKm.getMaKm());
@@ -235,8 +239,8 @@ public class SaleOfController extends ActionSupport implements
 		khuyenmai.setTieuDe(updatekm.getTieuDe());
 		khuyenmai.setMoTa(updatekm.getMoTa());
 		if (updatekm.getPhanTramGiamGia() == null
-				|| updatekm.getPhanTramGiamGia() == 0.0) {
-			khuyenmai.setPhanTramGiamGia(null);
+				|| updatekm.getPhanTramGiamGia() == 0f) {
+			khuyenmai.setPhanTramGiamGia(0f);
 		} else {
 			khuyenmai.setPhanTramGiamGia(updatekm.getPhanTramGiamGia());
 		}
