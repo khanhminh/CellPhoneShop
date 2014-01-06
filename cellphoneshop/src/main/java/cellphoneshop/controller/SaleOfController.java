@@ -390,17 +390,17 @@ public class SaleOfController extends ActionSupport implements
 	}
 
 	public String searchCTKhuyenMai() {
-		
-		if(this.query == null || this.option == null){
+
+		if (this.query == null || this.option == null) {
 			request.setAttribute("isInput", true);
 			return SUCCESS;
 		}
 		errors = new ArrayList<String>();
-		
+
 		List<CTKhuyenMaiView> ctKhuyenMaiList = khuyenMaiService
 				.getListCTKhuyenMai(this.query, this.option);
-		
-		if(ctKhuyenMaiList == null || ctKhuyenMaiList.isEmpty()){
+
+		if (ctKhuyenMaiList == null || ctKhuyenMaiList.isEmpty()) {
 			errors.add(messages.getMessage("unFoundctkm"));
 			request.setAttribute("errors", errors);
 			return SUCCESS;
@@ -578,17 +578,17 @@ public class SaleOfController extends ActionSupport implements
 	public Integer getVitriBD(Integer page) {
 		return (page - 1) * this.saleOfPerPage;
 	}
-	
-	public boolean updateTotalKm(){
-		if(this.totalKm == null){
+
+	public boolean updateTotalKm() {
+		if (this.totalKm == null) {
 			this.totalKm = khuyenMaiService.countKhuyenMai();
 		}
-		
-		if(totalKm != null){
+
+		if (totalKm != null) {
 			totalKm += 1;
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -766,6 +766,30 @@ public class SaleOfController extends ActionSupport implements
 
 		this.validatekNgayBatDau(km, today);
 		this.validateNgayKetThuc(today);
+
+		if (updatekm.getPhanTramGiamGia() == null
+				|| updatekm.getPhanTramGiamGia() == 0.0) {
+			if (updatekm.getQuaTang() == null
+					|| updatekm.getQuaTang().isEmpty()) {
+				errors.add(messages
+						.getMessage("uknowQuaTangorPhanTrangGiamGia"));
+
+			}
+		} else {
+			if (updatekm.getQuaTang() == null
+					|| updatekm.getQuaTang().isEmpty()) {
+				if (updatekm.getPhanTramGiamGia() == null
+						|| updatekm.getPhanTramGiamGia() == 0.0) {
+					errors.add(messages
+							.getMessage("uknowQuaTangorPhanTrangGiamGia"));
+				}
+			}
+		}
+		
+		if(updatekm.getNgayBatDau().compareTo(updatekm.getNgayKetThuc()) > 0){
+			errors.add(messages.getMessage("errorDate"));
+		}
+
 		if (errors.isEmpty()) {
 			return true;
 		}
@@ -805,7 +829,29 @@ public class SaleOfController extends ActionSupport implements
 				|| this.myFileFileName.isEmpty()) {
 			errors.add(messages.getMessageList().getProperty("unknownImage"));
 		}
+
+		if (insertKm.getPhanTramGiamGia() == null
+				|| insertKm.getPhanTramGiamGia() == 0.0) {
+			if (insertKm.getQuaTang() == null
+					|| insertKm.getQuaTang().isEmpty()) {
+				errors.add(messages
+						.getMessage("uknowQuaTangorPhanTrangGiamGia"));
+
+			}
+		} else {
+			if (insertKm.getQuaTang() == null
+					|| insertKm.getQuaTang().isEmpty()) {
+				if (insertKm.getPhanTramGiamGia() == null
+						|| insertKm.getPhanTramGiamGia() == 0.0) {
+					errors.add(messages
+							.getMessage("uknowQuaTangorPhanTrangGiamGia"));
+				}
+			}
+		}
 		
+		if(insertKm.getNgayBatDau().compareTo(insertKm.getNgayKetThuc()) > 0){
+			errors.add(messages.getMessage("errorDate"));
+		}
 
 		if (!errors.isEmpty()) {
 			return false;
@@ -813,6 +859,7 @@ public class SaleOfController extends ActionSupport implements
 
 		return true;
 	}
+	
 
 	public String getRegixTrangThaiKM() {
 		return regixTrangThaiKM;
