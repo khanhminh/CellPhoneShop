@@ -22,6 +22,7 @@ import cellphoneshop.model.CtDonHang;
 import cellphoneshop.model.CtSanPham;
 import cellphoneshop.model.HeDieuHanh;
 import cellphoneshop.model.HinhAnhSp;
+import cellphoneshop.model.KhuyenMai;
 import cellphoneshop.model.NhaSanXuat;
 import cellphoneshop.model.ProductFilter;
 import cellphoneshop.model.SanPham;
@@ -276,6 +277,12 @@ public class SanPhamDAOImpl implements SanPhamDAO {
 
 				Hibernate.initialize(result.getNhaSanXuat());
 				Hibernate.initialize(result.getLoaiSanPham());
+				
+				Iterator<KhuyenMai> itrKhuyenMai = result.getKhuyenMais().iterator();
+				while (itrKhuyenMai.hasNext()) {
+					KhuyenMai km = itrKhuyenMai.next();
+					Hibernate.initialize(km);
+				}
 			}
 		} catch (Exception ex) {
 		}

@@ -142,25 +142,33 @@ public class KhuyenMaiServiceImpl implements KhuyenMaiService {
 
 	public List<KhuyenMai> getKhuyenMaiDangDienRa(Integer maSP) {
 		List<KhuyenMai> kmList = khuyenMaiDAO.getListKhuyenMai("1", "status");
+		List<KhuyenMai> resultList = new ArrayList<KhuyenMai>(); // tao them ds moi chua ket qua
+		
 		for(KhuyenMai km : kmList){
-			boolean isKm = false;
+			//boolean isKm = false;
 			Iterator<SanPham> iterator = km.getSanPhams().iterator();
 			while(iterator.hasNext()){
 				SanPham sp = (SanPham) iterator.next();
 				if(sp.getMaSp() == maSP){
-					isKm = true;
+					//isKm = true;
+					resultList.add(km); //
 					break;
 				}
 			}
-			if(!isKm){
-				kmList.remove(km);
-			}
+			/*if(!isKm){
+				kmList.remove(km); // remove trong danh sach dang chay phat sinh ra exception (?)
+			}*/
 		}
 		
-		if(kmList.isEmpty()){
+		if (resultList.isEmpty()) {
 			return null;
 		}
-		return kmList;
+		return resultList;
+		
+		/*if(kmList.isEmpty()){
+			return null;
+		}
+		return kmList;*/
 	}
 
 	public List<CTKhuyenMaiView> getListCTKhuyenMai(String query, String option) {
