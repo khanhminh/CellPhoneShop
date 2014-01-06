@@ -90,7 +90,7 @@
 				</tr>
 				<tr>
 					<td class="sub-info">Bảo hành:</td>
-					<td>${sp.soThangBaoHanh}Tháng</td>
+					<td>${sp.soThangBaoHanh} Tháng</td>
 				</tr>
 				<tr>
 					<td class="sub-info">Ngày cập nhật:</td>

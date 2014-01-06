@@ -94,7 +94,41 @@
 													<fmt:formatNumber value="${sp.gia}" type="number" />
 													VNĐ
 												</h2>
-												<h3>Khuyến mãi:</h3>
+												<div class="safe_off" style="text-align: center;font-size: 12px;">
+													<span class="cost-safe"> -<fmt:formatNumber
+															value="${sp.gia * (total * 1.0 / 100)}" type="number" />
+														VNĐ
+													</span>
+												</div>
+												<%-- <c:if test="${kms != null && not empty kms}">
+													<div>
+														<c:forEach var="km" items="${kms}">
+															<c:if test="${km.phanTramGiamGia != null}">
+																<c:set var="total" value="${total + km.phanTramGiamGia}" />
+															</c:if>
+														</c:forEach>
+														<c:if test="${total != null && total > 0}">
+															<div class="safe_off">
+																<span class="title-safe">Giảm giá: </span> <span
+																	class="cost-safe"> -<fmt:formatNumber
+																		value="${sp.gia * (total * 1.0 / 100)}" type="number" />
+																	VNĐ
+																</span>
+															</div>
+														</c:if>
+														<div class="safe_off">
+															<span class="title-safe">Quà tặng: </span>
+															<ul>
+																<c:forEach var="km" items="${kms}">
+																	<c:if test="${km.quaTang != null}">
+																		<li>${km.quaTang}</li>
+																	</c:if>
+																</c:forEach>
+															</ul>
+														</div>
+													</div>
+												</c:if> --%>
+												<h3>Quà tặng:</h3>
 												<ul>
 													<li>Tặng ốp lưng</li>
 													<li>Tai nghe</li>

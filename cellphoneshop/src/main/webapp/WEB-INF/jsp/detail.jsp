@@ -53,6 +53,35 @@
 				<fmt:formatNumber value="${sp.gia}" type="number" />
 				VNĐ
 			</h2>
+			<c:set var="kms" value="${sp.khuyenMais}"/>
+			<c:if test="${kms != null && not empty kms}">
+				<div>
+					<c:forEach var="km" items="${kms}">
+						<c:if test="${km.phanTramGiamGia != null}">
+							<c:set var="total" value="${total + km.phanTramGiamGia}"/>
+						</c:if>
+					</c:forEach>
+					<c:if test="${total != null && total > 0}">
+						<div class="safe_off">
+							<span class="title-safe">Giảm giá: </span>
+							<span class="cost-safe">
+								-<fmt:formatNumber value="${sp.gia * (total * 1.0 / 100)}" type="number" />
+								VNĐ
+							</span>
+						</div>
+					</c:if>
+					<div class="safe_off">
+						<span class="title-safe">Quà tặng: </span>
+						<ul>
+						<c:forEach var="km" items="${kms}">							
+							<c:if test="${km.quaTang != null}">
+								<li>${km.quaTang}</li>
+							</c:if>
+						</c:forEach>
+						</ul>
+					</div>
+				</div>
+			</c:if>		
 			<table>
 				<tr>
 					<td class="sub-info">Hãng sản xuất:</td>
@@ -60,11 +89,11 @@
 				</tr>
 				<tr>
 					<td class="sub-info">Bảo hành:</td>
-					<td>${sp.soThangBaoHanh}Tháng</td>
+					<td>${sp.soThangBaoHanh} Tháng</td>
 				</tr>
 				<tr>
 					<td class="sub-info">Ngày cập nhật:</td>
-					<td>${sp.ngayNhap}</td>
+					<td><fmt:formatDate pattern="dd/MM/yyyy" value="${sp.ngayNhap}" /></td>
 				</tr>
 			</table>
 			<div>

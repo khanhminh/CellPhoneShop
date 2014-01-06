@@ -1656,3 +1656,24 @@ input[type="checkbox"].input-validation-error {
 #mycarousel li{
 	display: inline;
 }
+
+.safe_off{
+	font-size: 15px;
+	border-bottom: #ccc dotted 1px;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+.title-safe{
+	color: green;
+	font-weight: bold;
+}
+
+.cost-safe{
+	color: red;
+	font-weight: bold;
+}
+
+.safe_off ul{
+	margin: 0;
+}
