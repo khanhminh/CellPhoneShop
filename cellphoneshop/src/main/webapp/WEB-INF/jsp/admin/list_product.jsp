@@ -43,12 +43,7 @@
 							<td>${sp.gioiThieu}</td>
 							<td><span class="label label-success" id="">
 									${sp.soLuongHienCo} </span></td>
-							<td><a class="btn btn-success"
-								href="detail_product?id=${sp.maSp}"> <i
-									class="icon-zoom-in icon-white"></i> Chi tiết
-							</a> <a class="btn btn-info" href="update_product?id=${km.maKm}">
-									<i class="icon-edit icon-white"></i> Chỉnh Sửa
-							</a>
+							<td>
 						</tr>
 					</c:forEach>
 

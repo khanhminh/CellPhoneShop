@@ -45,12 +45,12 @@
 				</a>
 			</li>
 			
-			<li>
-				<a class="ajax-link" href="search_product.action">
-					<i class="icon-search"></i>
-					<span class="hidden-tablet">Tìm kiếm</span>
-				</a>
-			</li>
+<!-- 			<li> -->
+<!-- 				<a class="ajax-link" href="search_product.action"> -->
+<!-- 					<i class="icon-search"></i> -->
+<!-- 					<span class="hidden-tablet">Tìm kiếm</span> -->
+<!-- 				</a> -->
+<!-- 			</li> -->
 			
 			<li class="nav-header hidden-tablet">Quản lý khuyến mãi</li>
 			<li>
