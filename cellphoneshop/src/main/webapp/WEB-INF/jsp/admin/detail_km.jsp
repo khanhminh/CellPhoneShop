@@ -104,10 +104,11 @@
 
 							<div class="control-group">
 								<label class="control-label">Hình ảnh KM</label>
-								<div class="controls">
+								<%-- <div class="controls">
 									<span class="input-xlarge uneditable-input">
 										${km.hinhAnh} </span>
-								</div>
+								</div> --%>
+								<img style="margin-left: 10px" src="<c:url value='/${km.hinhAnh}' />"/>
 							</div>
 							<div class="center">
 								<a class="btn btn-info" href="list_km.action"> <i
