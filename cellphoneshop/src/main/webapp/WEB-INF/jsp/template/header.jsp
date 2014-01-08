@@ -2,6 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="s" uri="/struts-tags"%>
+
 <div class="wrapper row1">
 	<header id="header" class="full_width clear">
 		<div id="logo" class="one_half">
@@ -50,7 +52,9 @@
 				<li><a href="list_order.action">Quản lý đơn hàng</a></li>
 			</security:authorize>
 			<security:authorize access="hasAnyRole('Admin')"> 
-				<li><a href="/cellphoneshop/admin/list_account.action">Admin</a></li>
+				<li>
+					<s:a namespace="/admin" action="list_account">Admin</s:a>
+				</li>
 			</security:authorize>
 			<li><a href="contact.action">Liên hệ</a></li>
 			<li><a href="about.action">Giới thiệu</a></li>
