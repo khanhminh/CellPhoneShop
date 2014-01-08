@@ -69,10 +69,18 @@ public class DonHangServiceImpl implements DonHangService {
 			return -1;
 		}
 		
-		NguoiNhan nguoiNhan = donHang.getNguoiNhan();
+		/*NguoiNhan nguoiNhan = donHang.getNguoiNhan();
 		if (nguoiNhanDAO.getNguoiNhan(maND, nguoiNhan.getHoTen()) == null) {
 			nguoiNhan.setNguoiDung(nguoiDung);
 			nguoiNhanDAO.themNguoiNhan(nguoiNhan);
+		}*/
+		
+		NguoiNhan nguoiNhan = nguoiNhanDAO.getNguoiNhan(maND, donHang.getNguoiNhan().getHoTen());
+		if (nguoiNhan == null) {
+			donHang.getNguoiNhan().setNguoiDung(nguoiDung);
+			nguoiNhanDAO.themNguoiNhan(donHang.getNguoiNhan());
+		} else {
+			donHang.setNguoiNhan(nguoiNhan);
 		}
 		
 		// Chen don hang
