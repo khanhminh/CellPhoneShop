@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Not found</title>
+<title>Error</title>
 </head>
 <body>
 	<div style="color: red;font-weight: bold;font-size: 20px">
