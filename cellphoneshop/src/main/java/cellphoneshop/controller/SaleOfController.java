@@ -490,7 +490,7 @@ public class SaleOfController extends ActionSupport implements
 			return true;
 
 		} catch (IOException ex) {
-			log.error("Can't upload file " + this.myFileFileName
+			log.error("Can't upload file " + this.myFileFileName + " "
 					+ ex.getMessage());
 			return false;
 		}
@@ -554,7 +554,7 @@ public class SaleOfController extends ActionSupport implements
 			return Integer.parseInt(page);
 
 		} catch (Exception e) {
-			log.error("Parse page error" + page);
+			log.error("Parse page error" + page + " message: " + e.getMessage() );
 			return 1;
 
 		}
@@ -569,7 +569,7 @@ public class SaleOfController extends ActionSupport implements
 			return Integer.parseInt(makm);
 
 		} catch (Exception e) {
-			log.error("Parse makm error" + makm);
+			log.error("Parse makm error" + makm + " message: " + e.getMessage());
 			return null;
 		}
 	}
@@ -711,7 +711,7 @@ public class SaleOfController extends ActionSupport implements
 		try {
 			return formater.parse(strDate);
 		} catch (Exception e) {
-			log.error("Parse date is not success");
+			log.error("Parse date is not success " + e.getMessage());
 			return null;
 		}
 	}
@@ -815,7 +815,7 @@ public class SaleOfController extends ActionSupport implements
 			errors.add(messages.getMessageList().getProperty("unknownNgayBD"));
 		} else {
 			if (insertKm.getNgayBatDau().compareTo(today) < 0) {
-				log.warn("Loi ngay bat dau");
+				log.warn("Loi ngay bat dau khuyen mai");
 				errors.add(messages.getMessageList().getProperty(
 						"errorNgayBDTL"));
 			}
