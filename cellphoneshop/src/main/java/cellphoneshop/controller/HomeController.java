@@ -26,7 +26,7 @@ public class HomeController extends ActionSupport implements
 	
 	
 	@Override
-	public String execute() throws Exception {
+	public String execute() throws Exception {		
 		long totalNewProduct = sanPhamService.demSoSanPhamMoiTrongTuan();
 		int totalPage = (int) totalNewProduct / productPerPage;
 		if (totalPage * productPerPage < totalNewProduct) {

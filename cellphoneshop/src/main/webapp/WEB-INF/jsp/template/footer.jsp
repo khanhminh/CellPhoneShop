@@ -38,8 +38,8 @@
       <h2 class="footer_title">THÔNG TIN WEBSITE</h2>
       <nav class="footer_nav">
         <ul class="nospace">
-          <li><a href="about.html">&nbsp;&nbsp;&nbsp;Giới thiệu</a></li>
-          <li><a href="contact.html">&nbsp;&nbsp;&nbsp;Liên hệ</a></li>
+          <li><a href="about">&nbsp;&nbsp;&nbsp;Giới thiệu</a></li>
+          <li><a href="contact">&nbsp;&nbsp;&nbsp;Liên hệ</a></li>
           <li><a href="#">&nbsp;&nbsp;&nbsp;Sơ đồ website</a></li>
         </ul>
       </nav>
