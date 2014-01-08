@@ -45,15 +45,11 @@ public class SearchInterceptor implements Interceptor {
 		if (listPrice != null){
 			listPrice = null;
 		}
-		
-		logger.info("SearchInterceptor destroy");
 	}
 
 	public void init() {
 		listOS = hdhService.getListHeDieuHanh();
 		listBrand = nsxService.getListNhaSanXuat();
-		
-		logger.info("SearchInterceptor init");
 	}
 
 	public String intercept(ActionInvocation ai) throws Exception {

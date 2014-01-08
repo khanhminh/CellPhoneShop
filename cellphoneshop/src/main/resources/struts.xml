@@ -45,9 +45,13 @@
 
 		<default-interceptor-ref name="pageStack" />
 
-		<!-- <global-results> <result name="unhandledException">/WEB-INF/jsp/error.jsp</result> 
-			</global-results> <global-exception-mappings> <exception-mapping exception="java.lang.Exception" 
-			result="unhandledException" /> </global-exception-mappings> -->
+		<global-results>
+			<result name="unhandledException">/WEB-INF/jsp/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="unhandledException" />
+		</global-exception-mappings>
 
 		<action name="home" class="homeAction">
 			<interceptor-ref name="newStack" />
@@ -190,6 +194,14 @@
 			</interceptor-stack>
 		</interceptors>
 
+		<global-results>
+			<result name="unhandledException">/WEB-INF/jsp/error.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception"
+				result="unhandledException" />
+		</global-exception-mappings>
+
 		<action name="list_account" method="listAccount" class="accountManagerAction">
 			<result name="success" type="tiles">list_account</result>
 		</action>
@@ -300,12 +312,7 @@
 
 		<action name="detail_product" method="detailProduct" class="productManagerAction">
 			<result name="success" type="tiles">detail_product</result>
-		</action>
-		
-		
-
-
-
+		</action>		
 
 	</package>
 
