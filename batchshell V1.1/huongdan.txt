@@ -1,0 +1,13 @@
+﻿\\Yeu cau may da cai maven hoặc tham khảo tại trang http://www.youtube.com/watch?v=wezKtFijkIE
+Hoặc coi tại link
+B0: cấu hình trong file porm để có thể cấu hình copy các file mapping hibernate, hỗ trợ buil của maven
+B1: copy folder src cua Project vao thuc muc resource
+B2: copy script sql vao thuc muc database - cellphoneshop.sql ( nhớ chỉnh lại password, user name -u username -p12356, password của mình là 12345 - chỉnh trong file batch_build_createDatabase.bat)
+B3: Yêu cầu phần mềm cài đặt đúng như dưới đây hoặc có thể lại trong file batchshell
+	+ thuc muc cai dat mysql: "C:\Program Files(x86)\MySQL\MySQL Server 5.5\bin\mysql.exe"
+	+ thuc muc chua tomcat: C:\Program Files\Tomcat\apache-tomcat-7.0.47\apache-tomcat-7.0.47\webapps"
+	- chay file batch_build_createDatabase.bat
+	- sau do chay file 2.batch_copyfileWar_start_startTomcat.bat
+	- Neu loi, chay 3.batch_.................................
+B4: Ra trinh duyet va truy cap vo web
+
